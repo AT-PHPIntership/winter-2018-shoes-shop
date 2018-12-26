@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    public function users(){
+    /**
+     * Get User Object
+     *
+     * @return object
+     */
+    public function users()
+    {
         return $this->hasMany('App\Models\User');
     }
 }

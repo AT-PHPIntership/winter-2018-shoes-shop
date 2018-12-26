@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    public function user(){
+    /**
+     * Get User Object
+     *
+     * @return object
+     */
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 }

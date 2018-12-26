@@ -28,11 +28,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function profile(){
+    /**
+     * Get Profile Object
+     *
+     * @return object
+     */
+    public function profile()
+    {
         return $this->hasOne('App\Models\Profile');
     }
 
-    public function role(){
+    /**
+     * Get Role Object
+     *
+     * @return object
+     */
+    public function role()
+    {
         return $this->belongsTo('App\Models\Role');
     }
 }
