@@ -12,19 +12,19 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-                <form method="POST" action="{{ route('login') }}" class="login100-form validate-form">
+                <form method="POST" action="{{ route('admin.login') }}" class="login100-form validate-form">
                     @csrf
 					<span class="login100-form-title p-b-26">
 						Welcome
 					</span>
 					<div class="wrap-input100 validate-input">
-                        <input class="input100" type="email" name="email" placeholder="Email" required>
+                        <input class="input100" type="email" name="email" placeholder="Email">
                     </div>
                     @if ($errors->has('email'))
                         <span class="cl-red">{{ $errors->first('email') }}</span>
                     @endif
 					<div class="wrap-input100 validate-input">
-						<input class="input100" type="password" name="password" placeholder="Password" required>
+						<input class="input100" type="password" name="password" placeholder="Password">
                     </div>
                     @if ($errors->has('password'))
                         <span class="cl-red">{{ $errors->first('password') }}</span>
@@ -44,9 +44,9 @@
 						<span class="txt1">
 							Don’t have an account?
 						</span>
-						<a class="txt2" href="{{ route('register') }}">
+						{{-- <a class="txt2" href="{{ route('admin.register') }}"> --}}
 							Sign Up
-						</a>
+						{{-- </a> --}}
 					</div>
 				</form>
 			</div>

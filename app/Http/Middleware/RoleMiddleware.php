@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Role;
 
 class RoleMiddleware
 {
@@ -15,10 +16,10 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next, $role)
     {
-        if(Auth::user()->role == $role){
+        if(Auth::user() && Auth::user()->role->name == $role){
             return $next($request);
         }else{
-            return redirect()->route('admin.index');
+            return redirect('/');
         }
     }
 }
