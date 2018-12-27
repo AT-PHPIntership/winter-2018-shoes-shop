@@ -18,8 +18,8 @@ class CreateProfilesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
-            $table->integer('gender')->comment('2: other,1: Male, 0: Female');
-            $table->string('phonenumber')->length(11);
+            $table->tinyInteger('gender')->comment('2: other,1: Male, 0: Female');
+            $table->string('phonenumber')->length(10);
             $table->string('avatar');
             $table->string('address');
             $table->timestamps();

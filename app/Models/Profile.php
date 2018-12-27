@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    const MALE = 1;
+    const FEMALE = 0;
+    const OTHER = 2;
+
     /**
-     * Get User Object
+     * Profile belong to user
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function user()
     {
