@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    protected $table = 'm_roles';
+
     /**
-     * Get User Object
+     * Role has many users
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users()
     {
-        return $this->hasMany('App\Models\User');
+        return $this->hasMany(Role::class, 'role_id');
     }
 }
