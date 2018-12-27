@@ -38,22 +38,22 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     /**
-     * Get Profile Object
+     * User has one profile
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function profile()
     {
-        return $this->hasOne('App\Models\Profile');
+        return $this->hasOne(Profile::class);
     }
     
     /**
-     * Get Role Object
+     * User belong to Role
      *
-     * @return object
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function role()
     {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }
