@@ -13,10 +13,10 @@ class ProfileTableSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
-        foreach($users as $user){
-            factory(App\Models\Profile::class)->create([
-                'user_id' => $user->id
+        $ids = User::all('id');
+        foreach($ids as $id){
+            factory(Profile::class)->create([
+                'user_id' => $id
             ]);
         }
     }

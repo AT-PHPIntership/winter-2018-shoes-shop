@@ -13,7 +13,6 @@ class CreateProfilesTable extends Migration
      */
     public function up()
     {
-        \DB::table('profiles')->truncate();
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
