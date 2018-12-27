@@ -11,6 +11,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        \DB::table('m_roles')->truncate();
         $role = [
             [
                 'name' => 'Admin',
@@ -33,6 +34,6 @@ class RolesTableSeeder extends Seeder
                 'updated_At' => \Carbon\Carbon::now()
             ],
         ];
-        \DB::table('roles')->insert($role);
+        \DB::table('m_roles')->insert($role);
     }
 }
