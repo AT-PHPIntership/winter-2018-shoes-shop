@@ -45,10 +45,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -57,10 +57,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -69,10 +69,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
-    {
-        //
-    }
+    // public function show(Category $category)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -81,10 +81,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
-    {
-        //
-    }
+    // public function edit(Category $category)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -94,10 +94,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
+    // public function update(Request $request, Category $category)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -106,8 +106,8 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
-    {
-        //
-    }
+    // public function destroy(Category $category)
+    // {
+    //     //
+    // }
 }
