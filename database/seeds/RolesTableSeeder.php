@@ -17,22 +17,22 @@ class RolesTableSeeder extends Seeder
             [
                 'name' => Role::ADMIN_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
-                'updated_At' => \Carbon\Carbon::now()
+                'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'name' => Role::EMPLOYEE_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
-                'updated_At' => \Carbon\Carbon::now()
+                'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'name' => Role::SHIPPER_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
-                'updated_At' => \Carbon\Carbon::now()
+                'updated_at' => \Carbon\Carbon::now()
             ],
             [
                 'name' => Role::CUSTOMER_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
-                'updated_At' => \Carbon\Carbon::now()
+                'updated_at' => \Carbon\Carbon::now()
             ],
         ];
         \DB::table('m_roles')->insert($role);
