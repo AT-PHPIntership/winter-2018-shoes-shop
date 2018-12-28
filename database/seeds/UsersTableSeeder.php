@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 10)->create();
+        $ids = Role::all('id');
+        for($i = 0; $i < 10; $i++){
+            factory(User::class)->create([
+                'role_id' => $ids->random()
+            ]); 
+        }
     }
 }
