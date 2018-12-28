@@ -2,6 +2,7 @@
 
 use Faker\Generator as Faker;
 use App\Models\Role;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use App\Models\Role;
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker $faker) {
+$factory->define(User::class, function (Faker $faker) {
     return [
         'role_id' => Role::all()->random()->id,
         'email' => $faker->unique()->safeEmail,
