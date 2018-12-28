@@ -10,6 +10,7 @@ class Category extends Model
 
     /**
      * Get the children for categories.
+     * @return void
      */
     public function children()
     {
@@ -18,6 +19,7 @@ class Category extends Model
 
     /**
      * Get the parent for categories.
+     * @return void
      */
     public function parent()
     {
