@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $table = 'm_roles';
+    const ADMIN_ROLE = 'Admin';
+    const EMPLOYEE_ROLE = 'Employee';
+    const SHIPPER_ROLE = 'Shipper';
+    const CUSTOMER_ROLE = 'Customer';
 
     /**
      * Role has many users
@@ -15,6 +19,6 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->hasMany(Role::class, 'role_id');
+        return $this->hasMany(User::class, 'role_id');
     }
 }
