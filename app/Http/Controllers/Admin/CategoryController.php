@@ -45,10 +45,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function create()
+    {
+        return view('admin/category/create');
+    }
 
     /**
      * Store a newly created resource in storage.

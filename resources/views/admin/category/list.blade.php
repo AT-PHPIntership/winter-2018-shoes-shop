@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div style="padding: 16px 0;">
-            <button class="btn btn-success btn-sm ad-click-event">@lang('category.new')</button>
+            <button class="btn btn-success btn-sm ad-click-event">@lang('common.new')</button>
           </div>
           <div class="box">
             <div class="box-header">
@@ -21,10 +21,10 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>@lang('category.table.num')</th>
-                    <th>@lang('category.table.category_name')</th>
-                    <th>@lang('category.table.category_parent')</th>
-                    <th>@lang('category.table.action')</th>
+                    <th>@lang('common.table.num')</th>
+                    <th>@lang('category.name')</th>
+                    <th>@lang('category.parent_name')</th>
+                    <th>@lang('common.table.action')</th>
                   </tr>
                 </thead>
                 <tbody>
