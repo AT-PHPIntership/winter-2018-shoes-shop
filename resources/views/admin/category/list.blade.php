@@ -28,63 +28,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                @foreach($categories as $category)
                   <tr>
-                    <td>1</td>
-                    <td>Giày nam</td>
-                    <td>-</td>
+                    <td>{{ $category->id }}</td>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>
                       <button><a href="#">Sửa</a></button>
                       <button><a href="#">Xóa</a></button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Giày thể thao</td>
-                    <td>Giày nam</td>
-                    <td>
-                      <button><a href="#">Sửa</a></button>
-                      <button><a href="#">Xóa</a></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Giày tây</td>
-                    <td>Giày nam</td>
-                    <td>
-                      <button><a href="#">Sửa</a></button>
-                      <button><a href="#">Xóa</a></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Giày nữ</td>
-                    <td>-</td>
-                    <td>
-                      <button><a href="#">Sửa</a></button>
-                      <button><a href="#">Xóa</a></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Giày cao gót</td>
-                    <td>-</td>
-                    <td>
-                      <button><a href="#">Sửa</a></button>
-                      <button><a href="#">Xóa</a></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Phụ kiện</td>
-                    <td>-</td>
-                    <td>
-                      <button><a href="#">Sửa</a></button>
-                      <button><a href="#">Xóa</a></button>
-                    </td>
-                  </tr>
+                @endforeach
                 </tbody>
               </table>
             </div>
+            <div lass="row">{{$categories->links()}}</div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
