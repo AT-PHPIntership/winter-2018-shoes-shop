@@ -47,7 +47,8 @@
                     <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>
                       <button>
-                        <a href="{{ route('category.edit', 1)}}" style="color: #fff;">{{  trans('common.edit') }}</a>
+                        <a href="{{ route('category.edit', $category->id)}}">{{  trans('common.edit') }}</a>
+                      </button>
                       <button><a href="#">{{  trans('common.delete') }}</a></button>
                     </td>
                   </tr>

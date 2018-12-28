@@ -34,18 +34,16 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <select class="form-control" name="parent_id">
                   <option value=""></option>
-                  @foreach($categories as $category)
-                    @if(!$category->parent)
-                      <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endif
+                  @foreach($parents as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                   @endforeach
                 </select>
               </div>
             </div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="reset" class="btn btn-primary">Reset</button>
-                <button type="submit" class="btn btn-success">submit</button>
+                <button type="reset" class="btn btn-primary">{{  trans('common.reset') }}</button>
+                <button type="submit" class="btn btn-success">{{  trans('common.submit') }}</button>
               </div>
             </div>
           </form>

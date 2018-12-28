@@ -38,7 +38,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categories->getList();
-        return view('admin/category/list', compact('categories'));
+        return view('admin.category.list', compact('categories'));
     }
 
     /**
@@ -48,8 +48,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->getList();
-        return view('admin/category/create', compact('categories'));
+        $parents = $this->categories->getParent();
+        return view('admin.category.create', compact('parents'));
     }
 
     /**
@@ -62,11 +62,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         if ($this->categories->storeCategory($request)) {
-            session()->flash('message', 'Đăng ký gia sư thành công!');
-            // Session::flash('message', _('common.create_success'));
+            session()->flash('message', trans('common.message.create_success'));
             return redirect()->route('category.index');
         } else {
-            Session::flash('message', _('common.create_error'));
+            session()->flash('message', trans('common.message.create_error'));
             return redirect()->route('category.create');
         }
     }
@@ -86,27 +85,35 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Category $category comment about this variable
+     * @param int $id comment about this variable
      *
      * @return \Illuminate\Http\Response
      */
-    // public function edit(Category $category)
-    // {
-    //     //
-    // }
+    public function edit($id)
+    {
+        $category = $this->categories->getCategoryById($id);
+        $parents = $this->categories->getParent();
+        return view('admin.category.edit', compact('parents', 'category'));
+    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request  comment about this variable
-     * @param \App\Models\Category     $category comment about this variable
+     * @param int                  $id       comment about this variable
+     * @param \App\Models\Category $category comment about this variable
      *
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Category $category)
-    // {
-    //     //
-    // }
+    public function update(Request $request, $id)
+    {
+        if ($this->categories->updateCategory($request, $id)) {
+            session()->flash('message', trans('common.message.edit_success'));
+            return redirect()->route('category.index');
+        } else {
+            session()->flash('message', trans('common.message.edit_error'));
+            return redirect()->route('category.edit');
+        }
+    }
 
     /**
      * Remove the specified resource from storage.
