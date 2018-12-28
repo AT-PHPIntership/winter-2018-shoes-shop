@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -47,7 +48,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin/category/create');
+        $categories = $this->categories->getList();
+        return view('admin/category/create', compact('categories'));
     }
 
     /**
@@ -57,10 +59,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
+    public function store(Request $request)
+    {
+        if ($this->categories->storeCategory($request)) {
+            session()->flash('message', 'Đăng ký gia sư thành công!');
+            // Session::flash('message', _('common.create_success'));
+            return redirect()->route('category.index');
+        } else {
+            Session::flash('message', _('common.create_error'));
+            return redirect()->route('category.create');
+        }
+    }
 
     /**
      * Display the specified resource.
