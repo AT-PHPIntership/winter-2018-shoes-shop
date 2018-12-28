@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Role;
 
 class RolesTableSeeder extends Seeder
 {
@@ -14,22 +15,22 @@ class RolesTableSeeder extends Seeder
         \DB::table('m_roles')->truncate();
         $role = [
             [
-                'name' => 'Admin',
+                'name' => Role::ADMIN_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_At' => \Carbon\Carbon::now()
             ],
             [
-                'name' => 'Employee',
+                'name' => Role::EMPLOYEE_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_At' => \Carbon\Carbon::now()
             ],
             [
-                'name' => 'Shipper',
+                'name' => Role::SHIPPER_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_At' => \Carbon\Carbon::now()
             ],
             [
-                'name' => 'Customer',
+                'name' => Role::CUSTOMER_ROLE,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_At' => \Carbon\Carbon::now()
             ],
