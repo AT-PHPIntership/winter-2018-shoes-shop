@@ -56,6 +56,8 @@ class CategoryService
     /**
      * Handle get categoriy by id
      *
+     * @param int $id comment about this variable
+     *
      * @return \Illuminate\Http\Response
      */
     public function getCategoryById($id)
@@ -67,6 +69,7 @@ class CategoryService
      * Handle update categoriy from view
      *
      * @param \Illuminate\Http\Request $request comment about this variable
+     * @param int                      $id      comment about this variable
      *
      * @return \Illuminate\Http\Response
      */
@@ -81,5 +84,4 @@ class CategoryService
             return false;
         }
     }
-
 }
