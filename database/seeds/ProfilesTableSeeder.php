@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Profile;
 
-class ProfileTableSeeder extends Seeder
+class ProfilesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
