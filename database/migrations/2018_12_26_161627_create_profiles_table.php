@@ -18,9 +18,9 @@ class CreateProfilesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
-            $table->tinyInteger('gender')->default(0)->comment('2: other,1: Male, 0: Female');
+            $table->tinyInteger('gender')->default(0)->comment('0: other,1: Male, 2: Female');
             $table->string('phonenumber')->length(10);
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('address');
             $table->timestamps();
         });

@@ -14,6 +14,14 @@ return [
         'avatar' => 'Ảnh',
         'role' => 'Chức vụ',
         'action' => 'Hành động',
+        'password' => 'Mật khẩu',
+        'confirm_password' => 'Nhập lại mật khẩu',
+        'address' => 'Địa chỉ',
+    ],
+    'gender' => [
+        'other' => 'Khác',
+        'male' => 'Nữ',
+        'female' => 'Nam'
     ],
     'button' => [
         'add' => 'Thêm',
@@ -21,6 +29,9 @@ return [
         'delete' => 'Xóa',
     ],
     'placeholder' => [
-        'search' => 'Tìm kiếm'
-    ]
+        'search' => 'Tìm kiếm',
+    ],
+    'add' => [
+        'title' => 'Thêm người dùng',
+    ],
 ];
