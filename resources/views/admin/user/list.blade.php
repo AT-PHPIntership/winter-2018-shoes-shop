@@ -15,7 +15,7 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('user.list.title')</h3>
-              <a class="btn btn-success btn-xs" href="">@lang('user.button.add')</a>   
+              <a class="btn btn-success btn-xs" href="{{ route('admin.users.create')}}">@lang('user.button.add')</a>   
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="@lang('user.placeholder.search')">
@@ -39,91 +39,29 @@
                   <th>@lang('user.table.role')</th>
                   <th style="width: 100px">@lang('user.table.action')</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>buivanthanh@gmail.com</td>
-                  <td>Bui Van Thanh</td>
-                  <td>Nam</td>
-                  <td>0792760420</td>
-                  <td>
-                    <img class="direct-chat-img" src="https://lorempixel.com/200/200/?10668" alt="">
-                  </td>
-                  <td>Admin</td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('user.button.edit')</a>
-                    <a class="btn btn-danger btn-xs" href="">@lang('user.button.delete')</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>buivanthanh@gmail.com</td>
-                  <td>Bui Van Thanh</td>
-                  <td>Nam</td>
-                  <td>0792760420</td>
-                  <td>
-                    <img class="direct-chat-img" src="https://lorempixel.com/200/200/?10668" alt="">
-                  </td>
-                  <td>Admin</td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('user.button.edit')</a>
-                    <a class="btn btn-danger btn-xs" href="">@lang('user.button.delete')</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>buivanthanh@gmail.com</td>
-                  <td>Bui Van Thanh</td>
-                  <td>Nam</td>
-                  <td>0792760420</td>
-                  <td>
-                    <img class="direct-chat-img" src="https://lorempixel.com/200/200/?10668" alt="">
-                  </td>
-                  <td>Admin</td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('user.button.edit')</a>
-                    <a class="btn btn-danger btn-xs" href="">@lang('user.button.delete')</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>buivanthanh@gmail.com</td>
-                  <td>Bui Van Thanh</td>
-                  <td>Nam</td>
-                  <td>0792760420</td>
-                  <td>
-                    <img class="direct-chat-img" src="https://lorempixel.com/200/200/?10668" alt="">
-                  </td>
-                  <td>Admin</td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('user.button.edit')</a>
-                    <a class="btn btn-danger btn-xs" href="">@lang('user.button.delete')</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>buivanthanh@gmail.com</td>
-                  <td>Bui Van Thanh</td>
-                  <td>Nam</td>
-                  <td>0792760420</td>
-                  <td>
-                    <img class="direct-chat-img" src="https://lorempixel.com/200/200/?10668" alt="">
-                  </td>
-                  <td>Admin</td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('user.button.edit')</a>
-                    <a class="btn btn-danger btn-xs" href="">@lang('user.button.delete')</a>
-                  </td>
-                </tr>
+                @foreach ($users as $user)
+                  <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->profile->name }}</td>
+                    <td>{{ $user->profile->gender }}</td>
+                    <td>{{ $user->profile->phonenumber }}</td>
+                    <td>
+                      <img class="direct-chat-img" src="{{ $user->profile->avatar }}" alt="">
+                    </td>
+                    <td>{{ $user->role->name }}</td>
+                    <td>
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('user.button.edit')</a>
+                      <a class="btn btn-danger btn-xs" href="{{ route('admin.users.destroy', $user->id)}}">@lang('user.button.delete')</a>
+                    </td>
+                  </tr>
+                @endforeach
               </table>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
+                  {{ $users->links() }}
               </ul>
             </div>
           </div>
