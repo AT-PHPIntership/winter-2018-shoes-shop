@@ -2,7 +2,6 @@
 
 use Faker\Generator as Faker;
 use App\Models\Profile;
-use App\Models\User;
 
 $factory->define(Profile::class, function (Faker $faker) {
     return [
