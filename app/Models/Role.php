@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $table = 'm_roles';
-    const ADMIN_ROLE = 'Admin';
-    const EMPLOYEE_ROLE = 'Employee';
-    const SHIPPER_ROLE = 'Shipper';
-    const CUSTOMER_ROLE = 'Customer';
+    const ADMIN_ROLE = 1;
+    const EMPLOYEE_ROLE = 2;
+    const SHIPPER_ROLE = 3;
+    const CUSTOMER_ROLE = 4;
 
     /**
      * Role has many users
