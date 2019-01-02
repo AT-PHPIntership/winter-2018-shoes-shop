@@ -12,7 +12,7 @@ class AdminMiddleware
      * Handle an incoming request
      *
      * @param \Illuminate\Http\Request $request request
-     * @param \Closure $next next
+     * @param \Closure                 $next    next
      *
      * @return mixed
      */
