@@ -32,8 +32,9 @@ class UserRequest extends FormRequest
                     'name' => 'required',
                     'gender' => 'numeric|max:1',
                     'address' => 'required|max:255',
-                    'phonenumber' => 'required|numeric|min:10|max:10',
+                    'phonenumber' => 'required|numeric',
                     'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'role_id' => 'required'
                 ];
             default: break;
         }

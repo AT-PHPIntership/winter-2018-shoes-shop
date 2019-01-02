@@ -58,8 +58,8 @@
                 <div class="form-group">
                   <label for="exampleInputPhoneNumber">@lang('user.table.phone') *</label>
                   <input type="text" name="phonenumber" class="form-control" id="exampleInputPhoneNumber" value="{{ old('phonenumber') }}">
-                  @if ($errors->has('phone'))
-                    <span class="help-block">{{ $errors->first('phone') }}</span>
+                  @if ($errors->has('phonenumber'))
+                    <span class="help-block">{{ $errors->first('phonenumber') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
@@ -78,12 +78,13 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputRole">@lang('user.table.role') *</label>
-                  <select name="role" class="form-control" id="exampleInputRole">
-                    <option value="1">Admin</option>
-                    <option value="2">Customer</option>
+                  <select name="role_id" class="form-control" id="exampleInputRole">
+                    @foreach ($roles as $role)
+                      <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
                   </select>
-                  @if ($errors->has('role'))
-                    <span class="help-block">{{ $errors->first('role') }}</span>
+                  @if ($errors->has('role_id'))
+                    <span class="help-block">{{ $errors->first('role_id') }}</span>
                   @endif
                 </div>
               </div>

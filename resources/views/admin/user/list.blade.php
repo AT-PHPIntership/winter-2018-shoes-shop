@@ -12,10 +12,31 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          {{-- @if (session()->has('message'))
+            <div class="alert alert-info fade in alert-dismissible alert-message">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>
+                <strong>{{ session('message') }}</strong>
+            </div>
+            <script type="text/javascript">
+              setTimeout(function(){
+                document.getElementById("alert-message").innerHTML = '';
+              }, 3000);
+            </script>
+          @endif --}}
+          @if (session()->has('message'))
+            <div id="alert-message">
+              <strong style="padding: 10px 20px; display: block;">{{ session('message') }}</strong>
+            </div>
+            <script type="text/javascript">
+              setTimeout(function(){
+                document.getElementById("alert-message").innerHTML = '';
+              }, 3000);
+            </script>
+          @endif 
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('user.list.title')</h3>
-              <a class="btn btn-success btn-xs" href="{{ route('admin.users.create')}}">@lang('user.button.add')</a>   
+              <a class="btn btn-success btn-xs" href="{{ route('admin.users.create')}}">@lang('user.button.add')</a>            
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="@lang('user.placeholder.search')">
@@ -47,7 +68,7 @@
                     <td>{{ $user->profile->gender }}</td>
                     <td>{{ $user->profile->phonenumber }}</td>
                     <td>
-                      <img class="direct-chat-img" src="{{ $user->profile->avatar }}" alt="">
+                      <img class="direct-chat-img" src="/upload/{{ $user->profile->avatar }}" alt="">
                     </td>
                     <td>{{ $user->role->name }}</td>
                     <td>
