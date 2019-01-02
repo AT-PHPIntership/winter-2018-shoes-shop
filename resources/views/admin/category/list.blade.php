@@ -16,7 +16,7 @@
           </div>
           @if (session()->has('message'))
             <div id="alert-message">
-              <strong style="padding: 10px 20px; display: block;">{{ session('message') }}</strong>
+              <strong style="padding: 10px 20px; display: block; color: #f00">{{ session('message') }}</strong>
             </div>
             <script type="text/javascript">
               setTimeout(function(){
@@ -46,11 +46,12 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>
-                      <button>
-                        <a href="{{ route('category.edit', $category->id)}}">{{  trans('common.edit') }}</a>
+                      <button class="btn btn-primary btn-xs">
+                        <a href="{{ route('category.edit', $category->id)}}" style="color: #fff;">{{  trans('common.edit') }}</a>
                       </button>
-                      <button><a href="#">{{  trans('common.delete') }}</a></button>
-                    </td>
+                      {{ Form::model($category, ['url' => ['/category', $category->id], 'method'=> 'DELETE', 'enctype' => 'multipart/form-data', 'style' => 'display: inline-block;'])}}
+                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('{{trans('common.message.confirm_delete')}}')">{{  trans('common.delete') }}</button>
+                      {{ Form::close()}}
                   </tr>
                 @endforeach
                 </tbody>

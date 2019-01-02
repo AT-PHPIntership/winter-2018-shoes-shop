@@ -22,7 +22,7 @@ class CategoryService
     }
 
     /**
-     * Handle get categories list to data
+     * Handle get parent category to data
      *
      * @return \Illuminate\Http\Response
      */
@@ -62,11 +62,11 @@ class CategoryService
      */
     public function getCategoryById($id)
     {
-        return Category::findOrFail($id);
+        return Category::where('delete_flag', 0)->findOrFail($id);
     }
 
     /**
-     * Handle update categoriy from view
+     * Handle update category from view
      *
      * @param \Illuminate\Http\Request $request comment about this variable
      * @param int                      $id      comment about this variable
@@ -78,6 +78,28 @@ class CategoryService
         $category = $this->getCategoryById($id);
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
+        if ($category->save()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Handle delete category from view
+     *
+     * @param int $id of category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteCategory($id)
+    {
+        $category = $this->getCategoryById($id);
+        foreach($category->children as $child) {
+            $child->delete_flag = 1;
+        }
+        $category->delete_flag = 1;
+        
         if ($category->save()) {
             return true;
         } else {

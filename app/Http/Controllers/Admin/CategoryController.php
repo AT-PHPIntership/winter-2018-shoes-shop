@@ -122,8 +122,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(Category $category)
-    // {
-    //     //
-    // }
+    public function destroy($id)
+    {
+        if ($this->categories->deleteCategory($id)) {
+            session()->flash('message', trans('common.message.delete_success'));
+            return redirect()->route('category.index');
+        } else {
+            session()->flash('message', trans('common.message.delete_error'));
+            return redirect()->route('category.index');
+        }
+    }
 }
