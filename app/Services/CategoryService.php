@@ -87,7 +87,7 @@ class CategoryService
             return true;
         } else {
             return false;
-        }   
+        }
     }
 
     /**
