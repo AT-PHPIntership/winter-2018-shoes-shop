@@ -1,8 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Models\Role;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
