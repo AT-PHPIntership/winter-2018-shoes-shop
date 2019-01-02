@@ -56,14 +56,14 @@
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPhoneNumber">@lang('user.table.phone')</label>
+                  <label for="exampleInputPhoneNumber">@lang('user.table.phone') *</label>
                   <input type="text" name="phonenumber" class="form-control" id="exampleInputPhoneNumber" value="{{ old('phonenumber') }}">
                   @if ($errors->has('phone'))
                     <span class="help-block">{{ $errors->first('phone') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputAddress">@lang('user.table.address')</label>
+                  <label for="exampleInputAddress">@lang('user.table.address') *</label>
                   <input type="text" name="address" class="form-control" id="exampleInputAddress" value="{{ old('address') }}">
                   @if ($errors->has('address'))
                     <span class="help-block">{{ $errors->first('address') }}</span>
@@ -74,6 +74,16 @@
                   <input type="file" name="avatar" id="exampleInputAvatar">
                   @if ($errors->has('avatar'))
                     <span class="help-block">{{ $errors->first('avatar') }}</span>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputRole">@lang('user.table.role') *</label>
+                  <select name="role" class="form-control" id="exampleInputRole">
+                    <option value="1">Admin</option>
+                    <option value="2">Customer</option>
+                  </select>
+                  @if ($errors->has('role'))
+                    <span class="help-block">{{ $errors->first('role') }}</span>
                   @endif
                 </div>
               </div>
