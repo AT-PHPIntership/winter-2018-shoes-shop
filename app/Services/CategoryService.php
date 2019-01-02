@@ -95,7 +95,7 @@ class CategoryService
     public function deleteCategory($id)
     {
         $category = $this->getCategoryById($id);
-        foreach($category->children as $child) {
+        foreach ($category->children as $child) {
             $child->delete_flag = 1;
         }
         $category->delete_flag = 1;
