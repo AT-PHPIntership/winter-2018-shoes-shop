@@ -106,12 +106,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($this->categories->updateCategory($request, $id) === 'children_error') {
+            session()->flash('message', trans('category.message.children_error'));
+            return redirect()->route('category.edit', $id);
+        }
         if ($this->categories->updateCategory($request, $id)) {
             session()->flash('message', trans('common.message.edit_success'));
             return redirect()->route('category.index');
         } else {
             session()->flash('message', trans('common.message.edit_error'));
-            return redirect()->route('category.edit');
+            return redirect()->route('category.edit', $id);
         }
     }
 
