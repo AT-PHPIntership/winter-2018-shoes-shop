@@ -32,7 +32,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
+                            <a href="{{ route('admin.users.show', Auth::user()->id) }}" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
                         </div>
                         <div class="pull-right">
                             <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();

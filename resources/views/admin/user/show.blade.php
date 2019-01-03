@@ -13,7 +13,6 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="{{ $user->profile->avatar }}" alt="User profile picture">
               <h3 class="profile-username text-center">{{ $user->profile->name }}</h3>
-              {{-- <p class="text-muted text-center">Software Engineer</p> --}}
               <table class="table table-bordered">
                 <tr>
                   <th>#</th>
@@ -33,11 +32,19 @@
                 </tr>
                 <tr>
                   <td>@lang('user.table.role')</td>
-                  <td>{{ $user->role_id }}</td>
+                  <td>{{ $user->role->name }}</td>
                 </tr>
                 <tr>
                   <td>@lang('user.table.gender')</td>
-                  <td>{{ $user->profile->gender }}</td>
+                  <td>
+                    @if ($user->profile->gender === \App\Models\Profile::OTHER)
+                      @lang('profile.gender.other')
+                    @elseif ($user->profile->gender === \App\Models\Profile::MALE)
+                      @lang('profile.gender.male')
+                    @else
+                      @lang('profile.gender.female')
+                    @endif
+                  </td>
                 </tr>
                 <tr>
                   <td>@lang('user.table.phone')</td>
