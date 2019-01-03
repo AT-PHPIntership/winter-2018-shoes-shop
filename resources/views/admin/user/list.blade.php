@@ -15,9 +15,9 @@
         </div>
         <div class="col-md-5">
           <div class="box-top">
-            {{-- <div class="al-success">
+            <div class="al-success">
               <strong>Thêm mới thành công</strong>  
-            </div>  --}}
+            </div> 
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
                     <td>{{ $user->profile->name }}</td>
                     <td>{{ $user->role->name }}</td>
                     <td>
-                        <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
+                        <a class="btn btn-info btn-xs" href="{{ route('admin.users.show', $user->id) }}">@lang('common.show')</a>
                         <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>
                         <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
                     </td>

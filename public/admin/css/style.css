@@ -9,7 +9,7 @@
     border: 1px solid #3c763d;
     display: inline-block;
     color: #3c763d;
-    padding: 5px;
+    padding: 5px 10px;
 }
 .al-error{
     background-color: #f2dede;
@@ -17,4 +17,7 @@
     display: inline-block;
     color: #a94442;
     padding: 5px;
+}
+.profile-user-img{
+    height: 100px;
 }

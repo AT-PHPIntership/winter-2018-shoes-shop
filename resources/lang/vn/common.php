@@ -7,6 +7,7 @@ return [
    'reset' => 'Làm mới',
    'submit' => 'Lưu',
    'show' => 'Chi tiết',
+   'back' => 'Quay lại',
    'table' => [
        'num' => 'STT',
        'action' => 'Hành động',
