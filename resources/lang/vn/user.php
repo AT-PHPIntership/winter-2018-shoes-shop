@@ -5,6 +5,7 @@ return [
     'list' => [
         'title' => 'Danh sách người dùng',
     ],
+    'show' => 'Thông tin cá nhân',
     'table' => [
         'id' => 'Id',
         'email' => 'Email',
@@ -23,15 +24,11 @@ return [
         'male' => 'Nữ',
         'female' => 'Nam'
     ],
-    'button' => [
-        'add' => 'Thêm',
-        'edit' => 'Sửa',
-        'delete' => 'Xóa',
-    ],
     'placeholder' => [
         'search' => 'Tìm kiếm',
     ],
     'add' => [
         'title' => 'Thêm người dùng',
     ],
+    'select' => 'Chọn',
 ];

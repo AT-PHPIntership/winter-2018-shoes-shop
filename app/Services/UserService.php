@@ -14,7 +14,7 @@ class UserService
      */
     public function getAll()
     {
-        $users = User::paginate(config('define.paginate.limit_rows'));
+        $users = User::with('profile')->with('role')->paginate(config('define.paginate.limit_rows'));
         return $users;
     }
 
@@ -54,5 +54,17 @@ class UserService
             return $fileName;
         }
         return null;
+    }
+    
+    /**
+     * Get info user
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return $user;
     }
 }
