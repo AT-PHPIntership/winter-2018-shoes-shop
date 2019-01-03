@@ -9,18 +9,18 @@ use App\Models\Role;
 class AdminMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Handle an incoming request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request request
+     * @param \Closure                 $next    next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role->name !== Role::CUSTOMER_ROLE) {
+        if (isAdminLogin()) {
             return $next($request);
-        }else{
-            return redirect('admin/login');
         }
+        return redirect('admin/login');
     }
 }

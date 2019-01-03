@@ -15,22 +15,12 @@ class RolesTableSeeder extends Seeder
         \DB::table('m_roles')->truncate();
         $role = [
             [
-                'name' => Role::ADMIN_ROLE,
+                'name' => 'admin',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
             [
-                'name' => Role::EMPLOYEE_ROLE,
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now()
-            ],
-            [
-                'name' => Role::SHIPPER_ROLE,
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now()
-            ],
-            [
-                'name' => Role::CUSTOMER_ROLE,
+                'name' => 'customer',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],
