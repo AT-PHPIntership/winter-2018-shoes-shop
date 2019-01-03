@@ -20,7 +20,8 @@ class UserService
     /**
      * Get info user
      *
-     * @param  int  $id
+     * @param int $id id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)

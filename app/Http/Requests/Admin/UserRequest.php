@@ -35,7 +35,8 @@ class UserRequest extends FormRequest
                     'phonenumber' => 'required|numeric|min:10|max:10',
                     'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ];
-            default: break;
+            default:
+                break;
         }
     }
 }
