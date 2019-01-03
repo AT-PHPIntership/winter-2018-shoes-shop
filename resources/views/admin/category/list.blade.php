@@ -29,9 +29,11 @@
               <h3 class="box-title">{{  trans('category.list') }}</h3>
               <!-- search form (Optional) -->
               <div class="box-tools">
-                <form action="#" method="get">
+                <form action="{{ route('category.search')}}" method="post">
+                @csrf
+                @method('POST')
                   <div class="input-group input-group-sm" style="width: 350px;">
-                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                    <input type="text" name="data_search" class="form-control pull-right" placeholder="Search">
                     <div class="input-group-btn">
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
@@ -52,9 +54,12 @@
                   </tr>
                 </thead>
                 <tbody>
+                @php
+                  $num =1;
+                @endphp
                 @foreach($categories as $category)
                   <tr>
-                    <td>{{ $category->id }}</td>
+                    <td>{{ $num++ }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>

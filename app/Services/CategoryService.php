@@ -17,7 +17,7 @@ class CategoryService
     {
         $categories = Category::where('delete_flag', 0)
                     ->orderBy('updated_at', 'desc')
-                    ->paginate(config('paging.number_element_in_page'));
+                    ->paginate(config('define.number_element_in_table'));
         return $categories;
     }
 
@@ -105,5 +105,27 @@ class CategoryService
         } else {
             return false;
         }
+    }
+
+    /**
+     * Search data of categories.
+     *
+     * @param \Illuminate\Http\Request $request from search form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchData(Request $request)
+    {
+        $data = $request->data_search;
+        $categories = Category::where('delete_flag', 0)
+                    ->Where(function($query) use ($data) {
+                        $query->where('name','LIKE','%'.$data.'%')
+                            ->orWhereHas('parent',function ($subquery ) use ($data) {
+                                $subquery->where('name','LIKE','%'.$data.'%');
+                            });
+                    })
+                    ->orderBy('updated_at', 'desc')
+                    ->paginate(config('define.number_element_in_table'));
+        return $categories;
     }
 }

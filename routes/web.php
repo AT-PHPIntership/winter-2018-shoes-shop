@@ -16,3 +16,8 @@ Route::get('/', function () {
 });
 
 Route::resource('category', 'Admin\CategoryController');
+
+Route::post('category/search', [
+    'as' => 'category.search',
+    'uses' => 'Admin\CategoryController@searchData'
+]);
