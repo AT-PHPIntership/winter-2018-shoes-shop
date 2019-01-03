@@ -18,7 +18,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">@lang('user.table.email') *</label>
-                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ old('email') }}">
+                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ $user->email }}">
                   @if ($errors->has('email'))
                     <span class="help-block">{{ $errors->first('email') }}</span>
                   @endif
@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputName">@lang('user.table.name') *</label>
-                  <input type="text" name="name" class="form-control" id="exampleInputName" value="{{ old('name') }}">
+                  <input type="text" name="name" class="form-control" id="exampleInputName" value="{{ $user->profile->name }}">
                   @if ($errors->has('name'))
                     <span class="help-block">{{ $errors->first('name') }}</span>
                   @endif
@@ -47,9 +47,9 @@
                 <div class="form-group">
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">
-                    <option value="0">@lang('user.gender.other')</option>
-                    <option value="1">@lang('user.gender.male')</option>
-                    <option value="2">@lang('user.gender.female')</option>
+                      <option value="0" {{ $user->profile->gender === 0 ? "selected": "" }}>@lang('user.gender.other')</option>
+                      <option value="1" {{ $user->profile->gender === 1 ? "selected": "" }}>@lang('user.gender.male')</option>
+                      <option value="2" {{ $user->profile->gender === 2 ? "selected": "" }}>@lang('user.gender.female')</option>
                   </select>
                   @if ($errors->has('gender'))
                     <span class="help-block">{{ $errors->first('gender') }}</span>
@@ -57,20 +57,25 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPhoneNumber">@lang('user.table.phone') *</label>
-                  <input type="text" name="phonenumber" class="form-control" id="exampleInputPhoneNumber" value="{{ old('phonenumber') }}">
+                  <input type="text" name="phonenumber" class="form-control" id="exampleInputPhoneNumber" value="{{ $user->profile->phonenumber }}">
                   @if ($errors->has('phonenumber'))
                     <span class="help-block">{{ $errors->first('phonenumber') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
                   <label for="exampleInputAddress">@lang('user.table.address') *</label>
-                  <input type="text" name="address" class="form-control" id="exampleInputAddress" value="{{ old('address') }}">
+                  <input type="text" name="address" class="form-control" id="exampleInputAddress" value="{{ $user->profile->address }}">
                   @if ($errors->has('address'))
                     <span class="help-block">{{ $errors->first('address') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
                   <label for="exampleInputAvatar">@lang('user.table.avatar')</label>
+                  @if (isset($user->profile->avatar))
+                    <div class="block-img">
+                      <img class="profile-user-img img-responsive img-circle" src="/upload/{{ $user->profile->avatar }}" alt="">
+                    </div>
+                  @endif
                   <input type="file" name="avatar" id="exampleInputAvatar">
                   @if ($errors->has('avatar'))
                     <span class="help-block">{{ $errors->first('avatar') }}</span>
@@ -80,7 +85,7 @@
                   <label for="exampleInputRole">@lang('user.table.role') *</label>
                   <select name="role_id" class="form-control" id="exampleInputRole">
                     @foreach ($roles as $role)
-                      <option value="{{ $role->id }}">{{ $role->name }}</option>
+                      <option value="{{ $role->id }}" {{ $role->id == $user->role_id ? "selected": "" }}>{{ $role->name }}</option>
                     @endforeach
                   </select>
                   @if ($errors->has('role_id'))
@@ -89,7 +94,7 @@
                 </div>
               </div>
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">@lang('user.button.add')</button>
+                <button type="submit" class="btn btn-primary">@lang('user.button.edit')</button>
               </div>
             </form>
           </div>

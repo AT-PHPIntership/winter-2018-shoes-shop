@@ -67,7 +67,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('admin.user.edit');
+        $user = $this->userService->show($id);
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
