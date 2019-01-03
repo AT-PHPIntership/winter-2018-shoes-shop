@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.add');
+        return view('admin.user.create');
     }
 
     /**
@@ -62,7 +62,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->userService->show($id);
+        return view('admin.user.show', compact('user'));
     }
 
     /**
