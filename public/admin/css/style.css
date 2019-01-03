@@ -1,0 +1,17 @@
+.box-top{
+    padding: 10px 0;
+}
+.al-success{
+    background-color: #dff0d8;
+    border: 1px solid #3c763d;
+    display: inline-block;
+    color: #3c763d;
+    padding: 5px;
+}
+.al-error{
+    background-color: #f2dede;
+    border: 1px solid #a94442;
+    display: inline-block;
+    color: #a94442;
+    padding: 5px;
+}

@@ -15,11 +15,6 @@ return [
         'role' => 'Chức vụ',
         'action' => 'Hành động',
     ],
-    'button' => [
-        'add' => 'Thêm',
-        'edit' => 'Sửa',
-        'delete' => 'Xóa',
-    ],
     'placeholder' => [
         'search' => 'Tìm kiếm'
     ]

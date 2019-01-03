@@ -19,6 +19,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Auth::routes();
     Route::middleware(['admin'])->group(function () {
         Route::get('index', 'HomeController@index')->name('index');
-        Route::resource('user', 'UserController');
+        Route::resource('users', 'UserController');
     });
 });
