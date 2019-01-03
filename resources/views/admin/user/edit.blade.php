@@ -13,11 +13,13 @@
             <div class="box-header with-border">
               <h3 class="box-title">@lang('user.edit.title')</h3>
             </div>
-            <form method="POST" role="form" enctype="multipart/form-data" action="">
+            <form method="post" role="form" enctype="multipart/form-data" action="{{ route('admin.users.update', $user->id) }}">
               @csrf
+              @method('PUT')
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">@lang('user.table.email') *</label>
+                  <input type="hidden" name="id" value="{{ $user->id }}">
                   <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ $user->email }}">
                   @if ($errors->has('email'))
                     <span class="help-block">{{ $errors->first('email') }}</span>

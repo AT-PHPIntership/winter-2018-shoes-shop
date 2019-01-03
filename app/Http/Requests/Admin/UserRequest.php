@@ -32,6 +32,16 @@ class UserRequest extends FormRequest
                     'name' => 'required',
                     'gender' => 'numeric|max:1',
                     'address' => 'required|max:255',
+                    'phonenumber' => 'required|numeric|min:10',
+                    'avatar' => 'image|avatar:jpeg,png,jpg,gif,svg|max:2048',
+                    'role_id' => 'required'
+                ];
+            case 'PUT':
+                return [
+                    'email' => 'required|email|unique:users,email,' . request()->id,
+                    'name' => 'required',
+                    'gender' => 'numeric|max:2',
+                    'address' => 'required|max:255',
                     'phonenumber' => 'required|numeric',
                     'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'role_id' => 'required'

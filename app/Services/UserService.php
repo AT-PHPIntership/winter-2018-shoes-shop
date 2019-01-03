@@ -66,4 +66,15 @@ class UserService
         $user = User::find($id);
         return $user;
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($request,$id)
+    {
+        dd($request);
+    }
 }

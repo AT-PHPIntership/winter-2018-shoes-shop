@@ -65,10 +65,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $user = $this->userService->show($id);
-        return view('admin.user.edit', compact('user'));
+        //
     }
 
     /**
@@ -79,7 +78,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userService->show($id);
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -89,9 +89,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**
