@@ -72,7 +72,7 @@
                     </td>
                     <td>{{ $user->role->name }}</td>
                     <td>
-                      <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('user.button.edit')</a>
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.users.show', $user->id)}}">@lang('user.button.edit')</a>
                       <a class="btn btn-danger btn-xs" href="{{ route('admin.users.destroy', $user->id)}}">@lang('user.button.delete')</a>
                     </td>
                   </tr>

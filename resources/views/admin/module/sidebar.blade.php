@@ -12,8 +12,8 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Danh sách người dùng</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Thêm người dùng</a></li>
+                <li class="active"><a href="{{ route('admin.users.index') }}"><i class="fa fa-circle-o"></i> Danh sách người dùng</a></li>
+                <li><a href="{{ route('admin.users.create') }}"><i class="fa fa-circle-o"></i> Thêm người dùng</a></li>
             </ul>
         </li>        
         <li class="treeview">

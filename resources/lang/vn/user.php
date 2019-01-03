@@ -34,4 +34,7 @@ return [
     'add' => [
         'title' => 'Thêm người dùng',
     ],
+    'edit' => [
+        'title' => 'Sửa người dùng',
+    ],
 ];
