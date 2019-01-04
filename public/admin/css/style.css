@@ -27,3 +27,6 @@
 .no-mg{
     margin: 0;
 }
+.form-inline{
+    display: inline-block;
+}

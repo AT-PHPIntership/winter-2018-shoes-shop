@@ -101,14 +101,18 @@ class UserController extends Controller
         }
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if ($this->userService->destroy($id)) {
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.delete_success'));
+        } else {
+            return redirect()->route('admin.users.index')->with('error', trans('common.message.delete_error'));
+        }
+    }
 }

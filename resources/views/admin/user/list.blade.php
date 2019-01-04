@@ -49,7 +49,13 @@
                     <td>
                         <a class="btn btn-info btn-xs" href="{{ route('admin.users.show', $user->id) }}">@lang('common.show')</a>
                         <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('common.edit')</a>
-                        <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
+                        <form class="form-inline" action="{{ route('admin.users.destroy', ['id' => $user->id]) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          @if ($user->role_id != \App\Models\Role::ADMIN_ROLE)
+                            <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
+                          @endif
+                        </form>
                     </td>
                   </tr>
                 @endforeach

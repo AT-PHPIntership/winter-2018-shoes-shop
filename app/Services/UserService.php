@@ -123,6 +123,16 @@ class UserService
      */
     public function destroy($id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+            if($user->profile->avatar != null){
+                File::delete(public_path('upload/'.$user->profile->avatar));
+            }
+            $user->delete();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
+    
 }
