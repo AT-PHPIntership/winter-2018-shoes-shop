@@ -36,7 +36,8 @@ class UserRequest extends FormRequest
                     'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'role_id' => 'required'
                 ];
-            default: break;
+            default:
+                break;
         }
     }
 }

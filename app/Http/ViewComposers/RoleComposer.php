@@ -12,7 +12,9 @@ class RoleComposer
     /**
      * Contructor
      *
-     * @param RoleService $role comment
+     * @param RoleService $roles roles
+     *
+     * @return void
      */
     public function __construct(RoleService $roles)
     {

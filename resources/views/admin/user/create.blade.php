@@ -84,6 +84,7 @@
                     @foreach ($roles as $role)
                       <option value="{{ $role->id }}">{{ $role->name }}</option>
                     @endforeach
+                  </select>
                   @if ($errors->has('role_id'))
                     <span class="help-block">{{ $errors->first('role_id') }}</span>
                   @endif

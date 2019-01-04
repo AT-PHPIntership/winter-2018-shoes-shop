@@ -14,7 +14,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['admin.user.add'], 'App\Http\ViewComposers\RoleComposer');
+        view()->composer(['admin.user.create'], 'App\Http\ViewComposers\RoleComposer');
     }
 
     /**
