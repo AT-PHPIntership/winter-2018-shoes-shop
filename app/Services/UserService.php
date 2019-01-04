@@ -14,14 +14,15 @@ class UserService
      */
     public function getAll()
     {
-        $users = User::paginate(config('define.paginate.limit_rows'));
+        $users = User::with('profile')->with('role')->paginate(config('define.paginate.limit_rows'));
         return $users;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  array  $request request
+     * @param array $request request
+     *
      * @return boolean
      */
     public function store($request)
@@ -46,6 +47,13 @@ class UserService
         }
     }
 
+    /**
+     * Upload Avatar
+     *
+     * @param string $avatar avatar
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function uploadAvatar($avatar)
     {
         if ($avatar != null) {
@@ -55,15 +63,17 @@ class UserService
         }
         return null;
     }
-
+    
     /**
-     * Display the specified resource.
+     * Get info user
      *
-     * @param  int  $id
+     * @param int $id id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
-        $user = User::find($id);
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
         return $user;
     }
 }
