@@ -27,10 +27,10 @@ class UserRequest extends FormRequest
             case 'POST':
                 return [
                     'email' => 'required|email|unique:users,email',
-                    'password' => 'required|min:5max:255|',
+                    'password' => 'required|min:5|max:255|',
                     'confirm_password' => 'required|same:password',
                     'name' => 'required',
-                    'gender' => 'numeric|max:1',
+                    'gender' => 'numeric|max:2',
                     'address' => 'required|max:255',
                     'phonenumber' => 'required|numeric',
                     'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',

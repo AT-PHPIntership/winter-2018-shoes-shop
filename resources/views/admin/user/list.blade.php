@@ -14,38 +14,11 @@
           </div>
         </div>
         <div class="col-md-5">
-          <div class="box-top">
-            @if (session()->has('message'))
-            <div class="al-error">
-              <strong>{{ session('message') }}</strong>  
-            </div>
-            @endif
-          </div>
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          {{-- @if (session()->has('message'))
-            <div class="alert alert-info fade in alert-dismissible alert-message">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>
-                <strong>{{ session('message') }}</strong>
-            </div>
-            <script type="text/javascript">
-              setTimeout(function(){
-                document.getElementById("alert-message").innerHTML = '';
-              }, 3000);
-            </script>
-          @endif --}}
-          {{-- @if (session()->has('message'))
-            <div id="alert-message">
-              <strong style="padding: 10px 20px; display: block;">{{ session('message') }}</strong>
-            </div>
-            <script type="text/javascript">
-              setTimeout(function(){
-                document.getElementById("alert-message").innerHTML = '';
-              }, 3000);
-            </script>
-          @endif  --}}
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('user.list.title')</h3>
