@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <td><a class="btn btn-warning btn-xs" href="{{ route('admin.users.index') }}">@lang('common.back')</a></td>
-                    <td><a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a></td>
+                    <td><a class="btn btn-primary btn-xs" href="{{ route('admin.users.show', $user->id) }}">@lang('common.edit')</a></td>
                   </tr>
               </table>
             </div>
