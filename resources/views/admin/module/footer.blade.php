@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
+      <b>@lang('admin.footer.version')</b>
     </div>
-    <strong>Copyright &copy; 12/2018 <a href="https://adminlte.io">PHP Intership</a>.</strong> Shoes Shop
+    <strong>@lang('admin.footer.copyright') &copy; @lang('admin.footer.date-copyright') <a href="#">@lang('admin.footer.shop-name')</a>.</strong>
 </footer>
