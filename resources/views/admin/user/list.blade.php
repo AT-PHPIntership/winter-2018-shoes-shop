@@ -55,7 +55,7 @@
                     <td>
                         <a class="btn btn-info btn-xs" href="{{ route('admin.users.show', $user->id) }}">@lang('common.show')</a>
                         <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('common.edit')</a>
-                        <a class="btn btn-danger btn-xs" href="{{ route('admin.users.destroy', $user->id)}}">@lang('common.delete')</a>
+                        <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
                     </td>
                   </tr>
                 @endforeach
