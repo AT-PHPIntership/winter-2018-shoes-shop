@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    const OTHER = 0;
     const MALE = 1;
-    const FEMALE = 0;
-    const OTHER = 2;
+    const FEMALE = 2;
 
     /**
      * The attributes that are mass assignable.

@@ -1,4 +1,4 @@
-@extends('admin.module.masterpage')
+@extends('admin.module.master')
 @section('content')
   <div class="content-wrapper">
     <section class="content-header">
@@ -49,9 +49,9 @@
                 <div class="form-group">
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">
-                      <option value="0" {{ $user->profile->gender === 0 ? "selected": "" }}>@lang('user.gender.other')</option>
-                      <option value="1" {{ $user->profile->gender === 1 ? "selected": "" }}>@lang('user.gender.male')</option>
-                      <option value="2" {{ $user->profile->gender === 2 ? "selected": "" }}>@lang('user.gender.female')</option>
+                    <option value="{{ \App\Models\Profile::OTHER }}">@lang('user.gender.other')</option>
+                    <option value="{{ \App\Models\Profile::MALE }}">@lang('user.gender.male')</option>
+                    <option value="{{ \App\Models\Profile::FEMALE }}">@lang('user.gender.female')</option>
                   </select>
                   @if ($errors->has('gender'))
                     <span class="help-block">{{ $errors->first('gender') }}</span>
@@ -96,7 +96,7 @@
                 </div>
               </div>
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">@lang('user.button.edit')</button>
+                <button type="submit" class="btn btn-primary">@lang('common.edit')</button>
               </div>
             </form>
           </div>
