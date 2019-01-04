@@ -69,10 +69,12 @@ class UserService
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show($id){
+    public function show($id)
+    {
         $user = User::findOrFail($id);
         return $user;
     }
@@ -80,12 +82,12 @@ class UserService
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request  $request request
-     * @param int                       $id      id
-     * 
+     * @param \Illuminate\Http\Request $request request
+     * @param int                      $id      id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update($request,$id)
+    public function update($request, $id)
     {
         try {
             $user = User::findOrFail($id);
@@ -118,14 +120,15 @@ class UserService
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
             $user = User::findOrFail($id);
-            if($user->profile->avatar != null){
+            if ($user->profile->avatar != null) {
                 File::delete(public_path('upload/'.$user->profile->avatar));
             }
             $user->delete();
@@ -134,5 +137,4 @@ class UserService
             return false;
         }
     }
-    
 }
