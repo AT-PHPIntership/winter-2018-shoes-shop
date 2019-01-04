@@ -20,8 +20,10 @@
 }
 .profile-user-img{
     height: 100px;
-    margin: 0;
 }
 .block-img{
     padding: 5px;
+}
+.no-mg{
+    margin: 0;
 }

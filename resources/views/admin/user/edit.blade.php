@@ -75,7 +75,7 @@
                   <label for="exampleInputAvatar">@lang('user.table.avatar')</label>
                   @if (isset($user->profile->avatar))
                     <div class="block-img">
-                      <img class="profile-user-img img-responsive img-circle" src="/upload/{{ $user->profile->avatar }}" alt="">
+                      <img class="profile-user-img no-mg img-responsive img-circle" src="/upload/{{ $user->profile->avatar }}" alt="">
                     </div>
                   @endif
                   <input type="file" name="avatar" id="exampleInputAvatar">
