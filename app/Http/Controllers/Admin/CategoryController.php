@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\Controller;
 
 class CategoryController extends Controller
 {
@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categories->getList();
-        return view('admin/category/list', compact('categories'));
+        return view('admin.category.list', compact('categories'));
     }
 
     /**
