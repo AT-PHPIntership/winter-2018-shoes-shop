@@ -14,7 +14,7 @@ class UserController extends Controller
     /**
     * Contructer
     *
-    * @param $userService
+    * @param App\Service\UserService $userService userService
     *
     * @return void
     */
@@ -41,20 +41,21 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.add');
+        return view('admin.user.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storag
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
     {
-        if($this->userService->store($request)){
+        if ($this->userService->store($request)) {
             return redirect()->route('admin.users.index')->with('message', trans('common.message.create_success'));
-        }else{
+        } else {
             return redirect()->route('admin.users.index')->with('message', trans('common.message.create_error'));
         }
     }
@@ -62,12 +63,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return view('admin.user.edit');
+        $user = $this->userService->show($id);
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -78,29 +81,29 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.user.edit');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 }

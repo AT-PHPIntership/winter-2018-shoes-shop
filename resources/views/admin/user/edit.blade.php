@@ -1,4 +1,4 @@
-@extends('admin.module.masterpage')
+@extends('admin.module.master')
 @section('content')
   <div class="content-wrapper">
     <section class="content-header">
@@ -47,9 +47,9 @@
                 <div class="form-group">
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">
-                    <option value="0">@lang('user.gender.other')</option>
-                    <option value="1">@lang('user.gender.male')</option>
-                    <option value="2">@lang('user.gender.female')</option>
+                    <option value="{{ \App\Models\Profile::OTHER }}">@lang('user.gender.other')</option>
+                    <option value="{{ \App\Models\Profile::MALE }}">@lang('user.gender.male')</option>
+                    <option value="{{ \App\Models\Profile::FEMALE }}">@lang('user.gender.female')</option>
                   </select>
                   @if ($errors->has('gender'))
                     <span class="help-block">{{ $errors->first('gender') }}</span>
@@ -89,7 +89,7 @@
                 </div>
               </div>
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">@lang('user.button.add')</button>
+                <button type="submit" class="btn btn-primary">@lang('common.edit')</button>
               </div>
             </form>
           </div>
