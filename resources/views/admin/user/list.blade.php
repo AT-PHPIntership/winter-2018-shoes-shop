@@ -14,13 +14,7 @@
           </div>
         </div>
         <div class="col-md-5">
-          <div class="box-top">
-            @if (session()->has('message'))
-            <div class="al-error">
-              <strong>{{ session('message') }}</strong>  
-            </div>
-            @endif
-          </div>
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
