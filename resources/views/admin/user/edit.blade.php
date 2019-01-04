@@ -8,6 +8,11 @@
     </section>
     <section class="content">
       <div class="row">
+        <div class="col-md-5">
+          @include('admin.module.message')
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -17,14 +22,6 @@
               @csrf
               @method('PUT')
               <div class="box-body">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">@lang('user.table.email') *</label>
-                  <input type="hidden" name="id" value="{{ $user->id }}">
-                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ $user->email }}">
-                  @if ($errors->has('email'))
-                    <span class="help-block">{{ $errors->first('email') }}</span>
-                  @endif
-                </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">@lang('user.table.password')</label>
                   <input type="password" name="password" class="form-control" id="exampleInputPassword1">

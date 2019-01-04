@@ -92,7 +92,6 @@ class UserService
             $profile = Profile::findOrFail($id);
             $inputUser = [
                 'role_id' => $request->role_id,
-                'email' => $request->email,
             ];
             if ($request->password != null) {
                 $inputUser['password'] = bcrypt($request->password);
