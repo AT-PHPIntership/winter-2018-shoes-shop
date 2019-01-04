@@ -29,7 +29,6 @@ class UserService
      */
     public function store($request)
     {
-        // dd($request->hasFile('avatar'));
         try {
             $user = User::create([
                 'role_id' => $request->role_id,

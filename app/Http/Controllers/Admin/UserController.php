@@ -54,9 +54,9 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         if ($this->userService->store($request)) {
-            return redirect()->route('admin.users.index')->with('message', trans('common.message.create_success'));
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
         } else {
-            return redirect()->route('admin.users.index')->with('message', trans('common.message.create_error'));
+            return redirect()->route('admin.users.index')->with('error', trans('common.message.create_error'));
         }
     }
 
