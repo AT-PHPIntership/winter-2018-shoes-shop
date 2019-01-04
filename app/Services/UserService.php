@@ -26,7 +26,6 @@ class UserService
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return $user;
+        return User::findOrFail($id);
     }
 }
