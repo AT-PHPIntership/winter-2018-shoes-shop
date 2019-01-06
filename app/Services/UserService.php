@@ -13,7 +13,6 @@ class UserService
      */
     public function getAll()
     {
-        $users = User::paginate(config('define.paginate.limit_rows'));
-        return $users;
+        return User::paginate(config('define.paginate.limit_rows'));
     }
 }
