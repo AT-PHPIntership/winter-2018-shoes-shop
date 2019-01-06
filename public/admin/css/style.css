@@ -1,29 +1,32 @@
-.skin-blue{
-    position: relative;
-}
-.box-top{
-    padding: 10px 0;
-}
-.al-success{
-    background-color: #dff0d8;
-    border: 1px solid #3c763d;
-    display: inline-block;
-    color: #3c763d;
-    padding: 5px 10px;
-}
-.al-error{
-    background-color: #f2dede;
-    border: 1px solid #a94442;
-    display: inline-block;
-    color: #a94442;
-    padding: 5px;
+.block-img{
+  padding: 5px;
 }
 .profile-user-img{
-    height: 100px;
+  height: 100px;
 }
-.block-img{
-    padding: 5px;
+.skin-blue{
+  position: relative;
+}
+.box-top{
+  padding: 10px 0;
+}
+.al-success{
+  background-color: #dff0d8;
+  border: 1px solid #3c763d;
+  display: inline-block;
+  color: #3c763d;
+  padding: 5px 10px;
+}
+.al-error{
+  background-color: #f2dede;
+  border: 1px solid #a94442;
+  display: inline-block;
+  color: #a94442;
+  padding: 5px;
+}
+.profile-user-img{
+  height: 100px;
 }
 .no-mg{
-    margin: 0;
+  margin: 0;
 }
