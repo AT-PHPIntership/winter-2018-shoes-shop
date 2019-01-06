@@ -13,8 +13,7 @@ class UserService
      */
     public function getAll()
     {
-        $users = User::with('profile')->with('role')->paginate(config('define.paginate.limit_rows'));
-        return $users;
+        return User::paginate(config('define.paginate.limit_rows'));
     }
 
     /**
@@ -26,7 +25,6 @@ class UserService
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return $user;
+        return User::findOrFail($id);
     }
 }
