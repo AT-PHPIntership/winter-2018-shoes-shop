@@ -77,9 +77,11 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param int $id id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
         $user = $this->userService->show($id);
         return view('admin.user.edit', compact('user'));

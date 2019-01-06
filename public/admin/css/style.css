@@ -3,7 +3,6 @@
 }
 .profile-user-img{
   height: 100px;
-  margin: 0;
 }
 .skin-blue{
   position: relative;
@@ -24,7 +23,4 @@
   display: inline-block;
   color: #a94442;
   padding: 5px;
-}
-.profile-user-img{
-  height: 100px;
 }
