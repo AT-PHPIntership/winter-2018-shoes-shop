@@ -22,14 +22,6 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('user.list.title')</h3>
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 250px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="@lang('user.placeholder.search')">
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="box-body">
               <table class="table table-bordered">
