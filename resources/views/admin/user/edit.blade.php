@@ -17,27 +17,6 @@
               @csrf
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">@lang('user.table.email') *</label>
-                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ $user->email }}">
-                  @if ($errors->has('email'))
-                    <span class="help-block">{{ $errors->first('email') }}</span>
-                  @endif
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">@lang('user.table.password')</label>
-                  <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                  @if ($errors->has('password'))
-                    <span class="help-block">{{ $errors->first('password') }}</span>
-                  @endif
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputConfirmPassword1">@lang('user.table.confirm_password')</label>
-                  <input type="password" name="confirm_password" class="form-control" id="exampleInputConfirmPassword1">
-                  @if ($errors->has('confirm_password'))
-                    <span class="help-block">{{ $errors->first('confirm_password') }}</span>
-                  @endif
-                </div>
-                <div class="form-group">
                   <label for="exampleInputName">@lang('user.table.name') *</label>
                   <input type="text" name="name" class="form-control" id="exampleInputName" value="{{ $user->profile->name }}">
                   @if ($errors->has('name'))
