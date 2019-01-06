@@ -94,11 +94,7 @@
                 </div>
               </div>
               <div class="box-footer">
-<<<<<<< HEAD
-                <button type="submit" class="btn btn-primary">@lang('user.button.edit')</button>
-=======
                 <button type="submit" class="btn btn-primary">@lang('common.edit')</button>
->>>>>>> 45865b1bed0f7063041cf1bdbea2a95276c58ab2
               </div>
             </form>
           </div>

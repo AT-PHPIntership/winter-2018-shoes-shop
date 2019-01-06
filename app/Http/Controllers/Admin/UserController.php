@@ -53,10 +53,11 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        if ($this->userService->store($request)) {
+        $data = $request->all();
+        if ($this->userService->store($data)) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
         } else {
-            return redirect()->route('admin.users.index')->with('error', trans('common.message.create_error'));
+            return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
         }
     }
 
@@ -76,11 +77,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id id
-     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
         $user = $this->userService->show($id);
         return view('admin.user.edit', compact('user'));

@@ -14,32 +14,31 @@ class UserService
      */
     public function getAll()
     {
-        $users = User::with('profile')->with('role')->paginate(config('define.paginate.limit_rows'));
-        return $users;
+        return User::paginate(config('define.paginate.limit_rows'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param array $request request
+     * @param array $data data
      *
      * @return boolean
      */
-    public function store($request)
+    public function store($data)
     {
         try {
             $user = User::create([
-                'role_id' => $request->role_id,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
+                'role_id' => $data['role_id'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
             ]);
             Profile::create([
-                'user_id' => $user->id,
-                'name' => $request->name,
-                'gender' => $request->gender,
-                'address' => $request->address,
-                'phonenumber' => $request->phonenumber,
-                'avatar' => $this->uploadAvatar($request->avatar),
+                'user_id' => $user['id'],
+                'name' => $data['name'],
+                'gender' => $data['gender'],
+                'address' => $data['address'],
+                'phonenumber' => $data['phonenumber'],
+                'avatar' => isset($data['avatar']) ? $this->uploadAvatar($data['avatar']) : null,
             ]);
             return true;
         } catch (Exception $e) {
@@ -56,12 +55,9 @@ class UserService
      */
     public function uploadAvatar($avatar)
     {
-        if ($avatar != null) {
-            $fileName = time().'-'.$avatar->getClientOriginalName();
-            $avatar->move('upload', $fileName);
-            return $fileName;
-        }
-        return null;
+        $fileName = time().'-'.$avatar->getClientOriginalName();
+        $avatar->move('upload', $fileName);
+        return $fileName;
     }
     
     /**
@@ -73,7 +69,6 @@ class UserService
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        return $user;
+        return User::findOrFail($id);
     }
 }

@@ -13,7 +13,6 @@ class RoleService
      */
     public function getAll()
     {
-        $roles = Role::get();
-        return $roles;
+        return Role::get();
     }
 }
