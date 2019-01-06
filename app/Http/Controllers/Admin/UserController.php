@@ -79,7 +79,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
         $user = $this->userService->show($id);
         return view('admin.user.edit', compact('user'));
