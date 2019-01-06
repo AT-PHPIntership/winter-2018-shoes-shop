@@ -23,7 +23,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{ Auth::user()->profile->avatar }}" class="img-circle" alt="User Image">
+                            <img src="/upload/{{ Auth::user()->profile->avatar }}" class="img-circle" alt="User Image">
                             <p>
                                 {{ Auth::user()->profile->name }}
                                 <small>{{ Auth::user()->created_at }}</small>

@@ -23,20 +23,6 @@
               @method('PUT')
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">@lang('user.table.password')</label>
-                  <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                  @if ($errors->has('password'))
-                    <span class="help-block">{{ $errors->first('password') }}</span>
-                  @endif
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputConfirmPassword1">@lang('user.table.confirm_password')</label>
-                  <input type="password" name="confirm_password" class="form-control" id="exampleInputConfirmPassword1">
-                  @if ($errors->has('confirm_password'))
-                    <span class="help-block">{{ $errors->first('confirm_password') }}</span>
-                  @endif
-                </div>
-                <div class="form-group">
                   <label for="exampleInputName">@lang('user.table.name') *</label>
                   <input type="text" name="name" class="form-control" id="exampleInputName" value="{{ $user->profile->name }}">
                   @if ($errors->has('name'))
@@ -46,9 +32,9 @@
                 <div class="form-group">
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">
-                    <option value="{{ \App\Models\Profile::OTHER }}">@lang('user.gender.other')</option>
-                    <option value="{{ \App\Models\Profile::MALE }}">@lang('user.gender.male')</option>
-                    <option value="{{ \App\Models\Profile::FEMALE }}">@lang('user.gender.female')</option>
+                    <option value="{{ \App\Models\Profile::OTHER }}" {{ $user->profile->gender === 0 ? "selected": "" }}>@lang('user.gender.other')</option>
+                    <option value="{{ \App\Models\Profile::MALE }}" {{ $user->profile->gender === 1 ? "selected": "" }}>@lang('user.gender.male')</option>
+                    <option value="{{ \App\Models\Profile::FEMALE }}" {{ $user->profile->gender === 2 ? "selected": "" }}>@lang('user.gender.female')</option>
                   </select>
                   @if ($errors->has('gender'))
                     <span class="help-block">{{ $errors->first('gender') }}</span>

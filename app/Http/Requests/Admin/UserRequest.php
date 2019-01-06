@@ -38,7 +38,6 @@ class UserRequest extends FormRequest
                 ];
             case 'PUT':
                 return [
-                    'confirm_password' => 'same:password',
                     'name' => 'required',
                     'gender' => 'numeric|max:2',
                     'address' => 'required|max:255',
