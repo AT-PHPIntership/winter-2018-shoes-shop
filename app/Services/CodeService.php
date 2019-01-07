@@ -63,4 +63,22 @@ class CodeService
             return false;
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $code = Code::findOrFail($id);
+            $code->delete();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

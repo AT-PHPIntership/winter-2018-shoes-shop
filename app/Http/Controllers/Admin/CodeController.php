@@ -93,20 +93,24 @@ class CodeController extends Controller
     {
         $data = $request->all();
         if ($this->codeService->update($data, $id)) {
-            return redirect()->route('admin.code.index')->with('success', trans('common.message.edit_success'));
+            return redirect()->route('admin.codes.index')->with('success', trans('common.message.edit_success'));
         } else {
-            return redirect()->route('admin.code.edit', $id)->with('error', trans('common.message.edit_error'));
+            return redirect()->route('admin.codes.edit', $id)->with('error', trans('common.message.edit_error'));
         }
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if ($this->codeService->destroy($id)) {
+            return redirect()->route('admin.codes.index')->with('success', trans('common.message.delete_success'));
+        } else {
+            return redirect()->route('admin.codes.index')->with('error', trans('common.message.delete_error'));
+        }
+    }
 }
