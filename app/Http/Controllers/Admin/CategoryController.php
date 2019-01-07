@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Session;
+use App\Http\Controllers\Admin\Controller;
 
 class CategoryController extends Controller
 {
@@ -21,13 +20,13 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param CategoryService $categories comment about this variable
+     * @param CategoryService $categoryService comment about this variable
      *
      * @return void
      */
-    public function __construct(CategoryService $categories)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->categories = $categories;
+        $this->categories = $categoryService;
     }
 
     /**
@@ -38,7 +37,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categories->getList();
-        return view('admin/category/list', compact('categories'));
+        return view('admin.category.list', compact('categories'));
     }
 
     /**

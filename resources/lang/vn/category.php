@@ -8,4 +8,10 @@ return [
     'name' => 'Tên danh mục',
     'parent_name' => 'Danh mục cha',
     'children_name' => 'Danh mục con',
+    'table' => [
+        'num' => 'STT',
+        'name' => 'Tên danh mục',
+        'parent_name' => 'Danh mục cha',
+        'action' => 'Hành động',
+    ]
 ];

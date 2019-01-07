@@ -15,8 +15,7 @@ class CategoryService
      */
     public function getList()
     {
-        $categories = Category::where('delete_flag', 0)
-                    ->orderBy('updated_at', 'desc')
+        $categories = Category::select('id', 'name', 'parent_id')
                     ->paginate(config('paging.number_element_in_page'));
         return $categories;
     }
