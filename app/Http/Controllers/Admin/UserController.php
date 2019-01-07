@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\UserService;
-use App\Http\Requests\Admin\UserRequest;
+use App\Http\Requests\Admin\PostUserRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -30,7 +31,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userService->getAll();
+        $users = $this->userService->getUserWithPaginate();
         return view('admin.user.list', compact('users'));
     }
 
@@ -51,62 +52,34 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(PostUserRequest $request)
     {
         $data = $request->all();
-        if ($this->userService->store($data)) {
-            return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
-        } else {
-            return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
-        }
+        $this->userService->store($data);
+        return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id id
+     * @param App\Models\User $user user
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = $this->userService->show($id);
         return view('admin.user.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id id
+     * @param App\Models\User $user user
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = $this->userService->show($id);
         return view('admin.user.edit', compact('user'));
     }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
 }

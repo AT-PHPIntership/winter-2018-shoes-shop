@@ -30,6 +30,6 @@ class RoleComposer
      */
     public function compose(View $view)
     {
-        $view->with('roles', $this->roles->getAll());
+        $view->with('roles', $this->roles->getAll(['id', 'name']));
     }
 }
