@@ -42,16 +42,22 @@ class CodeController extends Controller
         return view('admin.code.create');
     }
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(Request $request)
-    // {
-        
-    // }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $data = $request->all();
+        if ($this->codeService->store($data)) {
+            return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
+        } else {
+            return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
+        }
+    }
 
     // /**
     //  * Display the specified resource.
