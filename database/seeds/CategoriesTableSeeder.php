@@ -31,7 +31,6 @@ class CategoriesTableSeeder extends Seeder
             ],[
                 'name' => 'Giày nữ',
                 'parent_id' => null,
-                'parent_id' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[

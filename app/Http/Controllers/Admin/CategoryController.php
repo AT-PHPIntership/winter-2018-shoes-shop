@@ -20,7 +20,7 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param CategoryService $categories comment about this variable
+     * @param CategoryService $categoryService comment about this variable
      *
      * @return void
      */
