@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Profile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Log\Logger;
 
 class UserService
 {
@@ -12,9 +14,9 @@ class UserService
      *
      * @return object
      */
-    public function getAll()
+    public function getUserWithPaginate()
     {
-        return User::paginate(config('define.paginate.limit_rows'));
+        return User::with(['role', 'profile'])->paginate(config('define.paginate.limit_rows'));
     }
 
     /**
@@ -22,10 +24,11 @@ class UserService
      *
      * @param array $data data
      *
-     * @return boolean
+     * @return object
      */
-    public function store($data)
+    public function store(array $data)
     {
+        DB::beginTransaction();
         try {
             $user = User::create([
                 'role_id' => $data['role_id'],
@@ -40,9 +43,11 @@ class UserService
                 'phonenumber' => $data['phonenumber'],
                 'avatar' => isset($data['avatar']) ? $this->uploadAvatar($data['avatar']) : null,
             ]);
-            return true;
+            DB::commit();
+            return $user;
         } catch (Exception $e) {
-            return false;
+            Log::error($e);
+            DB::rollback();
         }
     }
 
@@ -58,17 +63,5 @@ class UserService
         $fileName = time().'-'.$avatar->getClientOriginalName();
         $avatar->move('upload', $fileName);
         return $fileName;
-    }
-    
-    /**
-     * Get info user
-     *
-     * @param int $id id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return User::findOrFail($id);
     }
 }
