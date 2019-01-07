@@ -6,8 +6,8 @@ return [
     'new' => 'Thêm mới',
     'table' => [
         'num' => 'STT',
-        'category_name' => 'Tên danh mục',
-        'category_parent' => 'Danh mục cha',
+        'name' => 'Tên danh mục',
+        'parent_name' => 'Danh mục cha',
         'action' => 'Hành động',
     ]
 ];

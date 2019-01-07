@@ -24,9 +24,9 @@ class CategoryController extends Controller
      *
      * @return void
      */
-    public function __construct(CategoryService $categories)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->categories = $categories;
+        $this->categories = $categoryService;
     }
 
     /**

@@ -34,8 +34,8 @@
                 <thead>
                   <tr>
                     <th>{{  trans('common.table.num') }}</th>
-                    <th>{{  trans('category.name') }}</th>
-                    <th>{{  trans('category.parent_name') }}</th>
+                    <th>{{  trans('category.table.name') }}</th>
+                    <th>{{  trans('category.table.parent_name') }}</th>
                     <th>{{  trans('common.table.action') }}</th>
                   </tr>
                 </thead>
