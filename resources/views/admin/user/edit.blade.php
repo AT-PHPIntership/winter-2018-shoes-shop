@@ -15,6 +15,7 @@
             </div>
             <form method="POST" role="form" enctype="multipart/form-data" action="">
               @csrf
+              @method('PUT')
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputName">@lang('user.table.name') *</label>
