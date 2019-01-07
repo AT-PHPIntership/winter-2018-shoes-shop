@@ -44,4 +44,23 @@ class CodeService
     {
         return Code::findOrFail($id);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param array $data data
+     * @param int   $id   id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update($data, $id)
+    {
+        try {
+            $code = Code::findOrFail($id);
+            $code->update($data);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }

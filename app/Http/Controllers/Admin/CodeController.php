@@ -82,17 +82,22 @@ class CodeController extends Controller
         return view('admin.code.edit', compact('code'));
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        if ($this->codeService->update($data, $id)) {
+            return redirect()->route('admin.codes.index')->with('success', trans('common.message.edit_success'));
+        } else {
+            return redirect()->route('admin.codes.edit', $id)->with('error', trans('common.message.edit_error'));
+        }
+    }
 
     // /**
     //  * Remove the specified resource from storage.
