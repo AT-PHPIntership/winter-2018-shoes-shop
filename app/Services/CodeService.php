@@ -32,4 +32,16 @@ class CodeService
             return false;
         }
     }
+
+    /**
+     * Get info user
+     *
+     * @param int $id id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        return Code::findOrFail($id);
+    }
 }

@@ -70,16 +70,17 @@ class CodeController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     //
-    // }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $code = $this->codeService->edit($id);
+        return view('admin.code.edit', compact('code'));
+    }
 
     // /**
     //  * Update the specified resource in storage.
