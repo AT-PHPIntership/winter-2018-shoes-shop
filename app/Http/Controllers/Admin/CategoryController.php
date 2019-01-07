@@ -62,8 +62,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         if ($this->categories->storeCategory($request)) {
-            session()->flash('message', 'Đăng ký gia sư thành công!');
-            // Session::flash('message', _('common.create_success'));
+            session()->flash('message', _('common.create_success'));
             return redirect()->route('category.index');
         } else {
             Session::flash('message', _('common.create_error'));
