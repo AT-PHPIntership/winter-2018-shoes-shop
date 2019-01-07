@@ -11,8 +11,8 @@ class UserService
      *
      * @return object
      */
-    public function getAll()
+    public function getUserWithPaginate()
     {
-        return User::paginate(config('define.paginate.limit_rows'));
+        return User::with(['role', 'profile'])->paginate(config('define.paginate.limit_rows'));
     }
 }
