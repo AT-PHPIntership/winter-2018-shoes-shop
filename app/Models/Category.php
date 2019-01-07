@@ -15,5 +15,26 @@ class Category extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
     protected $table = 'categories';
+
+    /**
+     * Get the children for categories.
+     *
+     * @return void
+     */
+    public function children()
+    {
+        return $this->hasMany('App\Models\Category', 'parent_id', 'id');
+    }
+
+    /**
+     * Get the parent for categories.
+     *
+     * @return void
+     */
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\Category', 'parent_id', 'id');
+    }
 }
