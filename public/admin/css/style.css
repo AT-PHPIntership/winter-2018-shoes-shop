@@ -30,3 +30,14 @@
 .form-inline {
     display: inline-block;
 }
+.padding-bot-20 {
+    padding-bottom: 20px;
+}
+
+.padding-y-20 {
+    padding: 20px 0;
+}
+.form-create {
+    background: #ecf0f5;
+    padding:20px;
+}

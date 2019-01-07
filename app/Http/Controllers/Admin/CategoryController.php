@@ -48,7 +48,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = $this->categories->getList();
-        return view('admin/category/create', compact('categories'));
+        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -61,11 +61,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         if ($this->categories->storeCategory($request)) {
-            session()->flash('message', _('common.create_success'));
-            return redirect()->route('category.index');
+            session()->flash('success', trans('common.create_success'));
+            return redirect()->route('admin.category.index');
         } else {
-            Session::flash('message', _('common.create_error'));
-            return redirect()->route('category.create');
+            Session::flash('error', _('common.create_error'));
+            return redirect()->route('admin.adcategory.create');
         }
     }
 
