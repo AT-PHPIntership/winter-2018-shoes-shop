@@ -13,8 +13,8 @@ class CategoryService
      *
      * @return object
      */
-    public function getAll(array $columns = ['*'], array $conditions = ['1' ,'1'])
+    public function getSubCategory(array $columns = ['*'])
     {
-        return Category::select($columns)->where($conditions)->get();
+        return Category::select($columns)->where('parent_id', '!=', null)->get();
     }
 }

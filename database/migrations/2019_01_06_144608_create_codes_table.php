@@ -21,8 +21,8 @@ class CreateCodesTable extends Migration
             $table->integer('percent');
             $table->string('description')->nullable();
             $table->integer('times');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

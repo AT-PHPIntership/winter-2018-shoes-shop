@@ -30,6 +30,6 @@ class CategoryComposer
      */
     public function compose(View $view)
     {
-        $view->with('categories', $this->categoryService->getAll(['id', 'name'], ['parent_id', '!=', null]));
+        $view->with('categories', $this->categoryService->getSubCategory(['id', 'name']));
     }
 }
