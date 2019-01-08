@@ -8,6 +8,7 @@ use App\Services\UserService;
 use App\Http\Requests\Admin\PostUserRequest;
 use App\Http\Requests\Admin\PutUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -83,7 +84,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact('user'));
+        if (Auth::user()->id == $user->id ||  $user->role_id != \App\Models\Role::ADMIN_ROLE) {
+            return view('admin.user.edit', compact('user'));
+        }
+        return redirect()->back();
     }
 
     /**
