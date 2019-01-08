@@ -58,9 +58,8 @@ class UserController extends Controller
         $data = $request->all();
         if (!empty($this->userService->store($data))) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
-        } else {
-            return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
         }
+        return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
     }
 
     /**
@@ -100,9 +99,8 @@ class UserController extends Controller
         $data = $request->all();
         if (!empty($this->userService->update($data, $user))) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.edit_success'));
-        } else {
-            return redirect()->route('admin.users.edit', $user)->with('error', trans('common.message.edit_error'));
         }
+        return redirect()->route('admin.users.edit', $user)->with('error', trans('common.message.edit_error'));
     }
 
     /**
