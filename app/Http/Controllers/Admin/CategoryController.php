@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Session;
+use App\Http\Controllers\Admin\Controller;
 
 class CategoryController extends Controller
 {
@@ -21,13 +20,13 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param CategoryService $categories comment about this variable
+     * @param CategoryService $categoryService comment about this variable
      *
      * @return void
      */
-    public function __construct(CategoryService $categories)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->categories = $categories;
+        $this->categories = $categoryService;
     }
 
     /**
@@ -62,11 +61,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         if ($this->categories->storeCategory($request)) {
-            session()->flash('message', trans('common.message.create_success'));
-            return redirect()->route('category.index');
+            session()->flash('success', trans('common.message.create_success'));
+            return redirect()->route('admin.category.index');
         } else {
-            session()->flash('message', trans('common.message.create_error'));
-            return redirect()->route('category.create');
+            session()->flash('error', trans('common.message.create_error'));
+            return redirect()->route('admin.category.create');
         }
     }
 
@@ -107,15 +106,15 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         if ($this->categories->updateCategory($request, $id) === 'children_error') {
-            session()->flash('message', trans('category.message.children_error'));
-            return redirect()->route('category.edit', $id);
+            session()->flash('error', trans('category.message.children_error'));
+            return redirect()->route('admin.category.edit', $id);
         }
         if ($this->categories->updateCategory($request, $id)) {
-            session()->flash('message', trans('common.message.edit_success'));
-            return redirect()->route('category.index');
+            session()->flash('success', trans('common.message.edit_success'));
+            return redirect()->route('admin.category.index');
         } else {
-            session()->flash('message', trans('common.message.edit_error'));
-            return redirect()->route('category.edit', $id);
+            session()->flash('error', trans('common.message.edit_error'));
+            return redirect()->route('admin.category.edit', $id);
         }
     }
 

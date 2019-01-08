@@ -1,4 +1,4 @@
-@extends('admin.module.masterpage')
+@extends('admin.module.master')
 @section('content')
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,54 +9,50 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-          <div style="padding: 16px 0;">
-            <button class="btn btn-success btn-sm ad-click-event">
-              <a href="{{ route('category.create')}}" style="color: #fff;">{{  trans('common.new') }}</a>
-            </button>
+          <div class="box-top">
+          <a class="btn btn-success btn-md" href="{{ route('admin.category.create')}}">{{ trans('common.new') }}</a>
           </div>
-          @if (session()->has('message'))
-            <div id="alert-message">
-              <strong style="padding: 10px 20px; display: block;">{{ session('message') }}</strong>
-            </div>
-            <script type="text/javascript">
-              setTimeout(function(){
-                document.getElementById("alert-message").innerHTML = '';
-              }, 2000);
-            </script>
-          @endif
+        </div>
+        <div class="col-xs-12">
+          @include('admin.module.message')
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">{{  trans('category.list') }}</h3>
+              <h3 class="box-title">{{ trans('category.list') }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>{{  trans('category.num') }}</th>
-                    <th>{{  trans('category.name') }}</th>
-                    <th>{{  trans('category.parent_name') }}</th>
-                    <th>{{  trans('common.table.action') }}</th>
+                    <th>{{ trans('common.table.num') }}</th>
+                    <th>{{ trans('category.table.name') }}</th>
+                    <th>{{ trans('category.table.parent_name') }}</th>
+                    <th>{{ trans('common.table.action') }}</th>
                   </tr>
                 </thead>
                 <tbody>
-                @foreach($categories as $category)
+                @foreach($categories as $key => $category)
                   <tr>
-                    <td>{{ $category->id }}</td>
+                    <td>{{ $key+1 }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>
-                      <button>
-                        <a href="{{ route('category.edit', $category->id)}}">{{  trans('common.edit') }}</a>
+                      <button class="btn btn-primary btn-xs">
+                        <a href="{{ route('admin.category.edit', $category->id)}}" style="color: #fff;">{{ trans('common.edit') }}</a>
                       </button>
-                      <button><a href="#">{{  trans('common.delete') }}</a></button>
-                    </td>
+                      <button type="submit" class="btn btn-danger btn-xs">
+                        <a href="#" style="color: #fff;">{{ trans('common.delete') }}</a>
+                      </button>
                   </tr>
                 @endforeach
                 </tbody>
               </table>
             </div>
-            <div lass="row">{{$categories->links()}}</div>
+            <div lass="row">{{ $categories->links() }}</div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
