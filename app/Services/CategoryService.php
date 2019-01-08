@@ -15,7 +15,7 @@ class CategoryService
      */
     public function getList()
     {
-        $categories = Category::where('delete_flag', 0)
+        $categories = Category::select('id', 'name', 'parent_id')
                     ->orderBy('updated_at', 'desc')
                     ->paginate(config('define.number_element_in_table'));
         return $categories;
@@ -28,8 +28,7 @@ class CategoryService
      */
     public function getParent()
     {
-        $parents = Category::where('delete_flag', 0)
-                    ->whereNull('parent_id')
+        $parents = Category::whereNull('parent_id')
                     ->get();
         return $parents;
     }
@@ -62,7 +61,7 @@ class CategoryService
      */
     public function getCategoryById($id)
     {
-        return Category::where('delete_flag', 0)->findOrFail($id);
+        return Category::findOrFail($id);
     }
 
     /**
@@ -76,6 +75,11 @@ class CategoryService
     public function updateCategory(Request $request, $id)
     {
         $category = $this->getCategoryById($id);
+        if (count($category->children)) {
+            if ($category->parent_id != $request->parent_id) {
+                return ('children_error');
+            }
+        }
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         if ($category->save()) {
@@ -96,15 +100,14 @@ class CategoryService
     {
         $category = $this->getCategoryById($id);
         foreach ($category->children as $child) {
-            $child->delete_flag = 1;
+            if (!($child->delete())) {
+                return false;
+            };
         }
-        $category->delete_flag = 1;
-        
-        if ($category->save()) {
-            return true;
-        } else {
+        if (!($category->delete())) {
             return false;
-        }
+        };
+        return true;
     }
 
     /**
@@ -117,15 +120,12 @@ class CategoryService
     public function searchData(Request $request)
     {
         $data = $request->data_search;
-        $categories = Category::where('delete_flag', 0)
-                    ->Where(function ($query) use ($data) {
-                        $query->where('name', 'LIKE', '%'.$data.'%')
-                            ->orWhereHas('parent', function ($subquery) use ($data) {
-                                $subquery->where('name', 'LIKE', '%'.$data.'%');
-                            });
-                    })
-                    ->orderBy('updated_at', 'desc')
-                    ->paginate(config('define.number_element_in_table'));
+        $categories = Category::where('name', 'LIKE', '%'.$data.'%')
+                        ->orWhereHas('parent', function ($subquery) use ($data) {
+                            $subquery->where('name', 'LIKE', '%'.$data.'%');
+                        })
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate(config('define.number_element_in_table'));
         return $categories;
     }
 }

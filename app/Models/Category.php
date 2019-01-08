@@ -3,9 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     protected $table = 'categories';
 
     /**
@@ -15,7 +25,7 @@ class Category extends Model
      */
     public function children()
     {
-        return $this->hasMany('App\Models\Category', 'parent_id', 'id')->where('delete_flag', 0);
+        return $this->hasMany('App\Models\Category', 'parent_id', 'id');
     }
 
     /**
@@ -25,6 +35,6 @@ class Category extends Model
      */
     public function parent()
     {
-        return $this->belongsTo('App\Models\Category', 'parent_id', 'id')->where('delete_flag', 0);
+        return $this->belongsTo('App\Models\Category', 'parent_id', 'id');
     }
 }
