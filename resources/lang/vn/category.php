@@ -11,6 +11,12 @@ return [
     'parent_name' => 'Danh mục cha',
     'children_name' => 'Danh mục con',
     'message' => [
-        'children_error' => 'Bạn không thể chỉnh sửa cấp danh mục này!'
+        'children_error' => 'Bạn không thể chỉnh sửa cấp danh mục này!',
+    ],
+    'table' => [
+        'num' => 'STT',
+        'name' => 'Tên danh mục',
+        'parent_name' => 'Danh mục cha',
+        'action' => 'Hành động',
     ]
 ];

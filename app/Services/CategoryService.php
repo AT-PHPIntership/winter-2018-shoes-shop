@@ -15,9 +15,9 @@ class CategoryService
      */
     public function getList()
     {
-        $categories = Category::where('delete_flag', 0)
+        $categories = Category::select('id', 'name', 'parent_id')
                     ->orderBy('updated_at', 'desc')
-                    ->paginate(config('paging.number_element_in_page'));
+                    ->paginate(config('define.number_element_in_table'));
         return $categories;
     }
 
@@ -28,8 +28,7 @@ class CategoryService
      */
     public function getParent()
     {
-        $parents = Category::where('delete_flag', 0)
-                    ->whereNull('parent_id')
+        $parents = Category::whereNull('parent_id')
                     ->get();
         return $parents;
     }
@@ -62,7 +61,7 @@ class CategoryService
      */
     public function getCategoryById($id)
     {
-        return Category::where('delete_flag', 0)->findOrFail($id);
+        return Category::findOrFail($id);
     }
 
     /**
@@ -97,18 +96,18 @@ class CategoryService
      *
      * @return \Illuminate\Http\Response
      */
-    public function deleteCategory($id)
-    {
-        $category = $this->getCategoryById($id);
-        foreach ($category->children as $child) {
-            $child->delete_flag = 1;
-        }
-        $category->delete_flag = 1;
+    // public function deleteCategory($id)
+    // {
+    //     $category = $this->getCategoryById($id);
+    //     foreach ($category->children as $child) {
+    //         $child->delete_flag = 1;
+    //     }
+    //     $category->delete_flag = 1;
         
-        if ($category->save()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     if ($category->save()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 }
