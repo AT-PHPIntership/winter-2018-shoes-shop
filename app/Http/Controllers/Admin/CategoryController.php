@@ -63,10 +63,9 @@ class CategoryController extends Controller
         if ($this->categories->storeCategory($request)) {
             session()->flash('success', trans('common.message.create_success'));
             return redirect()->route('admin.category.index');
-        } else {
-            session()->flash('error', trans('common.message.create_error'));
-            return redirect()->route('admin.category.create');
         }
+        session()->flash('error', trans('common.message.create_error'));
+        return redirect()->route('admin.category.create');
     }
 
     /**
@@ -112,10 +111,9 @@ class CategoryController extends Controller
         if ($this->categories->updateCategory($request, $id)) {
             session()->flash('success', trans('common.message.edit_success'));
             return redirect()->route('admin.category.index');
-        } else {
-            session()->flash('error', trans('common.message.edit_error'));
-            return redirect()->route('admin.category.edit', $id);
         }
+        session()->flash('error', trans('common.message.edit_error'));
+        return redirect()->route('admin.category.edit', $id);
     }
 
     /**
