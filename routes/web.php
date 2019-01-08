@@ -20,5 +20,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Route::middleware(['admin'])->group(function () {
         Route::get('index', 'HomeController@index')->name('index');
         Route::resource('users', 'UserController');
+        Route::resource('category', 'CategoryController');
     });
 });
