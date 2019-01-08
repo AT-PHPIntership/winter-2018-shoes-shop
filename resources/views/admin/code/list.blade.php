@@ -14,11 +14,7 @@
           </div>
         </div>
         <div class="col-md-5">
-          <div class="box-top">
-            <div class="al-success">
-              <strong>Thêm mới thành công</strong>  
-            </div> 
-          </div>
+          
         </div>
       </div>
       <div class="row">
