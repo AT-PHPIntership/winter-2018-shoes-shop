@@ -18,7 +18,7 @@ return [
         'edit_success' => 'Chỉnh sửa thành công',
         'edit_error' => 'Chỉnh sửa thất bại',
         'delete_success' => 'Xóa thành công',
-        'delete_eror' => 'Xóa thất bại',
+        'delete_erorr' => 'Xóa thất bại',
         'del_question' => 'Bạn có muốn xóa không ?'
     ]
 ];
