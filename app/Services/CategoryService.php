@@ -22,6 +22,19 @@ class CategoryService
     }
 
     /**
+     * Handle get parents list from database
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getParentList()
+    {
+        $categories = Category::select('id', 'name', 'parent_id')
+                        ->whereNull('parent_id')
+                        ->get();
+        return $categories;
+    }
+
+    /**
      * Handle store categoriy from view
      *
      * @param array $input data from request
