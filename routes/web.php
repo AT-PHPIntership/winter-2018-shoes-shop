@@ -15,4 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('category', 'Admin\CategoryController');
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
+    Auth::routes();
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('index', 'HomeController@index')->name('index');
+
+        Route::resource('category', 'CategoryController');
+        
+        Route::post('category/search', [
+            'as' => 'category.search',
+            'uses' => 'CategoryController@searchData'
+        ]);
+    });
+});

@@ -15,9 +15,9 @@ class CategoryService
      */
     public function getList()
     {
-        $categories = Category::where('delete_flag', 0)
+        $categories = Category::select('id', 'name', 'parent_id')
                     ->orderBy('updated_at', 'desc')
-                    ->paginate(config('paging.number_element_in_page'));
+                    ->paginate(config('define.number_element_in_table'));
         return $categories;
     }
 
@@ -28,8 +28,7 @@ class CategoryService
      */
     public function getParent()
     {
-        $parents = Category::where('delete_flag', 0)
-                    ->whereNull('parent_id')
+        $parents = Category::whereNull('parent_id')
                     ->get();
         return $parents;
     }
@@ -76,6 +75,11 @@ class CategoryService
     public function updateCategory(Request $request, $id)
     {
         $category = $this->getCategoryById($id);
+        if (count($category->children)) {
+            if ($category->parent_id != $request->parent_id) {
+                return ('children_error');
+            }
+        }
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         if ($category->save()) {
