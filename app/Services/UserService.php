@@ -30,6 +30,9 @@ class UserService
     {
         DB::beginTransaction();
         try {
+            if ($data['role_id'] === Role::ADMIN_ROLE && !isAdminLogin()) {
+                return false;
+            }
             $user = User::create([
                 'role_id' => $data['role_id'],
                 'email' => $data['email'],
