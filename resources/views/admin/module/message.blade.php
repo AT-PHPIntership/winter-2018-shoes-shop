@@ -2,14 +2,14 @@
 	@if (session()->has('success'))
 		<div class="box-top">
 			<div class="al-success">
-				<strong>{{ session('success') }}</strong>  
+				<strong>{{ session('success') }}</strong>
 			</div>
 		</div>
 	@endif
 	@if (session()->has('error'))
 		<div class="box-top">
 			<div class="al-error">
-				<strong>{{ session('error') }}</strong>  
+				<strong>{{ session('error') }}</strong>
 			</div>
 		</div>
 	@endif

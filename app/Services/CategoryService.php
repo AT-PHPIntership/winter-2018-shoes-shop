@@ -22,34 +22,31 @@ class CategoryService
     }
 
     /**
-     * Handle get parent category to data
+     * Handle get parents list from database
      *
      * @return \Illuminate\Http\Response
      */
-    public function getParent()
+    public function getParentList()
     {
-        $parents = Category::whereNull('parent_id')
-                    ->get();
-        return $parents;
+        $categories = Category::select('id', 'name', 'parent_id')
+                        ->whereNull('parent_id')
+                        ->get();
+        return $categories;
     }
 
     /**
      * Handle store categoriy from view
      *
-     * @param \Illuminate\Http\Request $request comment about this variable
+     * @param array $input data from request
      *
-     * @return \Illuminate\Http\Response
+     * @return boolean
      */
-    public function storeCategory(Request $request)
+    public function storeCategory(array $input)
     {
-        $category = new Category;
-        $category->name = $request->name;
-        $category->parent_id = $request->parent_id;
-        if ($category->save()) {
+        if (Category::create($input)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -88,26 +85,4 @@ class CategoryService
             return false;
         }
     }
-
-    /**
-     * Handle delete category from view
-     *
-     * @param int $id of category
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function deleteCategory($id)
-    // {
-    //     $category = $this->getCategoryById($id);
-    //     foreach ($category->children as $child) {
-    //         $child->delete_flag = 1;
-    //     }
-    //     $category->delete_flag = 1;
-        
-    //     if ($category->save()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 }

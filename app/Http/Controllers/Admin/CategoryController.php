@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
+use App\Http\Requests\Admin\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -47,8 +48,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $parents = $this->categories->getParent();
-        return view('admin.category.create', compact('parents'));
+        $categories = $this->categories->getParentList();
+        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -58,31 +59,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        if ($this->categories->storeCategory($request)) {
-            session()->flash('success', trans('common.message.create_success'));
-            return redirect()->route('admin.category.index');
-        }
-        if ($this->categories->storeCategory($request)) {
+        $input = $request->all();
+        if ($this->categories->storeCategory($input)) {
             session()->flash('success', trans('common.message.create_success'));
             return redirect()->route('admin.category.index');
         }
         session()->flash('error', trans('common.message.create_error'));
         return redirect()->route('admin.category.create');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id comment about this variable
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(Category $category)
-    // {
-    //     //
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -119,16 +105,4 @@ class CategoryController extends Controller
         session()->flash('error', trans('common.message.edit_error'));
         return redirect()->route('admin.category.edit', $id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id comment about this variable
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function destroy(Category $category)
-    // {
-    //     //
-    // }
 }
