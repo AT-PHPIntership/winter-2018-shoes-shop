@@ -32,9 +32,9 @@
                 <div class="form-group">
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">
-                    <option value="{{ \App\Models\Profile::OTHER }}" {{ $user->profile->gender === 0 ? "selected": "" }}>@lang('user.gender.other')</option>
-                    <option value="{{ \App\Models\Profile::MALE }}" {{ $user->profile->gender === 1 ? "selected": "" }}>@lang('user.gender.male')</option>
-                    <option value="{{ \App\Models\Profile::FEMALE }}" {{ $user->profile->gender === 2 ? "selected": "" }}>@lang('user.gender.female')</option>
+                    <option value="{{ \App\Models\Profile::OTHER }}" {{ $user->profile->gender === config('define.gender.other') ? "selected": "" }}>@lang('user.gender.other')</option>
+                    <option value="{{ \App\Models\Profile::MALE }}" {{ $user->profile->gender === config('define.gender.male') ? "selected": "" }}>@lang('user.gender.male')</option>
+                    <option value="{{ \App\Models\Profile::FEMALE }}" {{ $user->profile->gender === config('define.gender.female') ? "selected": "" }}>@lang('user.gender.female')</option>
                   </select>
                   @if ($errors->has('gender'))
                     <span class="help-block">{{ $errors->first('gender') }}</span>

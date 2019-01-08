@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\UserService;
-use App\Http\Requests\Admin\UserRequest;
+use App\Http\Requests\Admin\PostUserRequest;
+use App\Http\Requests\Admin\PutUserRequest;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -30,7 +32,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userService->getAll();
+        $users = $this->userService->getUserWithPaginate();
         return view('admin.user.list', compact('users'));
     }
 
@@ -51,10 +53,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(PostUserRequest $request)
     {
         $data = $request->all();
-        if ($this->userService->store($data)) {
+        $this->userService->store($data);
+        if (!empty($this->userService->store($data))) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
         } else {
             return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
@@ -64,26 +67,24 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id id
+     * @param App\Models\User $user user
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = $this->userService->show($id);
         return view('admin.user.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id id
+     * @param App\Models\User $user user
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = $this->userService->show($id);
         return view('admin.user.edit', compact('user'));
     }
 
@@ -91,28 +92,17 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request request
-     * @param int                      $id      id
+     * @param App\Models\User          $user    user
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(PutUserRequest $request, User $user)
     {
         $data = $request->all();
-        if ($this->userService->update($data, $id)) {
+        if (!empty($this->userService->update($data, $user))) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.edit_success'));
         } else {
-            return redirect()->route('admin.users.edit', $id)->with('error', trans('common.message.edit_error'));
+            return redirect()->route('admin.users.edit', $user)->with('error', trans('common.message.edit_error'));
         }
     }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
 }
