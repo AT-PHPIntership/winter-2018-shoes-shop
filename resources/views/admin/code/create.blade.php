@@ -27,6 +27,9 @@
                   <label for="exampleInputCategory">@lang('code.table.category') *</label>
                   <select name="category_id" class="form-control" id="exampleInputCategory">
                     <option value="">@lang('code.select')</option>
+                    @foreach ($categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                   </select>
                   @if ($errors->has('category_id'))
                     <span class="help-block">{{ $errors->first('category_id') }}</span>
