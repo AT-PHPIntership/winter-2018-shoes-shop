@@ -57,9 +57,8 @@ class UserController extends Controller
         $data = $request->all();
         if (!empty($this->userService->store($data))) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
-        } else {
-            return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
         }
+        return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
     }
 
     /**
