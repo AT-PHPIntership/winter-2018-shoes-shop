@@ -4,8 +4,11 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserService
 {
@@ -14,9 +17,9 @@ class UserService
      *
      * @return object
      */
-    public function getAll()
+    public function getUserWithPaginate()
     {
-        return User::paginate(config('define.paginate.limit_rows'));
+        return User::with(['role', 'profile'])->paginate(config('define.paginate.limit_rows'));
     }
 
     /**
@@ -24,11 +27,15 @@ class UserService
      *
      * @param array $data data
      *
-     * @return boolean
+     * @return object
      */
-    public function store($data)
+    public function store(array $data)
     {
+        DB::beginTransaction();
         try {
+            if ($data['role_id'] === Role::ADMIN_ROLE && !isAdminLogin()) { 
+                return false;
+            }
             $user = User::create([
                 'role_id' => $data['role_id'],
                 'email' => $data['email'],
@@ -42,9 +49,11 @@ class UserService
                 'phonenumber' => $data['phonenumber'],
                 'avatar' => isset($data['avatar']) ? $this->uploadAvatar($data['avatar']) : null,
             ]);
-            return true;
+            DB::commit();
+            return $user;
         } catch (Exception $e) {
-            return false;
+            Log::error($e);
+            DB::rollback();
         }
     }
 
@@ -78,19 +87,20 @@ class UserService
      * Update the specified resource in storage.
      *
      * @param array $data data
-     * @param int   $id   id
+     * @param    $id   id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($data, $id)
+    public function update(array $data, User $user)
     {
+        DB::beginTransaction();
         try {
-            $user = User::findOrFail($id);
-            $profile = Profile::findOrFail($id);
+            if ($data['role_id'] === Role::ADMIN_ROLE && !isAdminLogin()) { 
+                return false;
+            }
             $inputUser = [
                 'role_id' => $data['role_id'],
             ];
-            $user->update($inputUser);
             $inputProfile = [
                 'user_id' => $user->id,
                 'name' => $data['name'],
@@ -100,24 +110,15 @@ class UserService
             ];
             if (isset($data['avatar'])) {
                 $inputProfile['avatar'] = $this->uploadAvatar($data['avatar']);
-                File::delete(public_path('upload/'.$profile->avatar));
+                File::delete(public_path('upload/'.$user->profile->avatar));
             }
-            $profile->update($inputProfile);
-            return true;
+            $user->profile->update($inputProfile);
+            $user->update($inputUser);
+            DB::commit();
+            return $user;
         } catch (Exception $e) {
-            return false;
+            Log::error($e);
+            DB::rollback();
         }
     }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param int $id id
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
 }

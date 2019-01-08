@@ -9,10 +9,12 @@ class RoleService
     /**
      * Get all data table role
      *
+     * @param array $columns columns
+     *
      * @return object
      */
-    public function getAll()
+    public function getAll(array $columns = ['*'])
     {
-        return Role::get();
+        return Role::select($columns)->get();
     }
 }
