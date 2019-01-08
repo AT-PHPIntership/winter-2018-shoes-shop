@@ -64,6 +64,10 @@ class CategoryController extends Controller
             session()->flash('success', trans('common.message.create_success'));
             return redirect()->route('admin.category.index');
         }
+        if ($this->categories->storeCategory($request)) {
+            session()->flash('success', trans('common.message.create_success'));
+            return redirect()->route('admin.category.index');
+        }
         session()->flash('error', trans('common.message.create_error'));
         return redirect()->route('admin.category.create');
     }
