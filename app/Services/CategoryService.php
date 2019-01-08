@@ -61,7 +61,7 @@ class CategoryService
      */
     public function getCategoryById($id)
     {
-        return Category::where('delete_flag', 0)->findOrFail($id);
+        return Category::findOrFail($id);
     }
 
     /**
@@ -100,14 +100,13 @@ class CategoryService
     {
         $category = $this->getCategoryById($id);
         foreach ($category->children as $child) {
-            $child->delete_flag = 1;
+            if (!($child->delete())) {
+                return false;
+            };
         }
-        $category->delete_flag = 1;
-        
-        if ($category->save()) {
-            return true;
-        } else {
+        if (!($category->delete())) {
             return false;
-        }
+        };
+        return true;
     }
 }

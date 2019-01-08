@@ -130,11 +130,10 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         if ($this->categories->deleteCategory($id)) {
-            session()->flash('message', trans('common.message.delete_success'));
-            return redirect()->route('category.index');
+            session()->flash('success', trans('common.message.delete_success'));
         } else {
-            session()->flash('message', trans('common.message.delete_error'));
-            return redirect()->route('category.index');
+            session()->flash('error', trans('common.message.delete_error'));
         }
+        return redirect()->route('admin.category.index');
     }
 }
