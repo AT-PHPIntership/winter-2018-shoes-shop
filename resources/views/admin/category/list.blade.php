@@ -45,7 +45,7 @@
                         <a href="#" style="color: #fff;">{{ trans('common.edit') }}</a>
                       </button>
                       <button type="submit" class="btn btn-danger btn-xs">
-                        <a href="#" style="color: #fff;">{{ trans('common.edit') }}</a>
+                        <a href="#" style="color: #fff;">{{ trans('common.delete') }}</a>
                       </button>
                   </tr>
                 @endforeach

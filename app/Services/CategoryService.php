@@ -24,19 +24,15 @@ class CategoryService
     /**
      * Handle store categoriy from view
      *
-     * @param \Illuminate\Http\Request $request comment about this variable
+     * @param array $input data from request
      *
-     * @return \Illuminate\Http\Response
+     * @return boolean
      */
-    public function storeCategory(Request $request)
+    public function storeCategory(array $input)
     {
-        $category = new Category;
-        $category->name = $request->name;
-        $category->parent_id = $request->parent_id;
-        if ($category->save()) {
+        if (Category::create($input)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }

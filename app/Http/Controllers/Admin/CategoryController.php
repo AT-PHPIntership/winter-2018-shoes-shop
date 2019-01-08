@@ -60,61 +60,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if ($this->categories->storeCategory($request)) {
-            session()->flash('success', trans('common.create_success'));
+        $input = $request->all();
+        if ($this->categories->storeCategory($input)) {
+            session()->flash('success', trans('common.message.create_success'));
             return redirect()->route('admin.category.index');
         } else {
-            Session::flash('error', _('common.create_error'));
+            Session::flash('error', _('common.message.create_error'));
             return redirect()->route('admin.adcategory.create');
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Category $category comment about this variable
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function show(Category $category)
-    // {
-    //     //
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Category $category comment about this variable
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function edit(Category $category)
-    // {
-    //     //
-    // }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request  comment about this variable
-     * @param \App\Models\Category     $category comment about this variable
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function update(Request $request, Category $category)
-    // {
-    //     //
-    // }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Category $category comment about this variable
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function destroy(Category $category)
-    // {
-    //     //
-    // }
 }
