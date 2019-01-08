@@ -16,7 +16,7 @@ class CategoryService
     public function getList()
     {
         $categories = Category::select('id', 'name', 'parent_id')
-                    ->paginate(config('paging.number_element_in_page'));
+                    ->paginate(config('define.number_element_in_table'));
         return $categories;
     }
 }
