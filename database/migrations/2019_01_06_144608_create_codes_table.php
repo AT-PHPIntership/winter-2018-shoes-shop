@@ -15,8 +15,8 @@ class CreateCodesTable extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('category_id')->nullable();
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
             $table->integer('percent');
             $table->string('description')->nullable();

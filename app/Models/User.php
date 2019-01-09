@@ -64,6 +64,6 @@ class User extends Authenticatable
      */
     public function codes()
     {
-        return $this->belongsToMany(Code::class);
+        return $this->belongsToMany(Code::class, 'user_codes', 'user_id', 'code_id');
     }
 }
