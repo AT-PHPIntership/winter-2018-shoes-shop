@@ -52,7 +52,7 @@ class CategoryService
     /**
      * Handle get categoriy by id
      *
-     * @param int $id comment about this variable
+     * @param int $id of category
      *
      * @return \Illuminate\Http\Response
      */
@@ -64,25 +64,22 @@ class CategoryService
     /**
      * Handle update category from view
      *
-     * @param \Illuminate\Http\Request $request comment about this variable
-     * @param int                      $id      comment about this variable
+     * @param array    $input    data from request
+     * @param Category $category of category
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
-    public function updateCategory(Request $request, $id)
+    public function updateCategory(array $input, $category)
     {
-        $category = $this->getCategoryById($id);
+        // $category = $this->getCategoryById($id);
         if (count($category->children)) {
-            if ($category->parent_id != $request->parent_id) {
+            if ($category->parent_id != $input->parent_id) {
                 return ('children_error');
             }
         }
-        $category->name = $request->name;
-        $category->parent_id = $request->parent_id;
-        if ($category->save()) {
+        if ($category->update($input)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }

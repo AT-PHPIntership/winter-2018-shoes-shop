@@ -22,8 +22,16 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
+        switch($this->method()) {
+            case 'POST':
+                $id = '';
+                break;
+            case 'PUT':
+                $id = $this->category->id;
+                break;
+        }
         return [
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:categories,name,' . $id,
         ];
     }
 

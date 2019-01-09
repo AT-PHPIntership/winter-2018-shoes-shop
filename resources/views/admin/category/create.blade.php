@@ -23,8 +23,8 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" class="form-control" placeholder="@lang('category.new')" name="name">
                 @if ($errors->has('name'))
-                   <span class="help-block">{{ $errors->first('name') }}</span>
-                 @endif
+                  <span class="help-block">{{ $errors->first('name') }}</span>
+                @endif
               </div>
             </div>
             <div class="form-group">
