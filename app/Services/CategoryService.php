@@ -15,6 +15,6 @@ class CategoryService
      */
     public function getSubCategory(array $columns = ['*'])
     {
-        return Category::select($columns)->where('parent_id', '!=', null)->get();
+        return Category::select($columns)->get();
     }
 }
