@@ -107,4 +107,26 @@ class UserService
             DB::rollback();
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param App\Models\User $user user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($user)
+    {
+        try {
+            if ($user->role_id != Role::ADMIN_ROLE) {
+                if ($user->profile->avatar) {
+                    File::delete(public_path('upload/'.$user->profile->avatar));
+                }
+                return $user->delete();
+            }
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+        return false;
+    }
 }

@@ -19,5 +19,6 @@ return [
         'edit_error' => 'Chỉnh sửa thất bại',
         'delete_success' => 'Xóa thành công',
         'delete_error' => 'Xóa thất bại',
+        'del_question' => 'Bạn có muốn xóa không ?'
     ]
 ];
