@@ -11,7 +11,7 @@
         <div class="col-md-5 col-md-offset-3">
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{ !empty(Auth::user()->profile->avatar) ? config('define.path.default_avatar').Auth::user()->profile->avatar : config('define.path.default_avatar') }}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="{{ !empty($user->profile->avatar) ? config('define.path.avatar').$user->profile->avatar : config('define.path.default_avatar') }}" alt="User profile picture">
               <h3 class="profile-username text-center">{{ $user->profile->name }}</h3>
               <table class="table table-bordered">
                 <tr>

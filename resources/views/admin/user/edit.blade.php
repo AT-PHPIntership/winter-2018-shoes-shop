@@ -59,7 +59,7 @@
                   @if (isset($user->profile->avatar))
                     <div class="block-img">
                       @if (!empty($user->profile->avatar))
-                        <img class="profile-user-img no-mg img-responsive img-circle" src="{{ config('define.path.default_avatar').$user->profile->avatar }}" alt="">                          
+                        <img class="profile-user-img no-mg img-responsive img-circle" src="{{ config('define.path.avatar').$user->profile->avatar }}" alt="">                          
                       @endif
                     </div>
                   @endif
