@@ -22,7 +22,10 @@
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('category.name') }}</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input value="{{ old('name', $category->name) }}" type="text" class="form-control" required placeholder="@lang('category.new')" name="name">
+                <input value="{{ old('name', $category->name) }}" type="text" class="form-control" placeholder="@lang('category.new')" name="name">
+                @if ($errors->has('name'))
+                  <span class="help-block">{{ $errors->first('name') }}</span>
+                @endif
               </div>
             </div>
             <div class="form-group">

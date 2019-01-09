@@ -7,6 +7,7 @@ use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
+use App\Http\Requests\Admin\EditCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -48,8 +49,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->getParentList();
-        return view('admin.category.create', compact('categories'));
+        $parents = $this->categories->getParentList();
+        return view('admin.category.create', compact('parents'));
     }
 
     /**
@@ -80,25 +81,26 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->categories->getCategoryById($id);
-        $parents = $this->categories->getParent();
+        $parents = $this->categories->getParentList();
         return view('admin.category.edit', compact('parents', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request comment about this variable
-     * @param int                      $id      comment about this variable
+     * @param \Illuminate\Http\Request $request  from edit form
+     * @param App\Models\Category      $category biding of id from edit form
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        if ($this->categories->updateCategory($request, $id) === 'children_error') {
+        $input = $request->all();
+        if ($this->categories->updateCategory($input, $category) === 'children_error') {
             session()->flash('error', trans('category.message.children_error'));
             return redirect()->route('admin.category.edit', $id);
         }
-        if ($this->categories->updateCategory($request, $id)) {
+        if ($this->categories->updateCategory($input, $category)) {
             session()->flash('success', trans('common.message.edit_success'));
             return redirect()->route('admin.category.index');
         }
