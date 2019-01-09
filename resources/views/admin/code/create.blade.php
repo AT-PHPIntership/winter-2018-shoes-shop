@@ -9,6 +9,11 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          @include('admin.module.message')
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('code.add.title')</h3>
@@ -26,7 +31,11 @@
                 <div class="form-group">
                   <label for="exampleInputCategory">@lang('code.table.category') *</label>
                   <select name="category_id" class="form-control" id="exampleInputCategory">
-                    <option value="">@lang('code.select')</option>
+                    <option value="">@lang('code.null')</option>
+                    {{-- <option value="null">@lang('code.null')</option> --}}
+                    @foreach ($categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                   </select>
                   @if ($errors->has('category_id'))
                     <span class="help-block">{{ $errors->first('category_id') }}</span>

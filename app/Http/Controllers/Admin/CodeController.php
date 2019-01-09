@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
+use App\Services\CodeService;
 
 class CodeController extends Controller
 {
@@ -28,15 +29,15 @@ class CodeController extends Controller
      */
     public function index()
     {
-        $codes = $this->codeService->getAll();
+        $codes = $this->codeService->getCodeWithPaginate();
         return view('admin.code.list', compact('codes'));
     }
-    
+
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
         return view('admin.code.create');
@@ -49,58 +50,13 @@ class CodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostCodeRequest $request)
     {
         $data = $request->all();
-        if ($this->codeService->store($data)) {
+        if (!empty($this->codeService->store($data))) {
             return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
         } else {
             return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
         }
     }
-
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }
 }

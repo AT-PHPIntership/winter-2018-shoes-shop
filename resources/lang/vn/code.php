@@ -26,4 +26,5 @@ return [
         'title' => 'Sửa mã khuyến mãi',
     ],
     'select' => 'Chọn',
+    'null' => 'Tất cả',
 ];
