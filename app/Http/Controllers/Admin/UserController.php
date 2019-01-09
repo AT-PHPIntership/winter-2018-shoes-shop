@@ -119,6 +119,6 @@ class UserController extends Controller
         if ($this->userService->destroy($user)) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.delete_success'));
         }
-        return redirect()->route('admin.users.index')->with('error', trans('common.message.delete_erorr'));
+        return redirect()->route('admin.users.index')->with('error', trans('common.message.delete_error'));
     }
 }
