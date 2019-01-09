@@ -106,4 +106,19 @@ class UserController extends Controller
         }
         return redirect()->route('admin.users.edit', $user)->with('error', trans('common.message.edit_error'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param App\Models\User $user user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        if ($this->userService->destroy($user)) {
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.delete_success'));
+        }
+        return redirect()->route('admin.users.index')->with('error', trans('common.message.delete_error'));
+    }
 }
