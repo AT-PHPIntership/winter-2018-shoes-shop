@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CodeRequest extends FormRequest
+class PostCodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class CodeRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:codes,name',
-            'category_id' => 'required|numeric|exists:categories,id',
+            'category_id' => 'required|nullable',
             'percent' => 'required|numeric|min:1|max:100',
             'times' => 'required|numeric',
             'start_date' => 'required',

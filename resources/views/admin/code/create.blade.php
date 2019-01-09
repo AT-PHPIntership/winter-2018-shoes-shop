@@ -31,8 +31,8 @@
                 <div class="form-group">
                   <label for="exampleInputCategory">@lang('code.table.category') *</label>
                   <select name="category_id" class="form-control" id="exampleInputCategory">
-                    <option value="">@lang('code.null')</option>
-                    {{-- <option value="null">@lang('code.null')</option> --}}
+                    <option value="">@lang('code.select')</option>
+                    <option value="null">@lang('code.null')</option>
                     @foreach ($categories as $category)
                       <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach

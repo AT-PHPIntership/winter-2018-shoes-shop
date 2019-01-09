@@ -20,7 +20,7 @@ class CategoryComposer
     {
         $this->categoryService = $categoryService;
     }
-    
+
     /**
      * Bind data to the view.
      *

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\CodeService;
+use App\Http\Requests\Admin\PostCodeRequest;
 
 class CodeController extends Controller
 {
