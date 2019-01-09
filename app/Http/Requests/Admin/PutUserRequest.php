@@ -29,7 +29,7 @@ class PutUserRequest extends FormRequest
             'address' => 'required|max:255',
             'phonenumber' => 'required|numeric|min:10',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'role_id' => 'required|exists:m_roles,id'
+            // 'role_id' => 'required|exists:m_roles,id'
         ];
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -92,6 +93,9 @@ class UserService
     {
         DB::beginTransaction();
         try {
+            if ($user->role_id == Role::ADMIN_ROLE && ($data['role_id'] != Role::ADMIN_ROLE || Auth::user()->id != $user->id)) {
+                return false;
+            }
             $inputUser = [
                 'role_id' => $data['role_id'],
             ];
