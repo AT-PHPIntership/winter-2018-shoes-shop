@@ -130,17 +130,15 @@ class UserService
     public function destroy($user)
     {
         try {
-            if ($user->role_id == Role::ADMIN_ROLE) {
-                return false;
+            if ($user->role_id != Role::ADMIN_ROLE) {
+                if ($user->profile->avatar) {
+                    File::delete(public_path('upload/'.$user->profile->avatar));
+                }
+                return $user->delete();
             }
-            if ($user->profile->avatar != null) {
-                File::delete(public_path('upload/'.$user->profile->avatar));
-            }
-            $user->delete();
-            return true;
         } catch (Exception $e) {
             Log::error($e);
-            return false;
         }
+        return false;
     }
 }

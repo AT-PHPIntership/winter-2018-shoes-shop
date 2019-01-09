@@ -18,6 +18,7 @@ return [
         'password' => 'Mật khẩu',
         'confirm_password' => 'Nhập lại mật khẩu',
         'address' => 'Địa chỉ',
+        'info' => 'Thông tin',
     ],
     'gender' => [
         'other' => 'Khác',
