@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Profile;
 
-class PostUserRequest extends FormRequest
+class PutUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,6 @@ class PostUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5|max:255|',
-            'confirm_password' => 'required|same:password',
             'name' => 'required',
             'gender' => 'in:'.Profile::OTHER.','.Profile::MALE.','.Profile::FEMALE.'',
             'address' => 'required|max:255',
