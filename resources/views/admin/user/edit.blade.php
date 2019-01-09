@@ -9,11 +9,16 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          @include('admin.module.message')
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('user.edit.title')</h3>
             </div>
-            <form method="POST" role="form" enctype="multipart/form-data" action="">
+            <form method="post" role="form" enctype="multipart/form-data" action="{{ route('admin.users.update', $user->id) }}">
               @csrf
               @method('PUT')
               <div class="box-body">
@@ -53,7 +58,7 @@
                   <label for="exampleInputAvatar">@lang('user.table.avatar')</label>
                   @if (isset($user->profile->avatar))
                     <div class="block-img">
-                      <img class="profile-user-img img-responsive img-circle" src="/upload/{{ $user->profile->avatar }}" alt="">
+                      <img class="profile-user-img no-mg img-responsive img-circle" src="/upload/{{ $user->profile->avatar }}" alt="">
                     </div>
                   @endif
                   <input type="file" name="avatar" id="exampleInputAvatar">
