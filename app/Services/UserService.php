@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
@@ -66,18 +67,6 @@ class UserService
         $fileName = time().'-'.$avatar->getClientOriginalName();
         $avatar->move('upload', $fileName);
         return $fileName;
-    }
-    
-    /**
-     * Get info user
-     *
-     * @param int $id id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return User::findOrFail($id);
     }
 
     /**

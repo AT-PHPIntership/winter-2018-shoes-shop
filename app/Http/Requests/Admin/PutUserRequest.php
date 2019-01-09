@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Profile;
 
 class PutUserRequest extends FormRequest
 {
@@ -25,7 +26,7 @@ class PutUserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'gender' => 'in:0,1,2',
+            'gender' => 'in:'.Profile::OTHER.','.Profile::MALE.','.Profile::FEMALE.'',
             'address' => 'required|max:255',
             'phonenumber' => 'required|numeric|min:10',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
