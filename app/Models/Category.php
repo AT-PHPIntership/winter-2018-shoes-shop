@@ -37,4 +37,14 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category', 'parent_id', 'id');
     }
+
+    /**
+     * Category belong to code
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function codes()
+    {
+        return $this->belongsToMany(Code::class);
+    }
 }

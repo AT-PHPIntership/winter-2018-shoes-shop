@@ -1,8 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Models\Code;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Code::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'percent' => $faker->numberBetween(1,100),
