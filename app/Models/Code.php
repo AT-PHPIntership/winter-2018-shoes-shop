@@ -26,7 +26,7 @@ class Code extends Model
     }
 
     /**
-     * Code belong to category
+     * Code belong to user
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
