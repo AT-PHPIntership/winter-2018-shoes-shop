@@ -42,7 +42,7 @@ class CodeService
      * Update the specified resource in storage.
      *
      * @param array           $data data
-     * @param App\Models\User $code code
+     * @param App\Models\Code $code code
      *
      * @return \Illuminate\Http\Response
      */
