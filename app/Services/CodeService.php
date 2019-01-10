@@ -41,8 +41,8 @@ class CodeService
     /**
      * Update the specified resource in storage.
      *
-     * @param array $data data
-     * @param int   $id   id
+     * @param array           $data data
+     * @param App\Models\Code $code code
      *
      * @return \Illuminate\Http\Response
      */
