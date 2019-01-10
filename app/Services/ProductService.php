@@ -19,9 +19,9 @@ class ProductService
     }
 
     /**
-     * Get categoriy by id
+     * Get specified product by id
      *
-     * @param int $id comment about this variable
+     * @param int $id product
      *
      * @return \Illuminate\Http\Response
      */

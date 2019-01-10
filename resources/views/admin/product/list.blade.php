@@ -1,6 +1,5 @@
 @extends('admin.module.master')
 @section('content')
-
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -44,7 +43,7 @@
                       <td>{{ $key + 1 }}</td>
                       <td>{{ $product->name }}</td>
                       <td>{{ $product->original_price }}</td>
-                      <th>{{ $product->category->name }}</th>
+                      <td>{{ $product->category->name }}</td>
                       <td>{{ $product->quantity }}</td>
                       <td>{{ $product->total_sold }}</td>
                       <td>
