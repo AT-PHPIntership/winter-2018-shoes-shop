@@ -11,7 +11,7 @@
         <div class="col-md-5 col-md-offset-3">
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="/upload/{{ $user->profile->avatar }}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="{{ $user->profile->avatar }}" alt="User profile picture">
               <h3 class="profile-username text-center">{{ $user->profile->name }}</h3>
               <table class="table table-bordered">
                 <tr>
@@ -56,7 +56,9 @@
                 </tr>
                 <tr>
                     <td><a class="btn btn-warning btn-xs" href="{{ route('admin.users.index') }}">@lang('common.back')</a></td>
-                    <td><a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a></td>
+                    @if ( Auth::user()->id == $user->id ||  $user->role_id != \App\Models\Role::ADMIN_ROLE)
+                      <td><a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('common.edit')</a></td>                          
+                    @endif
                   </tr>
               </table>
             </div>

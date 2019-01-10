@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Auth::routes();
-    Route::middleware(['admin'])->group(function () {
+    Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'HomeController@index')->name('index');
         Route::resource('users', 'UserController');
     });

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\UserService;
 use App\Http\Requests\Admin\PostUserRequest;
+use App\Http\Requests\Admin\PutUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -55,8 +57,10 @@ class UserController extends Controller
     public function store(PostUserRequest $request)
     {
         $data = $request->all();
-        $this->userService->store($data);
-        return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
+        if (!empty($this->userService->store($data))) {
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.create_success'));
+        }
+        return redirect()->route('admin.users.create')->with('error', trans('common.message.create_error'));
     }
 
     /**
@@ -69,5 +73,52 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('admin.user.show', compact('user'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param App\Models\User $user user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        if (Auth::user()->id == $user->id ||  $user->role_id != \App\Models\Role::ADMIN_ROLE) {
+            return view('admin.user.edit', compact('user'));
+        }
+        return redirect()->back();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request request
+     * @param App\Models\User          $user    user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PutUserRequest $request, User $user)
+    {
+        $data = $request->all();
+        if (!empty($this->userService->update($data, $user))) {
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.edit_success'));
+        }
+        return redirect()->route('admin.users.edit', $user)->with('error', trans('common.message.edit_error'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param App\Models\User $user user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        if ($this->userService->destroy($user)) {
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.delete_success'));
+        }
+        return redirect()->route('admin.users.index')->with('error', trans('common.message.delete_error'));
     }
 }
