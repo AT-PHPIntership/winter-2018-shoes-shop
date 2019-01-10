@@ -13,7 +13,7 @@ class CodesTableSeeder extends Seeder
      */
     public function run()
     {
-        $ids = Category::where('parent_id', 1)->select('id')->get();
+        $ids = Category::all('id');
         for($i = 0; $i < 10; $i++){
             factory(Code::class)->create([
                 'category_id' => array_random([null, $ids->random()])
