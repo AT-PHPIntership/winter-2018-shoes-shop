@@ -9,6 +9,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'original_price' => rand(100000, 1000000),
         'description' => str_random(20),
         'quantity' => rand(50 , 100),
-        'total_sold' => rand(0 , 50),
+        'total_sold' => rand(0 , 10),
     ];
 });
