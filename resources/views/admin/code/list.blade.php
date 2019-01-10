@@ -48,8 +48,8 @@
                     <td>{{ $code->percent }}%</td>
                     <td>{{ $code->description }}</td>
                     <td>{{ $code->times }}</td>
-                    <td>{{ date("H:i d-m-Y", strtotime($code->start_date)) }}</td>
-                    <td>{{ date("H:i d-m-Y", strtotime($code->end_date)) }}</td>
+                    <td>{{ $code->start_date }}</td>
+                    <td>{{ $code->end_date }}</td>
                     <td>
                       <a class="btn btn-primary btn-xs" href="{{ route('admin.codes.edit', $code->id) }}">@lang('common.edit')</a>
                       <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
