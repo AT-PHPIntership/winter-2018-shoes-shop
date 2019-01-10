@@ -9,7 +9,7 @@ return [
         'id' => 'Id',
         'category' => 'Danh mục',
         'name' => 'Tên',
-        'percent' => 'Phần trăm giảm giá',
+        'percent' => 'Giảm giá',
         'description' => 'Mô tả',
         'times' => 'Số lần sử dụng',
         'start_date' => 'Thời gian bắt đầu',

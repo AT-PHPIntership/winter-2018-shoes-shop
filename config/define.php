@@ -6,5 +6,6 @@ return [
     ],
     'orderBy' => [
         'desc' => 'desc',
-    ]
+    ],
+    'date_vn' => 'd-m-Y',
 ];
