@@ -17,13 +17,13 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu" style="width: 280px;">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ !empty(Auth::user()->profile->avatar) ? config('define.path.avatar').Auth::user()->profile->avatar : config('define.path.default_avatar') }}" class="user-image" alt="User Image">
+                        <img src="{{ Auth::user()->profile->avatar }}" class="user-image" alt="User Image">
                         <span class="hidden-xs">@lang('admin.header.hello') {{ Auth::user()->profile->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{ !empty(Auth::user()->profile->avatar) ? config('define.path.avatar').Auth::user()->profile->avatar : config('define.path.default_avatar') }}" class="img-circle" alt="User Image">
+                            <img src="{{ Auth::user()->profile->avatar }}" class="img-circle" alt="User Image">
                             <p>
                                 {{ Auth::user()->profile->name }}
                                 <small>{{ Auth::user()->created_at }}</small>

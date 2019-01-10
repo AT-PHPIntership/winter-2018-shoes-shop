@@ -28,4 +28,19 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    /**
+     * Get the avatar.
+     *
+     * @param string $value value
+     *
+     * @return string
+     */
+    public function getAvatarAttribute($value)
+    {
+        if (empty($value)) {
+            return config('define.path.default_avatar');
+        }
+        return '/upload/'.$value;
+    }
 }
