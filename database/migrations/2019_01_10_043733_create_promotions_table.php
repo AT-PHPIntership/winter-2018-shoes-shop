@@ -20,8 +20,8 @@ class CreatePromotionsTable extends Migration
             $table->string('description');
             $table->integer('max_sell');
             $table->integer('total_sold')->default(0);
-            $table->string('password');
-            $table->rememberToken();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
