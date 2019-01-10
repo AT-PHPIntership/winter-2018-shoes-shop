@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Code;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CodeService
 {
@@ -11,9 +13,9 @@ class CodeService
      *
      * @return object
      */
-    public function getAll()
+    public function getCodeWithPaginate()
     {
-        return User::latest()->with('category')->paginate(config('define.paginate.limit_rows'));
+        return Code::with('category')->orderBy('id', config('define.orderBy.desc'))->paginate(config('define.paginate.limit_rows'));
     }
 
     /**
@@ -23,26 +25,17 @@ class CodeService
      *
      * @return boolean
      */
-    public function store($data)
+    public function store(array $data)
     {
+        DB::beginTransaction();
         try {
-            Code::create($data);
-            return true;
+            $code = Code::create($data);
+            DB::commit();
+            return $code;
         } catch (Exception $e) {
-            return false;
+            Log::error($e);
+            DB::rollback();
         }
-    }
-
-    /**
-     * Get info user
-     *
-     * @param int $id id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return Code::findOrFail($id);
     }
 
     /**
@@ -53,14 +46,16 @@ class CodeService
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($data, $id)
+    public function update(array $data, Code $code)
     {
+        DB::beginTransaction();
         try {
-            $code = Code::findOrFail($id);
             $code->update($data);
-            return true;
+            DB::commit();
+            return $code;
         } catch (Exception $e) {
-            return false;
+            Log::error($e);
+            DB::rollback();
         }
     }
 }
