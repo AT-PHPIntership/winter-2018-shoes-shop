@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="{{ route('admin.index') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>@lang('admin.header.sort-name')</b>@lang('admin.header.sort-name')</span>
         <!-- logo for regular state and mobile devices -->
@@ -32,7 +32,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                         <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
+                            <a href="{{ route('admin.users.show', Auth::user()->id) }}" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
                         </div>
                         <div class="pull-right">
                             <a href="{{ route('admin.logout') }}" onclick="event.preventDefault();
