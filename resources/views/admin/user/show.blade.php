@@ -56,7 +56,9 @@
                 </tr>
                 <tr>
                     <td><a class="btn btn-warning btn-xs" href="{{ route('admin.users.index') }}">@lang('common.back')</a></td>
-                    <td><a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a></td>
+                    @if ( Auth::user()->id == $user->id ||  $user->role_id != \App\Models\Role::ADMIN_ROLE)
+                      <td><a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('common.edit')</a></td>                          
+                    @endif
                   </tr>
               </table>
             </div>

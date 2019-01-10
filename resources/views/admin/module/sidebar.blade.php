@@ -13,7 +13,7 @@
             </a>
             <ul class="treeview-menu">
                 <li class="active"><a href="{{ route('admin.users.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.user.list')</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.user.add')</a></li>
+                <li><a href="{{ route('admin.users.create') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.user.add')</a></li>
             </ul>
         </li>
         <li class="treeview">

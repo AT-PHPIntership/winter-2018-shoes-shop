@@ -8,13 +8,13 @@
     </section>
     <section class="content">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-12">
           <div class="box-top">
-            <a class="btn btn-success btn-md" href="">@lang('common.new')</a>
+            <a class="btn btn-success btn-md" href="{{ route('admin.users.create') }}">@lang('common.new')</a>
           </div>
         </div>
-        <div class="col-md-5">
-          
+        <div class="col-md-12">
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
@@ -22,14 +22,6 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('user.list.title')</h3>
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 250px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="@lang('user.placeholder.search')">
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="box-body">
               <table class="table table-bordered">
@@ -48,8 +40,16 @@
                     <td>{{ $user->role->name }}</td>
                     <td>
                         <a class="btn btn-info btn-xs" href="{{ route('admin.users.show', $user->id) }}">@lang('common.show')</a>
-                        <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>
-                        <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
+                        @if ( Auth::user()->id == $user->id ||  $user->role_id != \App\Models\Role::ADMIN_ROLE)
+                          <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('common.edit')</a>                            
+                        @endif
+                        <form class="form-inline" action="{{ route('admin.users.destroy', ['id' => $user->id]) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          @if ($user->role_id != \App\Models\Role::ADMIN_ROLE)
+                            <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
+                          @endif
+                        </form>
                     </td>
                   </tr>
                 @endforeach

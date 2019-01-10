@@ -15,10 +15,24 @@ return [
         'avatar' => 'Ảnh',
         'role' => 'Chức vụ',
         'action' => 'Hành động',
+        'password' => 'Mật khẩu',
+        'confirm_password' => 'Nhập lại mật khẩu',
         'address' => 'Địa chỉ',
         'info' => 'Thông tin',
     ],
+    'gender' => [
+        'other' => 'Khác',
+        'male' => 'Nữ',
+        'female' => 'Nam'
+    ],
     'placeholder' => [
-        'search' => 'Tìm kiếm'
-    ]
+        'search' => 'Tìm kiếm',
+    ],
+    'add' => [
+        'title' => 'Thêm người dùng',
+    ],
+    'edit' => [
+        'title' => 'Sửa người dùng',
+    ],
+    'select' => 'Chọn',
 ];
