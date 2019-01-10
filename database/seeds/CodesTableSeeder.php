@@ -15,8 +15,8 @@ class CodesTableSeeder extends Seeder
     {
         $ids = Category::all('id');
         for($i = 0; $i < 10; $i++){
-            factory(Role::class)->create([
-                'category_id' => $ids->random()
+            factory(Code::class)->create([
+                'category_id' => array_random([null, $ids->random()])
             ]);
         }
     }

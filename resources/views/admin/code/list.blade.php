@@ -10,15 +10,11 @@
       <div class="row">
         <div class="col-md-2">
           <div class="box-top">
-            <a class="btn btn-success btn-md" href="">@lang('common.new')</a>
+            <a class="btn btn-success btn-md" href="{{ route('admin.codes.create') }}">@lang('common.new')</a>
           </div>
         </div>
-        <div class="col-md-5">
-          <div class="box-top">
-            <div class="al-success">
-              <strong>Thêm mới thành công</strong>  
-            </div> 
-          </div>
+        <div class="col-md-12">
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
@@ -40,43 +36,35 @@
                   <th>@lang('code.table.end_date')</th>
                   <th style="width: 100px">@lang('code.table.action')</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Code</td>
-                  <td>Null</td>
-                  <td>10%</td>
-                  <td>Năm mới 2019</td>
-                  <td>100</td>
-                  <td>10:12:12 04/01/2019</td>
-                  <td>10:12:12 08/01/2019</td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>
-                    <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Code</td>
-                  <td>Null</td>
-                  <td>10%</td>
-                  <td>Năm mới 2019</td>
-                  <td>100</td>
-                  <td>10:12:12 04/01/2019</td>
-                  <td>10:12:12 08/01/2019</td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>
-                    <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
-                  </td>
-                </tr>
+                @foreach ($codes as $code)
+                  <tr>
+                    <td>{{ $code->id }}</td>
+                    <td>{{ $code->name }}</td>
+                    @if ($code->category_id == null)
+                      <td>@lang('code.null')</td>
+                    @else
+                      <td>{{ $code->category->name }}</td>
+                    @endif
+                    <td>{{ $code->percent }}%</td>
+                    <td>{{ $code->description }}</td>
+                    <td>{{ $code->times }}</td>
+                    <td>{{ date("H:i d-m-Y", strtotime($code->start_date)) }}</td>
+                    <td>{{ date("H:i d-m-Y", strtotime($code->end_date)) }}</td>
+                    <td>
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.codes.edit', $code->id) }}">@lang('common.edit')</a>
+                      <form class="form-inline" action="{{ route('admin.codes.destroy', ['id' => $code->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
               </table>
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
+                  {{ $codes->links() }}
               </ul>
             </div>
           </div>

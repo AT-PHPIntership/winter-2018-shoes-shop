@@ -9,6 +9,11 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          @include('admin.module.message')
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('code.add.title')</h3>
@@ -26,7 +31,10 @@
                 <div class="form-group">
                   <label for="exampleInputCategory">@lang('code.table.category') *</label>
                   <select name="category_id" class="form-control" id="exampleInputCategory">
-                    <option value="">@lang('code.select')</option>
+                    <option value="">@lang('code.null')</option>
+                    @foreach ($categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                   </select>
                   @if ($errors->has('category_id'))
                     <span class="help-block">{{ $errors->first('category_id') }}</span>
@@ -55,14 +63,14 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputStart_date">@lang('code.table.start_date') *</label>
-                  <input type="datetime-local" name="start_date" class="form-control" id="exampleInputStart_date" value="{{ old('start_date') }}">
+                  <input type="date" name="start_date" class="form-control" id="exampleInputStart_date" value="{{ old('start_date') }}">
                   @if ($errors->has('start_date'))
                     <span class="help-block">{{ $errors->first('start_date') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEnd_date">@lang('code.table.end_date') *</label>
-                  <input type="datetime-local" name="end_date" class="form-control" id="exampleInputEnd_date" value="{{ old('end_date') }}">
+                  <input type="date" name="end_date" class="form-control" id="exampleInputEnd_date" value="{{ old('end_date') }}">
                   @if ($errors->has('end_date'))
                     <span class="help-block">{{ $errors->first('end_date') }}</span>
                   @endif

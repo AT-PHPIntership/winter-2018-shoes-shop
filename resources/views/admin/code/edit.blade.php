@@ -9,15 +9,22 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
+          @include('admin.module.message')
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">@lang('code.edit.title')</h3>
             </div>
-            <form method="POST" role="form" action="{{ route('admin.codes.update') }}">
+            <form method="POST" role="form" action="{{ route('admin.codes.update', $code->id) }}">
               @csrf
+              @method('PUT')
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputName">@lang('code.table.name') *</label>
+                  <input type="hidden" name="id" value="{{ $code->id }}">
                   <input type="text" name="name" class="form-control" id="exampleInputName" value="{{ $code->name }}">
                   @if ($errors->has('name'))
                     <span class="help-block">{{ $errors->first('name') }}</span>
@@ -26,10 +33,9 @@
                 <div class="form-group">
                   <label for="exampleInputCategory">@lang('code.table.category') *</label>
                   <select name="category_id" class="form-control" id="exampleInputCategory">
-                    <option value="">@lang('code.select')</option>
-                    <option value="null" {{ $code->category_id == null ? "selected": "" }}>@lang('code.option')</option>
+                    <option value="" {{ $code->category_id == null ? "selected": "" }}>@lang('code.null')</option>
                     @foreach ($categories as $category)
-                      <option value="{{ $category->id }}" {{ $category->id == $code->category_id ? "selected": "" }}>{{ $category->name }}</option>
+                      <option value="{{ $category->id }}" {{ $code->category_id == $category->id ? "selected": "" }}>{{ $category->name }}</option>
                     @endforeach
                   </select>
                   @if ($errors->has('category_id'))
@@ -59,14 +65,14 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputStart_date">@lang('code.table.start_date') *</label>
-                  <input type="datetime-local" name="start_date" class="form-control" id="exampleInputStart_date" value="{{ $code->start_date }}">
+                  <input type="date" name="start_date" class="form-control" id="exampleInputStart_date" value="{{ $code->start_date }}">
                   @if ($errors->has('start_date'))
                     <span class="help-block">{{ $errors->first('start_date') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEnd_date">@lang('code.table.end_date') *</label>
-                  <input type="datetime-local" name="end_date" class="form-control" id="exampleInputEnd_date" value="{{ $code->end_date }}">
+                  <input type="date" name="end_date" class="form-control" id="exampleInputEnd_date" value="{{ $code->end_date }}">
                   @if ($errors->has('end_date'))
                     <span class="help-block">{{ $errors->first('end_date') }}</span>
                   @endif

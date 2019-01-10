@@ -27,4 +27,5 @@ return [
     ],
     'select' => 'Chọn',
     'option' => 'Tất cả',
+    'null' => 'Tất cả',
 ];

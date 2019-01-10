@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
+use App\Services\CodeService;
+use App\Http\Requests\Admin\PostCodeRequest;
+use App\Models\Code;
+use App\Http\Requests\Admin\PutCodeRequest;
 
 class CodeController extends Controller
 {
@@ -28,15 +32,15 @@ class CodeController extends Controller
      */
     public function index()
     {
-        $codes = $this->codeService->getAll();
+        $codes = $this->codeService->getCodeWithPaginate();
         return view('admin.code.list', compact('codes'));
     }
-    
+
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function create()
     {
         return view('admin.code.create');
@@ -49,68 +53,57 @@ class CodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostCodeRequest $request)
     {
         $data = $request->all();
-        if ($this->codeService->store($data)) {
+        if (!empty($this->codeService->store($data))) {
             return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
         } else {
             return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
         }
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param App\Models\Code $code code
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Code $code)
     {
-        $code = $this->codeService->edit($id);
         return view('admin.code.edit', compact('code'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request request
+     * @param App\Models\Code          $code    code
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PutCodeRequest $request, Code $code)
     {
         $data = $request->all();
-        if ($this->codeService->update($data, $id)) {
+        if (!empty($this->codeService->update($data, $code))) {
             return redirect()->route('admin.codes.index')->with('success', trans('common.message.edit_success'));
-        } else {
-            return redirect()->route('admin.codes.edit', $id)->with('error', trans('common.message.edit_error'));
         }
+        return redirect()->route('admin.codes.edit', $code)->with('error', trans('common.message.edit_error'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param App\Models\Code $code code
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Code $code)
     {
-        if ($this->codeService->destroy($id)) {
+        if ($this->codeService->destroy($code)) {
             return redirect()->route('admin.codes.index')->with('success', trans('common.message.delete_success'));
-        } else {
-            return redirect()->route('admin.codes.index')->with('error', trans('common.message.delete_error'));
         }
+        return redirect()->route('admin.codes.index')->with('error', trans('common.message.delete_error'));
     }
 }
