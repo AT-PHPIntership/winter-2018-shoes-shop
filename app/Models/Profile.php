@@ -32,15 +32,15 @@ class Profile extends Model
     /**
      * Get the avatar.
      *
-     * @param string $value value
+     * @param string $imageName imageName
      *
      * @return string
      */
-    public function getAvatarAttribute($value)
+    public function getAvatarAttribute($imageName)
     {
-        if (empty($value)) {
+        if (empty($imageName)) {
             return config('define.path.default_avatar');
         }
-        return '/upload/'.$value;
+        return '/upload/'.$imageName;
     }
 }
