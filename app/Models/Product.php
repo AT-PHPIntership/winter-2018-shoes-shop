@@ -35,4 +35,14 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Image');
     }
+
+    /**
+     * Get the category for this product.
+     *
+     * @return void
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
+    }
 }

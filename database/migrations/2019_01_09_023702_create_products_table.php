@@ -19,9 +19,9 @@ class CreateProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
             $table->integer('original_price');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('quantity');
-            $table->integer('total_sold');
+            $table->integer('total_sold')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });
