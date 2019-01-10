@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\CodeService;
 use App\Http\Requests\Admin\PostCodeRequest;
+use App\Models\Code;
 
 class CodeController extends Controller
 {
@@ -59,5 +60,17 @@ class CodeController extends Controller
         } else {
             return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
         }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param App\Models\Code $code code
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Code $code)
+    {
+        return view('admin.code.edit', compact('code'));
     }
 }
