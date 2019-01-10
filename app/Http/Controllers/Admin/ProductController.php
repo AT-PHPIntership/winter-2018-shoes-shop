@@ -42,7 +42,8 @@ class ProductController extends Controller
     /**
      * Display the specified product.
      *
-     * @param  int $id
+     * @param int $id product
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -50,5 +51,4 @@ class ProductController extends Controller
         $product = $this->products->getProductbyId($id);
         return view('admin.product.detail', compact('product'));
     }
-
 }
