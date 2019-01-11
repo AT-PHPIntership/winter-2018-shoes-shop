@@ -18,6 +18,6 @@ class UsersTableSeeder extends Seeder
             factory(User::class)->create([
                 'role_id' => $ids->random()
             ]);
-        }
+        } 
     }
 }
