@@ -15,7 +15,7 @@ class CategoriesTableSeeder extends Seeder
         \DB::table('categories')-> insert([
             [
                 'name' => 'Giày nam',
-                'parent_id' => 0,
+                'parent_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ], [
@@ -30,17 +30,17 @@ class CategoriesTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now()
             ],[
                 'name' => 'Giày nữ',
-                'parent_id' => 0,
+                'parent_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[
                 'name' => 'Giày trẻ em',
-                'parent_id' => 0,
+                'parent_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[
                 'name' => 'Phụ kiện',
-                'parent_id' => 0,
+                'parent_id' => null,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
