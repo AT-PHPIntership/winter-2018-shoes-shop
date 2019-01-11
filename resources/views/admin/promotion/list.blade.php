@@ -47,7 +47,7 @@
                     <td>{{ convertToDateVN($promotion->start_date) }}</td>
                     <td>{{ convertToDateVN($promotion->end_date) }}</td>
                     <td>
-                      <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
+                      <a class="btn btn-info btn-xs" href="{{ route('admin.promotions.show', $promotion) }}">@lang('common.show')</a>
                       <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
                       <form class="form-inline" action="" method="POST">
                         @csrf
@@ -61,7 +61,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-                  
+                {{ $promotions->links() }}
               </ul>
             </div>
           </div>
