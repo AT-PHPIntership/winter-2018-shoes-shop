@@ -56,7 +56,7 @@ class CodeController extends Controller
     public function store(PostCodeRequest $request)
     {
         $data = $request->all();
-        if (!$this->codeService->store($data)->isEmpty()) {
+        if (!empty($this->codeService->store($data))) {
             return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
         } else {
             return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
@@ -86,7 +86,7 @@ class CodeController extends Controller
     public function update(PutCodeRequest $request, Code $code)
     {
         $data = $request->all();
-        if (!$this->codeService->update($data, $code)->isEmpty()) {
+        if (!empty($this->codeService->update($data, $code))) {
             return redirect()->route('admin.codes.index')->with('success', trans('common.message.edit_success'));
         }
         return redirect()->route('admin.codes.edit', $code)->with('error', trans('common.message.edit_error'));
