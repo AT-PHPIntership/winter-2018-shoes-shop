@@ -34,8 +34,7 @@
                   <th>@lang('promotion.table.total_sold')</th>
                   <th>@lang('promotion.table.start_date')</th>
                   <th>@lang('promotion.table.end_date')</th>
-                  <th>@lang('promotion.table.product')</th>
-                  <th style="width: 100px">@lang('promotion.table.action')</th>
+                  <th style="width: 140px">@lang('promotion.table.action')</th>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -47,60 +46,7 @@
                   <td>11/01/2019</td>
                   <td>15/01/2019</td>
                   <td>
-                    <p class="no-mg">Sản phẩm 1</p>
-                    <p class="no-mg">Sản phẩm 2</p>
-                    <p class="no-mg">Sản phẩm 3</p>
-                    <p class="no-mg">Sản phẩm 4</p>
-                  </td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
-                    <form class="form-inline" action="" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Năm 2019</td>
-                  <td>10%</td>
-                  <td>Đợt 1</td>
-                  <td>100</td>
-                  <td>30</td>
-                  <td>11/01/2019</td>
-                  <td>15/01/2019</td>
-                  <td>
-                    <p class="no-mg">Sản phẩm 1</p>
-                    <p class="no-mg">Sản phẩm 2</p>
-                    <p class="no-mg">Sản phẩm 3</p>
-                    <p class="no-mg">Sản phẩm 4</p>
-                  </td>
-                  <td>
-                    <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
-                    <form class="form-inline" action="" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
-                    </form>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Năm 2019</td>
-                  <td>10%</td>
-                  <td>Đợt 1</td>
-                  <td>100</td>
-                  <td>30</td>
-                  <td>11/01/2019</td>
-                  <td>15/01/2019</td>
-                  <td>
-                    <p class="no-mg">Sản phẩm 1</p>
-                    <p class="no-mg">Sản phẩm 2</p>
-                    <p class="no-mg">Sản phẩm 3</p>
-                    <p class="no-mg">Sản phẩm 4</p>
-                  </td>
-                  <td>
+                    <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
                     <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
                     <form class="form-inline" action="" method="POST">
                       @csrf
