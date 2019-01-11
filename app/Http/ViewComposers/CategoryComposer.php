@@ -20,7 +20,7 @@ class CategoryComposer
     {
         $this->categoryService = $categoryService;
     }
-    
+
     /**
      * Bind data to the view.
      *
@@ -30,6 +30,6 @@ class CategoryComposer
      */
     public function compose(View $view)
     {
-        $view->with('categories', $this->categoryService->getSubCategory(['id', 'name']));
+        $view->with('categories', $this->categoryService->getAll(['id', 'name']));
     }
 }

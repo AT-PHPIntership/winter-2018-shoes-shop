@@ -13,7 +13,7 @@ class CategoryService
      *
      * @return object
      */
-    public function getSubCategory(array $columns = ['*'])
+    public function getAll(array $columns = ['*'])
     {
         return Category::select($columns)->get();
     }
