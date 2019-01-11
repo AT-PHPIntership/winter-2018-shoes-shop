@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-2">
           <div class="box-top">
-            <a class="btn btn-success btn-md" href="">@lang('common.new')</a>
+            <a class="btn btn-success btn-md" href="{{ route('admin.codes.create') }}">@lang('common.new')</a>
           </div>
         </div>
         <div class="col-md-5">
@@ -51,8 +51,8 @@
                     <td>{{ convertToDateVN($code->start_date) }}</td>
                     <td>{{ convertToDateVN($code->end_date) }}</td>
                     <td>
-                      <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>
-                      <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.codes.edit', $code) }}">@lang('common.edit')</a>
+                      <a class="btn btn-danger btn-xs" href="{{ route('admin.codes.destroy', $code) }}">@lang('common.delete')</a>
                     </td>
                   </tr>
                 @endforeach
