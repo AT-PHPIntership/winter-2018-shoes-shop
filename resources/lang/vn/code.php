@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Quản lý mã khuyến mãi',
     'list' => [
