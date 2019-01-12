@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="col-md-5">
-          
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
