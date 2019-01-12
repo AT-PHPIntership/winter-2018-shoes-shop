@@ -16,31 +16,37 @@ class CategoriesTableSeeder extends Seeder
             [
                 'name' => 'Giày nam',
                 'parent_id' => null,
+                'delete_flag' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ], [
                 'name' => 'Giày thể thao',
                 'parent_id' => 1,
+                'delete_flag' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[
                 'name' => 'Giày tây',
                 'parent_id' => 1,
+                'delete_flag' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[
                 'name' => 'Giày nữ',
                 'parent_id' => null,
+                'delete_flag' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[
                 'name' => 'Giày trẻ em',
                 'parent_id' => null,
+                'delete_flag' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ],[
                 'name' => 'Phụ kiện',
                 'parent_id' => null,
+                'delete_flag' => 0,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now()
             ]
