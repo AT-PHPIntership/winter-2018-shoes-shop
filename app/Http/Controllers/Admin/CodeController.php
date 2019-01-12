@@ -16,4 +16,14 @@ class CodeController extends Controller
     {
         return view('admin.code.list');
     }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function create()
+    {
+        return view('admin.code.create');
+    }
 }

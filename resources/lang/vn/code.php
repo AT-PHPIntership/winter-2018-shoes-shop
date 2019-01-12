@@ -20,10 +20,11 @@ return [
         'search' => 'Tìm kiếm',
     ],
     'add' => [
-        'title' => 'Thêm mã khuyến mãi',
+        'title' => 'Thêm mã giảm giá',
     ],
     'edit' => [
-        'title' => 'Sửa mã khuyến mãi',
+        'title' => 'Sửa mã giảm giá',
     ],
     'select' => 'Chọn',
+    'null' => 'Tất cả',
 ];
