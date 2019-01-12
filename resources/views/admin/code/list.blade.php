@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="col-md-5">
-          
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
@@ -52,7 +52,11 @@
                     <td>{{ convertToDateVN($code->end_date) }}</td>
                     <td>
                       <a class="btn btn-primary btn-xs" href="{{ route('admin.codes.edit', $code) }}">@lang('common.edit')</a>
-                      <a class="btn btn-danger btn-xs" href="{{ route('admin.codes.destroy', $code) }}">@lang('common.delete')</a>
+                      <form class="form-inline" action="{{ route('admin.codes.destroy', ['id' => $code->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
+                      </form>
                     </td>
                   </tr>
                 @endforeach
