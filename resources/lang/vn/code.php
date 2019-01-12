@@ -1,14 +1,15 @@
 <?php
+
 return [
-    'title' => 'Quản lý mã khuyến mãi',
+    'title' => 'Quản lý mã giảm giá',
     'list' => [
-        'title' => 'Danh sách mã khuyến mãi',
+        'title' => 'Danh sách mã giảm giá',
     ],
     'table' => [
         'id' => 'Id',
         'category' => 'Danh mục',
         'name' => 'Tên',
-        'percent' => 'Phần trăm giảm giá',
+        'percent' => 'Giảm giá',
         'description' => 'Mô tả',
         'times' => 'Số lần sử dụng',
         'start_date' => 'Thời gian bắt đầu',
