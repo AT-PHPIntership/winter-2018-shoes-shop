@@ -1,4 +1,5 @@
 <?php
+
 return [
     'title' => 'Quản lý mã khuyến mãi',
     'list' => [
@@ -25,4 +26,5 @@ return [
         'title' => 'Sửa mã khuyến mãi',
     ],
     'select' => 'Chọn',
+    'null' => 'Tất cả',
 ];
