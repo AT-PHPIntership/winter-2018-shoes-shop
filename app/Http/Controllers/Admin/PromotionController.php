@@ -5,9 +5,23 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\PostPromotionRequest;
+use App\Services\PromotionService;
 
 class PromotionController extends Controller
 {
+    private $promotionService;
+    /**
+    * Contructer
+    *
+    * @param App\Service\promotionService $promotionService promotionService
+    *
+    * @return void
+    */
+    public function __construct(PromotionService $promotionService)
+    {
+        $this->promotionService = $promotionService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +52,10 @@ class PromotionController extends Controller
     public function store(PostPromotionRequest $request)
     {
         $data = $request->all();
-        dd($data);
-        // if (!empty($this->codeService->store($data))) {
-        //     return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
-        // } else {
-        //     return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
-        // }
+        if (!empty($this->promotionService->store($data))) {
+            return redirect()->route('admin.promotions.index')->with('success', trans('common.message.create_success'));
+        } else {
+            return redirect()->route('admin.promotions.create')->with('error', trans('common.message.create_error'));
+        }
     }
 }
