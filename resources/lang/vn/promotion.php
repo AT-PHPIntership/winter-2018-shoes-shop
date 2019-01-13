@@ -26,6 +26,11 @@ return [
     'edit' => [
         'title' => 'Sửa khuyến mãi',
     ],
+    'show' => [
+        'title' => 'Chi tiết khuyến mãi',
+        'list-product' => 'Sản phẩm khuyến mãi',
+        'no-product' => 'Không có sản phẩm',
+    ],
     'select' => 'Chọn',
     'option' => 'Tất cả',
     'null' => 'Tất cả',

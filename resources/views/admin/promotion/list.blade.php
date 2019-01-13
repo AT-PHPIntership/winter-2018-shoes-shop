@@ -40,14 +40,14 @@
                   <tr>
                     <td>{{ $promotion->id }}</td>
                     <td>{{ $promotion->name }}</td>
-                    <td>{{ $promotion->percent }}</td>
+                    <td>{{ $promotion->percent }}%</td>
                     <td>{{ $promotion->description }}</td>
                     <td>{{ $promotion->max_sell }}</td>
                     <td>{{ $promotion->total_sold }}</td>
                     <td>{{ convertToDateVN($promotion->start_date) }}</td>
                     <td>{{ convertToDateVN($promotion->end_date) }}</td>
                     <td>
-                      <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
+                      <a class="btn btn-info btn-xs" href="{{ route('admin.promotions.show', $promotion) }}">@lang('common.show')</a>
                       <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
                       <form class="form-inline" action="" method="POST">
                         @csrf
