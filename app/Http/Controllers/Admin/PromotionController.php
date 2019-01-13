@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
+use App\Http\Requests\Admin\PostPromotionRequest;
 
 class PromotionController extends Controller
 {
@@ -25,5 +26,23 @@ class PromotionController extends Controller
     public function create()
     {
         return view('admin.promotion.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(PostPromotionRequest $request)
+    {
+        $data = $request->all();
+        dd($data);
+        // if (!empty($this->codeService->store($data))) {
+        //     return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
+        // } else {
+        //     return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
+        // }
     }
 }
