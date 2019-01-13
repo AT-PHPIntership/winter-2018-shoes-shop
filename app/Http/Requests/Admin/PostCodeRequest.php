@@ -28,7 +28,7 @@ class PostCodeRequest extends FormRequest
             'category_id' => 'exists:categories,id|nullable',
             'percent' => 'required|numeric|min:1|max:100',
             'times' => 'required|numeric',
-            'start_date' => 'required|date',
+            'start_date' => 'required|date|after:yesterday',
             'end_date' => 'required|date|after:start_date',
         ];
     }
