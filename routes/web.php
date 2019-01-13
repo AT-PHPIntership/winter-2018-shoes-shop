@@ -21,5 +21,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::get('index', 'HomeController@index')->name('index');
         Route::resource('users', 'UserController');
         Route::resource('category', 'CategoryController');
+        Route::resource('promotions', 'PromotionController');
     });
 });
