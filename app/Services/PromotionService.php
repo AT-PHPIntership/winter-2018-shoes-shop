@@ -22,9 +22,7 @@ class PromotionService
         try {
             $promotion = Promotion::create($data);
             if (isset($data['product_id'])) {
-                foreach ($data['product_id'] as $productId) {
-                    $promotion->products()->attach($productId);
-                }
+                $promotion->products()->attach($data['product_id']);
             }
             DB::commit();
             return $promotion;
