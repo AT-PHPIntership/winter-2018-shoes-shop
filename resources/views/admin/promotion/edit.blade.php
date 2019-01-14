@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputProduct">@lang('promotion.table.product')</label>
-                  <select class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')"
+                  <select name="product_id[]" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')"
                           style="width: 100%;">
                     @foreach ($products as $product)
                       @if (!$promotion->products->isEmpty())
@@ -58,8 +58,8 @@
                       @endif
                     @endforeach
                   </select>
-                  @if ($errors->has('product'))
-                    <span class="help-block">{{ $errors->first('product') }}</span>
+                  @if ($errors->has('product_id'))
+                    <span class="help-block">{{ $errors->first('product_id') }}</span>
                   @endif
                 </div>
                 <div class="form-group">

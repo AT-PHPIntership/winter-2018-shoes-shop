@@ -33,12 +33,7 @@ class PromotionService
         try {
             $promotion->update($data);
             if (isset($data['product_id'])) {
-                foreach ($data['product_id'] as $idProduct) {
-                    $promotion->products->update([
-                        'product_id' => $idProduct,
-                        'promotion_id' => $promotion->id,
-                    ]);
-                }
+                $promotion->products()->sync($data['product_id']);
             }
             DB::commit();
             return $promotion;
