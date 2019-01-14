@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\PromotionService;
+use App\Models\Promotion;
 
 class PromotionController extends Controller
 {
@@ -31,5 +32,17 @@ class PromotionController extends Controller
     {
         $promotions = $this->promotionService->getPromotionWithPaginate();
         return view('admin.promotion.list', compact('promotions'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param App\Models\Promotion $promotion promotion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Promotion $promotion)
+    {
+        return view('admin.promotion.edit', compact('promotion'));
     }
 }
