@@ -49,7 +49,7 @@
                     <td>
                       <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
                       <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
-                      <form class="form-inline" action="" method="POST">
+                      <form class="form-inline" action="{{ route('admin.promotions.destroy', $promotion) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
