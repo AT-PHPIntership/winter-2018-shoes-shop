@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Promotion;
-use App\Models\ProductPromotion;
+// use App\Models\ProductPromotion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -22,11 +22,8 @@ class PromotionService
         try {
             $promotion = Promotion::create($data);
             if (isset($data['product_id'])) {
-                foreach ($data['product_id'] as $idProduct) {
-                    ProductPromotion::create([
-                        'product_id' => $idProduct,
-                        'promotion_id' => $promotion->id,
-                    ]);
+                foreach ($data['product_id'] as $productId) {
+                    $promotion->products()->attach($productId);
                 }
             }
             DB::commit();
