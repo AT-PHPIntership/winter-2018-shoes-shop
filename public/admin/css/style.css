@@ -36,3 +36,32 @@
 .form-inline{
   display: inline-block;
 }
+.product-menu {
+  list-style-type: none;
+}
+.product-item {
+  padding: 5px 10px;
+  float: left;
+}
+.product-img {
+  height: 80px;
+  width: 80px;
+}
+.product-picture {
+  height: 250px;
+  width: 250px
+}
+.margin-b-10 {
+  margin-bottom: 10px;
+}
+.margin-y-10 {
+  padding: 10px 0;
+}
+.detail-menu {
+  padding: 5px 30px;
+}
+.detail-img {
+  height: 80px;
+  width: 80px;
+  padding: 5px;
+}

@@ -24,8 +24,8 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.list')</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.add')</a></li>
+                <li class="active"><a href="{{ route('admin.category.index')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.list')</a></li>
+                <li><a href="{{ route('admin.category.create')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.add')</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -36,8 +36,8 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.product.list')</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.product.add')</a></li>
+                <li class="active"><a href="{{ route('admin.product.index')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.product.list')</a></li>
+            <li><a href="{{ route('admin.product.create')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.product.add')</a></li>
             </ul>
         </li>
         <li class="treeview">

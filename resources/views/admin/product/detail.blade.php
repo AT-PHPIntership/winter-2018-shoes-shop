@@ -1,24 +1,5 @@
 @extends('admin.module.master')
 @section('content')
-<style>
-  .product-menu {
-    list-style-type: none;
-  }
-  .product-item {
-    padding: 5px 10px;
-    float: left;
-  }
-  .product-img {
-    height: 80px;
-    width: 80px;
-  }
-  .product-picture {
-    height: 250px;
-    width: 250px
-  }
-
-</style>
-{{-- @dd($product->images->first()) --}}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
