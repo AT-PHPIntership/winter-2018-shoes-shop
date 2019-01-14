@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Promotion;
-// use App\Models\ProductPromotion;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
