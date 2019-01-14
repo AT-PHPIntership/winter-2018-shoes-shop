@@ -20,9 +20,11 @@
             </div>
             <form method="POST" role="form" action="{{ route('admin.promotions.update', $promotion) }}">
               @csrf
+              @method('PUT')
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputName">@lang('promotion.table.name') *</label>
+                  <input type="hidden" name="id" value="{{ $promotion->id }}">
                   <input type="text" name="name" class="form-control" id="exampleInputName" value="{{ $promotion->name }}">
                   @if ($errors->has('name'))
                     <span class="help-block">{{ $errors->first('name') }}</span>
@@ -47,9 +49,13 @@
                   <select class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')"
                           style="width: 100%;">
                     @foreach ($products as $product)
-                      @foreach ($promotion->products as $item)
-                        <option value="{{ $product->id }}" {{ $product->id === $item->id ? "selected": "" }}>{{ $product->name }}</option>                        
-                      @endforeach
+                      @if (!$promotion->products->isEmpty())
+                        @foreach ($promotion->products as $item)
+                          <option value="{{ $product->id }}" {{ $product->id === $item->id ? "selected": "" }}>{{ $product->name }}</option>                        
+                        @endforeach  
+                      @else
+                        <option value="{{ $product->id }}">{{ $product->name }}</option>  
+                      @endif
                     @endforeach
                   </select>
                   @if ($errors->has('product'))
