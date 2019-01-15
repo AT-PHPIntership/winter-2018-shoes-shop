@@ -34,4 +34,24 @@ class Comment extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * Parent Comment has many Child Comment
+     *
+     * @return void
+     */
+    public function children()
+    {
+        return $this->hasMany(Comment::class, 'parent_id', 'id');
+    }
+
+    /**
+     * Child Comment belong to Parent Comment
+     *
+     * @return void
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Comment::class, 'parent_id', 'id');
+    }
 }

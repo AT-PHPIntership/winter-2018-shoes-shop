@@ -26,28 +26,19 @@
                   <th>@lang('comment.table.product')</th>
                   <th>@lang('comment.table.content')</th>
                   <th>@lang('comment.table.parent_id')</th>
+                  <th>@lang('comment.table.created_at')</th>
+                  <th>@lang('comment.table.updated_at')</th>
                   <th style="width: 100px">@lang('comment.table.action')</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Bui Van Thanh</td>
-                  <td>San pham 1</td>
-                  <td>Toi da mua nhieu san pham</td>
-                  <td>San pham tot</td>
-                  <td>
-                      <form class="form-inline" action="" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
-                      </form>
-                    </td>
-                  </tr>
+                @foreach ($comments as $comment)
                   <tr>
-                    <td>1</td>
-                    <td>Bui Van Thanh</td>
-                    <td>San pham 1</td>
-                    <td>Toi da mua nhieu san pham</td>
-                    <td>San pham tot</td>
+                    <td>{{ $comment->id }}</td>
+                    <td>{{ $comment->user->profile->name }}</td>
+                    <td>{{ $comment->product->name }}</td>
+                    <td>{{ $comment->content }}</td>
+                    <td>{{ $comment->parent ? $comment->parent->content : '' }}</td>
+                    <td>{{ \Carbon\Carbon::parse($comment->created_at)->format(config('define.datetime_vn')) }}</td>
+                    <td>{{ \Carbon\Carbon::parse($comment->updated_at)->format(config('define.datetime_vn')) }}</td>
                     <td>
                       <form class="form-inline" action="" method="POST">
                         @csrf
@@ -56,6 +47,7 @@
                       </form>
                     </td>
                   </tr>
+                @endforeach
               </table>
             </div>
             <div class="box-footer clearfix">

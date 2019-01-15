@@ -9,8 +9,10 @@ return [
         'id' => 'Id',
         'user' => 'Người bình luận',
         'product' => 'Sản phẩm',
-        'content' => 'Nội dung',
+        'content' => 'Bình luận',
         'parent_id' => 'Bình luận cha',
         'action' => 'Hành động',
+        'created_at' => 'Ngày tạo',
+        'updated_at' => 'Ngày sửa',
     ],
 ];
