@@ -39,12 +39,12 @@ class Category extends Model
     }
 
     /**
-     * Category belong to code
+     * Category has many users
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function codes()
     {
-        return $this->belongsToMany(Code::class);
+        return $this->hasMany(Code::class);
     }
 }
