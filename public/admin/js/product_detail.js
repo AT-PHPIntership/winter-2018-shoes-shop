@@ -1,5 +1,14 @@
-//Display product detail when click add button
 $(document).ready(function(){
+  //Display choosen images
+  function preview_image() 
+  {
+    var total_file=document.getElementById("upload_file").files.length;
+    for(var i=0;i<total_file;i++)
+    {
+      $('#image_preview').append("<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+    }
+  }
+  //Display product detail when click add button
   $("#add-detail").on("click", function(){
     $.ajax({
       url: "detail",
