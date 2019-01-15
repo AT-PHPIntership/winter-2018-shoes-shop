@@ -16,9 +16,16 @@ class CommentsTableSeeder extends Seeder
     {
         $product_ids = Product::all('id');
         $user_ids = User::all('id');
-        for($i = 1; $i < 11; $i++){
+        for($i = 0; $i < 5; $i++){
             factory(Comment::class)->create([
-                'parent_id' => array_random([null, $i]),
+                'product_id' => $product_ids->random(),
+                'user_id' => $user_ids->random(),
+            ]);
+        }
+        $comment_ids = Comment::all('id');
+        for($i = 0; $i < 5; $i++){
+            factory(Comment::class)->create([
+                'parent_id' => $comment_ids->random(),
                 'product_id' => $product_ids->random(),
                 'user_id' => $user_ids->random(),
             ]);
