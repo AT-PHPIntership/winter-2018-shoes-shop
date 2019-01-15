@@ -40,7 +40,7 @@
                     <td>{{ \Carbon\Carbon::parse($comment->created_at)->format(config('define.datetime_vn')) }}</td>
                     <td>{{ \Carbon\Carbon::parse($comment->updated_at)->format(config('define.datetime_vn')) }}</td>
                     <td>
-                      <form class="form-inline" action="" method="POST">
+                      <form class="form-inline" action="{{ route('admin.comments.destroy', $comment) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
