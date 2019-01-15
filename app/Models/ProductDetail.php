@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class ProductDetail extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'product_id', 'size_id', 'color_id', 'quantity'
+    ];
+
+    /**
      * Get the color for product detail.
      *
      * @return void

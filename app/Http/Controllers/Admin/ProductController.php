@@ -20,7 +20,10 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param ProductService $productService get services
+     * @param ProductService  $productService  get services
+     * @param CategoryService $categoryService get services
+     * @param SizeService     $sizeService     get services
+     * @param ColorService    $colorService    get services
      *
      * @return void
      */
@@ -78,7 +81,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        if ($this->products->storeProduct($data)) {
+            session()->flash('success', trans('common.message.create_success'));
+            return redirect()->route('admin.product.index');
+        }
+        session()->flash('error', trans('common.message.create_error'));
+        return redirect()->route('admin.product.create');
     }
 
+    /**
+     * Get all color from data.
+     *
+     * @return \App\Models\Color
+     */
+    public function getDetail()
+    {
+         $color = $this->colors->getColors();
+         $size = $this->sizes->getSizes();
+
+         $tt = response()->json(['color' => $color, 'size' => $size]);
+         return response()->json(['color' => $color, 'size' => $size]);
+    }
 }
