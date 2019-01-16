@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Product;
+use File;
+use Illuminate\Support\Facades\Log;
 
 class ProductService
 {
@@ -28,5 +30,27 @@ class ProductService
     public function getProductById($id)
     {
         return Product::findOrFail($id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($product)
+    {
+        try {
+            if (!$product->images->isEmpty()) {
+                foreach($product->images as $image) {
+                    File::delete(public_path('upload/'.$image->path));
+                }
+            }
+            return $product->delete();
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+        return false;
     }
 }

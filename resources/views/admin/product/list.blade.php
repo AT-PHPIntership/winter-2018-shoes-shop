@@ -52,7 +52,11 @@
                             <a href="#" style="color: #fff;">{{ trans('common.detail')}}</a>
                           </button>
                           <button type="" class="btn btn-primary btn-xs">{{ trans('common.edit')}}</button>
-                          <button type="" class="btn btn-danger btn-xs">{{ trans('common.delete')}}</button>
+                          <form class="form-inline" action="{{ route('admin.product.destroy', $product) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
+                          </form>
                         </td>
                     </tr>
                   @endforeach
