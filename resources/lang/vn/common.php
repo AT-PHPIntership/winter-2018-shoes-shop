@@ -9,6 +9,7 @@ return [
     'detail' => 'Chi tiết',
     'show' => 'Chi tiết',
     'back' => 'Quay lại',
+    'upload' => 'Thêm file',
     'table' => [
         'num' => 'STT',
         'action' => 'Hành động',

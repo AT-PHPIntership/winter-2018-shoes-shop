@@ -8,6 +8,16 @@
     </section>
     <!-- Main content -->
     <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box-top">
+            <a class="btn btn-success btn-md" href="{{route('admin.product.import')}}">{{ trans('common.upload')}}</a>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          @include('admin.module.message')
+        </div>
+      </div>
       <div class="row"> 
         <div class="col-xs-12">
           <!-- ./product info box -->

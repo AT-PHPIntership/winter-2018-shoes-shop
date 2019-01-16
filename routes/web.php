@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::resource('users', 'UserController');
         Route::resource('category', 'CategoryController');
         Route::get('product/detail', 'ProductController@getDetail');
+        Route::get('product/import', 'ProductController@importFile')->name('product.import');
+        Route::post('product/import/process', 'ProductController@processImport')->name('product.import.process');
         Route::resource('product', 'ProductController');
     });
 });

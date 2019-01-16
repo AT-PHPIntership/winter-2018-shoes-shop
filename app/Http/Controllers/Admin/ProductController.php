@@ -9,6 +9,7 @@ use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
+use Excel;
 
 class ProductController extends Controller
 {
@@ -93,14 +94,51 @@ class ProductController extends Controller
     /**
      * Get all color from data.
      *
-     * @return \App\Models\Color
+     * @return \Illuminate\Http\Response
      */
     public function getDetail()
     {
-         $color = $this->colors->getColors();
-         $size = $this->sizes->getSizes();
+        $color = $this->colors->getColors();
+        $size = $this->sizes->getSizes();
+        return response()->json(['color' => $color, 'size' => $size]);
+    }
 
-         $tt = response()->json(['color' => $color, 'size' => $size]);
-         return response()->json(['color' => $color, 'size' => $size]);
+    /**
+     * import file csv including products data.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importFile(Request $request)
+    {
+        return view('admin.product.import');
+    }
+
+    /**
+     * Handle process import file csv including products data.
+     *
+     * @param \Illuminate\Http\Request $request file csv from view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processImport(Request $request)
+    {
+        try {
+            $path = $request->file('csv_file')->getRealPath();
+            $data = Excel::load($path)->get();
+            $arr = [];
+            foreach ($data as $key => $value) {
+                $arr[$key]['name'] = $value['name'];
+                $arr[$key]['category_id'] = $value['category'];
+                $arr[$key]['original_price'] = $value['original_price'];
+                $arr[$key]['quantity'] = $value['quantity'];
+            }
+            Product::insert($arr);
+
+            dd($arr);
+            session()->flash('success', __('common.success'));
+        } catch (\Exception $e) {
+            // session()->flash('error', __('common.error', ['attribute' => $e->getMessage(), 'line' => $lineError]));
+            throw $e;
+        }
     }
 }
