@@ -36,6 +36,10 @@ return [
         'report' => [
             'title' => 'Báo cáo thống kê',
         ],
+        'comment' => [
+            'title' => 'Quản lý bình luận',
+            'list' => 'Danh sách bình luận',
+        ],
     ],
     'header' => [
         'hello' => 'Xin chào',
