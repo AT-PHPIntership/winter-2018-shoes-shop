@@ -37,14 +37,4 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category', 'parent_id', 'id');
     }
-
-    /**
-     * Category has many users
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function codes()
-    {
-        return $this->hasMany(Code::class);
-    }
 }
