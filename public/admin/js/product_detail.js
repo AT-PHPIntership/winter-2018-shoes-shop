@@ -26,8 +26,8 @@ $(document).ready(function(){
           size += '<option value="'+ val.id + '">' + val.size + '</option>';
         });
         size += '</select>';
-
-        var output = '<li class="row margin-y-10">';
+        
+        var output = '<li class="js-row row margin-y-10">';
         output += '<div class="col-xs-4">';
         output += color;
         output += '</div>';
@@ -38,10 +38,16 @@ $(document).ready(function(){
         output += '<input name="quantity_type[]" type="quantity_type" class="form-control" placeholder="Số lượng">';
         output += '</div>';
         output += '<div class="col-xs-1">';
-        // output += '<button type="button" class="btn"> x </button>';
+        output += '<button type="button" class="js-btn-remove btn"> x </button>';
         output += '</div>';
         output += '</li>';
         $("#show-detail").append(output);
+        var listBtnRemove = document.getElementsByClassName('js-btn-remove');
+        for (var i = 0; i < listBtnRemove.length; i++) {
+          listBtnRemove[i].addEventListener("click", function(){
+            $(this.parentElement.parentElement).remove();
+          });
+        }
       }
     });
   });

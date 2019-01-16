@@ -65,3 +65,15 @@
   width: 80px;
   padding: 5px;
 }
+.preview {
+  display: inline;
+  position: relative;
+}
+.btn-remove-img {
+  position: absolute;
+  right: 0;
+  margin: 5px;
+  padding: 0px 5px;
+  background: #e1e1e1;
+  border-radius: 5px;
+}
