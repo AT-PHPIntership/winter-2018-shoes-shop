@@ -7,7 +7,7 @@ return [
     'orderBy' => [
         'desc' => 'desc',
     ],
-    'date_vn' => 'd-m-Y',
+    'format_date_vn' => 'd-m-Y',
     'path' => [
         'avatar' => '/upload/',
         'default_avatar' => '/admin/images/default_avatar.png',
