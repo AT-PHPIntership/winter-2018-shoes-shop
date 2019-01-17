@@ -33,7 +33,7 @@
                   <select name="category_id" class="form-control" id="exampleInputCategory">
                     <option value="">@lang('code.null')</option>
                     @foreach ($categories as $category)
-                      <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                      <option value="{{ $category->id }}" {{ old('category_id') === $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                     @endforeach
                   </select>
                   @if ($errors->has('category_id'))
