@@ -18,7 +18,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">@lang('code.add.title')</h3>
             </div>
-            <form method="POST" role="form" action="">
+            <form method="POST" role="form" action="{{ route('admin.codes.store') }}">
               @csrf
               <div class="box-body">
                 <div class="form-group">
@@ -33,7 +33,7 @@
                   <select name="category_id" class="form-control" id="code-slt-category">
                     <option value="">@lang('code.null')</option>
                     @foreach ($categories as $category)
-                      <option value="{{ $category->id }}" {{ old('category_id') === $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                      <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                     @endforeach
                   </select>
                   @if ($errors->has('category_id'))
