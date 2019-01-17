@@ -18,7 +18,7 @@
             <div class="box-header with-border">
               <h3 class="box-title">@lang('code.add.title')</h3>
             </div>
-            <form method="POST" role="form" action="{{ route('admin.codes.store') }}">
+            <form method="POST" role="form" action="">
               @csrf
               <div class="box-body">
                 <div class="form-group">

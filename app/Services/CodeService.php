@@ -15,7 +15,7 @@ class CodeService
      */
     public function getCodeWithPaginate()
     {
-        return Code::with('category')->orderBy('id', config('define.orderBy.desc'))->paginate(config('define.paginate.limit_rows'));
+        return Code::with('category')->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 
     /**
