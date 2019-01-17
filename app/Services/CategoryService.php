@@ -43,9 +43,6 @@ class CategoryService
      */
     public function storeCategory(array $input)
     {
-        if (Category::create($input)) {
-            return true;
-        }
-        return false;
+        return Category::create($input);
     }
 }
