@@ -19,6 +19,6 @@ return [
         'confirm_delete' => 'Bạn có chắc chắn muốn xóa không?',
         'delete_success' => 'Đã xóa thành công',
         'delete_error' => 'Xóa thất bại',
-        'del_question' => 'Bạn có muốn xóa không ?'
+        'del_question' => 'Bạn có muốn xóa không ?',
     ]
 ];

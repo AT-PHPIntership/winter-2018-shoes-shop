@@ -9,14 +9,40 @@ use App\Http\Controllers\Controller;
 class CategoryService
 {
     /**
-    * Handle get categories list to data
-    *
-    * @return void
-    */
+     * Handle get categories list to data
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getList()
     {
         $categories = Category::select('id', 'name', 'parent_id')
+                    ->orderBy('updated_at', 'desc')
                     ->paginate(config('define.number_element_in_table'));
         return $categories;
+    }
+
+    /**
+     * Handle get parents list from database
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getParentList()
+    {
+        $categories = Category::select('id', 'name', 'parent_id')
+                        ->whereNull('parent_id')
+                        ->get();
+        return $categories;
+    }
+
+    /**
+     * Handle store categoriy from view
+     *
+     * @param array $input data from request
+     *
+     * @return boolean
+     */
+    public function storeCategory(array $input)
+    {
+        return Category::create($input);
     }
 }
