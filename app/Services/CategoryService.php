@@ -74,9 +74,9 @@ class CategoryService
                 return ('children_error');
             }
         }
+        return $category->update($input);
         if ($category->update($input)) {
             return true;
         }
-        return false;
     }
 }
