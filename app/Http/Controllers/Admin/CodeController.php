@@ -47,17 +47,16 @@ class CodeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request request
+     * @param PostCodeRequest $request request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(PostCodeRequest $request)
     {
         $data = $request->all();
-        if (!empty($this->codeService->store($data))) {
+        if ($this->codeService->store($data)) {
             return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
-        } else {
-            return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
         }
+        return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
     }
 }

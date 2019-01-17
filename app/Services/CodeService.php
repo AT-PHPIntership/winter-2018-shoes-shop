@@ -3,8 +3,7 @@
 namespace App\Services;
 
 use App\Models\Code;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Log;
 
 class CodeService
 {
@@ -27,14 +26,11 @@ class CodeService
      */
     public function store(array $data)
     {
-        DB::beginTransaction();
         try {
             $code = Code::create($data);
-            DB::commit();
             return $code;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
-            DB::rollback();
         }
     }
 }
