@@ -22,7 +22,7 @@ class CodeService
      *
      * @param array $data data
      *
-     * @return boolean
+     * @return Code
      */
     public function store(array $data)
     {
