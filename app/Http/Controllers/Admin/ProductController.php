@@ -9,6 +9,7 @@ use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
+use App\Http\Requests\Admin\UploadRequest;
 use Excel;
 
 class ProductController extends Controller
@@ -120,24 +121,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function processImport(Request $request)
+    public function processImport(UploadRequest $request)
     {
         try {
             $path = $request->file('csv_file')->getRealPath();
             $data = Excel::load($path)->get();
-            $arr = [];
-            foreach ($data as $key => $value) {
-                $arr[$key]['name'] = $value['name'];
-                $arr[$key]['category_id'] = $value['category'];
-                $arr[$key]['original_price'] = $value['original_price'];
-                $arr[$key]['quantity'] = $value['quantity'];
-            }
-            Product::insert($arr);
-
-            dd($arr);
-            session()->flash('success', __('common.success'));
+            $this->products->importData($data);
+            return redirect()->route('admin.product.index');
         } catch (\Exception $e) {
-            // session()->flash('error', __('common.error', ['attribute' => $e->getMessage(), 'line' => $lineError]));
             throw $e;
         }
     }

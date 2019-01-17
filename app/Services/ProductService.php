@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Image;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -99,5 +100,101 @@ class ProductService
         $fileName = time().'-'.$image->getClientOriginalName();
         $image->move('upload', $fileName);
         return $fileName;
+    }
+
+    /**
+     * Handle process import file csv including products data.
+     *
+     * @param \Illuminate\Http\Request $data of products
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importData($data)
+    {
+        $arr = [];
+        foreach ($data as $key => $value) {
+            $category_id = $this->checkNameExist($value->category);
+            if ($category_id) {
+                $checkName = $this->checkNameExist($value->name);
+                if ($checkName) {                     
+                    $checkInfo = $this->checkInfoCorrect($value->name, $category->id, $value->original_price, $value->description);
+                    if (checkInfo) {
+    //caculate                        $quantity = ... + $value->quantity;
+                        try {
+                            ProductDetail::create([
+
+                            ]);
+                        } catch (Exception $e) {
+                            Log::error($e);
+                            DB::rollback();
+                        }
+                    }
+                } else {
+                    try {
+                        Product::create([
+                            'name' => $data['name'],
+                            'category_id' => $data['category_id'],
+                            'original_price' => $data['original_price'],
+                            'quantity' => $quantity,
+                            'description' => $data['description'],
+                        ]);
+                        ProductDetail::create([
+
+                        ]);
+                    } catch (Exception $e) {
+                        Log::error($e);
+                        DB::rollback();
+                    }
+                }
+            } else {
+                session()->flash('error', __('common.file_error'));
+            }
+        }
+    }
+
+    /**
+     * Check if product name alredy exist
+     *
+     * @param string $name product
+     *
+     * @return boolean
+     */
+    public function checkNameExist($name)
+    {
+        $product = Product::where('name', $name)->get();
+        return (count($product) > 0);
+    }
+
+    /**
+     * Check if product information are correct
+     *
+     * @param string $name        product
+     * @param int    $category_id product
+     * @param string $price       product
+     * @param string $description product
+     *
+     * @return boolean
+     */
+    public function checkInfoCorrect($name, $category_id, $price, $description)
+    {
+        $product = Product::where('name', $name)->first();
+        dd($product);
+        return true;
+    }
+
+    /**
+     * get id of category
+     *
+     * @param string $name category name
+     *
+     * @return int
+     */
+    public function getCategoryByName($name)
+    {
+        $category = Category::select('id')->where('name', $name)->first();
+        if ($category) {
+            return $category->id;
+        }
+        return false;
     }
 }

@@ -25,5 +25,7 @@ return [
         'delete_success' => 'Xóa thành công',
         'delete_error' => 'Xóa thất bại',
         'del_question' => 'Bạn có muốn xóa không ?'
-    ]
+    ],
+    'request_upload' => 'Vui lòng chọn file!',
+    'file_error' => 'Dữ liệu nhập vào không đúng, vui lòng kiểm tra lại!',
 ];
