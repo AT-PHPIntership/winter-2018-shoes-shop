@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\CodeService;
+use App\Http\Requests\Admin\PostCodeRequest;
 
 class CodeController extends Controller
 {
@@ -31,5 +32,31 @@ class CodeController extends Controller
     {
         $codes = $this->codeService->getCodeWithPaginate();
         return view('admin.code.list', compact('codes'));
+    }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function create()
+    {
+        return view('admin.code.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param PostCodeRequest $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(PostCodeRequest $request)
+    {
+        $data = $request->all();
+        if ($this->codeService->store($data)) {
+            return redirect()->route('admin.codes.index')->with('success', trans('common.message.create_success'));
+        }
+        return redirect()->route('admin.codes.create')->with('error', trans('common.message.create_error'));
     }
 }

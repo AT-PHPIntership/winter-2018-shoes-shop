@@ -10,11 +10,11 @@
       <div class="row">
         <div class="col-md-2">
           <div class="box-top">
-            <a class="btn btn-success btn-md" href="">@lang('common.new')</a>
+            <a class="btn btn-success btn-md" href="{{ route('admin.codes.create') }}">@lang('common.new')</a>
           </div>
         </div>
-        <div class="col-md-5">
-          
+        <div class="col-md-12">
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
