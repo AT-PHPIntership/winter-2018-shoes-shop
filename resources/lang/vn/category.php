@@ -22,5 +22,6 @@ return [
     'request' => [
         'required' => 'Vui lòng nhập tên danh mục!',
         'unique' => 'Tên danh mục đã tồn tại!',
+        'category_exists' => 'Danh mục không tồn tại!',
     ]
 ];

@@ -6,8 +6,8 @@ use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
-use App\Http\Requests\Admin\CategoryRequest;
-use App\Http\Requests\Admin\EditCategoryRequest;
+use App\Http\Requests\Admin\PostCategoryRequest;
+use App\Http\Requests\Admin\PutCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -60,7 +60,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(PostCategoryRequest $request)
     {
         $input = $request->all();
         if ($this->categories->storeCategory($input)) {
@@ -88,12 +88,12 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request  from edit form
-     * @param App\Models\Category      $category biding of id from edit form
+     * @param PutCategoryRequest  $request  from edit form
+     * @param App\Models\Category $category biding of id from edit form
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(PutCategoryRequest $request, Category $category)
     {
         $input = $request->all();
         if ($this->categories->updateCategory($input, $category) === 'children_error') {

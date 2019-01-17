@@ -36,6 +36,9 @@
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                   @endforeach
                 </select>
+                @if ($errors->has('parent_id'))
+                  <span class="help-block">{{ $errors->first('parent_id') }}</span>
+                @endif
               </div>
             </div>
             <div class="form-group">

@@ -68,15 +68,11 @@ class CategoryService
      */
     public function updateCategory(array $input, $category)
     {
-        // $category = $this->getCategoryById($id);
         if (count($category->children)) {
             if ($category->parent_id != $input->parent_id) {
                 return ('children_error');
             }
         }
         return $category->update($input);
-        if ($category->update($input)) {
-            return true;
-        }
     }
 }
