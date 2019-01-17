@@ -14,4 +14,14 @@ class Code extends Model
     protected $fillable = [
         'category_id', 'name', 'percent', 'description', 'times', 'start_date', 'end_date',
     ];
+
+    /**
+     * Code belong to category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
