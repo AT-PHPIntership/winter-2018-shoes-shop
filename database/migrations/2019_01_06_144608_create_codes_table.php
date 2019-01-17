@@ -15,10 +15,10 @@ class CreateCodesTable extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id')->nullable();
-            $table->string('name');
+            $table->unsignedInteger('category_id')->nullable();
+            $table->string('name', 45);
             $table->integer('percent');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('times');
             $table->date('start_date');
             $table->date('end_date');
