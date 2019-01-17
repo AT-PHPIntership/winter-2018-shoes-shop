@@ -32,4 +32,14 @@ class CodeController extends Controller
         $codes = $this->codeService->getCodeWithPaginate();
         return view('admin.code.list', compact('codes'));
     }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function create()
+    {
+        return view('admin.code.create');
+    }
 }
