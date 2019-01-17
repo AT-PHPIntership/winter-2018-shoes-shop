@@ -19,4 +19,16 @@ class CategoryService
                     ->get();
         return $children;
     }
+
+    /**
+    * Handle get categories list to data
+    *
+    * @return void
+    */
+    public function getList()
+    {
+        $categories = Category::select('id', 'name', 'parent_id')
+                    ->paginate(config('define.number_element_in_table'));
+        return $categories;
+    }
 }
