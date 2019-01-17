@@ -10,11 +10,11 @@
       <div class="row">
         <div class="col-md-2">
           <div class="box-top">
-            <a class="btn btn-success btn-md" href="">@lang('common.new')</a>
+            <a class="btn btn-success btn-md" href="{{ route('admin.codes.create') }}">@lang('common.new')</a>
           </div>
         </div>
-        <div class="col-md-5">
-          
+        <div class="col-md-12">
+          @include('admin.module.message')
         </div>
       </div>
       <div class="row">
@@ -51,7 +51,7 @@
                     <td>{{ formatDateVN($code->start_date) }}</td>
                     <td>{{ formatDateVN($code->end_date) }}</td>
                     <td>
-                      <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.codes.edit', ['id' => $code->id]) }}">@lang('common.edit')</a>
                       <a class="btn btn-danger btn-xs" href="">@lang('common.delete')</a>
                     </td>
                   </tr>

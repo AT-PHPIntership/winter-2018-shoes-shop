@@ -66,7 +66,7 @@
             </a>
             <ul class="treeview-menu">
                 <li class="active"><a href="{{ route('admin.codes.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.list')</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.add')</a></li>
+                <li><a href="{{ route('admin.codes.create') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.add')</a></li>
             </ul>
         </li>
       </ul>
