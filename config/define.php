@@ -4,9 +4,6 @@ return [
     'paginate' => [
         'limit_rows' => 10,
     ],
-    'orderBy' => [
-        'desc' => 'desc',
-    ],
     'format_date_vn' => 'd-m-Y',
     'path' => [
         'avatar' => '/upload/',
