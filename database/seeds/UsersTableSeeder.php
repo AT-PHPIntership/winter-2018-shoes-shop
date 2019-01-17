@@ -14,8 +14,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $ids = Role::all('id');
-        factory(User::class, 10)->create([
-            'role_id' => $ids->random()
-        ]); 
+        for($i = 0; $i < 50; $i++){
+            factory(User::class)->create([
+                'role_id' => $ids->random()
+            ]);
+        } 
     }
 }
