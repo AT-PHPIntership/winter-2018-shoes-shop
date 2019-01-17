@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputDescription">@lang('code.table.description')</label>
-                  <input type="text" name="description" class="form-control" id="exampleInputDescription" value="{{ old('description') }}">
+                  <textarea class="form-control" name="description" id="exampleInputDescription">{{ old('description') }}</textarea>
                   @if ($errors->has('description'))
                     <span class="help-block">{{ $errors->first('description') }}</span>
                   @endif
