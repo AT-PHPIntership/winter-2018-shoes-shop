@@ -1,5 +1,4 @@
 <?php
-
 return [
     'new' => 'Thêm mới',
     'edit' => 'Sửa',
