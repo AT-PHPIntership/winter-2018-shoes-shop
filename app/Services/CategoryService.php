@@ -7,7 +7,7 @@ use App\Models\Category;
 class CategoryService
 {
     /**
-     * Get all data table role
+     * Get all data table categories
      *
      * @param array $columns columns
      *
@@ -15,6 +15,6 @@ class CategoryService
      */
     public function getAll(array $columns = ['*'])
     {
-        return Category::select($columns)->get();
+        return Category::get($columns);
     }
 }
