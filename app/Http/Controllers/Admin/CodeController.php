@@ -89,4 +89,19 @@ class CodeController extends Controller
         }
         return redirect()->route('admin.codes.edit', $code)->with('error', trans('common.message.edit_error'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param App\Models\Code $code code
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Code $code)
+    {
+        if ($this->codeService->destroy($code)) {
+            return redirect()->route('admin.codes.index')->with('success', trans('common.message.delete_success'));
+        }
+        return redirect()->route('admin.codes.index')->with('error', trans('common.message.delete_error'));
+    }
 }

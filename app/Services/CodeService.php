@@ -51,4 +51,21 @@ class CodeService
             Log::error($e);
         }
     }
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param App\Models\Code $code code
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function destroy(Code $code)
+    {
+        try {
+            return $code->delete();
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return false;
+    }
 }
