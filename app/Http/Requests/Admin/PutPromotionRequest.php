@@ -24,7 +24,7 @@ class PutPromotionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:promotions,name,'.request()->id,
+            'name' => 'required|unique:promotions,name,'.$this->promotion->id,
             'product_id' => 'exists:products,id',
             'percent' => 'required|numeric|min:1|max:100',
             'max_sell' => 'required|numeric',
