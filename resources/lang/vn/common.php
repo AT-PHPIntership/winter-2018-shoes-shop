@@ -1,5 +1,4 @@
 <?php
-
 return [
     'new' => 'Thêm mới',
     'edit' => 'Sửa',
@@ -17,8 +16,9 @@ return [
         'create_error' => 'Tạo mới thất bại',
         'edit_success' => 'Chỉnh sửa thành công',
         'edit_error' => 'Chỉnh sửa thất bại',
-        'delete_success' => 'Xóa thành công',
+        'confirm_delete' => 'Bạn có chắc chắn muốn xóa không?',
+        'delete_success' => 'Đã xóa thành công',
         'delete_error' => 'Xóa thất bại',
-        'del_question' => 'Bạn có muốn xóa không ?'
+        'del_question' => 'Bạn có muốn xóa không ?',
     ]
 ];
