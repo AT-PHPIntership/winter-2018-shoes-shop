@@ -9,6 +9,18 @@ use App\Http\Controllers\Controller;
 class CategoryService
 {
     /**
+     * Get all data table categories
+     *
+     * @param array $columns columns
+     *
+     * @return object
+     */
+    public function getAll(array $columns = ['*'])
+    {
+        return Category::get($columns);
+    }
+    
+    /**
      * Handle get categories list to data
      *
      * @return \Illuminate\Http\Response
