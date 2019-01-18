@@ -42,5 +42,10 @@
     <!-- AdminLTE App -->
     <script src="{!! asset('admin/js/adminlte.min.js') !!}"></script>
     <script src="{!! asset('admin/js/main.js') !!}"></script>
+    <script>
+        var selected = $('#data-selected').data('selected');
+        console.log(selected);
+        $('#js-select').val(selected);
+    </script>
 </body>
 </html>

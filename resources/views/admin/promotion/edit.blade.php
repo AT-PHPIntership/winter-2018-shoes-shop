@@ -44,21 +44,20 @@
                     <span class="help-block">{{ $errors->first('description') }}</span>
                   @endif
                 </div>
-                <span id="demo" data-select="5"></span>
-
-                $('#demo').attr('data-select').val();
+                @php
+                  $selected = [];
+                @endphp
+                @if (!$promotion->products->isEmpty())
+                  @foreach ($promotion->products as $item)
+                    @php
+                      $selected[] = $item->id;
+                    @endphp
+                  @endforeach
+                @endif
+                <span id="data-selected" data-selected='{{ json_encode($selected) }}'></span>
                 <div class="form-group">
                   <label for="exampleInputProduct">@lang('promotion.table.product')</label>
-                  <select name="product_id[]" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')">
-                    {{-- @foreach ($products as $product)
-                      @if (!$promotion->products->isEmpty())
-                        @foreach ($promotion->products as $item)
-                          @if ($product->id === $item->id)
-                            <option value="{{ $product->id }}" selected>{{ $product->name }}</option>                            
-                          @endif
-                        @endforeach
-                      @endif
-                    @endforeach --}}
+                  <select name="product_id[]" id="js-select" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')">
                     @foreach ($products as $product)
                       <option value="{{ $product->id }}">{{ $product->name }}</option>  
                     @endforeach
@@ -67,6 +66,7 @@
                     <span class="help-block">{{ $errors->first('product_id') }}</span>
                   @endif
                 </div>
+                
                 <div class="form-group">
                   <label for="exampleInputMax_sell">@lang('promotion.table.max_sell') *</label>
                   <input type="number" name="max_sell" class="form-control" id="exampleInputMax_sell" value="{{ $promotion->max_sell }}">
