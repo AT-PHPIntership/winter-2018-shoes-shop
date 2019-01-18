@@ -32,9 +32,9 @@
                 <div class="form-group">
                   <label for="code-slt-category">@lang('code.table.category') *</label>
                   <select name="category_id" class="form-control" id="code-slt-category">
-                    <option value="" {{ $code->category_id == null ? "selected": "" }}>@lang('code.null')</option>
+                    <option value="" {{ !$code->category_id ? "selected": "" }}>@lang('code.null')</option>
                     @foreach ($categories as $category)
-                      <option value="{{ $category->id }}" {{ $code->category_id === $category->id ? "selected": "" }}>{{ $category->name }}</option>
+                      <option value="{{ $category->id }}" {{ $code->category_id == $category->id ? "selected": "" }}>{{ $category->name }}</option>
                     @endforeach
                   </select>
                   @if ($errors->has('category_id'))
