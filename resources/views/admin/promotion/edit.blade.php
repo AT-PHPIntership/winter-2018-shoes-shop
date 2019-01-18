@@ -44,18 +44,23 @@
                     <span class="help-block">{{ $errors->first('description') }}</span>
                   @endif
                 </div>
+                <span id="demo" data-select="5"></span>
+
+                $('#demo').attr('data-select').val();
                 <div class="form-group">
                   <label for="exampleInputProduct">@lang('promotion.table.product')</label>
-                  <select name="product_id[]" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')"
-                          style="width: 100%;">
-                    @foreach ($products as $product)
+                  <select name="product_id[]" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')">
+                    {{-- @foreach ($products as $product)
                       @if (!$promotion->products->isEmpty())
                         @foreach ($promotion->products as $item)
-                          <option value="{{ $product->id }}" {{ $product->id === $item->id ? "selected": "" }}>{{ $product->name }}</option>                        
-                        @endforeach  
-                      @else
-                        <option value="{{ $product->id }}">{{ $product->name }}</option>  
+                          @if ($product->id === $item->id)
+                            <option value="{{ $product->id }}" selected>{{ $product->name }}</option>                            
+                          @endif
+                        @endforeach
                       @endif
+                    @endforeach --}}
+                    @foreach ($products as $product)
+                      <option value="{{ $product->id }}">{{ $product->name }}</option>  
                     @endforeach
                   </select>
                   @if ($errors->has('product_id'))
