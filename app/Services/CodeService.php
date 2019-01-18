@@ -33,4 +33,22 @@ class CodeService
             Log::error($e);
         }
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param array           $data data
+     * @param App\Models\Code $code code
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(array $data, Code $code)
+    {
+        try {
+            $code->update($data);
+            return $code;
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+    }
 }
