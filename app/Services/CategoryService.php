@@ -43,6 +43,10 @@ class CategoryService
      */
     public function storeCategory(array $input)
     {
+        if ($this->isChild($input['parent_id'])) {
+            session()->flash('error', trans('category.request.level_error'));
+            return false;
+        }
         return Category::create($input);
     }
 
@@ -70,14 +74,9 @@ class CategoryService
     {
         if ($category->parent_id) {
             if ($input['parent_id']) {
-                if (!($this->exists($input['parent_id']))) {
-                    session()->flash('error', trans('category.request.category_exists'));
+                if ($this->isChild($input['parent_id'])) {
+                    session()->flash('error', trans('category.request.level_error'));
                     return false;
-                } else {
-                    if ($this->isChild($input['parent_id'])) {
-                        session()->flash('error', trans('category.request.level_error'));
-                        return false;
-                    }
                 }
             }
         } else {
@@ -87,18 +86,6 @@ class CategoryService
             }
         }
         return $category->update($input);
-    }
-
-    /**
-     * Check if category exists
-     *
-     * @param int $id of category
-     *
-     * @return boolean
-     */
-    public function exists($id)
-    {
-        return Category::find($id);
     }
 
     /**
