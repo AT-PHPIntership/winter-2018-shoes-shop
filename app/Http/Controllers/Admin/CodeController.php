@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\CodeService;
 use App\Models\Code;
+use App\Http\Requests\Admin\PutCodeRequest;
 use App\Http\Requests\Admin\PostCodeRequest;
 
 class CodeController extends Controller
@@ -70,5 +71,22 @@ class CodeController extends Controller
     public function edit(Code $code)
     {
         return view('admin.code.edit', compact('code'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param PutCodeRequest  $request request
+     * @param App\Models\Code $code    code
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PutCodeRequest $request, Code $code)
+    {
+        $data = $request->all();
+        if ($this->codeService->update($data, $code)) {
+            return redirect()->route('admin.codes.index')->with('success', trans('common.message.edit_success'));
+        }
+        return redirect()->route('admin.codes.edit', $code)->with('error', trans('common.message.edit_error'));
     }
 }
