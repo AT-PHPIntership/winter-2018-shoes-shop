@@ -11,7 +11,7 @@ return [
     'parent_name' => 'Danh mục cha',
     'children_name' => 'Danh mục con',
     'message' => [
-        'children_error' => 'Bạn không thể chỉnh sửa cấp danh mục này!',
+        'level_error' => 'Bạn không thể chọn cấp danh mục này!',
     ],
     'table' => [
         'num' => 'STT',

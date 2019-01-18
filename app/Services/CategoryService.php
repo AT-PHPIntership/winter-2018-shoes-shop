@@ -28,7 +28,7 @@ class CategoryService
      */
     public function getParentList()
     {
-        $categories = Category::select('id', 'name', 'parent_id')
+        $categories = Category::select('id', 'name')
                         ->whereNull('parent_id')
                         ->get();
         return $categories;
@@ -68,11 +68,49 @@ class CategoryService
      */
     public function updateCategory(array $input, $category)
     {
-        if (count($category->children)) {
-            if ($category->parent_id != $input->parent_id) {
-                return ('children_error');
+        if ($category->parent_id) {
+            if ($input['parent_id']) {
+                if (!($this->exists($input['parent_id']))) {
+                    session()->flash('error', trans('category.request.category_exists'));
+                    return false;
+                } else {
+                    if ($this->isChild($input['parent_id'])) {
+                        session()->flash('error', trans('category.request.level_error'));
+                        return false;
+                    }
+                }
+            }
+        } else {
+            if ($input['parent_id']) {
+                session()->flash('error', trans('category.message.level_error'));
+                return false;
             }
         }
         return $category->update($input);
+    }
+
+    /**
+     * Check if category exists
+     *
+     * @param int $id of category
+     *
+     * @return boolean
+     */
+    public function exists($id)
+    {
+        return Category::find($id);
+    }
+
+    /**
+     * Check if category is children
+     *
+     * @param int $id of category
+     *
+     * @return boolean
+     */
+    public function isChild($id)
+    {
+        $category = Category::find($id);
+        return ($category->parent_id);
     }
 }
