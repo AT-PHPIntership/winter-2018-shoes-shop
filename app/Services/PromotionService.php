@@ -13,6 +13,6 @@ class PromotionService
      */
     public function getPromotionWithPaginate()
     {
-        return Promotion::orderBy('id', config('define.orderBy.desc'))->paginate(config('define.paginate.limit_rows'));
+        return Promotion::orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 }

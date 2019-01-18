@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ImagesTableSeeder::class);
         $this->call(PromotionsTableSeeder::class);
         $this->call(ProductPromotionsTableSeeder::class);
+        $this->call(CodesTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
