@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Code;
-use DB;
 use Log;
 
 class CodeService
@@ -45,14 +44,11 @@ class CodeService
      */
     public function update(array $data, Code $code)
     {
-        DB::beginTransaction();
         try {
             $code->update($data);
-            DB::commit();
             return $code;
         } catch (\Exception $e) {
             Log::error($e);
-            DB::rollback();
         }
     }
 }
