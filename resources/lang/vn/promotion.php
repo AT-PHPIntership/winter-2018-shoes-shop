@@ -7,7 +7,7 @@ return [
     ],
     'table' => [
         'id' => 'Id',
-        'name' => 'Tên',
+        'name' => 'Tên khuyến mãi',
         'percent' => 'Giảm',
         'description' => 'Mô tả',
         'max_sell' => 'Số lượng',
@@ -16,6 +16,7 @@ return [
         'end_date' => 'Kết thúc',
         'action' => 'Hành động',
         'product' => 'Sản phẩm',
+        'category' => 'Danh mục',
     ],
     'placeholder' => [
         'search' => 'Tìm kiếm',

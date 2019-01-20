@@ -21,8 +21,8 @@
                   <p><b>@lang('promotion.table.description'):</b> {{ $promotion->description }}</p>
                   <p><b>@lang('promotion.table.max_sell'):</b> {{ $promotion->max_sell }}</p>
                   <p><b>@lang('promotion.table.total_sold'):</b> {{ $promotion->total_sold }}</p>
-                  <p><b>@lang('promotion.table.start_date'):</b> {{ convertToDateVN($promotion->start_date) }}</p>
-                  <p><b>@lang('promotion.table.end_date'):</b> {{ convertToDateVN($promotion->end_date) }}</p>
+                  <p><b>@lang('promotion.table.start_date'):</b> {{ formatDateVN($promotion->start_date) }}</p>
+                  <p><b>@lang('promotion.table.end_date'):</b> {{ formatDateVN($promotion->end_date) }}</p>
                   <a class="btn btn-warning btn-xs" href="{{ route('admin.promotions.index') }}">@lang('common.back')</a>
                   <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>
                 </div>
