@@ -44,12 +44,15 @@
                 </div>
                 <div class="form-group">
                   <label for="promotion-slt-product">@lang('promotion.table.product')</label>
-                  <select class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')"
-                          style="width: 100%;">
+                  <select class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')">
+                    @php
+                      $productIds = [];
+                      foreach ($promotion->products as $oldProduct) {
+                        $productIds[] = $oldProduct->id;
+                      }
+                    @endphp
                     @foreach ($products as $product)
-                      @foreach ($promotion->products as $item)
-                        <option value="{{ $product->id }}" {{ $product->id === $item->id ? "selected": "" }}>{{ $product->name }}</option>                        
-                      @endforeach
+                      <option value="{{ $product->id }}" {{ (collect($productIds)->contains($product->id)) ? "selected": "" }}>{{ $product->name }}</option>                        
                     @endforeach
                   </select>
                   @if ($errors->has('product'))
