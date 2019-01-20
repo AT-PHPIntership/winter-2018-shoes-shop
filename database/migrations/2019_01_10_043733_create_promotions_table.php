@@ -17,7 +17,7 @@ class CreatePromotionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('percent');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->integer('max_sell');
             $table->integer('total_sold')->default(0);
             $table->date('start_date');

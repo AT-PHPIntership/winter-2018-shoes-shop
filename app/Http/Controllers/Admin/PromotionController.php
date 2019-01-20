@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\Admin\PostPromotionRequest;
 use App\Services\PromotionService;
@@ -45,17 +44,16 @@ class PromotionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request request
+     * @param PostPromotionRequest $request request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(PostPromotionRequest $request)
     {
         $data = $request->all();
-        if (!empty($this->promotionService->store($data))) {
+        if ($this->promotionService->store($data)) {
             return redirect()->route('admin.promotions.index')->with('success', trans('common.message.create_success'));
-        } else {
-            return redirect()->route('admin.promotions.create')->with('error', trans('common.message.create_error'));
         }
+        return redirect()->route('admin.promotions.create')->with('error', trans('common.message.create_error'));
     }
 }
