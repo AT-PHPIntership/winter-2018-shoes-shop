@@ -26,7 +26,7 @@
             <div class="box-body">
               <table class="table table-bordered">
                 <tr>
-                  <th style="width: 10px">@lang('promotion.table.id')</th>
+                  <th class="w-10">@lang('promotion.table.id')</th>
                   <th>@lang('promotion.table.name')</th>
                   <th>@lang('promotion.table.percent')</th>
                   <th>@lang('promotion.table.description')</th>
@@ -34,7 +34,7 @@
                   <th>@lang('promotion.table.total_sold')</th>
                   <th>@lang('promotion.table.start_date')</th>
                   <th>@lang('promotion.table.end_date')</th>
-                  <th style="width: 140px">@lang('promotion.table.action')</th>
+                  <th class="w-140">@lang('promotion.table.action')</th>
                 </tr>
                 @foreach ($promotions as $promotion)
                   <tr>
@@ -44,8 +44,8 @@
                     <td>{{ $promotion->description }}</td>
                     <td>{{ $promotion->max_sell }}</td>
                     <td>{{ $promotion->total_sold }}</td>
-                    <td>{{ convertToDateVN($promotion->start_date) }}</td>
-                    <td>{{ convertToDateVN($promotion->end_date) }}</td>
+                    <td>{{ formatDateVN($promotion->start_date) }}</td>
+                    <td>{{ formatDateVN($promotion->end_date) }}</td>
                     <td>
                       <a class="btn btn-info btn-xs" href="{{ route('admin.promotions.show', $promotion) }}">@lang('common.show')</a>
                       <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
@@ -61,7 +61,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-                  
+                {{ $promotions->links() }} 
               </ul>
             </div>
           </div>
