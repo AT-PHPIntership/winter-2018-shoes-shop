@@ -40,7 +40,7 @@
                   <tr>
                     <td>{{ $promotion->id }}</td>
                     <td>{{ $promotion->name }}</td>
-                    <td>{{ $promotion->percent }}</td>
+                    <td>{{ $promotion->percent }}%</td>
                     <td>{{ $promotion->description }}</td>
                     <td>{{ $promotion->max_sell }}</td>
                     <td>{{ $promotion->total_sold }}</td>
@@ -61,7 +61,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-                  
+                {{ $promotions->links() }} 
               </ul>
             </div>
           </div>
