@@ -15,4 +15,21 @@ class OrderService
     {
         return Order::with(['user', 'code'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param order $order order
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function destroy(Order $order)
+    {
+        try {
+            return $order->delete();
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return false;
+    }
 }
