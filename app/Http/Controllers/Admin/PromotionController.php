@@ -12,7 +12,7 @@ class PromotionController extends Controller
     /**
     * Contructer
     *
-    * @param App\Service\PromotionService $promotionService promotionService
+    * @param PromotionService $promotionService promotionService
     *
     * @return void
     */
