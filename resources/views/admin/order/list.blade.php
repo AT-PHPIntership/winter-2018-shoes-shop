@@ -30,24 +30,20 @@
                   <th>@lang('order.table.user')</th>
                   <th>@lang('order.table.code')</th>
                   <th>@lang('order.table.price')</th>
-                  <th>@lang('order.table.ship_to')</th>
-                  <th>@lang('order.table.phone_to')</th>
                   <th>@lang('order.table.ordered_at')</th>
                   <th>@lang('order.table.shipped_at')</th>
                   <th>@lang('order.table.status')</th>
-                  <th class="w-140">@lang('order.table.action')</th>
+                  <th class="w-100">@lang('order.table.action')</th>
                 </tr>
                 @foreach ($orders as $order)
                   <tr>
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->id }}</td>
-                    <td>FSSDK</td>
-                    <td>1000000</td>
-                    <td>10 Nguyễn Văn Thoại, Đà Nẵng</td>
-                    <td>0905678965</td>
-                    <td>22/01/2019</td>
-                    <td>25/01/2019</td>
-                    <td><span class="badge bg-yellow">Đang chờ</span></td>
+                    <td>{{ $order->user->profile->name }}</td>
+                    <td>{{ $order->code->name }}</td>
+                    <td>{{ $order->price }}</td>
+                    <td>{{ $order->ordered_at }}</td>
+                    <td>{{ $order->shipped_at }}</td>
+                    <td><span class="badge bg-yellow">{{ $order->status }}</span></td>
                     <td>
                       <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
                       <form class="form-inline" action="" method="POST">
@@ -62,7 +58,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-                  
+                {{ $orders->links() }}
               </ul>
             </div>
           </div>

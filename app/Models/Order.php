@@ -40,4 +40,24 @@ class Order extends Model
                 return config('define.orderStatus.pending');
         }
     }
+
+    /**
+     * Order belong to User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Order belong to code
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function code()
+    {
+        return $this->belongsTo(Code::class);
+    }
 }

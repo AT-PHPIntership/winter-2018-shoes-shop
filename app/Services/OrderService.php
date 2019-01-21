@@ -13,6 +13,6 @@ class OrderService
      */
     public function getOrderWithPaginate()
     {
-        return Order::with(['code', 'orderDetails'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+        return Order::with(['user', 'code'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 }
