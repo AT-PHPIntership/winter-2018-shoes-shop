@@ -36,7 +36,7 @@ class PromotionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param App\Models\Promotion $promotion promotion
+     * @param Promotion $promotion promotion
      *
      * @return \Illuminate\Http\Response
      */
