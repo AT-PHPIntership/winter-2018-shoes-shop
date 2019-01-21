@@ -8,12 +8,12 @@ use App\Models\Promotion;
 
 class PromotionController extends Controller
 {
-    private $promotionService;
+    protected $promotionService;
 
     /**
     * Contructer
     *
-    * @param App\Service\PromotionService $promotionService promotionService
+    * @param PromotionService $promotionService promotionService
     *
     * @return void
     */
