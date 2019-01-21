@@ -18,9 +18,15 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Auth::routes();
     Route::middleware(['auth', 'admin'])->group(function () {
-        Route::get('index', 'HomeController@index')->name('index');        
-        Route::resource('users', 'UserController');
-        Route::resource('category', 'CategoryController');                
+        Route::get('index', 'HomeController@index')->name('index');
         Route::resource('product', 'ProductController');
+        Route::get('index', 'HomeController@index')->name('index');
+        Route::post('category/search', [
+            'as' => 'category.search',
+            'uses' => 'CategoryController@searchData'
+        ]);
+        Route::resource('users', 'UserController');
+        Route::resource('category', 'CategoryController');
+        Route::resource('codes', 'CodeController')->except(['show']);
     });
 });
