@@ -7,7 +7,7 @@ use App\Services\PromotionService;
 
 class PromotionController extends Controller
 {
-    private $promotionService;
+    protected $promotionService;
 
     /**
     * Contructer
