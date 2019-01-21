@@ -15,10 +15,17 @@ return [
         'phone_to' => 'Số điện thoại',
         'price' => 'Tổng tiền',
         'status' => 'Trạng thái',
-        'action' => 'Hành động'
+        'action' => 'Hành động',
+        'product' => 'Sản phẩm',
+        'original_price' => 'Giá thực',
+        'price' => 'Giá',
+        'quantity' => 'Số lượng',
+        'category' => 'Danh mục',
+        'total_price' => 'Thành tiền',
     ],
     'show' => [
         'title' => 'Chi tiết đơn hàng',
+        'product' => 'Sản phẩm',
     ],
     'status' => [
         'pending' => 'Đang chờ',

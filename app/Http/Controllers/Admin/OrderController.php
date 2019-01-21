@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Controller;
 use App\Services\OrderService;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -30,5 +31,17 @@ class OrderController extends Controller
     {
         $orders = $this->orderService->getOrderWithPaginate();
         return view('admin.order.list', compact('orders'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Order $order order
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Order $order)
+    {
+        return view('admin.order.show', compact('order'));
     }
 }
