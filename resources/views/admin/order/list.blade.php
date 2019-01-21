@@ -39,11 +39,26 @@
                   <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->user->profile->name }}</td>
-                    <td>{{ $order->code->name }}</td>
+                    <td>{{ $order->code !== null ? $order->code->name : '' }}</td>
                     <td>{{ $order->price }}</td>
                     <td>{{ $order->ordered_at }}</td>
                     <td>{{ $order->shipped_at }}</td>
-                    <td><span class="badge bg-yellow">{{ $order->status }}</span></td>
+                    <td>
+                      @switch($order->status)
+                        @case(\App\Models\Order::APPROVED_STATUS)
+                          <span class="label label-primary">@lang('order.status.approved')</span>
+                          @break
+                        @case(\App\Models\Order::DELIVERED_STATUS)
+                          <span class="label label-success">@lang('order.status.delivered')</span>
+                          @break
+                        @case(\App\Models\Order::DENIED_STATUS)
+                          <span class="label label-danger">@lang('order.status.denied')</span>
+                          @break
+                        @default
+                          <span class="label label-warning">@lang('order.status.pending')</span>
+                          @break
+                      @endswitch
+                    </td>
                     <td>
                       <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
                       <form class="form-inline" action="" method="POST">

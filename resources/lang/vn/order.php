@@ -20,4 +20,10 @@ return [
     'show' => [
         'title' => 'Chi tiết đơn hàng',
     ],
+    'status' => [
+        'pending' => 'Đang chờ',
+        'approved' => 'Đã phê duyệt',
+        'delivered' => 'Đã giao',
+        'denied' => 'Từ chối',
+    ]
 ];
