@@ -1,0 +1,46 @@
+.block-img {
+    padding: 5px;
+}
+.profile-user-img {
+    height: 100px;
+}
+.skin-blue {
+    position: relative;
+}
+.box-top {
+    padding: 10px 0;
+}
+.al-success {
+    background-color: #dff0d8;
+    border: 1px solid #3c763d;
+    border-radius: 5px;
+    color: #3c763d;
+    padding: 10px;
+}
+.al-error {
+    background-color: #f2dede;
+    border: 1px solid #a94442;
+    border-radius: 5px;
+    color: #a94442;
+    padding: 10px;
+}
+.no-mg {
+    margin: 0;
+}
+.form-inline {
+    display: inline-block;
+}
+.padding-bot-20 {
+    padding-bottom: 20px;
+}
+
+.padding-y-20 {
+    padding: 20px 0;
+}
+.form-create {
+    background: #ecf0f5;
+    padding:20px;
+}
+.help-block {
+    color: #a94442;
+}
