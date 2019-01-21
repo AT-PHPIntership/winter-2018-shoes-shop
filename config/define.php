@@ -14,5 +14,11 @@ return [
         'other' => 0,
         'male' => 1,
         'female' => 2,
-    ]
+    ],
+    'orderStatus' => [
+        'pending' => 'pending',
+        'approve' => 'approve',
+        'complete' => 'complete',
+        'cancel' => 'cancel',
+    ],
 ];
