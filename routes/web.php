@@ -26,6 +26,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::resource('users', 'UserController');
         Route::resource('category', 'CategoryController');
         Route::resource('codes', 'CodeController')->except(['show']);
-        Route::resource('orders', 'OrderController')->only(['index', 'show']);
+        Route::resource('orders', 'OrderController')->only(['index', 'show', 'update']);
     });
 });

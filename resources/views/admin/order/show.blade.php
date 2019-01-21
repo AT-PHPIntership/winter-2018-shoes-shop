@@ -23,22 +23,32 @@
                   <p><b>@lang('order.table.phone_to'):</b> {{ $order->phone_to }}</p>
                   <p><b>@lang('order.table.ordered_at'):</b> {{ formatDateVN($order->ordered_at) }}</p>
                   <p><b>@lang('order.table.shipped_at'):</b> {{ formatDateVN($order->shipped_at) }}</p>
-                  <p><b>@lang('order.table.status'):</b> 
-                    @switch($order->status)
-                      @case(\App\Models\Order::APPROVED_STATUS)
-                        <span class="label label-primary">@lang('order.status.approved')</span>
-                        @break
-                      @case(\App\Models\Order::DELIVERED_STATUS)
-                        <span class="label label-success">@lang('order.status.delivered')</span>
-                        @break
-                      @case(\App\Models\Order::DENIED_STATUS)
-                        <span class="label label-danger">@lang('order.status.denied')</span>
-                        @break
-                      @default
-                        <span class="label label-warning">@lang('order.status.pending')</span>
-                        @break
-                    @endswitch
-                  </p>
+                  <p><b>@lang('order.table.status'):</b></p>
+                  <div class="row">
+                    <form action="{{ route('admin.orders.update', ['id' => $order->id]) }}" method="post">
+                      @csrf
+                      @method('PUT')
+                      <div class="col-xs-4">
+                        <div class="form-group">
+                          <select name="status" class="form-control">
+                            <option value="{{ \App\Models\Order::APPROVED_STATUS }}" {{ $order->status === \App\Models\Order::APPROVED_STATUS ? "selected": "" }}>@lang('order.status.approved')</option>
+                            <option value="{{ \App\Models\Order::DELIVERED_STATUS }}" {{ $order->status === \App\Models\Order::DELIVERED_STATUS ? "selected": "" }}>@lang('order.status.delivered')</option>
+                            <option value="{{ \App\Models\Order::DENIED_STATUS }}" {{ $order->status === \App\Models\Order::DENIED_STATUS ? "selected": "" }}>@lang('order.status.denied')</option>
+                            <option value="{{ \App\Models\Order::PENDING_STATUS }}" {{ $order->status === \App\Models\Order::PENDING_STATUS ? "selected": "" }}>@lang('order.status.pending')</option>
+                          </select>
+                          @if ($errors->has('status'))
+                            <span class="help-block">{{ $errors->first('status') }}</span>
+                          @endif
+                        </div>
+                      </div>
+                      <div class="col-xs-1">
+                        <button type="submit" class="btn btn-primary btn-sm">@lang('common.edit')</button>
+                      </div>
+                    </form>
+                    <div class="col-xs-12">
+                      @include('admin.module.message')
+                    </div>
+                  </div>
                   <a class="btn btn-warning btn-xs" href="{{ route('admin.orders.index') }}">@lang('common.back')</a>
                 </div>
               </div>
