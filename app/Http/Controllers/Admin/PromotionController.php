@@ -36,12 +36,13 @@ class PromotionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Promotion $promotion promotion
+     * @param int $id id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Promotion $promotion)
+    public function show($id)
     {
+        $promotion = $this->promotionService->getPromotionById($id);
         return view('admin.promotion.show', compact('promotion'));
     }
 }
