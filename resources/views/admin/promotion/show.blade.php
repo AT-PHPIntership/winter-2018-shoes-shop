@@ -41,7 +41,7 @@
                       </tr>
                       @foreach ($promotion->products as $product)
                         <tr>
-                          <td>{{ $product->id }}</td>
+                          <td>{{ $product->product_id }}</td>
                           <td>{{ $product->name }}</td>
                           <td>{{ $product->category->name }}</td>
                         </tr>  

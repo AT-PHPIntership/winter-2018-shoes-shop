@@ -15,7 +15,7 @@ class PromotionService
     {
         return Promotion::orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
-    
+
     /**
      * Get promotion by id
      *
@@ -25,6 +25,11 @@ class PromotionService
      */
     public function getPromotionById($id)
     {
-        return Promotion::with('products.category')->findOrFail($id);
+        return Promotion::with([
+        'products' => function ($query) {
+            $query->select('products.id as product_id','name','category_id');
+        },'products.category' => function ($query) {
+            $query->select('id', 'name');
+        }])->findOrFail($id);
     }
 }
