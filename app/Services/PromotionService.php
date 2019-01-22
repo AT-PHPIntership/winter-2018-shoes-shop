@@ -27,7 +27,7 @@ class PromotionService
     {
         return Promotion::with([
         'products' => function ($query) {
-            $query->select('products.id as product_id','name','category_id');
+            $query->select('products.id as product_id', 'name', 'category_id');
         },'products.category' => function ($query) {
             $query->select('id', 'name');
         }])->findOrFail($id);
