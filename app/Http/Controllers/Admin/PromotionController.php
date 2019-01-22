@@ -45,4 +45,14 @@ class PromotionController extends Controller
         $promotion = $this->promotionService->getPromotionById($id);
         return view('admin.promotion.show', compact('promotion'));
     }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function create()
+    {
+        return view('admin.promotion.create');
+    }
 }
