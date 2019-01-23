@@ -45,14 +45,4 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
-    
-    /**
-     * Product belong to promotion
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function promotions()
-    {
-        return $this->belongsToMany(Promotion::class, 'product_promotions', 'product_id', 'promotion_id');
-    }
 }
