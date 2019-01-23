@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box-top">
-            <a class="btn btn-success btn-md" href="#">{{ trans('common.new') }}</a>
+            <a class="btn btn-success btn-md" href="{{ route('admin.category.create')}}">{{ trans('common.new') }}</a>
           </div>
         </div>
         <div class="col-xs-12">
@@ -45,7 +45,7 @@
                         <a href="#" style="color: #fff;">{{ trans('common.edit') }}</a>
                       </button>
                       <button type="submit" class="btn btn-danger btn-xs">
-                        <a href="#" style="color: #fff;">{{ trans('common.edit') }}</a>
+                        <a href="#" style="color: #fff;">{{ trans('common.delete') }}</a>
                       </button>
                   </tr>
                 @endforeach
