@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Promotion;
+use DB;
+use Log;
 
 class PromotionService
 {
@@ -31,5 +33,29 @@ class PromotionService
         },'products.category' => function ($query) {
             $query->select('id', 'name');
         }])->findOrFail($id);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param array $data data
+     *
+     * @return Promotion
+     */
+    public function store(array $data)
+    {
+        DB::beginTransaction();
+        try {
+            $promotion = Promotion::create($data);
+            if (isset($data['product_id'])) {
+                $promotion->products()->attach($data['product_id']);
+            }
+            DB::commit();
+            return $promotion;
+        } catch (\Exception $e) {
+            Log::error($e);
+            DB::rollback();
+            return false;
+        }
     }
 }
