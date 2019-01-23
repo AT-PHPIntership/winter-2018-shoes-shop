@@ -15,6 +15,6 @@ class ProductService
      */
     public function getAll(array $columns = ['*'])
     {
-        return Product::select($columns)->get();
+        return Product::get($columns);
     }
 }

@@ -3,9 +3,8 @@
 namespace App\Services;
 
 use App\Models\Promotion;
-use App\Models\ProductPromotion;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use DB;
+use Log;
 
 class PromotionService
 {
@@ -16,16 +15,72 @@ class PromotionService
      */
     public function getPromotionWithPaginate()
     {
-        return Promotion::orderBy('id', config('define.orderBy.desc'))->paginate(config('define.paginate.limit_rows'));
+        return Promotion::orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+    }
+
+    /**
+     * Get promotion by id
+     *
+     * @param int $id id
+     *
+     * @return object
+     */
+    public function getPromotionById($id)
+    {
+        return Promotion::with([
+        'products' => function ($query) {
+            $query->select('products.id as product_id', 'name', 'category_id');
+        },'products.category' => function ($query) {
+            $query->select('id', 'name');
+        }])->findOrFail($id);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param array $data data
+     *
+     * @return Promotion
+     */
+    public function store(array $data)
+    {
+        DB::beginTransaction();
+        try {
+            $promotion = Promotion::create($data);
+            if (isset($data['product_id'])) {
+                $promotion->products()->attach($data['product_id']);
+            }
+            DB::commit();
+            return $promotion;
+        } catch (\Exception $e) {
+            Log::error($e);
+            DB::rollback();
+            return false;
+        }
+    }
+
+    /**
+     * Get promotion with products
+     *
+     * @param int $id id
+     *
+     * @return object
+     */
+    public function getPromotionWithProducts($id)
+    {
+        return Promotion::with([
+        'products' => function ($query) {
+            $query->select('products.id as product_id', 'name');
+        }])->findOrFail($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param array                $data      data
-     * @param App\Models\Promotion $promotion promotion
+     * @param array     $data      data
+     * @param Promotion $promotion promotion
      *
-     * @return \Illuminate\Http\Response
+     * @return Promotion
      */
     public function update(array $data, Promotion $promotion)
     {
@@ -37,9 +92,10 @@ class PromotionService
             }
             DB::commit();
             return $promotion;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
             DB::rollback();
+            return false;
         }
     }
 }

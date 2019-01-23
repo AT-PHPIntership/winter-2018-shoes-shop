@@ -14,16 +14,16 @@ if (! function_exists('isAdminLogin')) {
     }
 }
 
-if (! function_exists('convertToDateVN')) {
+if (! function_exists('formatDateVN')) {
     /**
-     * Function convertToDateVN convert date to date VN
+     * Function formatDateVN convert date to date VN
      *
      * @param string $date date
      *
      * @return string
      */
-    function convertToDateVN(string $date)
+    function formatDateVN(string $date)
     {
-        return date(config('define.date_vn'), strtotime($date));
+        return date(config('define.format_date_vn'), strtotime($date));
     }
 }
