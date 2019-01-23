@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Models\Promotion;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use DB;
+use Log;
 
 class PromotionService
 {
@@ -55,6 +55,7 @@ class PromotionService
         } catch (Exception $e) {
             Log::error($e);
             DB::rollback();
+            return false;
         }
     }
 }
