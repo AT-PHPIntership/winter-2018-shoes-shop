@@ -49,9 +49,11 @@
                       <td>{{ $product->total_sold }}</td>
                       <td>
                           <button class="btn btn-info btn-xs">
-                          <a href="{{ route('admin.product.show', $product->id)}}" style="color: #fff;">{{ trans('common.detail')}}</a>
+                            <a href="{{ route('admin.product.show', $product->id)}}" class="text-white">{{ trans('common.detail')}}</a>
                           </button>
-                          <button type="" class="btn btn-primary btn-xs">{{ trans('common.edit')}}</button>
+                          <button type="button" class="btn btn-primary btn-xs">
+                            <a href="{{ route('admin.product.edit', $product->id)}}" class="text-white">{{ trans('common.edit')}}</a>
+                          </button>
                           <button type="" class="btn btn-danger btn-xs">{{ trans('common.delete')}}</button>
                         </td>
                     </tr>

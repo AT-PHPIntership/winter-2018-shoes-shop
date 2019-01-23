@@ -69,9 +69,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = $this->categories->getChildren();
-        $sizes = $this->sizes->getSizes();
-        $colors = $this->colors->getColors();
-        return view('admin.product.create', compact('categories', 'sizes', 'colors'));
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -134,5 +132,34 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             throw $e;
         }
+    }
+
+    /**
+     * Show the form for editing the specified product.
+     *
+     * @param App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Product $product)
+    {
+        $sizes = $this->sizes->getSizes();
+        $colors = $this->colors->getColors();
+        $categories = $this->categories->getChildren();
+        return view('admin.product.edit', compact('product', 'categories', 'sizes', 'colors'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param PutProductRequest  $request request
+     * @param App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Product $product)
+    {
+        $data = $request->all();
+        dd($data);
     }
 }

@@ -33,7 +33,6 @@
 .padding-bot-20 {
     padding-bottom: 20px;
 }
-
 .padding-y-20 {
     padding: 20px 0;
 }
@@ -91,4 +90,7 @@
 .form-import {
   padding: 20px;
   background: #ecf0f5;
+}
+.text-white {
+  color: #fff;
 }
