@@ -48,7 +48,7 @@
                     <td>{{ formatDateVN($promotion->end_date) }}</td>
                     <td>
                       <a class="btn btn-info btn-xs" href="{{ route('admin.promotions.show', ['id' => $promotion->id]) }}">@lang('common.show')</a>
-                      <a class="btn btn-primary btn-xs" href="">@lang('common.edit')</a>                            
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.promotions.edit', ['id' => $promotion->id]) }}">@lang('common.edit')</a>                            
                       <form class="form-inline" action="" method="POST">
                         @csrf
                         @method('DELETE')

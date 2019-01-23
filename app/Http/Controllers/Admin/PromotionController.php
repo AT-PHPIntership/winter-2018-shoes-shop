@@ -72,4 +72,17 @@ class PromotionController extends Controller
         }
         return redirect()->route('admin.promotions.create')->with('error', trans('common.message.create_error'));
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(int $id)
+    {
+        $promotion = $this->promotionService->getPromotionWithProducts($id);
+        return view('admin.promotion.edit', compact('promotion'));
+    }
 }

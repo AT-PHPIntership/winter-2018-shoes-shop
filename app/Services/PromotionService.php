@@ -58,4 +58,19 @@ class PromotionService
             return false;
         }
     }
+
+    /**
+     * Get promotion with products
+     *
+     * @param int $id id
+     *
+     * @return object
+     */
+    public function getPromotionWithProducts($id)
+    {
+        return Promotion::with([
+        'products' => function ($query) {
+            $query->select('products.id as product_id', 'name');
+        }])->findOrFail($id);
+    }
 }
