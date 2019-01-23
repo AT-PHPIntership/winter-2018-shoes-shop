@@ -18,8 +18,9 @@
             <div class="box-header with-border">
               <h3 class="box-title">@lang('promotion.edit.title')</h3>
             </div>
-            <form method="POST" role="form" action="">
+            <form method="POST" role="form" action="{{ route('admin.promotions.update', ['id' => $promotion->id]) }}">
               @csrf
+              @method('PUT')
               <div class="box-body">
                 <div class="form-group">
                   <label for="promotion-ip-name">@lang('promotion.table.name') *</label>
@@ -44,7 +45,7 @@
                 </div>
                 <div class="form-group">
                   <label for="promotion-slt-product">@lang('promotion.table.product')</label>
-                  <select name="product_id" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')">
+                  <select name="product_id[]" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')">
                     @php
                       $productIds = [];
                       foreach ($promotion->products as $oldProduct) {
@@ -59,6 +60,7 @@
                     <span class="help-block">{{ $errors->first('product_id') }}</span>
                   @endif
                 </div>
+                
                 <div class="form-group">
                   <label for="promotion-ip-maxsell">@lang('promotion.table.max_sell') *</label>
                   <input type="number" name="max_sell" class="form-control" id="promotion-ip-maxsell" value="{{ $promotion->max_sell }}">

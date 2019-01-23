@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\PromotionService;
 use App\Models\Promotion;
+use App\Http\Requests\Admin\PutPromotionRequest;
 use App\Http\Requests\Admin\PostPromotionRequest;
 
 class PromotionController extends Controller
@@ -84,5 +85,22 @@ class PromotionController extends Controller
     {
         $promotion = $this->promotionService->getPromotionWithProducts($id);
         return view('admin.promotion.edit', compact('promotion'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param PutPromotionRequest $request   request
+     * @param Promotion           $promotion promotion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PutPromotionRequest $request, Promotion $promotion)
+    {
+        $data = $request->all();
+        if ($this->promotionService->update($data, $promotion)) {
+            return redirect()->route('admin.promotions.index')->with('success', trans('common.message.edit_success'));
+        }
+        return redirect()->route('admin.promotions.edit', ['id' => $promotion->id])->with('error', trans('common.message.edit_error'));
     }
 }

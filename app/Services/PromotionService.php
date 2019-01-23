@@ -73,4 +73,29 @@ class PromotionService
             $query->select('products.id as product_id', 'name');
         }])->findOrFail($id);
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param array     $data      data
+     * @param Promotion $promotion promotion
+     *
+     * @return Promotion
+     */
+    public function update(array $data, Promotion $promotion)
+    {
+        DB::beginTransaction();
+        try {
+            $promotion->update($data);
+            if (isset($data['product_id'])) {
+                $promotion->products()->sync($data['product_id']);
+            }
+            DB::commit();
+            return $promotion;
+        } catch (\Exception $e) {
+            Log::error($e);
+            DB::rollback();
+            return false;
+        }
+    }
 }
