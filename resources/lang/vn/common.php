@@ -1,5 +1,4 @@
 <?php
-
 return [
     'new' => 'Thêm mới',
     'edit' => 'Sửa',
@@ -28,5 +27,5 @@ return [
         'upload_success' => 'Thêm file thành công!',
         'request_upload' => 'Vui lòng chọn file!',
         'file_error' => 'Dữ liệu nhập vào không đúng tại dòng :line, vui lòng kiểm tra lại!',
-    ],
+    ]
 ];

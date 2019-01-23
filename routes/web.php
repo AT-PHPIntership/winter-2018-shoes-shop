@@ -19,11 +19,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Auth::routes();
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'HomeController@index')->name('index');
+        Route::post('category/search', [
+            'as' => 'category.search',
+            'uses' => 'CategoryController@searchData'
+        ]);
         Route::resource('users', 'UserController');
         Route::resource('category', 'CategoryController');
         Route::get('product/detail', 'ProductController@getDetail');
         Route::get('product/import', 'ProductController@importFile')->name('product.import');
         Route::post('product/import/process', 'ProductController@processImport')->name('product.import.process');
         Route::resource('product', 'ProductController');
+        Route::resource('codes', 'CodeController')->except(['show']);
     });
 });
