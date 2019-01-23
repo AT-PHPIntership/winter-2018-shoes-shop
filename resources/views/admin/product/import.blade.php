@@ -8,7 +8,10 @@
     </section>
     <!-- Main content -->
     <section class="content">
-      <div class="row"> 
+      <div class="row">
+        <div class="col-xs-12">
+          @include('admin.module.message')
+        </div> 
         <div class="col-xs-12">
           <!-- ./product info box -->
           <div class="box box-primary">

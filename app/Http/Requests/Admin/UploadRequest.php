@@ -36,8 +36,8 @@ class UploadRequest extends FormRequest
     public function messages()
     {
         return [
-            'csv_file.required' => trans('common.request_upload'),
-            'csv_file.file' => trans('common.request_upload'),
+            'csv_file.required' => trans('common.message.request_upload'),
+            'csv_file.file' => trans('common.message.request_upload'),
         ];
     }
 }

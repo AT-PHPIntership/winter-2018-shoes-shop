@@ -105,11 +105,11 @@ class ProductController extends Controller
     }
 
     /**
-     * import file csv including products data.
+     * Import csv file including products data.
      *
      * @return \Illuminate\Http\Response
      */
-    public function importFile(Request $request)
+    public function importFile()
     {
         return view('admin.product.import');
     }
@@ -117,7 +117,7 @@ class ProductController extends Controller
     /**
      * Handle process import file csv including products data.
      *
-     * @param \Illuminate\Http\Request $request file csv from view
+     * @param \app\Http\Request\UploadRequest $request file csv from view
      *
      * @return \Illuminate\Http\Response
      */
@@ -126,8 +126,11 @@ class ProductController extends Controller
         try {
             $path = $request->file('csv_file')->getRealPath();
             $data = Excel::load($path)->get();
-            $this->products->importData($data);
-            return redirect()->route('admin.product.index');
+            if ($this->products->importData($data)) {
+                session()->flash('success', trans('common.message.upload_success'));
+                return redirect()->route('admin.product.index');
+            }
+            return redirect()->route('admin.product.import');
         } catch (\Exception $e) {
             throw $e;
         }
