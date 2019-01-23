@@ -19,7 +19,8 @@ class CategoryService
                     ->get();
         return $children;
     }
-    /* Get all data table categories
+    /**
+     * Get all data table categories
      *
      * @param array $columns columns
      *
