@@ -20,7 +20,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'HomeController@index')->name('index');
         Route::resource('product', 'ProductController');
-        Route::get('index', 'HomeController@index')->name('index');
         Route::post('category/search', [
             'as' => 'category.search',
             'uses' => 'CategoryController@searchData'
