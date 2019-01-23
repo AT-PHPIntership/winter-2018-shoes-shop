@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Promotion extends Model
+class Code extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,16 +12,16 @@ class Promotion extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'percent', 'description', 'max_sell', 'total_sold', 'start_date', 'end_date',
+        'category_id', 'name', 'percent', 'description', 'times', 'start_date', 'end_date',
     ];
 
     /**
-     * Promotion belong to product
+     * Code belong to category
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function products()
+    public function category()
     {
-        return $this->belongsToMany(Product::class, 'product_promotions');
+        return $this->belongsTo(Category::class);
     }
 }
