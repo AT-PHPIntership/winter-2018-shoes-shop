@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Auth::routes();
     Route::middleware(['auth', 'admin'])->group(function () {
-        Route::get('index', 'HomeController@index')->name('index');
+        Route::get('index', 'IndexController@index')->name('index');
         Route::post('category/search', [
             'as' => 'category.search',
             'uses' => 'CategoryController@searchData'
