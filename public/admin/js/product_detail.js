@@ -31,11 +31,11 @@ $(document).ready(function(){
         output += '<div class="col-xs-4">';
         output += color;
         output += '</div>';
-        output += '<div class="col-xs-4">';
+        output += '<div class="col-xs-3">';
         output += size;
         output += '</div>';
-        output += '<div class="col-xs-3">';
-        output += '<input name="quantity_type[]" type="quantity_type" class="form-control" placeholder="Số lượng">';
+        output += '<div class="col-xs-4">';
+        output += '<input name="quantity_type[]" type="number" class="form-control" placeholder="Số lượng">';
         output += '</div>';
         output += '<div class="col-xs-1">';
         output += '<button type="button" class="js-btn-remove btn"> x </button>';

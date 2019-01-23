@@ -9,6 +9,7 @@ use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
+use App\Http\Requests\Admin\PutProductRequest;
 
 class ProductController extends Controller
 {
@@ -79,7 +80,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PutProductRequest $request)
     {
         $data = $request->all();
         if ($this->products->storeProduct($data)) {
@@ -97,10 +98,8 @@ class ProductController extends Controller
      */
     public function getDetail()
     {
-         $color = $this->colors->getColors();
-         $size = $this->sizes->getSizes();
-
-         $tt = response()->json(['color' => $color, 'size' => $size]);
-         return response()->json(['color' => $color, 'size' => $size]);
+        $color = $this->colors->getColors();
+        $size = $this->sizes->getSizes();
+        return response()->json(['color' => $color, 'size' => $size]);
     }
 }

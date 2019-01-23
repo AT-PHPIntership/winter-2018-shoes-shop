@@ -53,12 +53,14 @@ class ProductService
     public function storeProduct($data)
     {
         $quantity = 0;
-        foreach ($data['quantity_type'] as $item_quantity) {
-            $quantity = $quantity + $item_quantity;
+        if (isset($data['quantity_type'])) {
+            foreach ($data['quantity_type'] as $itemQuantity) {
+                $quantity = $quantity + $itemQuantity;
+            }
         }
         DB::beginTransaction();
         try {
-            $new_product = Product::create([
+            $newProduct = Product::create([
                 'name' => $data['name'],
                 'category_id' => $data['category_id'],
                 'original_price' => $data['original_price'],
@@ -66,21 +68,29 @@ class ProductService
                 'description' => $data['description'],
             ]);
             for ($i=0; $i < count($data['color_id']); $i++) {
-                ProductDetail::create([
-                    'product_id' => $new_product->id,
-                    'color_id' => $data['color_id'][$i],
-                    'size_id' => $data['size_id'][$i],
-                    'quantity' => $data['quantity_type'][$i],
-                ]);
+                $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
+                if ($productDetail) {
+                    $productDetail->quantity += $data['quantity_type'][$i];
+                    $productDetail->save();
+                } else {
+                    ProductDetail::create([
+                        'product_id' => $newProduct->id,
+                        'color_id' => $data['color_id'][$i],
+                        'size_id' => $data['size_id'][$i],
+                        'quantity' => $data['quantity_type'][$i],
+                    ]);
+                }
             }
-            foreach ($data['upload_file'] as $key => $image) {
-                Image::create([
-                    'product_id' => $new_product->id,
-                    'path' => $this->uploadImage($image)
-                ]);
+            if (isset($data['upload_file'])) {
+                foreach ($data['upload_file'] as $image) {
+                    Image::create([
+                        'product_id' => $newProduct->id,
+                        'path' => $this->uploadImage($image)
+                    ]);
+                }
             }
             DB::commit();
-            return $new_product;
+            return $newProduct;
         } catch (Exception $e) {
             Log::error($e);
             DB::rollback();
@@ -99,5 +109,23 @@ class ProductService
         $fileName = time().'-'.$image->getClientOriginalName();
         $image->move('upload', $fileName);
         return $fileName;
+    }
+
+    /**
+     * Check if product detail is exist
+     *
+     * @param int $productId product detail
+     * @param int $colorId   product detail
+     * @param int $sizeId    product detail
+     *
+     * @return boolean
+     */
+    public function checkDetailExist($productId, $colorId, $sizeId)
+    {
+        $productDetail = ProductDetail::where('product_id', $productId)
+                    ->where('color_id', $colorId)
+                    ->where('size_id', $sizeId)
+                    ->first();
+        return $productDetail;
     }
 }

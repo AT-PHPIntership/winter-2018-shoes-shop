@@ -26,6 +26,9 @@
                       <div class="form-group">
                         <label for="name">Tên sản phẩm</label>
                         <input type="text" class="form-control" name="name">
+                        @if ($errors->has('name'))
+                          <span class="help-block">{{ $errors->first('name') }}</span>
+                        @endif
                       </div>
                       <div class="form-group">
                         <label>Danh mục</label>
@@ -34,10 +37,16 @@
                             <option value={{$category->id}}>{{$category->name}}</option>
                           @endforeach
                         </select>
+                        @if ($errors->has('category_id'))
+                          <span class="help-block">{{ $errors->first('category_id') }}</span>
+                        @endif
                       </div>
                       <div class="form-group">
-                        <label for="price">Giá sản phẩm</label>
+                        <label for="original_price">Giá sản phẩm</label>
                         <input type="text" class="form-control" name="original_price">
+                        @if ($errors->has('original_price'))
+                          <span class="help-block">{{ $errors->first('original_price') }}</span>
+                        @endif
                       </div>
                       <div class="form-group">
                         <label>Mô tả</label>
@@ -52,6 +61,15 @@
                         <button type="button" id="add-detail" class="btn btn-success"> + </button>
                         <ul class="detail-menu list-unstyled" id="show-detail">                          
                         </ul>
+                        @if ($errors->has('color_id'))
+                          <span class="help-block">{{ $errors->first('color_id') }}</span>
+                        @endif
+                        @if ($errors->has('size_id'))
+                          <span class="help-block">{{ $errors->first('size_id') }}</span>
+                        @endif
+                        @if ($errors->has('quantity_type'))
+                          <span class="help-block">{{ $errors->first('quantity_type') }}</span>
+                        @endif
                       </div>
                     </div>
                     <br>
