@@ -52,7 +52,7 @@ class PromotionService
             }
             DB::commit();
             return $promotion;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
             DB::rollback();
             return false;

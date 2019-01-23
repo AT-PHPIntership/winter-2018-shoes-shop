@@ -45,7 +45,7 @@
                 <div class="form-group">
                   <label for="promotion-slt-product">@lang('promotion.table.product')</label>
                   <select class="form-control select2" name="product_id[]" multiple="multiple" data-placeholder="@lang('promotion.select')">
-                    @foreach ($products as $key => $product)
+                    @foreach ($products as $product)
                       <option value="{{ $product->id }}" {{ (collect(old('product_id'))->contains($product->id)) ? 'selected' : '' }}>{{ $product->name }}</option>
                     @endforeach
                   </select>
