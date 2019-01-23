@@ -57,13 +57,14 @@
           </div>
         </div>
       </div>
+      <h4>@lang('statistical.revenue.title')</h4>
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">Hôm nay</span>
-              <span class="info-box-number">1,410</span>
+              <span class="info-box-text">@lang('statistical.revenue.thisDay')</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisDay'] }}đ</span>
             </div>
           </div>
         </div>
@@ -71,8 +72,8 @@
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">Hôm nay</span>
-              <span class="info-box-number">1,410</span>
+              <span class="info-box-text">@lang('statistical.revenue.thisWeek')</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisWeek'] }}đ</span>
             </div>
           </div>
         </div>
@@ -80,8 +81,8 @@
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">Hôm nay</span>
-              <span class="info-box-number">1,410</span>
+              <span class="info-box-text">@lang('statistical.revenue.thisMonth')</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisMonth'] }}đ</span>
             </div>
           </div>
         </div>
@@ -89,8 +90,8 @@
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">Hôm nay</span>
-              <span class="info-box-number">1,410</span>
+              <span class="info-box-text">@lang('statistical.revenue.thisYear')</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisYear'] }}đ</span>
             </div>
           </div>
         </div>

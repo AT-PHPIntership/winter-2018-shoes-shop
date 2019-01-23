@@ -16,7 +16,7 @@ class IndexController extends Controller
     public function index()
     {
         $arrTotal = app(StatisticalService::class)->getTotal();
-        // $revenue = app(StatisticalService::class)->getRevenue();
-        return view('admin.index', compact('arrTotal'));
+        $arrRevenue = app(StatisticalService::class)->getRevenue();
+        return view('admin.index', compact(['arrTotal', 'arrRevenue']));
     }
 }
