@@ -14,15 +14,6 @@ use Illuminate\Support\Facades\Log;
 class ProductService
 {
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'category_id', 'original_price', 'quantity', 'description'
-    ];
-
-    /**
      * Get products list form database
      *
      * @return \Illuminate\Http\Response
@@ -56,12 +47,12 @@ class ProductService
     public function storeProduct($data)
     {
         $quantity = 0;
-        foreach ($data['quantity_type'] as $item_quantity) {
-            $quantity = $quantity + $item_quantity;
+        foreach ($data['quantity_type'] as $itemQuantity) {
+            $quantity = $quantity + $itemQuantity;
         }
         DB::beginTransaction();
         try {
-            $new_product = Product::create([
+            $newProduct = Product::create([
                 'name' => $data['name'],
                 'category_id' => $data['category_id'],
                 'original_price' => $data['original_price'],
@@ -70,20 +61,20 @@ class ProductService
             ]);
             for ($i=0; $i < count($data['color_id']); $i++) {
                 ProductDetail::create([
-                    'product_id' => $new_product->id,
+                    'product_id' => $newProduct->id,
                     'color_id' => $data['color_id'][$i],
                     'size_id' => $data['size_id'][$i],
                     'quantity' => $data['quantity_type'][$i],
                 ]);
             }
-            foreach ($data['upload_file'] as $key => $image) {
+            foreach ($data['upload_file'] as $image) {
                 Image::create([
-                    'product_id' => $new_product->id,
+                    'product_id' => $newProduct->id,
                     'path' => $this->uploadImage($image)
                 ]);
             }
             DB::commit();
-            return $new_product;
+            return $newProduct;
         } catch (Exception $e) {
             Log::error($e);
             DB::rollback();
@@ -114,21 +105,21 @@ class ProductService
     public function importData($data)
     {
         foreach ($data as $key => $value) {
-            $category_id = $this->getCategoryByName($value->category);
-            $size_id = $this->getSizeByName($value->size);
-            $color_id = $this->getColorByName($value->color);
-            if ((!$category_id) || (!$size_id) || (!$color_id)) {
+            $categoryId = $this->getCategoryByName($value->category);
+            $sizeId = $this->getSizeByName($value->size);
+            $colorId = $this->getColorByName($value->color);
+            if ((!$categoryId) || (!$sizeId) || (!$colorId)) {
                 session()->flash('error', trans('common.message.file_error', ['line' => $key + 2]));
                 return false;
             }
         }
         foreach ($data as $key => $value) {
-            $category_id = $this->getCategoryByName($value->category);
-            $size_id = $this->getSizeByName($value->size);
-            $color_id = $this->getColorByName($value->color);
+            $categoryId = $this->getCategoryByName($value->category);
+            $sizeId = $this->getSizeByName($value->size);
+            $colorId = $this->getColorByName($value->color);
             $checkName = $this->checkNameExist($value->name);
             if ($checkName) {
-                $product = $this->checkInfoCorrect($value->name, $category_id, $value->original_price, $value->description);
+                $product = $this->checkInfoCorrect($value->name, $categoryId, $value->original_price, $value->description);
                 if (!$product) {
                     session()->flash('error', trans('common.message.file_error', ['line' => $key + 2]));
                     return false;
@@ -137,15 +128,15 @@ class ProductService
                         $product->quantity += $value->quantity;
                         $product->save();
                     try {
-                        $productDetail = $this->checkDetailExist($product->id, $color_id, $size_id);
+                        $productDetail = $this->checkDetailExist($product->id, $colorId, $sizeId);
                         if ($productDetail) {
                             $productDetail->quantity += $value->quantity;
                             $productDetail->save();
                         } else {
                             ProductDetail::create([
                                 'product_id' => $product->id,
-                                'color_id' => $color_id,
-                                'size_id' => $size_id,
+                                'color_id' => $colorId,
+                                'size_id' => $sizeId,
                                 'quantity' => $value->quantity,
                             ]);
                         }
@@ -158,15 +149,15 @@ class ProductService
                 try {
                     $product = Product::create([
                         'name' => $value->name,
-                        'category_id' => $category_id,
+                        'category_id' => $categoryId,
                         'original_price' => $value->original_price,
                         'quantity' => $value->quantity,
                         'description' => $value->description,
                     ]);
                     ProductDetail::create([
                         'product_id' => $product->id,
-                        'color_id' => $color_id,
-                        'size_id' => $size_id,
+                        'color_id' => $colorId,
+                        'size_id' => $sizeId,
                         'quantity' => $value->quantity,
                     ]);
                 } catch (Exception $e) {
@@ -194,18 +185,18 @@ class ProductService
     /**
      * Check if product information are correct
      *
-     * @param string $name           product
-     * @param int    $category_id    product
-     * @param string $original_price product
-     * @param string $description    product
+     * @param string $name        product
+     * @param int    $categoryId  product
+     * @param string $price       product
+     * @param string $description product
      *
      * @return boolean
      */
-    public function checkInfoCorrect($name, $category_id, $original_price, $description)
+    public function checkInfoCorrect($name, $categoryId, $price, $description)
     {
         $product = Product::where('name', $name)
-                    ->where('category_id', $category_id)
-                    ->where('original_price', $original_price)
+                    ->where('category_id', $categoryId)
+                    ->where('original_price', $price)
                     ->where('description', $description)
                     ->first();
         return $product;
@@ -214,17 +205,17 @@ class ProductService
     /**
      * Check if product detail is exist
      *
-     * @param int $product_id product detail
-     * @param int $color_id   product detail
-     * @param int $size_id    product detail
+     * @param int $productId product detail
+     * @param int $colorId   product detail
+     * @param int $sizeId    product detail
      *
      * @return boolean
      */
-    public function checkDetailExist($product_id, $color_id, $size_id)
+    public function checkDetailExist($productId, $colorId, $sizeId)
     {
-        $productDetail = ProductDetail::where('product_id', $product_id)
-                    ->where('color_id', $color_id)
-                    ->where('size_id', $size_id)
+        $productDetail = ProductDetail::where('product_id', $productId)
+                    ->where('color_id', $colorId)
+                    ->where('size_id', $sizeId)
                     ->first();
         return $productDetail;
     }
