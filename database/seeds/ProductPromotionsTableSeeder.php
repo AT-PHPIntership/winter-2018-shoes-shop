@@ -14,12 +14,12 @@ class ProductPromotionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $product_ids = Product::all('id');
-        $promotion_ids = Promotion::all('id');
-        for($i = 0; $i < 5; $i++){
+        $productIds = Product::all('id');
+        $promotionIds = Promotion::all('id');
+        for($i = 0; $i < 10; $i++){
             factory(ProductPromotion::class)->create([
-                'product_id' => $product_ids->random(),
-                'promotion_id' => $promotion_ids->random(),
+                'product_id' => $productIds->random(),
+                'promotion_id' => $promotionIds->random(),
             ]);
         }
     }

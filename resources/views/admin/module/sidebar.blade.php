@@ -24,8 +24,8 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.list')</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.add')</a></li>
+                <li class="active"><a href="{{ route('admin.category.index')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.list')</a></li>
+                <li><a href="{{ route('admin.category.create')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.category.add')</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -67,6 +67,18 @@
             <ul class="treeview-menu">
                 <li class="active"><a href="{{ route('admin.promotions.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.promotion.list')</a></li>
                 <li><a href="{{ route('admin.promotions.create') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.promotion.add')</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-codepen"></i> <span>@lang('admin.sidebar.code.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.codes.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.list')</a></li>
+                <li><a href="{{ route('admin.codes.create') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.add')</a></li>
             </ul>
         </li>
       </ul>
