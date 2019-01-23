@@ -40,7 +40,7 @@ class PromotionService
      *
      * @param array $data data
      *
-     * @return object
+     * @return Promotion
      */
     public function store(array $data)
     {
