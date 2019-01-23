@@ -76,12 +76,13 @@ class PromotionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Promotion $promotion promotion
+     * @param int $id id
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Promotion $promotion)
+    public function edit(int $id)
     {
+        $promotion = $this->promotionService->getPromotionWithProducts($id);
         return view('admin.promotion.edit', compact('promotion'));
     }
 }

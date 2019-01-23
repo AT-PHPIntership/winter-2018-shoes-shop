@@ -48,7 +48,7 @@
                     @php
                       $productIds = [];
                       foreach ($promotion->products as $oldProduct) {
-                        $productIds[] = $oldProduct->id;
+                        $productIds[] = $oldProduct->product_id;
                       }
                     @endphp
                     @foreach ($products as $product)
