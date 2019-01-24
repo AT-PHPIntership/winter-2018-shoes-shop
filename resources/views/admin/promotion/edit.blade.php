@@ -43,14 +43,6 @@
                     <span class="help-block">{{ $errors->first('description') }}</span>
                   @endif
                 </div>
-                @if (!$promotion->products->isEmpty())
-                  @foreach ($promotion->products as $item)
-                    @php
-                      $selected[] = $item->id;
-                    @endphp
-                  @endforeach
-                @endif
-                <span id="data-selected" data-selected='{{ isset($selected) ? json_encode($selected) : '' }}'></span>
                 <div class="form-group">
                   <label for="promotion-slt-product">@lang('promotion.table.product')</label>
                   <select name="product_id[]" class="form-control select2" multiple="multiple" data-placeholder="@lang('promotion.select')">
