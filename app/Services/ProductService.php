@@ -27,6 +27,13 @@ class ProductService
      */
     public function getProductById($id)
     {
-        return Product::findOrFail($id);
+        $product = Product::with([
+            'images:product_id,path',
+            'category:id,name',
+            'productDetails' => function ($query) {
+                $query->with(['size:id,size', 'color:id,name']);
+            }
+            ])->findOrFail($id);
+        return $product;
     }
 }
