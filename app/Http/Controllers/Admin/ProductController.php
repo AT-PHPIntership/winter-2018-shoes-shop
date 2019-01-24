@@ -161,7 +161,11 @@ class ProductController extends Controller
     public function update(PutProductRequest $request, Product $product)
     {
         $data = $request->all();
-        dd($data);
-        dd($product);
+        if ($this->products->updateProduct($data, $product)) {
+            session()->flash('success', trans('common.message.edit_success'));
+            return redirect()->route('admin.product.index');
+        }
+        session()->flash('error', trans('common.message.edit_error'));
+        return redirect()->route('admin.product.edit', $product->id);
     }
 }

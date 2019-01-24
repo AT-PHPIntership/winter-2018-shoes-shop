@@ -265,4 +265,71 @@ class ProductService
         }
         return false;
     }
+
+    /**
+     * Update specified product
+     *
+     * @param array              $data    product
+     * @param App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProduct(array $data, Product $product)
+    {
+        $checkDetail = isset($data['quantity_type']);
+        DB::beginTransaction();
+        try {
+            if ($checkDetail) {
+                $quantity = 0;
+                foreach ($data['quantity_type'] as $itemQuantity) {
+                    $quantity = $quantity + $itemQuantity;
+                }
+                $product->update([
+                    'name' => $data['name'],
+                    'category_id' => $data['category_id'],
+                    'original_price' => $data['original_price'],
+                    'quantity' => $quantity,
+                    'description' => $data['description'],
+                ]);
+                DB::table('product_details')->where('product_id', $product->id)->delete();
+                for ($i=0; $i < count($data['color_id']); $i++) {
+                    $productDetail = $this->checkDetailExist($product->id, $data['color_id'][$i], $data['size_id'][$i]);
+                    if ($productDetail) {
+                        $productDetail->quantity += $data['quantity_type'][$i];
+                        $productDetail->save();
+                    } else {
+                        ProductDetail::create([
+                            'product_id' => $product->id,
+                            'color_id' => $data['color_id'][$i],
+                            'size_id' => $data['size_id'][$i],
+                            'quantity' => $data['quantity_type'][$i],
+                        ]);
+                    }
+                }
+            } else {
+                $product->update([
+                    'name' => $data['name'],
+                    'category_id' => $data['category_id'],
+                    'original_price' => $data['original_price'],
+                    'quantity' => 0,
+                    'description' => $data['description'],
+                ]);
+                DB::table('product_details')->where('product_id', $product->id)->delete();
+            }
+            if (isset($data['upload_file'])) {
+                DB::table('images')->where('product_id', $product->id)->delete();
+                foreach ($data['upload_file'] as $image) {
+                    Image::create([
+                        'product_id' => $product->id,
+                        'path' => $this->uploadImage($image)
+                    ]);
+                }
+            }
+            DB::commit();
+            return $product;
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollback();
+        }
+    }
 }
