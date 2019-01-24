@@ -103,4 +103,19 @@ class PromotionController extends Controller
         }
         return redirect()->route('admin.promotions.edit', ['id' => $promotion->id])->with('error', trans('common.message.edit_error'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Promotion $promotion promotion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Promotion $promotion)
+    {
+        if ($this->promotionService->destroy($promotion)) {
+            return redirect()->route('admin.promotions.index')->with('success', trans('common.message.delete_success'));
+        }
+        return redirect()->route('admin.promotions.index')->with('error', trans('common.message.delete_error'));
+    }
 }

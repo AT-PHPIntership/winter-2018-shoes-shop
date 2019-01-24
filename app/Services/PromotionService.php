@@ -98,4 +98,21 @@ class PromotionService
             return false;
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Promotion $promotion promotion
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Promotion $promotion)
+    {
+        try {
+            return $promotion->delete();
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return false;
+    }
 }
