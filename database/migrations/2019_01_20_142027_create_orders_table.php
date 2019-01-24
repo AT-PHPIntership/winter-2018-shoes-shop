@@ -19,12 +19,12 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('code_id')->nullable();
             $table->foreign('code_id')->references('id')->on('codes');
-            $table->date('delivered_at');
-            $table->string('buyer_name')->nullable();
+            $table->date('delivered_at')->nullable();
+            $table->string('customer_name')->nullable();
             $table->string('shipping_address')->nullable();
             $table->string('phone_number')->length(10)->nullable();
-            $table->integer('amount');
-            $table->integer('status')->length(1)->default(0);
+            $table->decimal('total_amount');
+            $table->tinyInteger('status')->length(1)->default(0);
             $table->timestamps();
         });
     }
