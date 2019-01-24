@@ -19,7 +19,7 @@ class OrdersTableSeeder extends Seeder
         for($i = 0; $i < 10; $i++){
             factory(Order::class)->create([
                 'user_id' => $userIds->random(),
-                'code_id' => $codeIds->random(),
+                'code_id' => array_random([null, $codeIds->random()])
             ]);
         }
     }

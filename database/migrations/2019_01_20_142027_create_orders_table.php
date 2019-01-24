@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('ship_to')->nullable();
             $table->string('phone_to')->length(10)->nullable();
             $table->integer('price');
-            $table->integer('status')->default(0);
+            $table->integer('status')->length(1)->default(0);
             $table->timestamps();
         });
     }
