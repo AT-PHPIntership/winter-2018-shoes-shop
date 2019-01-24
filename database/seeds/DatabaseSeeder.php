@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(ProfilesTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
-        $this->call(CodesTableSeeder::class);
         $this->call(SizesTableSeeder::class);
         $this->call(ColorsTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
         $this->call(ProductDetailsTableSeeder::class);
         $this->call(ImagesTableSeeder::class);
+        $this->call(PromotionsTableSeeder::class);
+        $this->call(ProductPromotionsTableSeeder::class);
+        $this->call(CodesTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
