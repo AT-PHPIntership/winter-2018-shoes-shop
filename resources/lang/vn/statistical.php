@@ -13,4 +13,11 @@ return [
         'thisMonth' => 'Tháng này',
         'thisYear' => 'Năm này',
     ],
+    'top_sell' => [
+        'title' => 'Sản phẩm bán chạy',
+        'thisDay' => 'Hôm nay',
+        'thisWeek' => 'Tuần này',
+        'thisMonth' => 'Tháng này',
+        'thisYear' => 'Năm này',
+    ],
 ];
