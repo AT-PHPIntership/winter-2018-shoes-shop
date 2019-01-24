@@ -1,5 +1,6 @@
 @extends('admin.module.master')
 @section('content')
+{{-- @dd($product->description) --}}
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -46,7 +47,20 @@
                       </div>
                       <div class="form-group">
                         <label>Mô tả</label>
-                        <textarea name="description" class="form-control" rows="3" value="{{ $product->description }}"></textarea>
+                        <textarea name="description" class="form-control" rows="3">{{ $product->description }}</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Hình ảnh sản phẩm</label>
+                        <ul class="product-menu">
+                          @foreach($product->images as $key => $image)
+                            <li class="product-item"><img src="{{ $image->path }}" class="product-img" alt="Product image"></li>
+                          @endforeach
+                        </ul>
+                        <div class="product-images">
+                          <div id="image_preview"></div>
+                          <input type="file" id="upload_file" name="upload_file[]"
+                           accept="image/gif, image/jpg, image/jpeg, image/png" onchange="preview_image();" multiple/>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -73,7 +87,7 @@
                                 </select>
                               </div>
                               <div class="col-xs-3">
-                                <input name="quantity_type[]" type="quantity_type" class="form-control" placeholder="Số lượng">
+                                <input name="quantity_type[]" value="{{ $detail->quantity}}" type="quantity_type" class="form-control" placeholder="Số lượng">
                               </div>
                               <div class="col-xs-1">
                                 <button type="button" class="js-btn-remove btn"> x </button>
@@ -84,20 +98,6 @@
                       </div>
                     </div>
                     <br>
-                    <br>
-                    <div class="product-images">
-                      <label>Hình ảnh sản phẩm</label>
-                      <ul class="product-menu">
-                        @foreach($product->images as $key => $image)
-                          <li class="product-item"><img src="{{ $image->path }}" class="product-img" alt="Product image"></li>
-                        @endforeach
-                      </ul>
-                      <div class="form-group">
-                        <div id="image_preview"></div>
-                        <input type="file" id="upload_file" name="upload_file[]"
-                         accept="image/gif, image/jpg, image/jpeg, image/png" onchange="preview_image();" multiple/>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
