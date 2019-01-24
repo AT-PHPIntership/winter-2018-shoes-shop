@@ -9,7 +9,7 @@ use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
-use App\Http\Requests\Admin\PutProductRequest;
+use App\Http\Requests\Admin\PostProductRequest;
 
 class ProductController extends Controller
 {

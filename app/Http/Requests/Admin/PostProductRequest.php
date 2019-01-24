@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PutProductRequest extends FormRequest
+class PostProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,8 +35,8 @@ class PutProductRequest extends FormRequest
             'name' => 'required|unique:products,name',
             'category_id' => 'exists:categories,id|nullable',
             'original_price' => 'required|numeric',
-            'color_id.*' => 'exists:colors,id',
-            'size_id.*' => 'exists:colors,id',
+            'color_id' => 'exists:colors,id',
+            'size_id' => 'exists:sizes,id',
             'quantity_type.*' => 'required|numeric',
         ];
     }
