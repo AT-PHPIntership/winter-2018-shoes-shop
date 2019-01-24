@@ -7,22 +7,22 @@ use App\Models\Order;
 class OrderService
 {
     /**
-     * Get all data table codes
+     * Get all data table order
      *
      * @return object
      */
     public function getOrderWithPaginate()
     {
-        return Order::with(['user', 'code'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+        return Order::with(['code:id,name', 'user:id', 'user.profile:user_id,name'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param array            $data  data
-     * @param App\Models\Order $order order
+     * @param array $data  data
+     * @param Order $order order
      *
-     * @return \Illuminate\Http\Response
+     * @return Order
      */
     public function update(array $data, Order $order)
     {
@@ -31,6 +31,7 @@ class OrderService
             return $order;
         } catch (\Exception $e) {
             Log::error($e);
+            return false;
         }
     }
 }

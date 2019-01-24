@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Order;
 
-class PutOrderRequest extends FormRequest
+class PutPromotionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +24,12 @@ class PutOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'in:'.Order::CONFIRMED_STATUS.','.Order::PROCESSING_STATUS.','.Order::QUALITY_CHECK_STATUS.','.Order::DISPATCHED_ITEM_STATUS.','.Order::DELIVERED_STATUS.','.Order::CANCELED_STATUS.','.Order::PENDING_STATUS.'',
+            'name' => 'required|unique:promotions,name,'.$this->promotion->id,
+            'product_id' => 'exists:products,id',
+            'percent' => 'required|numeric|min:1|max:100',
+            'max_sell' => 'required|numeric',
+            'start_date' => 'required|date|after:yesterday',
+            'end_date' => 'required|date|after:start_date',
         ];
     }
 }

@@ -9,20 +9,6 @@ use App\Http\Requests\Admin\PutOrderRequest;
 
 class OrderController extends Controller
 {
-    protected $orderService;
-
-    /**
-    * Contructer
-    *
-    * @param App\Service\OrderService $orderService orderService
-    *
-    * @return void
-    */
-    public function __construct(OrderService $orderService)
-    {
-        $this->orderService = $orderService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = $this->orderService->getOrderWithPaginate();
+        $orders = app(OrderService::class)->getOrderWithPaginate();
         return view('admin.order.list', compact('orders'));
     }
 
@@ -57,7 +43,7 @@ class OrderController extends Controller
     public function update(PutOrderRequest $request, Order $order)
     {
         $data = $request->all();
-        if ($this->orderService->update($data, $order)) {
+        if (app(OrderService::class)->update($data, $order)) {
             return redirect()->route('admin.orders.show', ['id' => $order->id])->with('success', trans('common.message.edit_success'));
         }
         return redirect()->route('admin.orders.show', ['id' => $order->id])->with('error', trans('common.message.edit_error'));
