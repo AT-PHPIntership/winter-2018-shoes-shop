@@ -18,8 +18,8 @@ class OrdersTableSeeder extends Seeder
         $userIds = User::all('id');
         for($i = 0; $i < 10; $i++){
             factory(Order::class)->create([
-                'user_id' => $userIds->random(),
-                'code_id' => array_random([null, $codeIds->random()])
+                'user_id' => array_random([null, $userIds->random()]),
+                'code_id' => array_random([null, $codeIds->random()]),
             ]);
         }
     }
