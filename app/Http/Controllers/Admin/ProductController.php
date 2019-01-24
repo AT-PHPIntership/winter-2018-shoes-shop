@@ -10,6 +10,7 @@ use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
 use App\Http\Requests\Admin\UploadRequest;
+use App\Http\Requests\Admin\PutProductRequest;
 use Excel;
 
 class ProductController extends Controller
@@ -157,9 +158,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(PutProductRequest $request, Product $product)
     {
         $data = $request->all();
         dd($data);
+        dd($product);
     }
 }

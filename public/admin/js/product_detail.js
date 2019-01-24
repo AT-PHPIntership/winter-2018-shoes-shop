@@ -1,13 +1,15 @@
 //Display choosen images
 function preview_image() 
 {
+  $('#menu-img-js').remove();
+  var divImage = '<div id="menu-img-js"></div>'
+  $('#image_preview').append(divImage);
   var total_file=document.getElementById("upload_file").files.length;
   for(var i=0;i<total_file;i++)
   {
-    $('#image_preview').append("<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+    $('#menu-img-js').append("<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>");
   }
-}
-  
+}  
 //Display product detail when click add button
 $(document).ready(function(){
   $("#add-detail").on("click", function(){
