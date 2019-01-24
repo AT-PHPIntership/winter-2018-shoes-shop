@@ -7,20 +7,6 @@ use App\Services\OrderService;
 
 class OrderController extends Controller
 {
-    protected $orderService;
-
-    /**
-    * Contructer
-    *
-    * @param App\Service\OrderService $orderService orderService
-    *
-    * @return void
-    */
-    public function __construct(OrderService $orderService)
-    {
-        $this->orderService = $orderService;
-    }
-
     /**
      * Display a listing of the resource.
      *

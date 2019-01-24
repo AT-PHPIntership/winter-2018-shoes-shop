@@ -29,30 +29,39 @@
                   <th class="w-10">@lang('order.table.id')</th>
                   <th>@lang('order.table.user')</th>
                   <th>@lang('order.table.code')</th>
-                  <th>@lang('order.table.price')</th>
-                  <th>@lang('order.table.ordered_at')</th>
-                  <th>@lang('order.table.shipped_at')</th>
+                  <th>@lang('order.table.amount')</th>
+                  <th>@lang('order.table.created_at')</th>
+                  <th>@lang('order.table.delivered_at')</th>
                   <th>@lang('order.table.status')</th>
                   <th class="w-100">@lang('order.table.action')</th>
                 </tr>
                 @foreach ($orders as $order)
                   <tr>
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->user->profile->name }}</td>
+                    <td>{{ $order->user !== null ? $order->user->profile->name : $order->buyer_name }}</td>
                     <td>{{ $order->code !== null ? $order->code->name : '' }}</td>
-                    <td>{{ $order->price }}</td>
-                    <td>{{ $order->ordered_at }}</td>
-                    <td>{{ $order->shipped_at }}</td>
+                    <td>{{ $order->amount }}</td>
+                    <td>{{ formatDateVN($order->created_at) }}</td>
+                    <td>{{ formatDateVN($order->delivered_at) }}</td>
                     <td>
                       @switch($order->status)
-                        @case(\App\Models\Order::APPROVED_STATUS)
-                          <span class="label label-primary">@lang('order.status.approved')</span>
+                        @case(\App\Models\Order::CONFIRMED_STATUS)
+                          <span class="label label-primary">@lang('order.status.confirmed')</span>
+                          @break
+                        @case(\App\Models\Order::PROCESSING_STATUS)
+                          <span class="label bg-maroon">@lang('order.status.processing')</span>
+                          @break
+                        @case(\App\Models\Order::QUALITY_CHECK_STATUS)
+                          <span class="label bg-olive">@lang('order.status.quality_check')</span>
+                          @break
+                        @case(\App\Models\Order::DISPATCHED_ITEM_STATUS)
+                          <span class="label bg-purple">@lang('order.status.dispatched_item')</span>
                           @break
                         @case(\App\Models\Order::DELIVERED_STATUS)
-                          <span class="label label-success">@lang('order.status.delivered')</span>
+                          <span class="label bg-navy">@lang('order.status.delivered')</span>
                           @break
-                        @case(\App\Models\Order::DENIED_STATUS)
-                          <span class="label label-danger">@lang('order.status.denied')</span>
+                        @case(\App\Models\Order::CANCELED_STATUS)
+                          <span class="label label-danger">@lang('order.status.canceled')</span>
                           @break
                         @default
                           <span class="label label-warning">@lang('order.status.pending')</span>

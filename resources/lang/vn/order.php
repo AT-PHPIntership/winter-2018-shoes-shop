@@ -9,11 +9,11 @@ return [
         'id' => 'Id',
         'user' => 'Người đặt',
         'code' => 'Mã giảm giá',
-        'ordered_at' => 'Ngày đặt',
-        'shipped_at' => 'Ngày giao',
-        'ship_to' => 'Địa chỉ',
-        'phone_to' => 'Số điện thoại',
-        'price' => 'Tổng tiền',
+        'created_at' => 'Ngày đặt',
+        'delivered_at' => 'Ngày giao',
+        'shipping_address' => 'Địa chỉ',
+        'phone_number' => 'Số điện thoại',
+        'amount' => 'Tổng tiền',
         'status' => 'Trạng thái',
         'action' => 'Hành động'
     ],
@@ -22,8 +22,11 @@ return [
     ],
     'status' => [
         'pending' => 'Đang chờ',
-        'approved' => 'Đã phê duyệt',
-        'delivered' => 'Đã giao',
-        'denied' => 'Từ chối',
+        'confirmed' => 'Đã xác nhận',
+        'processing' => 'Đang xử lý',
+        'quality_check' => 'Kiểm tra chất lượng',
+        'dispatched_item' => 'Đã gửi hàng',
+        'delivered' => 'Đã giao hàng',
+        'canceled' => 'Hủy đơn hàng',
     ]
 ];
