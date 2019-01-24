@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = $this->orderService->getOrderWithPaginate();
+        $orders = app(OrderService::class)->getOrderWithPaginate();
         return view('admin.order.list', compact('orders'));
     }
 }
