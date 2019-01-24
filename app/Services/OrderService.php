@@ -7,12 +7,12 @@ use App\Models\Order;
 class OrderService
 {
     /**
-     * Get all data table codes
+     * Get all data table orders
      *
      * @return object
      */
     public function getOrderWithPaginate()
     {
-        return Order::with(['user', 'code'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+        return Order::with(['code:id,name', 'user:id', 'user.profile:user_id,name'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 }

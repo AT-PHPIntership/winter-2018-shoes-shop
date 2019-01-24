@@ -38,11 +38,11 @@
                 @foreach ($orders as $order)
                   <tr>
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->user !== null ? $order->user->profile->name : $order->buyer_name }}</td>
+                    <td>{{ $order->user !== null ? $order->user->profile->name : $order->customer_name }}</td>
                     <td>{{ $order->code !== null ? $order->code->name : '' }}</td>
-                    <td>{{ $order->amount }}</td>
+                    <td>{{ $order->total_amount }}</td>
                     <td>{{ formatDateVN($order->created_at) }}</td>
-                    <td>{{ formatDateVN($order->delivered_at) }}</td>
+                    <td>{{ $order->delivered_at !== null ? formatDateVN($order->delivered_at) : '' }}</td>
                     <td>
                       @switch($order->status)
                         @case(\App\Models\Order::CONFIRMED_STATUS)
