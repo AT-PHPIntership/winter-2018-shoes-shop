@@ -7,6 +7,18 @@ use App\Models\Product;
 class ProductService
 {
     /**
+     * Get all data table products
+     *
+     * @param array $columns columns
+     *
+     * @return object
+     */
+    public function getAll(array $columns = ['*'])
+    {
+        return Product::get($columns);
+    }
+    
+    /**
      * Get products list form database
      *
      * @return \Illuminate\Http\Response
