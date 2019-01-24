@@ -110,7 +110,7 @@ class PromotionService
     {
         try {
             return $promotion->delete();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
         }
         return false;

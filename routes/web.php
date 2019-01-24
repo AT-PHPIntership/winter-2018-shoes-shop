@@ -25,7 +25,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         ]);
         Route::resource('users', 'UserController');
         Route::resource('category', 'CategoryController');
-        Route::resource('promotions', 'PromotionController')->except(['destroy']);
+        Route::resource('promotions', 'PromotionController');
         Route::resource('codes', 'CodeController')->except(['show']);
     });
 });
