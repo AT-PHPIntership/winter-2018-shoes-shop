@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Controller;
 use App\Services\StatisticalService;
+use App\Models\Order;
+use Carbon\Carbon;
 
 class IndexController extends Controller
 {
@@ -17,6 +19,7 @@ class IndexController extends Controller
     {
         $arrTotal = app(StatisticalService::class)->getTotal();
         $arrRevenue = app(StatisticalService::class)->getRevenue();
-        return view('admin.index', compact(['arrTotal', 'arrRevenue']));
+        $arrTopSell = app(StatisticalService::class)->getTopSell();
+        return view('admin.index', compact(['arrTotal', 'arrRevenue', 'arrTopSell']));
     }
 }

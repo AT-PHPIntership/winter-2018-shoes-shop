@@ -16,7 +16,7 @@ class OrderDetailsTableSeeder extends Seeder
     {
         $orderIds = Order::all('id');
         $productIds = Product::all('id');
-        for($i = 0; $i < 10; $i++){
+        for($i = 0; $i < 200; $i++){
             factory(OrderDetail::class)->create([
                 'order_id' => $orderIds->random(),
                 'product_id' => $productIds->random(),

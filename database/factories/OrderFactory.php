@@ -5,7 +5,7 @@ use App\Models\Order;
 
 $factory->define(Order::class, function (Faker $faker) {
     return [
-        'delivered_at' => $faker->dateTimeBetween('+1 day', '+3 day'),
+        'delivered_at' => $faker->dateTimeBetween('+1 week', '+3 month'),
         'customer_name' => $faker->name,
         'shipping_address' => $faker->address,
         'phone_number' => '09'.$faker->randomNumber(8),

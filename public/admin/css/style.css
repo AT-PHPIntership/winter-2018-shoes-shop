@@ -51,7 +51,7 @@
     width: 100px;
 }
 .b-block {
-    display: inline-block;
+    display: block;
 }
 .w-140 {
     width: 140px;

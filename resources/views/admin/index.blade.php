@@ -100,39 +100,41 @@
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-arrow-circle-up"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisDay')</span>
-              <b class="b-block">Bitis Hunter (3)</b>
-              <b class="b-block">Midnight (10)</b>
-              <b class="b-block">Giày Sandal A54 (12)</b>
+              @foreach ($arrTopSell['topSellThisDay'] as $key => $topSell)
+                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+              @endforeach
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-arrow-circle-up"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisWeek')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisWeek'] }}đ</span>
+              @foreach ($arrTopSell['topSellThisWeek'] as $key => $topSell)
+                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+              @endforeach
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-arrow-circle-up"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisMonth')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisMonth'] }}đ</span>
+              @foreach ($arrTopSell['topSellThisMonth'] as $key => $topSell)
+                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+              @endforeach
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-arrow-circle-up"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisYear')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisYear'] }}đ</span>
+              @foreach ($arrTopSell['topSellThisYear'] as $key => $topSell)
+                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+              @endforeach
             </div>
           </div>
         </div>

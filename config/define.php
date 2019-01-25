@@ -14,5 +14,8 @@ return [
         'other' => 0,
         'male' => 1,
         'female' => 2,
-    ]
+    ],
+    'statistical' => [
+        'limit_top_sell' => 5,
+    ],
 ];
