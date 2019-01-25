@@ -1,15 +1,37 @@
 //Display choosen images
 function preview_image() 
 {
-  $('#menu-img-js').remove();
-  var divImage = '<div id="menu-img-js"></div>'
-  $('#image_preview').append(divImage);
   var total_file=document.getElementById("upload_file").files.length;
+  var images = "";
   for(var i=0;i<total_file;i++)
   {
-    $('#menu-img-js').append("<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+    images += "<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>";
   }
-}  
+  $('#image_preview').html(images);
+}
+//Display children category list when click parent category
+$(document).ready(function(){
+  $("#parent_category").on("click", function(){
+    var id = $(this).val();
+    $.ajax({
+      url: 'category/children',
+      method:"get",
+      dataType:"JSON",
+      data: {id:id},
+      success: function(data){
+        var category = "";
+        if (data.length  > 0) {
+          category += '<select class="form-control" name="child_category_id">';
+          $.each(data, function(key, val){
+            category += '<option value="'+ val.id + '">' + val.name + '</option>';
+          });
+          category += '</select>';
+        }
+        $("#category-children").html(category);
+      }
+    });
+  });
+});
 //Display product detail when click add button
 $(document).ready(function(){
   $("#add-detail").on("click", function(){
@@ -33,11 +55,11 @@ $(document).ready(function(){
         output += '<div class="col-xs-4">';
         output += color;
         output += '</div>';
-        output += '<div class="col-xs-4">';
+        output += '<div class="col-xs-3">';
         output += size;
         output += '</div>';
-        output += '<div class="col-xs-3">';
-        output += '<input name="quantity_type[]" type="quantity_type" class="form-control" placeholder="Số lượng">';
+        output += '<div class="col-xs-4">';
+        output += '<input name="quantity_type[]" type="number" class="form-control" placeholder="Số lượng">';
         output += '</div>';
         output += '<div class="col-xs-1">';
         output += '<button type="button" class="js-btn-remove btn"> x </button>';

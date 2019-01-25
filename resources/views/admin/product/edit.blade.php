@@ -62,11 +62,9 @@
                         <label>{{ trans('product.images')}}</label>
                         <div class="product-images">
                           <div id="image_preview">
-                            <div class="product-menu" id="menu-img-js">
-                              @foreach($product->images as $key => $image)
-                                <img src="{{ $image->path }}" class="detail-img" alt="Product image">
-                              @endforeach
-                            </div>
+                            @foreach($product->images as $key => $image)
+                              <img src="{{ $image->path }}" class="detail-img" alt="Product image">
+                            @endforeach
                           </div>
                           <input type="file" id="upload_file" name="upload_file[]"
                            accept="image/gif, image/jpg, image/jpeg, image/png" onchange="preview_image();" multiple/>

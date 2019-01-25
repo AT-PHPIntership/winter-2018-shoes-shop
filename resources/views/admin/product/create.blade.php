@@ -31,12 +31,18 @@
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.category')}}</label>
-                        <select class="form-control" name="category_id">
+                        <select class="form-control" name="category_id" id="parent_category">
+                          <option></option>
                           @foreach($categories as $category)
                             <option value={{$category->id}}>{{$category->name}}</option>
                           @endforeach
                         </select>
                         @if ($errors->has('category_id'))
+                          <span class="help-block">{{ $errors->first('category_id') }}</span>
+                        @endif
+                      </div>
+                      <div class="form-group" id="category-children">
+                        @if ($errors->has('child_category_id'))
                           <span class="help-block">{{ $errors->first('category_id') }}</span>
                         @endif
                       </div>

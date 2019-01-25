@@ -11,11 +11,13 @@ class CategoryService
     /**
      * Handle get children list of category
      *
+     * int $id parent category
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function getChildren()
+    public function getChildren($id)
     {
-        $children = Category::whereNotNull('parent_id')
+        $children = Category::select('id', 'name')->where('parent_id', $id)
                     ->get();
         return $children;
     }

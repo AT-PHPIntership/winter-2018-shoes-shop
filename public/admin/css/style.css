@@ -94,3 +94,9 @@
 .text-white {
   color: #fff;
 }
+.w-10 {
+    width: 10px;
+}
+.w-140 {
+    width: 140px;
+}

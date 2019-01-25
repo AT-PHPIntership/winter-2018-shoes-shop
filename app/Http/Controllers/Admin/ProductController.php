@@ -11,6 +11,7 @@ use App\Services\ColorService;
 use App\Services\SizeService;
 use App\Http\Requests\Admin\UploadRequest;
 use App\Http\Requests\Admin\PutProductRequest;
+use App\Http\Requests\Admin\PostProductRequest;
 use Excel;
 
 class ProductController extends Controller
@@ -69,8 +70,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->getChildren();
-        return view('admin.product.create', compact('categories'));
+        $categories = $this->categories->getParentList();
+        $sizes = $this->sizes->getSizes();
+        $colors = $this->colors->getColors();
+        return view('admin.product.create', compact('categories', 'sizes', 'colors'));
     }
 
     /**
@@ -80,7 +83,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostProductRequest $request)
     {
         $data = $request->all();
         if ($this->products->storeProduct($data)) {
@@ -146,7 +149,7 @@ class ProductController extends Controller
     {
         $sizes = $this->sizes->getSizes();
         $colors = $this->colors->getColors();
-        $categories = $this->categories->getChildren();
+        $categories = $this->categories->getParentList();
         return view('admin.product.edit', compact('product', 'categories', 'sizes', 'colors'));
     }
 
