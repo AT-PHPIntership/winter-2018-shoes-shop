@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{!! asset('admin/css/bootstrap.min.css') !!}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{!! asset('admin/css/font-awesome.min.css') !!}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{!! asset('admin/css/select2.min.css') !!}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{!! asset('admin/css/AdminLTE.min.css') !!}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -36,7 +38,10 @@
 
     <!-- Bootstrap 3.3.7 -->
     <script src="{!! asset('admin/js/bootstrap.min.js') !!}"></script>
+    <!-- Select2 -->
+    <script src="{!! asset('admin/js/select2.full.min.js') !!}"></script>
     <!-- AdminLTE App -->
     <script src="{!! asset('admin/js/adminlte.min.js') !!}"></script>
+    <script src="{!! asset('admin/js/main.js') !!}"></script>
 </body>
 </html>

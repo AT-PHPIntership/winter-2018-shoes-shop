@@ -11,14 +11,17 @@ use Illuminate\Support\Facades\Log;
 class ProductService
 {
     /**
-     * The attributes that are mass assignable.
+     * Get all data table products
      *
-     * @var array
+     * @param array $columns columns
+     *
+     * @return object
      */
-    protected $fillable = [
-        'name', 'category_id', 'original_price', 'quantity', 'description'
-    ];
-
+    public function getAll(array $columns = ['*'])
+    {
+        return Product::get($columns);
+    }
+    
     /**
      * Get products list form database
      *
