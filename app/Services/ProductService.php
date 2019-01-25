@@ -62,6 +62,7 @@ class ProductService
      */
     public function storeProduct($data)
     {
+        $category_id = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
         DB::beginTransaction();
         try {
             if (isset($data['quantity_type'])) {
@@ -71,7 +72,7 @@ class ProductService
                 }
                 $newProduct = Product::create([
                     'name' => $data['name'],
-                    'category_id' => $data['category_id'],
+                    'category_id' => $category_id,
                     'original_price' => $data['original_price'],
                     'quantity' => $quantity,
                     'description' => $data['description'],
@@ -91,9 +92,9 @@ class ProductService
                     }
                 }
             } else {
-                $product->update([
+                Product::create([
                     'name' => $data['name'],
-                    'category_id' => $data['category_id'],
+                    'category_id' => $category_id,
                     'original_price' => $data['original_price'],
                     'quantity' => 0,
                     'description' => $data['description'],

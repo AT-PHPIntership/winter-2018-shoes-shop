@@ -27,13 +27,15 @@ class PostProductRequest extends FormRequest
         if (!isset($data['color_id'])) {
             return [
                 'name' => 'required|unique:products,name',
-                'category_id' => 'exists:categories,id|nullable',
+                'parent_category_id' => 'exists:categories,id|nullable',
+                'child_category_id' => 'exists:categories,id|nullable',
                 'original_price' => 'required|numeric',
             ];
         }
         return [
             'name' => 'required|unique:products,name',
-            'category_id' => 'exists:categories,id|nullable',
+            'parent_category_id' => 'exists:categories,id|nullable',
+            'child_category_id' => 'exists:categories,id|nullable',
             'original_price' => 'required|numeric',
             'color_id' => 'exists:colors,id',
             'size_id' => 'exists:sizes,id',
