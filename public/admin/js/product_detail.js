@@ -2,12 +2,36 @@
 function preview_image() 
 {
   var total_file=document.getElementById("upload_file").files.length;
+  var images = "";
   for(var i=0;i<total_file;i++)
   {
-    $('#image_preview').append("<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+    images += "<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>";
   }
+  $('#image_preview').html(images);
 }
-  
+//Display children category list when click parent category
+$(document).ready(function(){
+  $("#parent_category").on("click", function(){
+    var id = $(this).val();
+    $.ajax({
+      url: 'category/children',
+      method:"get",
+      dataType:"JSON",
+      data: {id:id},
+      success: function(data){
+        var category = "";
+        if (data.length  > 0) {
+          category += '<select class="form-control" name="child_category_id">';
+          $.each(data, function(key, val){
+            category += '<option value="'+ val.id + '">' + val.name + '</option>';
+          });
+          category += '</select>';
+        }
+        $("#category-children").html(category);
+      }
+    });
+  });
+});
 //Display product detail when click add button
 $(document).ready(function(){
   $("#add-detail").on("click", function(){

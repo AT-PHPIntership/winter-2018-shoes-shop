@@ -70,4 +70,17 @@ class CategoryController extends Controller
             return redirect()->route('admin.adcategory.create');
         }
     }
+
+    /**
+     * Get children category from ajax request
+     *
+     * @param object $request request
+     *
+     * @return json()
+     */
+    public function getChildren(Request $request)
+    {
+        $response = $this->categories->getChildren($request->get('id'));
+        return response()->json($response);
+    }
 }

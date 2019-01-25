@@ -67,7 +67,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->getChildren();
+        $categories = $this->categories->getParentList();
         $sizes = $this->sizes->getSizes();
         $colors = $this->colors->getColors();
         return view('admin.product.create', compact('categories', 'sizes', 'colors'));
@@ -80,7 +80,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(PutProductRequest $request)
+    public function store(PostProductRequest $request)
     {
         $data = $request->all();
         if ($this->products->storeProduct($data)) {

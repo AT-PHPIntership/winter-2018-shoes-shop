@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
             'uses' => 'CategoryController@searchData'
         ]);
         Route::resource('users', 'UserController');
+        Route::get('product/category/children', 'CategoryController@getChildren');
         Route::resource('category', 'CategoryController');
         Route::get('product/detail', 'ProductController@getDetail');
         Route::resource('product', 'ProductController');
