@@ -96,14 +96,21 @@
           </div>
         </div>
       </div>
-      <h4>@lang('statistical.top_sell.title')</h4>
+      <h4>@lang('statistical.top_sell.title') 
+        <span class="badge bg-green">@lang('statistical.top_sell.sold')</span>
+        <span class="badge bg-red">@lang('statistical.top_sell.remain')</span>
+      </h4>
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisDay')</span>
               @foreach ($arrTopSell['topSellThisDay'] as $key => $topSell)
-                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+                <b class="b-block">
+                  <a href="">{{ ($key + 1).'. '.$topSell->name }}</a>
+                  <span class="pull-right badge bg-red">{{ $topSell->product_quantity - $topSell->total_sold }}</span>
+                  <span class="pull-right badge bg-green">{{ $topSell->total }}</span>
+                </b>                 
               @endforeach
             </div>
           </div>
@@ -113,7 +120,11 @@
             <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisWeek')</span>
               @foreach ($arrTopSell['topSellThisWeek'] as $key => $topSell)
-                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+                <b class="b-block">
+                  <a href="">{{ ($key + 1).'. '.$topSell->name }}</a>
+                  <span class="pull-right badge bg-red">{{ $topSell->product_quantity - $topSell->total_sold }}</span>
+                  <span class="pull-right badge bg-green">{{ $topSell->total }}</span>
+                </b>                
               @endforeach
             </div>
           </div>
@@ -123,7 +134,11 @@
             <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisMonth')</span>
               @foreach ($arrTopSell['topSellThisMonth'] as $key => $topSell)
-                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+                <b class="b-block">
+                  <a href="">{{ ($key + 1).'. '.$topSell->name }}</a>
+                  <span class="pull-right badge bg-red">{{ $topSell->product_quantity - $topSell->total_sold }}</span>
+                  <span class="pull-right badge bg-green">{{ $topSell->total }}</span>
+                </b>                 
               @endforeach
             </div>
           </div>
@@ -133,7 +148,11 @@
             <div class="info-box-content no-mg">
               <span class="info-box-text">@lang('statistical.top_sell.thisYear')</span>
               @foreach ($arrTopSell['topSellThisYear'] as $key => $topSell)
-                <b class="b-block">{{ ($key + 1).'. '.$topSell->name.' ('.$topSell->total.')' }}</b>                 
+                <b class="b-block">
+                  <a href="">{{ ($key + 1).'. '.$topSell->name }}</a>
+                  <span class="pull-right badge bg-red">{{ $topSell->product_quantity - $topSell->total_sold }}</span>
+                  <span class="pull-right badge bg-green">{{ $topSell->total }}</span>
+                </b>                 
               @endforeach
             </div>
           </div>

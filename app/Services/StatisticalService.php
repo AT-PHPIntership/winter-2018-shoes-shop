@@ -17,10 +17,10 @@ class StatisticalService
      */
     public function getTotal()
     {
-        $totalOrder = Order::all()->count();
-        $totalProduct = Product::all()->count();
-        $totalUser = User::all()->count();
-        $totalComment = Comment::all()->count();
+        $totalOrder = Order::count();
+        $totalProduct = Product::count();
+        $totalUser = User::count();
+        $totalComment = Comment::count();
         return [
             'totalOrder' => $totalOrder,
             'totalProduct' => $totalProduct,
@@ -80,7 +80,7 @@ class StatisticalService
         return \DB::table('orders as o')
         ->join('order_details as od', 'o.id', '=', 'od.order_id')
         ->join('products as p', 'od.product_id', '=', 'p.id')
-        ->select(\DB::raw('count(product_id) as total, name'))
+        ->select(\DB::raw('count(product_id) as total, name, p.quantity as product_quantity, total_sold, p.id as product_id'))
         ->where('o.status', '=', 6)
         ->whereBetween('delivered_at', [$fromDate, $toDate])
         ->orderByRaw('total DESC')

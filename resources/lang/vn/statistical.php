@@ -19,5 +19,7 @@ return [
         'thisWeek' => 'Tuần này',
         'thisMonth' => 'Tháng này',
         'thisYear' => 'Năm này',
+        'sold' => 'Bán được',
+        'remain' => 'Còn lại',
     ],
 ];
