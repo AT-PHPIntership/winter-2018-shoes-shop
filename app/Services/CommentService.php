@@ -3,26 +3,26 @@
 namespace App\Services;
 
 use App\Models\Comment;
-use Illuminate\Support\Facades\Log;
+use Log;
 
 class CommentService
 {
     /**
-     * Get Comment with Paginate
+     * Get all data table role
      *
-     * @return object
+     * @return Comment
      */
     public function getCommentWithPaginate()
     {
-        return Comment::with(['user', 'product', 'parent'])->orderBy('id', config('define.orderBy.desc'))->paginate(config('define.paginate.limit_rows'));
+        return Comment::with(['user:id', 'user.profile:user_id,name', 'product:id,name', 'parent'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param App\Models\Comment $comment comment
+     * @param Comment $comment comment
      *
-     * @return \Illuminate\Http\Response
+     * @return Comment
      */
     public function destroy(Comment $comment)
     {
@@ -34,7 +34,7 @@ class CommentService
             }
             $comment->delete();
             return $comment;
-        } catch (Exception $e) {
+        } catch (\xception $e) {
             Log::error($e);
         }
         return false;

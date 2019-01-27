@@ -27,7 +27,6 @@
                   <th>@lang('comment.table.content')</th>
                   <th>@lang('comment.table.parent_id')</th>
                   <th>@lang('comment.table.created_at')</th>
-                  <th>@lang('comment.table.updated_at')</th>
                   <th style="width: 100px">@lang('comment.table.action')</th>
                 </tr>
                 @foreach ($comments as $comment)
@@ -37,8 +36,7 @@
                     <td>{{ $comment->product->name }}</td>
                     <td>{{ $comment->content }}</td>
                     <td>{{ $comment->parent ? $comment->parent->content : '' }}</td>
-                    <td>{{ \Carbon\Carbon::parse($comment->created_at)->format(config('define.datetime_vn')) }}</td>
-                    <td>{{ \Carbon\Carbon::parse($comment->updated_at)->format(config('define.datetime_vn')) }}</td>
+                    <td>{{ formatDateVN($comment->created_at) }}</td>
                     <td>
                       <form class="form-inline" action="{{ route('admin.comments.destroy', $comment) }}" method="POST">
                         @csrf
