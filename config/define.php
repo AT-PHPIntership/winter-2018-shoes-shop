@@ -1,13 +1,11 @@
 <?php
 
 return [
+    'number_element_in_table' => 10,
     'paginate' => [
         'limit_rows' => 10,
     ],
-    'orderBy' => [
-        'desc' => 'desc',
-    ],
-    'datetime_vn' => 'H:i:s d-m-Y',
+    'format_date_vn' => 'd-m-Y',
     'path' => [
         'avatar' => '/upload/',
         'default_avatar' => '/admin/images/default_avatar.png',

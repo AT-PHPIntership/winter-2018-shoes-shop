@@ -9,12 +9,10 @@ class CommentService
     /**
      * Get all data table role
      *
-     * @param array $columns columns
-     *
-     * @return object
+     * @return Comment
      */
     public function getCommentWithPaginate()
     {
-        return Comment::with(['user', 'product', 'parent'])->orderBy('id', config('define.orderBy.desc'))->paginate(config('define.paginate.limit_rows'));
+        return Comment::with(['user:id', 'user.profile:user_id,name', 'product:id,name', 'parent'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 }
