@@ -1,0 +1,56 @@
+.no-bg {
+  background-image: none;
+}
+.txt-purple {
+  color: #ff084e !important;
+}
+.bg-rgba {
+  background-color: rgba(0,0,0,.5);
+}
+.child-cat li {
+  display: inline-block;
+}
+.child-cat li h3 a{
+  font-size: 14px;
+  color: #777777;
+  padding: 10px 15px;
+}
+.parent-cat a{
+  color: #222222;
+}
+.s-30 {
+  font-size: 25px;
+}
+.navbar-nav span{
+  padding: 0 10px;
+}
+.form-search {
+  position: relative;
+}
+.ip-search {
+  width: 170px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+.btn-search {
+  background-color: #fff;
+  border: none;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+.show-cart {
+  position: relative;
+}
+.show-cart .js-cnt-item {
+  position: absolute;
+  right: 23px;
+  top: 0;
+  padding: 0 7px;
+  background-color: #f41068;
+  color: #fff;
+  border-radius: 50%;
+}
+.text-gray {
+  color: #cccccc;
+}
