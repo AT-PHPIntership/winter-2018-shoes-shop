@@ -10,6 +10,6 @@ $factory->define(Order::class, function (Faker $faker) {
         'shipping_address' => $faker->address,
         'phone_number' => '09'.$faker->randomNumber(8),
         'total_amount' => rand(100000, 1000000),
-        'status' => Order::PENDING_STATUS,
+        'status' => array_random(Order::ORDER_STATUS),
     ];
 });
