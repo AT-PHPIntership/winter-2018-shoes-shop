@@ -23,20 +23,21 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Order $order order
+     * @param int $id id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(int $id)
     {
+        $order = app(OrderService::class)->getOrderById($id);
         return view('admin.order.show', compact('order'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param PutOrderRequest  $request request
-     * @param Order $order     order
+     * @param PutOrderRequest $request request
+     * @param Order           $order   order
      *
      * @return \Illuminate\Http\Response
      */

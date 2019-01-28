@@ -38,29 +38,29 @@
                 @foreach ($orders as $order)
                   <tr>
                     <td>{{ $order->id }}</td>
-                    <td>{{ $order->user !== null ? $order->user->profile->name : $order->customer_name }}</td>
-                    <td>{{ $order->code !== null ? $order->code->name : '' }}</td>
+                    <td>{{ $order->user ? $order->user->profile->name : $order->customer_name }}</td>
+                    <td>{{ $order->code ? $order->code->name : '' }}</td>
                     <td>{{ $order->total_amount }}</td>
                     <td>{{ formatDateVN($order->created_at) }}</td>
-                    <td>{{ $order->delivered_at !== null ? formatDateVN($order->delivered_at) : '' }}</td>
+                    <td>{{ $order->delivered_at ? formatDateVN($order->delivered_at) : '' }}</td>
                     <td>
                       @switch($order->status)
-                        @case(\App\Models\Order::CONFIRMED_STATUS)
+                        @case(\App\Models\Order::ORDER_STATUS['CONFIRMED'])
                           <span class="label label-primary">@lang('order.status.confirmed')</span>
                           @break
-                        @case(\App\Models\Order::PROCESSING_STATUS)
+                        @case(\App\Models\Order::ORDER_STATUS['PROCESSING'])
                           <span class="label bg-maroon">@lang('order.status.processing')</span>
                           @break
-                        @case(\App\Models\Order::QUALITY_CHECK_STATUS)
+                        @case(\App\Models\Order::ORDER_STATUS['QUALITY_CHECK'])
                           <span class="label bg-olive">@lang('order.status.quality_check')</span>
                           @break
-                        @case(\App\Models\Order::DISPATCHED_ITEM_STATUS)
+                        @case(\App\Models\Order::ORDER_STATUS['DISPATCHED_ITEM'])
                           <span class="label bg-purple">@lang('order.status.dispatched_item')</span>
                           @break
-                        @case(\App\Models\Order::DELIVERED_STATUS)
+                        @case(\App\Models\Order::ORDER_STATUS['DELIVERED'])
                           <span class="label bg-navy">@lang('order.status.delivered')</span>
                           @break
-                        @case(\App\Models\Order::CANCELED_STATUS)
+                        @case(\App\Models\Order::ORDER_STATUS['CANCELED'])
                           <span class="label label-danger">@lang('order.status.canceled')</span>
                           @break
                         @default

@@ -21,7 +21,7 @@ return [
         'price' => 'Giá',
         'quantity' => 'Số lượng',
         'category' => 'Danh mục',
-        'total_price' => 'Thành tiền',
+        'total_price' => 'Thành tiền (Chưa áp dụng code)',
         'amount' => 'Tổng',
     ],
     'show' => [

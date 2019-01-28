@@ -7,7 +7,7 @@ use App\Models\Order;
 class OrderService
 {
     /**
-     * Get all data table order
+     * Get all data table orders
      *
      * @return object
      */
@@ -33,5 +33,17 @@ class OrderService
             Log::error($e);
             return false;
         }
+    }
+
+    /**
+     * Get order by id
+     *
+     * @param int $id id
+     *
+     * @return object
+     */
+    public function getOrderById($id)
+    {
+        return Order::with(['code:id,name', 'user:id', 'user.profile:id,name,user_id', 'orderDetails', 'orderDetails.product:id,name,original_price,category_id', 'orderDetails.product.category:id,name'])->findOrFail($id);
     }
 }
