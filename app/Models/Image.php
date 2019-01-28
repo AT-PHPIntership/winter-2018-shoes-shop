@@ -15,4 +15,16 @@ class Image extends Model
     {
         return $this->belongsTo('App\Models\Product');
     }
+
+    /**
+     * Get the image.
+     *
+     * @param string $path image name
+     *
+     * @return string
+     */
+    public function getPathAttribute($path)
+    {
+        return config('define.upload_folder').$path;
+    }
 }

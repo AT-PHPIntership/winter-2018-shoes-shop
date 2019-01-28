@@ -41,4 +41,21 @@ class ProductService
     {
         return Product::findOrFail($id);
     }
+
+    /**
+     * Get products by category
+     *
+     * @param string $categoryName categoryName
+     * @param array  $columns      columns
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getProductByCategory(string $categoryName, array $columns = ['*'])
+    {
+        return Product::with(['category' => function($query) use ($categoryName) {
+            $query->select('id', 'name')->where('name', $categoryName);
+        }, 'images:id,path,product_id', 'promotions'])
+        ->limit(4)
+        ->get($columns);
+    }
 }

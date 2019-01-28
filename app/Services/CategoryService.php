@@ -57,4 +57,20 @@ class CategoryService
     {
         return Category::create($input);
     }
+
+    /**
+     * Get childCategory by parentCategory
+     *
+     * @param string $parentCatName parentCatName
+     * @param array  $columns       columns
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getChildCatByParentCat(string $parentCatName, array $columns = ['*'])
+    {
+        $parentCat = Category::where('name', $parentCatName)->first(['id', 'name']);
+        return Category::with(['children'])
+        ->where('parent_id', $parentCat->id)
+        ->get($columns);
+    }
 }

@@ -76,90 +76,36 @@
               <a class="text-white" href="">Giày nam</a>
             </h2>
             <ul class="child-cat">
-              <li>
-                <h3>
-                  <a class="text-white" href="">Giày thể thao nam</a>
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  <a class="text-white" href="">Dép nam</a>
-                </h3>
-              </li>
-              <li>
-                <h3>
-                  <a class="text-white" href="">Sandal nam</a>
-                </h3>
-              </li>
+              @foreach ($childsCatForMen as $childCatForMen)
+                <li>
+                  <h3>
+                    <a class="text-white" href="">{{ $childCatForMen->name }}</a>
+                  </h3>
+                </li>
+              @endforeach
             </ul>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l1.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+        @foreach ($productsForMen as $productForMen)
+          <div class="col-lg-3 col-md-6 single-product">
+            <div class="content">
+              <div class="content-overlay"></div>
+              <img class="content-image img-fluid d-block mx-auto" src="{{ $productForMen->images->first() ? $productForMen->images->first()->path : config('define.image_default_product') }}" alt="">
+              <div class="content-details fadeIn-bottom">
+                <div class="bottom d-flex align-items-center justify-content-center">
+                  <a href="#"><span class="lnr lnr-cart"></span></a>
+                  <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="price">
-            <h5 class="text-white">Long Sleeve shirt</h5>
-            <h3 class="text-white">$150.00 <del class="text-gray">$100.00</del></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l2.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-              </div>
+            <div class="price">
+              <h5 class="text-white">{{ $productForMen->name }}</h5>
+              <h3 class="text-white">{{ $productForMen->promotions->first() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></h3>
             </div>
           </div>
-          <div class="price">
-            <h5 class="text-white">Long Sleeve shirt</h5>
-            <h3 class="text-white">$150.00</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l3.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="price">
-            <h5 class="text-white">Long Sleeve shirt</h5>
-            <h3 class="text-white">$150.00</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l4.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="price">
-            <h5 class="text-white">Long Sleeve shirt</h5>
-            <h3 class="text-white">$150.00</h3>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </section>
@@ -173,89 +119,35 @@
             <a href="">Giày nữ</a>
           </h2>
           <ul class="child-cat">
-            <li>
-              <h3>
-                <a href="">Giày thể thao nữ</a>
-              </h3>
-            </li>
-            <li>
-              <h3>
-                <a href="">Dép nữ</a>
-              </h3>
-            </li>
-            <li>
-              <h3>
-                <a href="">Giày búp bê</a>
-              </h3>
-            </li>
+            @foreach ($childsCatForWomen as $childCatForWomen)
+              <li>
+                <h3>
+                  <a class="text-white" href="">{{ $childCatForWomen->name }}</a>
+                </h3>
+              </li>
+            @endforeach
           </ul>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l5.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+        @foreach ($productsForWomen as $productForWomen)
+          <div class="col-lg-3 col-md-6 single-product">
+            <div class="content">
+              <div class="content-overlay"></div>
+              <img class="content-image img-fluid d-block mx-auto" src="{{ $productForWomen->images->first() ? $productForWomen->images->first()->path : config('define.image_default_product') }}" alt="">
+              <div class="content-details fadeIn-bottom">
+                <div class="bottom d-flex align-items-center justify-content-center">
+                  <a href="#"><span class="lnr lnr-cart"></span></a>
+                  <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="price">
-            <h5>Long Sleeve shirt</h5>
-            <h3>$150.00</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l6.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-              </div>
+            <div class="price">
+              <h5>{{ $productForWomen->name }}</h5>
+              <h3 >{{ $productForWomen->promotions->first() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></h3>
             </div>
           </div>
-          <div class="price">
-            <h5>Long Sleeve shirt</h5>
-            <h3>$150.00 <del class="text-gray">$100.00</del></h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l7.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="price">
-            <h5>Long Sleeve shirt</h5>
-            <h3>$150.00</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 single-product">
-          <div class="content">
-            <div class="content-overlay"></div>
-            <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/l8.jpg') }}" alt="">
-            <div class="content-details fadeIn-bottom">
-              <div class="bottom d-flex align-items-center justify-content-center">
-                <a href="#"><span class="lnr lnr-cart"></span></a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="price">
-            <h5>Long Sleeve shirt</h5>
-            <h3>$150.00</h3>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </section>
@@ -294,7 +186,7 @@
               <div class="countdown-label text" id="second-countdown">Seconds</div>
             </div>
             <a href="#" class="view-btn primary-btn2"><span>Shop Now</span></a>
-            <img src="img/cd.png" class="img-fluid cd-img" alt="">
+            <img src="{{ asset('public/img/cd.png') }}" class="img-fluid cd-img" alt="">
           </div>
         </div>
       </div>
@@ -474,19 +366,19 @@
     <div class="container">
       <div class="row logo-wrap">
         <a class="col single-img" href="#">
-        <img class="d-block mx-auto" src="img/br1.png" alt="">
+        <img class="d-block mx-auto" src="{{ asset('public/img/br1.png') }}" alt="">
         </a>
         <a class="col single-img" href="#">
-        <img class="d-block mx-auto" src="img/br2.png" alt="">
+        <img class="d-block mx-auto" src="{{ asset('public/img/br2.png') }}" alt="">
         </a>
         <a class="col single-img" href="#">
-        <img class="d-block mx-auto" src="img/br3.png" alt="">
+        <img class="d-block mx-auto" src="{{ asset('public/img/br3.png') }}" alt="">
         </a>
         <a class="col single-img" href="#">
-        <img class="d-block mx-auto" src="img/br4.png" alt="">
+        <img class="d-block mx-auto" src="{{ asset('public/img/br4.png') }}" alt="">
         </a>
         <a class="col single-img" href="#">
-        <img class="d-block mx-auto" src="img/br5.png" alt="">
+        <img class="d-block mx-auto" src="{{ asset('public/img/br5.png') }}" alt="">
         </a>
       </div>
     </div>
