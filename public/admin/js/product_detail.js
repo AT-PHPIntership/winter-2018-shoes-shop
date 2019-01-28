@@ -1,20 +1,20 @@
 //Display choosen images
-function preview_image() 
+function previewImage() 
 {
-  var total_file=document.getElementById("upload_file").files.length;
+  var total_file=document.getElementById("upload-file").files.length;
   var images = "";
   for(var i=0;i<total_file;i++)
   {
     images += "<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>";
   }
-  $('#image_preview').html(images);
+  $('#image-preview').html(images);
 }
 //Display children category list when click parent category
 $(document).ready(function(){
-  $("#parent_category").on("click", function(){
+  $("#parent-category").on("click", function(){
     var id = $(this).val();
     $.ajax({
-      url: 'category/children',
+      url: '../category/children',
       method:"get",
       dataType:"JSON",
       data: {id:id},

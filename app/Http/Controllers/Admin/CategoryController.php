@@ -80,7 +80,7 @@ class CategoryController extends Controller
      */
     public function getChildren(Request $request)
     {
-        $response = $this->categories->getChildren($request->get('id'));
-        return response()->json($response);
+        $response = $this->categories->getChildren((int) $request->only('id')['id'], ['id', 'name']);
+        return $response;
     }
 }

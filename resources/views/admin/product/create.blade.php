@@ -31,8 +31,8 @@
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.category')}}</label>
-                        <select class="form-control" name="parent_category_id" id="parent_category">
-                          <option></option>
+                        <select class="form-control" name="parent_category_id" id="parent-category">
+                          <option>{{ trans('product.choose_category')}}</option>
                           @foreach($categories as $category)
                             <option value={{$category->id}}>{{$category->name}}</option>
                           @endforeach
@@ -60,7 +60,7 @@
                       <div class="form-group">
                         <label>{{ trans('product.images')}}</label>
                         <div class="product-images">
-                          <div id="image_preview"></div>
+                          <div id="image-preview"></div>
                           <input type="file" id="upload_file" name="upload_file[]"
                            accept="image/gif, image/jpg, image/jpeg, image/png" onchange="preview_image();" multiple/>
                         </div>
