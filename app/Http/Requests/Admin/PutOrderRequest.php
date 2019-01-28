@@ -25,7 +25,8 @@ class PutOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'in:'.Order::CONFIRMED_STATUS.','.Order::PROCESSING_STATUS.','.Order::QUALITY_CHECK_STATUS.','.Order::DISPATCHED_ITEM_STATUS.','.Order::DELIVERED_STATUS.','.Order::CANCELED_STATUS.','.Order::PENDING_STATUS.'',
+            'delivered_at' => 'date',
+            'status' => 'in:'.implode(',', Order::ORDER_STATUS),
         ];
     }
 }
