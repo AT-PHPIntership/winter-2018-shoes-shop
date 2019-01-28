@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Log;
 class ProductService
 {
     /**
-<<<<<<< HEAD
-=======
      * Get all data table products
      *
      * @param array $columns columns
@@ -28,7 +26,6 @@ class ProductService
     }
     
     /**
->>>>>>> 3729bda598ad060da8d26e96ffdb57ec8dab7442
      * Get products list form database
      *
      * @return \Illuminate\Http\Response
@@ -55,7 +52,7 @@ class ProductService
             'productDetails' => function ($query) {
                 $query->with(['size:id,size', 'color:id,name']);
             }
-            ])->findOrFail($id);
+        ])->findOrFail($id);
         return $product;
     }
 
@@ -136,7 +133,6 @@ class ProductService
     }
 
     /**
-<<<<<<< HEAD
      * Handle process import file csv including products data.
      *
      * @param \Illuminate\Http\Request $data of products
@@ -244,8 +240,6 @@ class ProductService
     }
 
     /**
-=======
->>>>>>> 3729bda598ad060da8d26e96ffdb57ec8dab7442
      * Check if product detail is exist
      *
      * @param int $productId product detail
@@ -374,5 +368,6 @@ class ProductService
             Log::error($e);
             DB::rollback();
         }
+        return $product;
     }
 }

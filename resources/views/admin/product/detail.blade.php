@@ -1,5 +1,6 @@
 @extends('admin.module.master')
 @section('content')
+<link rel="stylesheet" href="{!! asset('admin/css/product.css') !!}">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
