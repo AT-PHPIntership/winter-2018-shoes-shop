@@ -49,7 +49,7 @@ class ProductService
             'productDetails' => function ($query) {
                 $query->with(['size:id,size', 'color:id,name']);
             }
-            ])->findOrFail($id);
+        ])->findOrFail($id);
         return $product;
     }
 

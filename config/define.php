@@ -15,5 +15,6 @@ return [
         'other' => 0,
         'male' => 1,
         'female' => 2,
-    ]
+    ],
+    'upload_folder' => '/upload/',
 ];
