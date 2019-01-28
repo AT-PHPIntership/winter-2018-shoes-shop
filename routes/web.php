@@ -30,3 +30,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::resource('codes', 'CodeController')->except(['show']);
     });
 });
+
+Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
+    Route::get('/', 'IndexController@index')->name('index');
+ });
