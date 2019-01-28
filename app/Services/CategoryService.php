@@ -11,8 +11,8 @@ class CategoryService
     /**
      * Handle get children list of category
      *
-     * int $id parent category
-     * 
+     * @param int $id parent category
+     *
      * @return \Illuminate\Http\Response
      */
     public function getChildren($id)
