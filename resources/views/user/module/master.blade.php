@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
-  <head>
+  <head> 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="img/fav.png">
     <meta name="author" content="CodePixar">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/linearicons.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/nice-select.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/css/ion.rangeSlider.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/ion.rangeSlider.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/main.css') }}">

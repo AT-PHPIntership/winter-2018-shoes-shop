@@ -20,17 +20,15 @@
       <div class="product-quick-view">
           <div class="row align-items-center">
               <div class="col-lg-6">
-                <div class="quick-view-carousel-details">
+                <div class="quick-view-carousel-details">                  
                   <div class="item">
-                      <div class="item" style="background: url(img/q1.jpg);">
-
-                      </div>
-                      <div class="item" style="background: url(img/q1.jpg);">
-
-                      </div>
-                      <div class="item" style="background: url(img/q1.jpg);">
-
-                      </div>
+                    <img src="upload/Giay_the_thao_sieu_mem_2.jpg" height="300px" width="400px" alt="Product image">
+                  </div>
+                  <div class="item">
+                    <img src="upload/Giay_the_thao_sieu_mem_3.jpg" height="300px" width="400px" alt="Product image">
+                  </div>
+                  <div class="item">
+                    <img src="upload/Giay_the_thao_sieu_mem_4.jpg" height="300px" width="400px" alt="Product image">
                   </div>
                 </div>
               </div>

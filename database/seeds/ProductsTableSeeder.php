@@ -14,6 +14,12 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         \DB::table('products')->truncate();
+        \DB::table('products')-> insert([
+                'name' => 'Giày nam',
+                'parent_id' => 0,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+        ]);
         $ids = Category::all('id');
         for ($i=0; $i < 10; $i++) {
             factory(Product::class)->create([
