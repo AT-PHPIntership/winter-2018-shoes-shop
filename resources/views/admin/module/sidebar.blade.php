@@ -57,6 +57,30 @@
                 <i class="fa fa-dashboard"></i> <span>@lang('admin.sidebar.report.title')</span>
             </a>
         </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-bell"></i> <span>@lang('admin.sidebar.promotion.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.promotions.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.promotion.list')</a></li>
+                <li><a href="{{ route('admin.promotions.create') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.promotion.add')</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-codepen"></i> <span>@lang('admin.sidebar.code.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.codes.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.list')</a></li>
+                <li><a href="{{ route('admin.codes.create') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.add')</a></li>
+            </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
