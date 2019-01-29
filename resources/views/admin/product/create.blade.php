@@ -63,8 +63,8 @@
                         <label>{{ trans('product.images')}}</label>
                         <div class="product-images">
                           <div id="image-preview"></div>
-                          <input type="file" id="upload_file" name="upload_file[]"
-                           accept="image/gif, image/jpg, image/jpeg, image/png" onchange="preview_image();" multiple/>
+                          <input type="file" id="upload-file" name="upload_file[]"
+                           accept="image/gif, image/jpg, image/jpeg, image/png" onchange="previewImage();" multiple/>
                         </div>
                       </div>
                     </div>
@@ -124,5 +124,6 @@
       </div>
     </section>
   </div>
+  <script>var getDetailUrl = "{{ url('admin/category/children') }}"</script>
   <script src="{!! asset('admin/js/product_detail.js') !!}"></script>
 @endsection
