@@ -47,6 +47,9 @@
                         <div class="form-group">
                           <label for="order-input-delivered-at">@lang('order.table.delivered_at')</label>
                           <input type="date" name="delivered_at" class="form-control" id="order-input-delivered-at" value="{{ $order->delivered_at }}">
+                          @if ($errors->has('delivered_at'))
+                            <span class="help-block">{{ $errors->first('delivered_at') }}</span>
+                          @endif
                         </div>
                       </div>
                       <div class="col-xs-3">

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Order;
 
-class PutOrderRequest extends FormRequest
+class PatchOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class PutOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'delivered_at' => 'date',
-            'status' => 'in:'.implode(',', Order::ORDER_STATUS),
+            'status' => 'required|in:'.implode(',', Order::ORDER_STATUS),
+            'delivered_at' => 'required_if:status,==,'.Order::ORDER_STATUS['DELIVERED'].'|nullable|date',
         ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\OrderService;
 use App\Models\Order;
-use App\Http\Requests\Admin\PutOrderRequest;
+use App\Http\Requests\Admin\PatchOrderRequest;
 
 class OrderController extends Controller
 {
@@ -36,12 +36,12 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param PutOrderRequest $request request
-     * @param Order           $order   order
+     * @param PatchOrderRequest $request request
+     * @param Order             $order   order
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(PutOrderRequest $request, Order $order)
+    public function update(PatchOrderRequest $request, Order $order)
     {
         $data = $request->all();
         if (app(OrderService::class)->update($data, $order)) {
