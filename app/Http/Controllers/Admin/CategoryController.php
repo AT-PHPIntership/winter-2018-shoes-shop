@@ -64,11 +64,9 @@ class CategoryController extends Controller
     {
         $input = $request->all();
         if ($this->categories->storeCategory($input)) {
-            session()->flash('success', trans('common.message.create_success'));
-            return redirect()->route('admin.category.index');
+            return redirect()->route('admin.category.index')->with('success', trans('common.message.create_success'));
         }
-        session()->flash('error', trans('common.message.create_error'));
-        return redirect()->route('admin.category.create');
+        return redirect()->route('admin.category.create')->with('error', trans('common.message.create_error'));
     }
 
     /**
@@ -97,8 +95,7 @@ class CategoryController extends Controller
     {
         $input = $request->all();
         if ($this->categories->updateCategory($input, $category)) {
-            session()->flash('success', trans('common.message.edit_success'));
-            return redirect()->route('admin.category.index');
+            return redirect()->route('admin.category.index')->with('success', trans('common.message.edit_success'));
         }
         return redirect()->route('admin.category.edit', $category->id);
     }

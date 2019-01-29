@@ -36,13 +36,13 @@ class CategoryService
     /**
      * Handle get parents list from database
      *
+     * @param array $columns columns
+     *
      * @return \Illuminate\Http\Response
      */
-    public function getParentList()
+    public function getParentList(array $columns = ['*'])
     {
-        $categories = Category::select('id', 'name')
-                        ->whereNull('parent_id')
-                        ->get();
+        $categories = Category::whereNull('parent_id')->get($columns);
         return $categories;
     }
 
