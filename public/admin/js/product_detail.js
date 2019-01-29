@@ -20,14 +20,22 @@ $(document).ready(function(){
       data: {id:id},
       success: function(data){
         var category = "";
-        if (data.length  > 0) {
-          category += '<select class="form-control" name="child_category_id">';
-          $.each(data, function(key, val){
-            category += '<option value="'+ val.id + '">' + val.name + '</option>';
-          });
-          category += '</select>';
-        }
+        $.each(data, function(key, val){
+          category += '<option value="'+ val.id + '">' + val.name + '</option>';
+        });
         $("#category-children").html(category);
+        var hid = $('#category-children').attr('data-hidden');
+        if (data.length  > 0) {
+          if (hid == 'hidden') {
+            $('#category-children').removeClass('hidden');
+            $('#category-children').attr('data-hidden', '');
+          }
+        } else {
+          if (hid == '') {
+            $('#category-children').addClass('hidden');
+            $('#category-children').attr('data-hidden', 'hidden');
+          }
+        }
       }
     });
   });

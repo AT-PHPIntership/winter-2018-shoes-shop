@@ -32,7 +32,7 @@
                       <div class="form-group">
                         <label>{{ trans('product.category')}}</label>
                         <select class="form-control" name="parent_category_id" id="parent-category">
-                          <option>{{ trans('product.choose_category')}}</option>
+                          <option value="">{{ trans('product.choose_category')}}</option>
                           @foreach($categories as $category)
                             <option value={{$category->id}}>{{$category->name}}</option>
                           @endforeach
@@ -41,7 +41,9 @@
                           <span class="help-block">{{ $errors->first('parent_category_id') }}</span>
                         @endif
                       </div>
-                      <div class="form-group" id="category-children">
+                      <div class="form-group">
+                        <select name="child_category_id" id="category-children" data-hidden="hidden" class="form-control hidden">
+                        </select>
                         @if ($errors->has('child_category_id'))
                           <span class="help-block">{{ $errors->first('category_id') }}</span>
                         @endif
@@ -72,7 +74,29 @@
                       <label>{{ trans('product.detail_type')}}</label>
                       <div class="margin-b-10">
                         <button type="button" id="add-detail" class="btn btn-success"> + </button>
-                        <ul class="detail-menu list-unstyled" id="show-detail">                          
+                        <ul class="detail-menu list-unstyled" id="show-detail">   
+                          <li class="js-row row margin-y-10">
+                            <div class="col-xs-4">
+                              <select name="color_id[]" id="color" class="form-control" placeholder="Chọn màu">
+                                @foreach($colors as $val)
+                                  <option value="{{$val->id}}">{{$val->name}}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                            <div class="col-xs-3">
+                              <select name="size_id[]" class="form-control" placeholder="Chọn size">
+                                @foreach($sizes as $val)
+                                  <option value="{{$val->id}}">{{$val->size}}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                            <div class="col-xs-4">
+                              <input name="quantity_type[]" type="number" class="form-control" placeholder="Số lượng">
+                            </div>
+                            <div class="col-xs-1">
+                              <button type="button" class="js-btn-remove btn"> x </button>
+                            </div>
+                          </li>
                         </ul>
                         @if ($errors->has('color_id'))
                           <span class="help-block">{{ $errors->first('color_id') }}</span>
