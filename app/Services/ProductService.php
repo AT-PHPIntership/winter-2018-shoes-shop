@@ -63,10 +63,10 @@ class ProductService
     public function storeProduct($data)
     {
         $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
+        $quantity = 0;// 29/01
         DB::beginTransaction();
         try {
             if (isset($data['quantity_type'])) {
-                $quantity = 0;
                 foreach ($data['quantity_type'] as $itemQuantity) {
                     $quantity = $quantity + $itemQuantity;
                 }
@@ -77,6 +77,7 @@ class ProductService
                     'quantity' => $quantity,
                     'description' => $data['description'],
                 ]);
+                //part function // 29/01
                 for ($i=0; $i < count($data['color_id']); $i++) {
                     $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
                     if ($productDetail) {
@@ -92,14 +93,15 @@ class ProductService
                     }
                 }
             } else {
-                Product::create([
+                Product::create([// 29/01 repeat code
                     'name' => $data['name'],
                     'category_id' => $categoryId,
                     'original_price' => $data['original_price'],
-                    'quantity' => 0,
+                    'quantity' => $quantity,
                     'description' => $data['description'],
                 ]);
             }
+            //part function // 29/01
             if (isset($data['upload_file'])) {
                 foreach ($data['upload_file'] as $image) {
                     Image::create([
@@ -119,7 +121,7 @@ class ProductService
     /**
      * Upload Image
      *
-     * @param string $image Image
+     * @param array images files
      *
      * @return \Illuminate\Http\Response
      */
@@ -128,6 +130,25 @@ class ProductService
         $fileName = time().'-'.$image->getClientOriginalName();
         $image->move('upload', $fileName);
         return $fileName;
+    }
+// 29/01
+    /**
+     * Store image files 
+     *
+     * @param string $image Image
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function stroreImages($image)
+    {
+        // if (isset($data['upload_file'])) {
+        //     foreach ($data['upload_file'] as $image) {
+        //         Image::create([
+        //             'product_id' => $newProduct->id,
+        //             'path' => $this->uploadImage($image)
+        //         ]);
+        //     }
+        // }
     }
 
     /**
