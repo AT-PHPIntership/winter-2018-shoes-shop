@@ -25,7 +25,7 @@
                   <div class="row">
                     <form action="{{ route('admin.orders.update', ['id' => $order->id]) }}" method="post">
                       @csrf
-                      @method('PUT')
+                      @method('PATCH')
                       <div class="col-xs-4">
                         <div class="form-group">
                           <label for="order-slt-status">@lang('order.table.status') *</label>
