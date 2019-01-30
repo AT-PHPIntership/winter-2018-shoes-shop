@@ -7,6 +7,7 @@ use App\Models\ProductDetail;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\UploadedFile;
 
 class ProductService
 {
@@ -82,7 +83,7 @@ class ProductService
                     $productDetail->quantity += $data['quantity_type'][$i];
                     $productDetail->save();
                 } else {
-                    $this->stroreProductDetail($data, $newProduct->id, $data['color_id'][$i], $data['size_id'][$i], $data['quantity_type'][$i]);
+                    $this->stroreProductDetail($newProduct->id, $data['color_id'][$i], $data['size_id'][$i], $data['quantity_type'][$i]);
                 }
             }
             $this->stroreImages($data, $newProduct->id);
@@ -121,10 +122,13 @@ class ProductService
         if (isset($data['upload_file'])) {
             foreach ($data['upload_file'] as $image) {
                 if ($image->isValid()) {
-                    Image::create([
-                        'product_id' => $productId,
-                        'path' => $this->uploadImage($image)
-                    ]);
+                    $extensions = ['jpg' , 'jpeg' ,'png', 'gif'];
+                    if (in_array($image->extension(), $extensions)) {
+                        Image::create([
+                            'product_id' => $productId,
+                            'path' => $this->uploadImage($image)
+                        ]);
+                    }
                 }
             }
         }
