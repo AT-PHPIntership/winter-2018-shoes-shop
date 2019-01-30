@@ -105,3 +105,6 @@
   top: 115px;
   right: -20px;
 }
+.nav-left {
+  flex-basis: 120%;
+}
