@@ -54,3 +54,7 @@
 .text-gray {
   color: #cccccc;
 }
+.menu-control .control-item {
+  height: 50px;
+  width: 70px;
+}
