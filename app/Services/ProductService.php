@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\OrderDetail;
 use App\Models\Category;
+use Carbon\Carbon;
 
 class ProductService
 {
@@ -60,7 +61,10 @@ class ProductService
         } else {
             $categoryIds = Category::where('id', $id)->get(['id']);
         }
-        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions'])
+        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])
         ->whereIn('category_id', $categoryIds)
         ->limit(8)
         ->get($columns);

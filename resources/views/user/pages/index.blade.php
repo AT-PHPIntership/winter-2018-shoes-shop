@@ -7,7 +7,7 @@
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-40">
           <div class="title text-center">
-            <h1 class="mb-10">Danh mục</h1>
+            <h1 class="mb-10">{{ __('index.category') }}</h1>
             {{-- <p>Who are in extremely love with eco friendly system.</p> --}}
           </div>
         </div>
@@ -21,7 +21,7 @@
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_men.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
-                    <h3 class="content-title">Giày nam</h3>
+                    <h3 class="content-title">{{ __('index.shoes.men') }}</h3>
                   </div>
                 </a>
               </div>
@@ -32,7 +32,7 @@
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_women.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
-                    <h3 class="content-title">Gày nữ</h3>
+                    <h3 class="content-title">{{ __('index.shoes.women') }}</h3>
                   </div>
                 </a>
               </div>
@@ -43,7 +43,7 @@
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c3.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
-                    <h3 class="content-title">Giày trẻ em</h3>
+                    <h3 class="content-title">{{ __('index.shoes.kid') }}</h3>
                   </div>
                 </a>
               </div>
@@ -56,7 +56,7 @@
               <div class="content-overlay"></div>
               <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c4.jpg') }}" alt="">
               <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Phụ kiện</h3>
+                <h3 class="content-title">{{ __('index.shoes.accessories') }}</h3>
               </div>
             </a>
           </div>
@@ -73,7 +73,7 @@
         <div class="menu-content pb-40">
           <div class="title text-center">
             <h2 class="mb-10 parent-cat">
-              <a class="text-white" href="">Giày nam</a>
+              <a class="text-white" href="">{{ __('index.shoes.men') }}</a>
             </h2>
             <ul class="child-cat">
               @foreach ($childsCatForMen as $childCatForMen)
@@ -118,7 +118,7 @@
       <div class="countdown-content pb-40">
         <div class="title text-center">
           <h2 class="mb-10 parent-cat">
-            <a href="">Giày nữ</a>
+            <a href="">{{ __('index.shoes.women') }}</a>
           </h2>
           <ul class="child-cat">
             @foreach ($childsCatForWomen as $childCatForWomen)
@@ -202,23 +202,21 @@
     <div class="container">
       <div class="related-content">
         <div class="title text-center">
-          <h2 class="mb-10">Sản phẩm mới</h2>
+          <h2 class="mb-10">{{ __('index.product.new') }}</h2>
         </div>
       </div>
       <div class="row">
-        <div class="new-product-owl owl-carousel">
-          @foreach ($newProducts as $newProduct)
-            <div class="item">
-              <div class="single-search-product d-flex">
-                <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
-                <div class="desc">
-                  <a href="#" class="title">{{ $newProduct->name }}</a>
-                  <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? ($newProduct->original_price * $newProduct->promotions->first()->percent)/100 : $newProduct->original_price }}đ <del>{{ $newProduct->promotions->first() ? $newProduct->original_price.'đ' : '' }}</del></div>
-                </div>
+        @foreach ($newProducts as $newProduct)
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">{{ $newProduct->name }}</a>
+                <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? ($newProduct->original_price * $newProduct->promotions->first()->percent)/100 : $newProduct->original_price }}đ <del>{{ $newProduct->promotions->first() ? $newProduct->original_price.'đ' : '' }}</del></div>
               </div>
             </div>
-          @endforeach
-        </div>
+          </div>
+        @endforeach
       </div>
     </div>
   </section>
@@ -228,7 +226,7 @@
     <div class="container">
     <div class="related-content">
       <div class="title text-center">
-        <h2 class="mb-10">Sản phẩm bán chạy</h2>
+        <h2 class="mb-10">{{ __('index.product.top_sell') }}</h2>
       </div>
     </div>
     <div class="row">
