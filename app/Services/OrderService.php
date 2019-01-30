@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use Log;
 
 class OrderService
 {
@@ -45,5 +46,22 @@ class OrderService
     public function getOrderById($id)
     {
         return Order::with(['code:id,name', 'user:id', 'user.profile:id,name,user_id', 'orderDetails', 'orderDetails.product:id,name,original_price,category_id', 'orderDetails.product.category:id,name'])->findOrFail($id);
+    }
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param order $order order
+    *
+    * @return Order
+    */
+    public function destroy(Order $order)
+    {
+        try {
+            return $order->delete();
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return false;
     }
 }

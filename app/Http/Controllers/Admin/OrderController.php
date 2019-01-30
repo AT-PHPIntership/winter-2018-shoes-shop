@@ -49,4 +49,19 @@ class OrderController extends Controller
         }
         return redirect()->route('admin.orders.show', ['id' => $order->id])->with('error', trans('common.message.edit_error'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Order $order order
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Order $order)
+    {
+        if (app(OrderService::class)->destroy($order)) {
+            return redirect()->route('admin.orders.index')->with('success', trans('common.message.delete_success'));
+        }
+        return redirect()->back()->with('error', trans('common.message.delete_error'));
+    }
 }
