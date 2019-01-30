@@ -16,5 +16,5 @@ return [
         'female' => 2,
     ],
     'upload_folder' => '/upload/',
-    'image_default_product' => '/public/img/default_product.png',
+    'image_default_product' => '/public/img/default_product.jpg',
 ];

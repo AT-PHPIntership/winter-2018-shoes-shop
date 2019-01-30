@@ -55,4 +55,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Promotion::class, 'product_promotions');
     }
+    
+    /**
+     * Product has many orderDetails
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

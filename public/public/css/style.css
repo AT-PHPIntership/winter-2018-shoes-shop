@@ -54,3 +54,54 @@
 .text-gray {
   color: #cccccc;
 }
+.single-search-product img{
+  max-height: 70px;
+}
+.size-product {
+  width: 250px;
+  height: 250px;
+}
+.size-slide {
+  height: 700px;
+}
+.price h5 {
+  font-size: 22px;
+}
+.price p {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222222;
+}
+.men-product-area .overlay-bg {
+  background-image: -webkit-linear-gradient(45deg, #f6463d 0%, #1d0d0d 45%, #101010 100%);
+}
+.related-content {
+  margin-bottom: 10px;
+}
+.product-owl, .new-product-owl {
+  position: relative;
+}
+.new-product-owl .owl-nav button.owl-prev {
+  font-size: 50px;
+  position: absolute;
+  top: 38px;
+  left: -20px;
+}
+.new-product-owl .owl-nav button.owl-next {
+  font-size: 50px;
+  position: absolute;
+  top: 38px;
+  right: -20px;
+}
+.product-owl .owl-nav button.owl-prev {
+  font-size: 50px;
+  position: absolute;
+  top: 115px;
+  left: -20px;
+}
+.product-owl .owl-nav button.owl-next {
+  font-size: 50px;
+  position: absolute;
+  top: 115px;
+  right: -20px;
+}

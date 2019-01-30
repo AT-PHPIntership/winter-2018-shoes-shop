@@ -1,5 +1,5 @@
 <!-- start banner Area -->
-<section class="banner-area relative" id="home">
+<section class="banner-area relative no-bg" id="home">
   <div class="container-fluid">
     <!-- <div class="row"> -->
     <!-- <div class="row fullscreen align-items-center justify-content-center"> -->
@@ -23,13 +23,13 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="{{ asset('public/img/header-img.png') }}" alt="First slide">
+            <img class="d-block w-100 size-slide" src="{{ asset('public/img/banner.jpg') }}" alt="First slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="{{ asset('public/img/header-img.png') }}" alt="Second slide">
+            <img class="d-block w-100 size-slide" src="{{ asset('public/img/banner4.jpg') }}" alt="Second slide">
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="{{ asset('public/img/header-img.png') }}" alt="Third slide">
+            <img class="d-block w-100 size-slide" src="{{ asset('public/img/banner5.jpg') }}" alt="Third slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carousel-slider" role="button" data-slide="prev">

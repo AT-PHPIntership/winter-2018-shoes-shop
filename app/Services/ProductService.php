@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\OrderDetail;
+use App\Models\Category;
 
 class ProductService
 {
@@ -52,10 +54,41 @@ class ProductService
      */
     public function getProductByCategory(string $categoryName, array $columns = ['*'])
     {
-        return Product::with(['category' => function($query) use ($categoryName) {
-            $query->select('id', 'name')->where('name', $categoryName);
-        }, 'images:id,path,product_id', 'promotions'])
-        ->limit(4)
+        $id = Category::where('name', $categoryName)->first()->id;
+        if (Category::where('parent_id', $id)->get()->count()) {
+            $categoryIds = Category::where('parent_id', $id)->get(['id']);
+        } else {
+            $categoryIds = Category::where('id', $id)->get(['id']);
+        }
+        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions'])
+        ->whereIn('category_id', $categoryIds)
+        ->limit(8)
+        ->get($columns);
+    }
+
+    /**
+     * Get new products
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getNewProducts(array $columns = ['*'])
+    {
+        return Product::with(['images:id,path,product_id', 'promotions'])
+        ->orderBy('id', 'desc')
+        ->limit(8)
+        ->get($columns);
+    }
+
+    /**
+     * Get top sell products
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getTopSellProducts(array $columns = ['*'])
+    {
+        $productIds = OrderDetail::select(\DB::raw('count(product_id) as total, product_id'))->groupBy('product_id')->orderBy('total', 'desc')->limit(8)->get()->pluck('product_id');
+        return Product::with(['images:id,path,product_id', 'promotions'])
+        ->whereIn('id', $productIds)
         ->get($columns);
     }
 }

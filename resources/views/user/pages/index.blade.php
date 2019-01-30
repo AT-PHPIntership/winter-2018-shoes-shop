@@ -7,8 +7,8 @@
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-40">
           <div class="title text-center">
-            <h1 class="mb-10">Shop for Different Categories</h1>
-            <p>Who are in extremely love with eco friendly system.</p>
+            <h1 class="mb-10">Danh mục</h1>
+            {{-- <p>Who are in extremely love with eco friendly system.</p> --}}
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
               <div class="content">
                 <a href="#" target="_blank">
                   <div class="content-overlay"></div>
-                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c1.jpg') }}" alt="">
+                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_men.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
                     <h3 class="content-title">Giày nam</h3>
                   </div>
@@ -30,7 +30,7 @@
               <div class="content">
                 <a href="#" target="_blank">
                   <div class="content-overlay"></div>
-                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c2.jpg') }}" alt="">
+                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_women.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
                     <h3 class="content-title">Gày nữ</h3>
                   </div>
@@ -88,24 +88,26 @@
         </div>
       </div>
       <div class="row">
-        @foreach ($productsForMen as $productForMen)
-          <div class="col-lg-3 col-md-6 single-product">
-            <div class="content">
-              <div class="content-overlay"></div>
-              <img class="content-image img-fluid d-block mx-auto" src="{{ $productForMen->images->first() ? $productForMen->images->first()->path : config('define.image_default_product') }}" alt="">
-              <div class="content-details fadeIn-bottom">
-                <div class="bottom d-flex align-items-center justify-content-center">
-                  <a href="#"><span class="lnr lnr-cart"></span></a>
-                  <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+        <div class="product-owl owl-carousel">
+          @foreach ($productsForMen as $productForMen)
+            <div class="item single-product">
+              <div class="content">
+                <div class="content-overlay"></div>
+                <img class="content-image img-fluid d-block mx-auto size-product" src="{{ $productForMen->images->first() ? $productForMen->images->first()->path : config('define.image_default_product') }}" alt="">
+                <div class="content-details fadeIn-bottom">
+                  <div class="bottom d-flex align-items-center justify-content-center">
+                    <a href="#"><span class="lnr lnr-cart"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                  </div>
                 </div>
               </div>
+              <div class="price">
+                <h5 class="text-white">{{ $productForMen->name }}</h5>
+                <p class="text-white">{{ $productForMen->promotions->first() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></p>
+              </div>
             </div>
-            <div class="price">
-              <h5 class="text-white">{{ $productForMen->name }}</h5>
-              <h3 class="text-white">{{ $productForMen->promotions->first() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></h3>
-            </div>
-          </div>
-        @endforeach
+          @endforeach
+        </div>
       </div>
     </div>
   </section>
@@ -130,24 +132,26 @@
         </div>
       </div>
       <div class="row">
-        @foreach ($productsForWomen as $productForWomen)
-          <div class="col-lg-3 col-md-6 single-product">
-            <div class="content">
-              <div class="content-overlay"></div>
-              <img class="content-image img-fluid d-block mx-auto" src="{{ $productForWomen->images->first() ? $productForWomen->images->first()->path : config('define.image_default_product') }}" alt="">
-              <div class="content-details fadeIn-bottom">
-                <div class="bottom d-flex align-items-center justify-content-center">
-                  <a href="#"><span class="lnr lnr-cart"></span></a>
-                  <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+        <div class="product-owl owl-carousel">
+          @foreach ($productsForWomen as $productForWomen)
+            <div class="item single-product">
+              <div class="content">
+                <div class="content-overlay"></div>
+                <img class="content-image img-fluid d-block mx-auto size-product" src="{{ $productForWomen->images->first() ? $productForWomen->images->first()->path : config('define.image_default_product') }}" alt="">
+                <div class="content-details fadeIn-bottom">
+                  <div class="bottom d-flex align-items-center justify-content-center">
+                    <a href="#"><span class="lnr lnr-cart"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                  </div>
                 </div>
               </div>
+              <div class="price">
+                <h5>{{ $productForWomen->name }}</h5>
+                <p>{{ $productForWomen->promotions->first() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></p>
+              </div>
             </div>
-            <div class="price">
-              <h5>{{ $productForWomen->name }}</h5>
-              <h3 >{{ $productForWomen->promotions->first() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></h3>
-            </div>
-          </div>
-        @endforeach
+          @endforeach
+        </div>
       </div>
     </div>
   </section>
@@ -196,82 +200,24 @@
   <!-- Start related-product Area --> 
   <section class="related-product-area section-gap" id="latest">
     <div class="container">
-    <div class="related-content">
-      <div class="title text-center">
-        <h1 class="mb-10">Sản phẩm mới</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r1.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
+      <div class="related-content">
+        <div class="title text-center">
+          <h2 class="mb-10">Sản phẩm mới</h2>
         </div>
       </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r2.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r3.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r4.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r5.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r6.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r7.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r8.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
+      <div class="row">
+        <div class="new-product-owl owl-carousel">
+          @foreach ($newProducts as $newProduct)
+            <div class="item">
+              <div class="single-search-product d-flex">
+                <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
+                <div class="desc">
+                  <a href="#" class="title">{{ $newProduct->name }}</a>
+                  <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? ($newProduct->original_price * $newProduct->promotions->first()->percent)/100 : $newProduct->original_price }}đ <del>{{ $newProduct->promotions->first() ? $newProduct->original_price.'đ' : '' }}</del></div>
+                </div>
+              </div>
+            </div>
+          @endforeach
         </div>
       </div>
     </div>
@@ -282,83 +228,21 @@
     <div class="container">
     <div class="related-content">
       <div class="title text-center">
-        <h1 class="mb-10">Sản phẩm bán chạy</h1>
+        <h2 class="mb-10">Sản phẩm bán chạy</h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r5.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
+      @foreach ($topSellProducts as $topSellProduct)
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="{{ $topSellProduct->images->first() ? $topSellProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
+            <div class="desc">
+              <a href="#" class="title">{{ $topSellProduct->name }}</a>
+              <div class="price"><span class="lnr lnr-tag"></span> {{ $topSellProduct->promotions->first() ? ($topSellProduct->original_price * $topSellProduct->promotions->first()->percent)/100 : $topSellProduct->original_price }}đ <del>{{ $topSellProduct->promotions->first() ? $topSellProduct->original_price.'đ' : '' }}</del></div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r6.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r7.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r8.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r9.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r10.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r11.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="single-search-product d-flex">
-          <a href="#"><img src="{{ asset('public/img/r12.jpg') }}" alt=""></a>
-          <div class="desc">
-            <a href="#" class="title">Black lace Heels</a>
-            <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-          </div>
-        </div>
-      </div>
-    </div>
+      @endforeach
   </section>
   <!-- End related-product Area -->
   <!-- Start brand Area -->

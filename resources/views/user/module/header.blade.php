@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li><a href="#home">Home</a></li>
-          <li class="dropdown">
+          {{-- <li class="dropdown">
             <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
             Nam
             </a>
@@ -44,24 +44,20 @@
               <a class="dropdown-item" href="#">Giày búp bê</a>
             </div>
           </li>
-          <li><a href="#">Phụ kiện</a></li>
-          <!-- Dropdown -->
-          <li class="dropdown">
-            <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Pages
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="category.html">Category</a>
-              <a class="dropdown-item" href="single.html">Single</a>
-              <a class="dropdown-item" href="cart.html">Cart</a>
-              <a class="dropdown-item" href="checkout.html">Checkout</a>
-              <a class="dropdown-item" href="confermation.html">Confermation</a>
-              <a class="dropdown-item" href="login.html">Login</a>
-              <a class="dropdown-item" href="tracking.html">Tracking</a>
-              <a class="dropdown-item" href="generic.html">Generic</a>
-              <a class="dropdown-item" href="elements.html">Elements</a>
-            </div>
-          </li>
+          <li><a href="#">Trẻ em</a></li>
+          <li><a href="#">Phụ kiện</a></li> --}}
+          @foreach ($parentCategories as $parentCategory)
+            <li class="dropdown">
+              <a href="" id="navbardrop" data-toggle="dropdown">{{ $parentCategory->name }}</a>
+              @if ($parentCategory->children->count())
+                <div class="dropdown-menu">
+                  @foreach ($parentCategory->children as $subCategory)
+                    <a class="dropdown-item" href="#">{{ $subCategory->name }}</a>
+                  @endforeach
+                </div>
+              @endif
+            </li>
+          @endforeach
         </ul>
       </div>
       <div class="collapse navbar-collapse justify-content-end align-items-center">
