@@ -91,4 +91,28 @@ class ProductService
         ->whereIn('id', $productIds)
         ->get($columns);
     }
+
+    /**
+     * Get all data table products
+     *
+     * @return object
+     */
+    public function getProductWithPaginate()
+    {
+        return Product::with('promotions')->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows_12'));
+    }
+
+    /**
+     * Get products by categoryId
+     *
+     * @param int $id id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getProductByCatIdWithPaginate(int $id)
+    {
+        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions'])
+        ->where('category_id', $id)
+        ->paginate(config('define.paginate.limit_rows_12'));
+    }
 }

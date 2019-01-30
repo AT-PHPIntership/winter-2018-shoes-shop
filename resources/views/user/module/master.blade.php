@@ -11,6 +11,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('public/css/css/owl.carousel.css') }}">   --}}
     <link rel="stylesheet" href="{{ asset('public/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/nouislider.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('public/css/ion.rangeSlider.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('public/css/ion.rangeSlider.skinFlat.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('public/css/bootstrap.css') }}">
@@ -30,6 +31,7 @@
     <script src="{{ asset('public/js/jquery.ajaxchimp.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('public/js/nouislider.min.js') }}"></script>
     {{-- <script src="{{ asset('public/js/ion.rangeSlider.js') }}"></script> --}}
     <script src="{{ asset('public/js/jquery.magnific-popup.min.js') }}"></script>
     {{-- <script src="{{ asset('public/js/owl.carousel.min.js') }}"></script>	 --}}

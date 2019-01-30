@@ -4,6 +4,7 @@ return [
     'number_element_in_table' => 10,
     'paginate' => [
         'limit_rows' => 10,
+        'limit_rows_12' => 12,
     ],
     'format_date_vn' => 'd-m-Y',
     'path' => [

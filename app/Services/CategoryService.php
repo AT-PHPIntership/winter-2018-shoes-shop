@@ -40,7 +40,7 @@ class CategoryService
      */
     public function getParentList()
     {
-        $categories = Category::select('id', 'name', 'parent_id')
+        $categories = Category::with('products:id,category_id')->select('id', 'name', 'parent_id')
                         ->whereNull('parent_id')
                         ->get();
         return $categories;

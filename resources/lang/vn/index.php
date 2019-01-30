@@ -33,7 +33,7 @@ return [
         ],
     ],
     'category' => 'Danh mục',
-    'shose' => [
+    'shoes' => [
         'men' => 'Giày nam',
         'women' => 'Giày nữ',
         'kid' => 'Giày trẻ em',

@@ -108,3 +108,9 @@
 .nav-left {
   flex-basis: 120%;
 }
+.public-pag .pagination a {
+  line-height: 17px;
+}
+.public-pag {
+  margin-bottom: 25px;
+}
