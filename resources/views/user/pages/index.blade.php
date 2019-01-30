@@ -97,7 +97,7 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal" data-product="{{ $productForMen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>

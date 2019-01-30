@@ -33,7 +33,7 @@
           <div class="col-lg-6">
             <div class="quick-view-content">
               <div class="top">
-                <h3 class="head">Mill Oil 1000W Heater, White</h3>
+                <h3 class="head">AAAAAAAAAAAAAAAAAAAAA</h3>
                 <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10">$149.99</span></div>
                 <div class="category">Category: <span>Household</span></div>
                 <div class="available">Availibility: <span>In Stock</span></div>
