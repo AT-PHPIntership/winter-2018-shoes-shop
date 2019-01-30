@@ -97,7 +97,7 @@ class ProductService
     /**
      * Upload Image
      *
-     * @param array images files
+     * @param array $image files
      *
      * @return \Illuminate\Http\Response
      */
@@ -109,43 +109,44 @@ class ProductService
     }
 
     /**
-     * Store image files 
+     * Store image files
      *
-     * @param array $data       product
-     * @param int   $product_id product
-     * 
+     * @param array $data      product
+     * @param int   $productId product
+     *
      * @return \Illuminate\Http\Response
      */
-    public function stroreImages($data, $product_id)
+    public function stroreImages($data, $productId)
     {
         if (isset($data['upload_file'])) {
             foreach ($data['upload_file'] as $image) {
-                Image::create([
-                    'product_id' => $product_id,
-                    'path' => $this->uploadImage($image)
-                ]);
+                if ($image->isValid()) {
+                    Image::create([
+                        'product_id' => $productId,
+                        'path' => $this->uploadImage($image)
+                    ]);
+                }
             }
         }
         return true;
     }
 
     /**
-     * Store product detail of each product 
+     * Store product detail of each product
      *
-     * @param array $data       product detail
-     * @param int   $product_id product detail
-     * @param int   $color_id   product detail
-     * @param int   $size_id    product detail
-     * @param int   $quantity   product detail
+     * @param int $productId product detail
+     * @param int $colorId   product detail
+     * @param int $sizeId    product detail
+     * @param int $quantity  product detail
      *
      * @return \Illuminate\Http\Response
      */
-    public function stroreProductDetail($data, $product_id, $color_id, $size_id, $quantity)
-    {    
+    public function stroreProductDetail($productId, $colorId, $sizeId, $quantity)
+    {
         $productDetail = ProductDetail::create([
-            'product_id' => $product_id,
-            'color_id' => $color_id,
-            'size_id' => $size_id,
+            'product_id' => $productId,
+            'color_id' => $colorId,
+            'size_id' => $sizeId,
             'quantity' => $quantity,
         ]);
         return $productDetail;
