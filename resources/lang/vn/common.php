@@ -5,6 +5,7 @@ return [
     'delete' => 'Xóa',
     'reset' => 'Làm mới',
     'submit' => 'Lưu',
+    'detail' => 'Chi tiết',
     'show' => 'Chi tiết',
     'back' => 'Quay lại',
     'table' => [
