@@ -62,54 +62,30 @@ class ProductService
      */
     public function storeProduct($data)
     {
+        $quantity = 0;
+        foreach ($data['quantity_type'] as $itemQuantity) {
+            $quantity = $quantity + $itemQuantity;
+        }
         $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
-        $quantity = 0;// 29/01
         DB::beginTransaction();
         try {
-            if (isset($data['quantity_type'])) {
-                foreach ($data['quantity_type'] as $itemQuantity) {
-                    $quantity = $quantity + $itemQuantity;
-                }
-                $newProduct = Product::create([
-                    'name' => $data['name'],
-                    'category_id' => $categoryId,
-                    'original_price' => $data['original_price'],
-                    'quantity' => $quantity,
-                    'description' => $data['description'],
-                ]);
-                //part function // 29/01
-                for ($i=0; $i < count($data['color_id']); $i++) {
-                    $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
-                    if ($productDetail) {
-                        $productDetail->quantity += $data['quantity_type'][$i];
-                        $productDetail->save();
-                    } else {
-                        ProductDetail::create([
-                            'product_id' => $newProduct->id,
-                            'color_id' => $data['color_id'][$i],
-                            'size_id' => $data['size_id'][$i],
-                            'quantity' => $data['quantity_type'][$i],
-                        ]);
-                    }
-                }
-            } else {
-                Product::create([// 29/01 repeat code
-                    'name' => $data['name'],
-                    'category_id' => $categoryId,
-                    'original_price' => $data['original_price'],
-                    'quantity' => $quantity,
-                    'description' => $data['description'],
-                ]);
-            }
-            //part function // 29/01
-            if (isset($data['upload_file'])) {
-                foreach ($data['upload_file'] as $image) {
-                    Image::create([
-                        'product_id' => $newProduct->id,
-                        'path' => $this->uploadImage($image)
-                    ]);
+            $newProduct = Product::create([
+                'name' => $data['name'],
+                'category_id' => $categoryId,
+                'original_price' => $data['original_price'],
+                'quantity' => $quantity,
+                'description' => $data['description'],
+            ]);
+            for ($i=0; $i < count($data['color_id']); $i++) {
+                $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
+                if ($productDetail) {
+                    $productDetail->quantity += $data['quantity_type'][$i];
+                    $productDetail->save();
+                } else {
+                    $this->stroreProductDetail($data, $newProduct->id, $data['color_id'][$i], $data['size_id'][$i], $data['quantity_type'][$i]);
                 }
             }
+            $this->stroreImages($data, $newProduct->id);
             DB::commit();
             return $newProduct;
         } catch (Exception $e) {
@@ -131,24 +107,48 @@ class ProductService
         $image->move('upload', $fileName);
         return $fileName;
     }
-// 29/01
+
     /**
      * Store image files 
      *
-     * @param string $image Image
+     * @param array $data       product
+     * @param int   $product_id product
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function stroreImages($data, $product_id)
+    {
+        if (isset($data['upload_file'])) {
+            foreach ($data['upload_file'] as $image) {
+                Image::create([
+                    'product_id' => $product_id,
+                    'path' => $this->uploadImage($image)
+                ]);
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Store product detail of each product 
+     *
+     * @param array $data       product detail
+     * @param int   $product_id product detail
+     * @param int   $color_id   product detail
+     * @param int   $size_id    product detail
+     * @param int   $quantity   product detail
      *
      * @return \Illuminate\Http\Response
      */
-    public function stroreImages($image)
-    {
-        // if (isset($data['upload_file'])) {
-        //     foreach ($data['upload_file'] as $image) {
-        //         Image::create([
-        //             'product_id' => $newProduct->id,
-        //             'path' => $this->uploadImage($image)
-        //         ]);
-        //     }
-        // }
+    public function stroreProductDetail($data, $product_id, $color_id, $size_id, $quantity)
+    {    
+        $productDetail = ProductDetail::create([
+            'product_id' => $product_id,
+            'color_id' => $color_id,
+            'size_id' => $size_id,
+            'quantity' => $quantity,
+        ]);
+        return $productDetail;
     }
 
     /**

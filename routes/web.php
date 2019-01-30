@@ -27,7 +27,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::get('category/children', 'CategoryController@getChildren');
         Route::resource('category', 'CategoryController');
         Route::get('product/detail', 'ProductController@getDetail');
-        Route::resource('product', 'ProductController')->except('show', 'edit', 'update', 'destroy');
+        Route::resource('product', 'ProductController')->except('edit', 'update', 'destroy');
         Route::resource('promotions', 'PromotionController');
         Route::resource('codes', 'CodeController')->except(['show']);
     });

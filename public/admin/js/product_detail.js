@@ -1,7 +1,7 @@
 //Display choosen images
 function previewImage() 
 {
-  var totalFile = document.getElementById("upload-file").files.length;
+  var totalFile = $("#upload-file").files.length;
   var images = "";
   for(var i = 0; i < totalFile; i++)
   {
