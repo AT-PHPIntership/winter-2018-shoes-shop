@@ -33,35 +33,44 @@
           <div class="col-lg-6">
             <div class="quick-view-content">
               <div class="top">
-                <h3 class="head">AAAAAAAAAAAAAAAAAAAAA</h3>
-                <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10">$149.99</span></div>
-                <div class="category">Category: <span>Household</span></div>
-                <div class="available">Availibility: <span>In Stock</span></div>
+                <h3 id="modal-name" class="head"></h3>
+                <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10" id="modal-price">$149.99</span></div>
+                <div class="category">Danh mục: <span id="modal-category"></span></div>
+                <div class="available">Còn lại: <span id="modal-inventory"></span></div>
               </div>
               <div class="middle">
-                <p class="content">Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for something that can make your interior look awesome, and at the same time give you the pleasant warm feeling during the winter.</p>
-                <a href="#" class="view-full">View full Details <span class="lnr lnr-arrow-right"></span></a>
+                <p class="content" id="modal-description"></p>
+                <a href="#" class="view-full">Chi tiết <span class="lnr lnr-arrow-right"></span></a>
               </div>
               <div class="bottom no-bg">
-                <div class="color-picker d-flex align-items-center">Color: 
-                  <span class="single-pick"></span>
-                  <span class="single-pick"></span>
-                  <span class="single-pick"></span>
-                  <span class="single-pick"></span>
-                  <span class="single-pick"></span>
+                <div class="color-picker d-flex align-items-center">
+                  Color: 
+                  <div class="default-select ml-15">
+                    <select id="modal-color">
+                      <option value="1">Xanh</option>
+                      <option value="1">Vang</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="size-picker d-flex align-items-center mt-15">
+                  Size: 
+                  <div class="default-select ml-15">
+                    <select id="modal-size">
+                      <option value="1">43</option>
+                      <option value="1">44</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="quantity-container d-flex align-items-center mt-15">
                   Quantity:
-                  <input type="text" class="quantity-amount ml-15" value="1" />
+                  <input type="text" id="modal-quantity" class="quantity-amount ml-15" value="1" />
                   <div class="arrow-btn d-inline-flex flex-column">
                     <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
                     <button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
                   </div>
                 </div>
                 <div class="d-flex mt-20">
-                  <a href="javascript:void(0)" class="view-btn color-2 js-addcart"><span class="txt-purple">Add to Cart</span></a>
-                  <a href="#" class="like-btn"><span class="lnr lnr-layers"></span></a>
-                  <a href="#" class="like-btn"><span class="lnr lnr-heart"></span></a>
+                  <a href="javascript:void(0)" class="genric-btn primary js-addcart"><span>Add to Cart</span></a>
                 </div>
               </div>
             </div>

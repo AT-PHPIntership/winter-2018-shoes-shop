@@ -267,5 +267,6 @@
       </div>
     </div>
   </section>
-  <!-- End brand Area -->    
+  <!-- End brand Area -->  
+  <script>var getDetailProduct = "{{ url('getDetailProduct') }}"</script>  
 @endsection
