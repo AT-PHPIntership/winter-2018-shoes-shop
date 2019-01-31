@@ -36,6 +36,16 @@ return [
         'report' => [
             'title' => 'Báo cáo thống kê',
         ],
+        'promotion' => [
+            'title' => 'Quản lý khuyến mãi',
+            'list' => 'Danh sách khuyến mãi',
+            'add' => 'Thêm khuyến mãi',
+        ],
+        'code' => [
+            'title' => 'Quản lý mã giảm giá',
+            'list' => 'Danh sách mã giảm giá',
+            'add' => 'Thêm mã giảm giá',
+        ],
     ],
     'header' => [
         'hello' => 'Xin chào',

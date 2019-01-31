@@ -1,0 +1,15 @@
+.product-menu {
+  list-style-type: none;
+}
+.product-item {
+  padding: 5px 10px;
+  float: left;
+}
+.product-img {
+  height: 80px;
+  width: 80px;
+}
+.product-picture {
+  height: 250px;
+  width: 250px
+}
