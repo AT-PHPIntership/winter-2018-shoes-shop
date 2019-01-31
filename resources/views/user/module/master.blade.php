@@ -28,7 +28,7 @@
     <script src="{{ asset('public/js/popper.min.js') }}" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="{{ asset('public/js/vendor/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/js/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ asset('public/js/jquery.nice-select.min.js') }}"></script>
+    {{-- <script src="{{ asset('public/js/jquery.nice-select.min.js') }}"></script> --}}
     <script src="{{ asset('public/js/jquery.sticky.js') }}"></script>
     {{-- <script src="{{ asset('public/js/ion.rangeSlider.js') }}"></script> --}}
     <script src="{{ asset('public/js/jquery.magnific-popup.min.js') }}"></script>

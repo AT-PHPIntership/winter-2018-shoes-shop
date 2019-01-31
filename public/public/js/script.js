@@ -1,10 +1,3 @@
-$('.js-addcart').each(function(){
-  var nameProduct = $(this).parent().parent().parent().find('.top .head').html();
-  $(this).on('click', function(){
-    swal(nameProduct, "is added to cart !", "success");
-    // alert(nameProduct);
-  });
-});
 $(document).ready(function(){
   $(".owl-carousel").owlCarousel({
     loop:true,
@@ -55,6 +48,13 @@ $(document).ready(function(){
           eleSize += '<option value="' + val.id + '">' + val.size + '</option>';
         });
         modal.find('#modal-size').html(eleSize);
+        var eleImage = "";
+        $.each(data.images, function(key, val){
+          var active = '';
+          active = (key == 0) ? 'active' : '';
+          eleImage += '<div class="carousel-item ' + active + '"><img class="d-block" src="' + val.path + '" alt=""></div>';
+        });
+        modal.find('#modal-image').html(eleImage);
       }
     });
   });
