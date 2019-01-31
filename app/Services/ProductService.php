@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\OrderDetail;
 use App\Models\Category;
+use Carbon\Carbon;
 
 class ProductService
 {
@@ -41,9 +42,42 @@ class ProductService
      */
     public function getProductById($id)
     {
-        return Product::with(['category:id,name', 'images:id,product_id,path', 'productDetails' => function ($query) {
-            $query->select('id', 'color_id', 'product_id', 'size_id');
-        }, 'productDetails.color:id, name', 'productDetails.size:id,size'])->findOrFail($id);
+        $product = Product::with(['category:id,name', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }, 'images:id,product_id,path', 'productDetails:id,product_id,color_id,size_id', 'productDetails.color:id,name', 'productDetails.size:id,size'])->findOrFail($id);
+        $data['product'] = [
+            'id' => $product->id,
+            'name' => $product->name,
+            'original_price' => $product->original_price,
+            'price' => $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : null,
+            'inventory' => $product->quantity - $product->total_sold,
+            'description' => $product->description,
+        ];
+        $data['category'] = [
+            'id' => $product->category->id,
+            'name' => $product->category->name,
+        ];
+        $data['images'] = $product->images;
+       
+        // $colors = $product->productDetails->map(function ($item) {
+        //     return $item['color'];
+        // });
+        // $sizes = $product->productDetails->map(function ($item) {
+        //     return $item['size'];
+        // });
+        // $data['colors'] = $colors->keyBy('id');
+        // $data['sizes'] = $sizes->keyBy('id');
+        $details = $product->productDetails->map(function ($item) {
+            return [
+                'colors' => $item['color'],
+                'sizes' => $item['size'],
+            ];
+        });
+        $data['colors'] = $details->pluck('colors')->keyBy('id');
+        $data['sizes'] = $details->pluck('sizes')->keyBy('id');
+        // \Log::debug($data['colors']);
+        return json_encode($data);
     }
 
     /**

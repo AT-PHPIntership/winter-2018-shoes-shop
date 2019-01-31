@@ -34,7 +34,7 @@
             <div class="quick-view-content">
               <div class="top">
                 <h3 id="modal-name" class="head"></h3>
-                <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10" id="modal-price">$149.99</span></div>
+                <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10" id="modal-price"></span> <del id="modal-original-price" class="ml-10"></del></div>
                 <div class="category">Danh mục: <span id="modal-category"></span></div>
                 <div class="available">Còn lại: <span id="modal-inventory"></span></div>
               </div>
@@ -45,19 +45,15 @@
               <div class="bottom no-bg">
                 <div class="color-picker d-flex align-items-center">
                   Color: 
-                  <div class="default-select ml-15">
+                  <div class="ml-15">
                     <select id="modal-color">
-                      <option value="1">Xanh</option>
-                      <option value="1">Vang</option>
                     </select>
                   </div>
                 </div>
                 <div class="size-picker d-flex align-items-center mt-15">
                   Size: 
-                  <div class="default-select ml-15">
+                  <div class="ml-15">
                     <select id="modal-size">
-                      <option value="1">43</option>
-                      <option value="1">44</option>
                     </select>
                   </div>
                 </div>
