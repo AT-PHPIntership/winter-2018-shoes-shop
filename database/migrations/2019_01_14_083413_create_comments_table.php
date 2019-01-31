@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('content');
+            $table->tinyInteger('status')->length(1)->default(1);
             $table->timestamps();
         });
     }
