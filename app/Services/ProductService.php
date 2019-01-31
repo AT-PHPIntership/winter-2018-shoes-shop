@@ -59,24 +59,14 @@ class ProductService
             'name' => $product->category->name,
         ];
         $data['images'] = $product->images;
-       
-        // $colors = $product->productDetails->map(function ($item) {
-        //     return $item['color'];
-        // });
-        // $sizes = $product->productDetails->map(function ($item) {
-        //     return $item['size'];
-        // });
-        // $data['colors'] = $colors->keyBy('id');
-        // $data['sizes'] = $sizes->keyBy('id');
         $details = $product->productDetails->map(function ($item) {
             return [
                 'colors' => $item['color'],
                 'sizes' => $item['size'],
             ];
         });
-        $data['colors'] = $details->pluck('colors')->keyBy('id');
-        $data['sizes'] = $details->pluck('sizes')->keyBy('id');
-        // \Log::debug($data['colors']);
+        $data['colors'] = $details->pluck('colors');
+        $data['sizes'] = $details->pluck('sizes');
         return json_encode($data);
     }
 
