@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\CommentService;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -32,5 +33,20 @@ class CommentController extends Controller
             return redirect()->route('admin.comments.index')->with('success', trans('common.message.delete_success'));
         }
         return redirect()->route('admin.comments.index')->with('error', trans('common.message.delete_error'));
+    }
+
+    /**
+     * Change status comment
+     *
+     * @param \Illuminate\Http\Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changeStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $response = app(CommentService::class)->changeStatus((int) $request->input('status'), (int) $request->input('id'));
+            return $response;
+        }
     }
 }

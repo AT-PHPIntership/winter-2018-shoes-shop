@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    const ACTIVE_STATUS = 1;
+    const BLOCKED_STATUS = 0;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'product_id', 'parent_id', 'content',
+        'user_id', 'product_id', 'parent_id', 'content', 'comment'
     ];
     
     /**
@@ -33,16 +36,6 @@ class Comment extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
-    }
-
-    /**
-     * Parent Comment has many Child Comment
-     *
-     * @return void
-     */
-    public function children()
-    {
-        return $this->hasMany(Comment::class, 'parent_id', 'id');
     }
 
     /**
