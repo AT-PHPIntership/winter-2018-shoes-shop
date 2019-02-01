@@ -22,11 +22,12 @@
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 10px">@lang('comment.table.id')</th>
-                  <th>@lang('comment.table.user')</th>
+                  <th id="user-name">@lang('comment.table.user')</th>
                   <th>@lang('comment.table.product')</th>
                   <th>@lang('comment.table.content')</th>
                   <th>@lang('comment.table.parent_id')</th>
                   <th>@lang('comment.table.created_at')</th>
+                  <th>@lang('comment.table.status')</th>
                   <th style="width: 100px">@lang('comment.table.action')</th>
                 </tr>
                 @foreach ($comments as $comment)
@@ -37,6 +38,9 @@
                     <td>{{ $comment->content }}</td>
                     <td>{{ $comment->parent ? $comment->parent->content : '' }}</td>
                     <td>{{ formatDateVN($comment->created_at) }}</td>
+                    <td>
+                      <button data-id="{{ $comment->id }}" data-status="{{ $comment->status }}" class="js-status-cmt btn btn-block {{ $comment->status == 1 ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $comment->status == 1 ? __('comment.table.active') : __('comment.table.blocked') }}</button>
+                    </td>
                     <td>
                       <form class="form-inline" action="" method="POST">
                         @csrf
@@ -59,3 +63,4 @@
     </section>
   </div>
 @endsection
+<script>var changeStatus = "{{ url('admin/comments/changeStatus') }}"</script>

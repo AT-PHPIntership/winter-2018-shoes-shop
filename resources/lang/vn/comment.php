@@ -14,5 +14,8 @@ return [
         'action' => 'Hành động',
         'created_at' => 'Ngày tạo',
         'updated_at' => 'Ngày sửa',
+        'status' => 'Trạng thái',
+        'active' => 'Hoạt động',
+        'blocked' => 'Chặn',
     ],
 ];
