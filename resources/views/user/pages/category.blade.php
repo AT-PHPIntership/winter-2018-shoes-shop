@@ -18,7 +18,27 @@
   <div class="container">
     <div class="row">
       <div class="col-xl-9 col-lg-8 col-md-7">
-        <h2>Danh sách sản phẩm</h2>
+        {{-- <h2>Danh sách sản phẩm</h2> --}}
+        <!-- Start Filter Bar -->
+        <div class="row">
+          <div class="col-lg-3 col-md-12 col-sm-6">
+            <select class="form-control form-control-sm">
+              <option value="1">A-Z</option>
+              <option value="1">Z-A</option>
+            </select>
+          </div>
+          <div class="col-lg-9 col-md-12 col-sm-6">
+            <span>Lọc theo: </span>
+            <ul class="active-filter">
+              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Gionee</li>
+              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
+              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
+              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
+              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
+            </ul>
+          </div>
+        </div>
+        <!-- End Filter Bar -->
         <!-- Start Best Seller -->
         <section class="lattest-product-area pb-40 category-list">
           <div class="row" id="list-product">
@@ -70,15 +90,7 @@
           </ul>
         </div> --}}
         <div class="sidebar-filter mt-50">
-          {{-- <div class="top-filter-head">Product Filters</div>
-          <div class="common-filter">
-            <div class="head">Active Filters</div>
-            <ul>
-              <li class="filter-list"><i class="fa fa-window-close" aria-hidden="true"></i>Gionee (29)</li>
-              <li class="filter-list"><i class="fa fa-window-close" aria-hidden="true"></i>Black with red (09)</li>
-            </ul>
-          </div>
-          <div class="common-filter">
+          {{-- <div class="common-filter">
             <div class="head">Brands</div>
             <form action="#">
               <ul>
@@ -93,11 +105,20 @@
           <div class="common-filter">
             <div class="head">Color</div>
             <form action="#">
-              <ul>
+              <ul class="list-color">
                 @foreach ($colors as $color)
                   <li class="filter-list"><input class="pixel-radio js-radio-color" type="radio" data-id="{{ $color->id }}" name="color"><label for="black">{{ $color->name }}</label></li>                  
                 @endforeach
-                {{-- <li class="filter-list"><input class="pixel-radio js-radio-color" type="radio" data-id="2" name="color"><label for="black">Den</label></li>                   --}}
+              </ul>
+            </form>
+          </div>
+          <div class="common-filter">
+            <div class="head">Size</div>
+            <form action="#">
+              <ul class="list-size">
+                @foreach ($sizes as $size)
+                  <li class="filter-list"><input class="pixel-radio js-radio-size" type="radio" data-id="{{ $size->id }}" name="color"><label for="black">{{ $size->size }}</label></li>                  
+                @endforeach
               </ul>
             </form>
           </div>

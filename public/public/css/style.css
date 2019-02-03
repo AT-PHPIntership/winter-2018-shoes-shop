@@ -58,7 +58,7 @@
   max-height: 70px;
 }
 .size-product {
-  width: 250px;
+  /* width: 250px; */
   height: 250px;
 }
 .size-slide {
@@ -116,4 +116,16 @@
 }
 .text-red {
   color: #f41068;
+}
+.active-filter {
+  display: inline-block;
+}
+.active-filter li{
+  display: inline;
+}
+.filter-bar {
+  padding: 10px 0 10px 0;
+}
+.list-size li{
+  display: inline-block;
 }

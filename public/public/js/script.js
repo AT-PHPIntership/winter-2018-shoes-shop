@@ -25,8 +25,6 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {colorId:colorId, categoryId:1},
       success: function(data){
-        // console.log(data);
-        // console.log(data.length);
         var list = '';
         if (data.length) {
           $.each(data, function(key, val){

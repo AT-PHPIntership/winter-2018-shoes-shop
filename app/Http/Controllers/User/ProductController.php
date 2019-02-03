@@ -36,8 +36,8 @@ class ProductController extends Controller
         $products = app(ProductService::class)->getProductByCatIdWithPaginate($id);
         // $parentCategories = app(CategoryService::class)->getParentList();
         $colors = app(ColorService::class)->getAll(['id','name']);
-        // $sizes = app(SizeService::class)->getAll(['id','size']);
-        return view('user.pages.category', compact(['products', 'colors']));
+        $sizes = app(SizeService::class)->getAll(['id','size']);
+        return view('user.pages.category', compact(['products', 'colors', 'sizes']));
     }
 
     /**

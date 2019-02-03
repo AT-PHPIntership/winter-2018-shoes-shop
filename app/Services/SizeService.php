@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Color;
+use App\Models\Size;
 
-class ColorService
+class SizeService
 {
     /**
      * Get all data table products
@@ -15,6 +15,6 @@ class ColorService
      */
     public function getAll(array $columns = ['*'])
     {
-        return Color::get($columns);
+        return Size::get($columns);
     }
 }
