@@ -206,19 +206,17 @@
         </div>
       </div>
       <div class="row">
-        <div class="new-product-owl owl-carousel">
-          @foreach ($newProducts as $newProduct)
-            <div class="item">
-              <div class="single-search-product d-flex">
-                <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
-                <div class="desc">
-                  <a href="#" class="title">{{ $newProduct->name }}</a>
-                  <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? ($newProduct->original_price * $newProduct->promotions->first()->percent)/100 : $newProduct->original_price }}đ <del>{{ $newProduct->promotions->first() ? $newProduct->original_price.'đ' : '' }}</del></div>
-                </div>
+        @foreach ($newProducts as $newProduct)
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
+            <div class="single-search-product d-flex">
+              <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
+              <div class="desc">
+                <a href="#" class="title">{{ $newProduct->name }}</a>
+                <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? ($newProduct->original_price * $newProduct->promotions->first()->percent)/100 : $newProduct->original_price }}đ <del>{{ $newProduct->promotions->first() ? $newProduct->original_price.'đ' : '' }}</del></div>
               </div>
             </div>
-          @endforeach
-        </div>
+          </div>
+        @endforeach
       </div>
     </div>
   </section>

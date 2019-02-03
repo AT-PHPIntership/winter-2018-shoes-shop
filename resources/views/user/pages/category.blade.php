@@ -21,7 +21,7 @@
         <h2>Danh sách sản phẩm</h2>
         <!-- Start Best Seller -->
         <section class="lattest-product-area pb-40 category-list">
-          <div class="row">
+          <div class="row" id="list-product">
             @foreach ($products as $product)
               <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product">
                 <div class="content">
@@ -44,15 +44,15 @@
         </section>
         <!-- End Best Seller -->
         <!-- Start Filter Bar -->
-        <div class="filter-bar d-flex flex-wrap align-items-center public-pag">
+        {{-- <div class="filter-bar d-flex flex-wrap align-items-center public-pag"> --}}
           {{-- <ul class="pagination pagination-sm no-margin pull-right public-pag"> --}}
-            {{ $products->links() }}
+            {{-- {{ $products->links() }} --}}
           {{-- </ul> --}}
-        </div>
+        {{-- </div> --}}
         <!-- End Filter Bar -->
       </div>
       <div class="col-xl-3 col-lg-4 col-md-5">
-        <div class="sidebar-categories">
+        {{-- <div class="sidebar-categories">
           <div class="head">Browse Categories</div>
           <ul class="main-categories">
             @foreach ($parentCategories as $parentCategory)
@@ -68,9 +68,9 @@
               </li>
             @endforeach
           </ul>
-        </div>
+        </div> --}}
         <div class="sidebar-filter mt-50">
-          <div class="top-filter-head">Product Filters</div>
+          {{-- <div class="top-filter-head">Product Filters</div>
           <div class="common-filter">
             <div class="head">Active Filters</div>
             <ul>
@@ -89,20 +89,19 @@
                 <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung" name="brand"><label for="samsung">Samsung<span>(19)</span></label></li>
               </ul>
             </form>
-          </div>
+          </div> --}}
           <div class="common-filter">
             <div class="head">Color</div>
             <form action="#">
               <ul>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">Black Leather<span>(29)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">Black with red<span>(19)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Spacegrey<span>(19)</span></label></li>
+                @foreach ($colors as $color)
+                  <li class="filter-list"><input class="pixel-radio js-radio-color" type="radio" data-id="{{ $color->id }}" name="color"><label for="black">{{ $color->name }}</label></li>                  
+                @endforeach
+                {{-- <li class="filter-list"><input class="pixel-radio js-radio-color" type="radio" data-id="2" name="color"><label for="black">Den</label></li>                   --}}
               </ul>
             </form>
           </div>
-          <div class="common-filter">
+          {{-- <div class="common-filter">
             <div class="head">Price</div>
             <div class="price-range-area">
               <div id="price-range"></div>
@@ -115,9 +114,10 @@
                 <div id="upper-value"></div>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
   </div>
+  <script>var productsByCatAndColorUrl = "{{ url('category/getProductsByColorIdAndCategoryId') }}";</script>
 @endsection

@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\OrderDetail;
 use App\Models\Category;
+use App\Models\ProductDetail;
+use Carbon\Carbon;
 
 class ProductService
 {
@@ -60,7 +62,10 @@ class ProductService
         } else {
             $categoryIds = Category::where('id', $id)->get(['id']);
         }
-        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions'])
+        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])
         ->whereIn('category_id', $categoryIds)
         ->limit(8)
         ->get($columns);
@@ -111,8 +116,43 @@ class ProductService
      */
     public function getProductByCatIdWithPaginate(int $id)
     {
-        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions'])
+        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])
         ->where('category_id', $id)
         ->paginate(config('define.paginate.limit_rows_12'));
+    }
+
+    /**
+     * Get products by colorId and categoryId
+     *
+     * @param int $colorId    colorId
+     * @param int $categoryId categoryId
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getProductsByColorIdAndCategoryId(int $colorId, int $categoryId)
+    {
+        $products =  Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                ->where('end_date', '>=', Carbon::now());
+        }])
+        ->join('categories as c', 'c.id', '=', 'products.category_id')
+        ->join('product_details as pd', 'pd.product_id', '=', 'products.id')
+        ->join('colors', 'colors.id', '=', 'pd.color_id')
+        ->select('products.id', 'products.name', 'products.original_price')
+        ->where('category_id', $categoryId)
+        ->where('color_id', $colorId)
+        ->distinct('product_id')
+        ->get();
+        $data = [];
+        foreach ($products as $key => $product) {
+            $data[$key]['name'] = $product->name;
+            $data[$key]['original_price'] = $product->original_price;
+            $data[$key]['price'] =  $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : null;
+            $data[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
+        }
+        return $data;
     }
 }
