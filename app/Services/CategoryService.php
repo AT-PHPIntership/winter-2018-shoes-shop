@@ -73,4 +73,16 @@ class CategoryService
         ->where('parent_id', $parentCat->id)
         ->get($columns);
     }
+
+     /**
+     * Get Category by id
+     *
+     * @param int $id id
+     *
+     * @return Category
+     */
+    public function getCategoryById(int $id)
+    {
+        return Category::findOrFail($id);
+    }
 }

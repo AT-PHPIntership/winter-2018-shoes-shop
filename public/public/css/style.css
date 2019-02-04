@@ -117,15 +117,34 @@
 .text-red {
   color: #f41068;
 }
-.active-filter {
+.active-filter-list {
   display: inline-block;
 }
-.active-filter li{
+.active-filter-list li{
   display: inline;
 }
 .filter-bar {
   padding: 10px 0 10px 0;
 }
-.list-size li{
+.list-size li {
   display: inline-block;
+}
+.ml-28 {
+  margin-left: 28px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.in-bl {
+  display: inline-block;
+}
+.mgb-5 {
+  margin-bottom: 5px;
+}
+.sidebar-filter .head {
+  padding: 0;
+}
+.filter-list i {
+  margin-right: 0;
+  margin-left: 10px;
 }

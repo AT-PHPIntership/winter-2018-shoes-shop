@@ -8,7 +8,7 @@
           <h1>Danh mục</h1>
           <nav class="d-flex align-items-center justify-content-start">
             <a href="{{ route('user.index') }}">Home<i class="fa fa-caret-right" aria-hidden="true"></i></a>
-            <a href="javascript:void(0)">Fashon Category</a>
+            <a href="javascript:void(0)" id="active-category" data-id="{{ $category->id }}">{{ $category->name }}</a>
           </nav>
         </div>
       </div>
@@ -22,19 +22,19 @@
         <!-- Start Filter Bar -->
         <div class="row">
           <div class="col-lg-3 col-md-12 col-sm-6">
-            <select class="form-control form-control-sm">
-              <option value="1">A-Z</option>
-              <option value="1">Z-A</option>
+            <select class="form-control form-control-sm js-slt-sort">
+              <option value="">Sắp xếp</option>
+              <option value="name-asc">Tên: A-Z</option>
+              <option value="name-desc">Tên: Z-A</option>
+              <option value="price-asc">Giá: Tăng dần</option>
+              <option value="price-desc">Giá: Giảm dần</option>
+              <option value="updated-asc">Cũ nhất</option>
+              <option value="updated-desc">Mới nhất</option>
             </select>
           </div>
           <div class="col-lg-9 col-md-12 col-sm-6">
             <span>Lọc theo: </span>
-            <ul class="active-filter">
-              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Gionee</li>
-              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
-              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
-              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
-              <li class="filter-list ml-10"><i class="fa fa-window-close" aria-hidden="true"></i>Black</li>
+            <ul class="active-filter-list">
             </ul>
           </div>
         </div>
@@ -90,55 +90,53 @@
           </ul>
         </div> --}}
         <div class="sidebar-filter mt-50">
-          {{-- <div class="common-filter">
-            <div class="head">Brands</div>
-            <form action="#">
-              <ul>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label for="apple">Apple<span>(29)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="asus" name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="gionee" name="brand"><label for="gionee">Gionee<span>(19)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="micromax" name="brand"><label for="micromax">Micromax<span>(19)</span></label></li>
-                <li class="filter-list"><input class="pixel-radio" type="radio" id="samsung" name="brand"><label for="samsung">Samsung<span>(19)</span></label></li>
-              </ul>
-            </form>
-          </div> --}}
           <div class="common-filter">
-            <div class="head">Color</div>
-            <form action="#">
-              <ul class="list-color">
-                @foreach ($colors as $color)
-                  <li class="filter-list"><input class="pixel-radio js-radio-color" type="radio" data-id="{{ $color->id }}" name="color"><label for="black">{{ $color->name }}</label></li>                  
-                @endforeach
-              </ul>
-            </form>
-          </div>
-          <div class="common-filter">
-            <div class="head">Size</div>
-            <form action="#">
-              <ul class="list-size">
-                @foreach ($sizes as $size)
-                  <li class="filter-list"><input class="pixel-radio js-radio-size" type="radio" data-id="{{ $size->id }}" name="color"><label for="black">{{ $size->size }}</label></li>                  
-                @endforeach
-              </ul>
-            </form>
-          </div>
-          {{-- <div class="common-filter">
-            <div class="head">Price</div>
+            <div class="head">Giá</div>
             <div class="price-range-area">
               <div id="price-range"></div>
               <div class="value-wrapper d-flex">
-                <div class="price">Price:</div>
-                <span>$</span>
+                <div class="price">Giá:</div>
                 <div id="lower-value"></div>
+                <span>đ</span>
                 <div class="to">to</div>
-                <span>$</span>
                 <div id="upper-value"></div>
+                <span>đ</span>
               </div>
             </div>
-          </div> --}}
+          </div>
+          <div class="common-filter">
+            <div class="head">Màu sắc</div>
+            <form action="#">
+              <ul class="list-color row">
+                @foreach ($colors as $color)
+                  <li class="mgb-5 col-lg-6 col-md-6">
+                    <div class="primary-checkbox in-bl">
+                      <input class="pixel-radio js-common js-ck-color" type="checkbox" data-id="color:{{ $color->id }}" name="color"><label class="default-checkbox"></label>
+                    </div>
+                    <span class="ml-5">{{ $color->name }}</span>
+                  </li>                 
+                @endforeach
+              </ul>
+            </form>
+          </div>
+          <div class="common-filter">
+            <div class="head">Kích cở</div>
+            <form action="#">
+              <ul class="list-size row">
+                @foreach ($sizes as $size)
+                <li class="mgb-5 col-lg-4 col-md-4">
+                    <div class="primary-checkbox in-bl">
+                      <input class="pixel-radio js-common js-ck-size" type="checkbox" data-id="size:{{ $size->id }}" name="size"><label class="default-checkbox"></label>
+                    </div>
+                    <span class="ml-5">{{ $size->size }}</span>
+                  </li>
+                @endforeach
+              </ul>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <script>var productsByCatAndColorUrl = "{{ url('category/getProductsByColorIdAndCategoryId') }}";</script>
+  <script>var filterProductUrl = "{{ url('category/filterProduct') }}";</script>
 @endsection

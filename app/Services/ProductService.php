@@ -116,12 +116,18 @@ class ProductService
      */
     public function getProductByCatIdWithPaginate(int $id)
     {
+        if (Category::where('parent_id', $id)->get()->count()) {
+            $ids = Category::where('parent_id', $id)->get(['id'])->pluck('id')->toArray();
+        } else {
+            $ids = Category::where('id', $id)->get(['id'])->pluck('id')->toArray();
+        }
         return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }])
-        ->where('category_id', $id)
-        ->paginate(config('define.paginate.limit_rows_12'));
+        ->whereIn('category_id', $ids)
+        // ->paginate(config('define.paginate.limit_rows_12'));
+        ->get();
     }
 
     /**
@@ -132,7 +138,7 @@ class ProductService
      *
      * @return \Illuminate\Http\Response
      */
-    public function getProductsByColorIdAndCategoryId(int $colorId, int $categoryId)
+    public function filterProduct(array $data)
     {
         $products =  Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
@@ -140,19 +146,38 @@ class ProductService
         }])
         ->join('categories as c', 'c.id', '=', 'products.category_id')
         ->join('product_details as pd', 'pd.product_id', '=', 'products.id')
-        ->join('colors', 'colors.id', '=', 'pd.color_id')
         ->select('products.id', 'products.name', 'products.original_price')
-        ->where('category_id', $categoryId)
-        ->where('color_id', $colorId)
-        ->distinct('product_id')
-        ->get();
-        $data = [];
-        foreach ($products as $key => $product) {
-            $data[$key]['name'] = $product->name;
-            $data[$key]['original_price'] = $product->original_price;
-            $data[$key]['price'] =  $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : null;
-            $data[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
+        ->where('category_id', $data['categoryId']);
+        if (isset($data['colorIds'])) {
+            $products->whereIn('color_id', $data['colorIds']);
         }
-        return $data;
+        if (isset($data['sizeIds'])) {
+            $products->whereIn('size_id', $data['sizeIds']);
+        }
+        if (isset($data['minPrice'], $data['maxPrice'])) {
+            $products->whereBetween('original_price', [$data['minPrice'], $data['maxPrice']]);
+        }
+        if (!empty($data['sort'])) {
+            $sort = explode('-', $data['sort']);
+            if ($sort[0] == 'name') {
+                $products->orderBy('name', $sort[1]);
+            } elseif ($sort[0] == 'price') {
+                $products->orderBy('original_price', $sort[1]);
+            } elseif ($sort[0] == 'update_at') {
+                $products->orderBy('updated_at', $sort[1]);
+            }
+        }
+        $products = $products->distinct('product_id')->get();
+        $result = [];
+        foreach ($products as $key => $product) {
+            $result[$key]['name'] = $product->name;
+            $result[$key]['original_price'] = $product->original_price;
+            $result[$key]['price'] =  $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : null;
+            $result[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
+        }
+        return $result;
+        $a = $data['sort'];
+        $a = explode('-', $a);
+        return $a[0];
     }
 }

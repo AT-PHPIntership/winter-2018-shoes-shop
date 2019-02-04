@@ -35,9 +35,10 @@ class ProductController extends Controller
     {
         $products = app(ProductService::class)->getProductByCatIdWithPaginate($id);
         // $parentCategories = app(CategoryService::class)->getParentList();
+        $category = app(CategoryService::class)->getCategoryById($id);
         $colors = app(ColorService::class)->getAll(['id','name']);
         $sizes = app(SizeService::class)->getAll(['id','size']);
-        return view('user.pages.category', compact(['products', 'colors', 'sizes']));
+        return view('user.pages.category', compact(['products', 'colors', 'sizes', 'category']));
     }
 
     /**
@@ -47,11 +48,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getProductsByColorIdAndCategoryId(Request $request)
+    public function filterProduct(Request $request)
     {
-        $products = app(ProductService::class)->getProductsByColorIdAndCategoryId($request->input('colorId'), $request->input('categoryId'));
-        // $colors = app(ColorService::class)->getAll(['id','name']);
-        // return view('user.pages.category', compact(['products', 'colors']));
+        $products = app(ProductService::class)->filterProduct($request->all());
         return $products;
     }
 }
