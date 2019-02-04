@@ -17,4 +17,10 @@ return [
     'size' => 'Size',
     'color' => 'Màu',
     'description' => 'Mô tả',
+    'select_size' => 'Chọn size',
+    'select_color' => 'Chọn màu',
+    'status' => 'Tình trạng',
+    'out_stock' => 'Hết hàng',
+    'in_stock' => 'Còn hàng',
+    'add_cart' => 'Thêm vào giỏ hàng',
 ];

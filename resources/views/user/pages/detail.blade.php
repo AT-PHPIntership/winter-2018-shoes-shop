@@ -1,5 +1,6 @@
 @extends('user.module.master')
 @section('content')
+{{-- @dd($product) --}}
   <!-- Start Banner Area -->
   <section class="banner-area organic-breadcrumb" style="margin-top: 55px">
     <div class="container">
@@ -22,29 +23,18 @@
         <div class="col-12 col-md-6">
           <div class="single_product_thumb">
             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators menu-control" >
-                <li class="active control-item" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(upload/1548831458-Giay_the_thao_sieu_mem_4.jpg);">
-                </li>
-                <li class="control-item" data-target="#product_details_slider" data-slide-to="1" style="background-image: url(upload/1548831458-Giay_the_thao_sieu_mem_4.jpg);">
-                </li>
-                <li class="control-item" data-target="#product_details_slider" data-slide-to="2" style="background-image: url(upload/1548831458-Giay_the_thao_sieu_mem_4.jpg);">
-                </li>
-                <li class="control-item" data-target="#product_details_slider" data-slide-to="3" style="background-image: url(upload/1548831458-Giay_the_thao_sieu_mem_4.jpg);">
-                </li>
+              <ol class="carousel-indicators menu-control">
+                @foreach($product->images as $key => $image)
+                  <li class="active control-item" data-target="#product_details_slider" data-slide-to="{{$key}}" style="background-image: url({{$image->path}});">
+                  </li>
+                @endforeach
               </ol>
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img class="d-block w-100" src="upload/1548831458-Giay_the_thao_sieu_mem_4.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="upload/1548831458-Giay_the_thao_sieu_mem_4.jpg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="upload/1548831458-Giay_the_thao_sieu_mem_4.jpg" alt="Third slide">
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="upload/1548831458-Giay_the_thao_sieu_mem_4.jpg" alt="Fourth slide">
-                </div>
+                @foreach($product->images as $key => $image)
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src="{{$image->path}}" alt="Slide">
+                  </div>
+                @endforeach
               </div>
             </div>
           </div>
@@ -52,41 +42,45 @@
         <div class="col-12 col-md-6">
           <div class="quick-view-content">
             <div class="top">
-              <h3 class="head">Giày thể thao nam IDE siêu mềm</h3>
-              <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10">$149.99</span></div>
-              <div class="category">Danh mục: <span>Giày thể thao nam</span></div>
+              {{-- <h3 class="head">Giày thể thao nam IDE siêu mềm</h3> --}}
+              <h3 class="head">{{ $product->name }}</h3>
+              <div class="price d-flex align-items-center">
+                <span class="lnr lnr-tag"></span>
+                <span class="ml-10">{{ $product->original_price }} VNĐ</span>
+                {{-- <span class="ml-10">$149.99</span> --}}
+              </div>
+              {{-- <div class="category">Danh mục: <span>Giày thể thao nam</span></div> --}}
+              <div class="category">{{ trans('product.category')}}: <span>{{ $product->category->name }}</span></div>
+              @if($product->quantity = $product->total_sold)
+                <div class="available">{{ trans('product.status')}}: <span>{{ trans('product.out_stock')}}</span></div>
+              @else
+                <div class="available">{{ trans('product.status')}}: <span>{{ trans('product.in_stock')}}</span></div>
+              @endif
             </div>
             <div class="middle">
-              <p class="content">Chất liệu mặt trong: Vải khử mùi.<br>
-                Chất liệu mặt ngoài: Vải sợi thoáng khí cao cấp.<br>
-                Chất liệu đế: Cao su tổng hợp.<br>
-                Size: Đủ size dành cho nam</p>
+              <p class="content">{{ $product->description }}</p>
             </div>
             <div class="add-cart">
               <div class="row">
                 <div class="form-group col-md-6 form-select" id="default-select">
-                  <label>Chọn màu: </label>
+                  <label>{{ trans('product.select_color')}}: </label>
                   <select>
-                    <option value="1">City</option>
-                    <option value="1">Dhaka</option>
-                    <option value="1">Dilli</option>
-                    <option value="1">Newyork</option>
-                    <option value="1">Islamabad</option>
+                    @foreach($colors as $color)
+                      <option value="{{ $color->id }}">{{ $color->name }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group col-md-6 form-select" id="default-select">
-                  <label>Chọn size: </label>
+                  <label>{{ trans('product.select_size')}}: </label>
                   <select>
-                    <option value="1">City</option>
-                    <option value="1">Dhaka</option>
-                    <option value="1">Dilli</option>
-                    <option value="1">Newyork</option>
-                    <option value="1">Islamabad</option>
+                      @foreach($sizes as $size)
+                        <option value="{{ $size->id }}">{{ $size->size }}</option>
+                      @endforeach
                   </select>
                 </div>
               </div>
               <div class="quantity-container d-flex align-items-center mt-30">
-                <label>Số lượng: </label>
+                <label>{{ trans('product.quantity')}}: </label>
                 <input type="text" class="quantity-amount ml-15" value="1" />
                 <div class="arrow-btn d-inline-flex flex-column">
                     <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
@@ -94,7 +88,7 @@
                 </div>
               </div>
               <div class="d-flex mt-20">
-                  <a href="#" class="view-btn color-2"><span>Add to Cart</span></a>
+              <a href="#" class="view-btn color-2"><span>{{ trans('product.add_cart')}}</span></a>
               </div>
             </div>
           </div>
