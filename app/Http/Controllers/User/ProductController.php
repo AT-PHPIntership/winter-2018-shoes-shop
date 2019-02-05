@@ -11,6 +11,8 @@ class ProductController extends Controller
     /**
      * Get detail product
      *
+     * @param Request $request request
+     *
      * @return \Illuminate\Http\Response
      */
     public function getDetailProduct(Request $request)

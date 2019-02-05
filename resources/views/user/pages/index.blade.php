@@ -7,8 +7,7 @@
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-40">
           <div class="title text-center">
-            <h1 class="mb-10">Danh mục</h1>
-            {{-- <p>Who are in extremely love with eco friendly system.</p> --}}
+            <h2 class="mb-10">{{ __('index.category') }}</h1>
           </div>
         </div>
       </div>
@@ -21,7 +20,7 @@
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_men.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
-                    <h3 class="content-title">Giày nam</h3>
+                    <h3 class="content-title">{{ __('index.shoes.men') }}</h3>
                   </div>
                 </a>
               </div>
@@ -32,7 +31,7 @@
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_women.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
-                    <h3 class="content-title">Gày nữ</h3>
+                    <h3 class="content-title">{{ __('index.shoes.women') }}</h3>
                   </div>
                 </a>
               </div>
@@ -41,9 +40,9 @@
               <div class="content">
                 <a href="#" target="_blank">
                   <div class="content-overlay"></div>
-                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c3.jpg') }}" alt="">
+                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_kid.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
-                    <h3 class="content-title">Giày trẻ em</h3>
+                    <h3 class="content-title">{{ __('index.shoes.kid') }}</h3>
                   </div>
                 </a>
               </div>
@@ -54,9 +53,9 @@
           <div class="content">
             <a href="#" target="_blank">
               <div class="content-overlay"></div>
-              <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c4.jpg') }}" alt="">
+              <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_accessory.jpg') }}" alt="">
               <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">Phụ kiện</h3>
+                <h3 class="content-title">{{ __('index.shoes.accessories') }}</h3>
               </div>
             </a>
           </div>
@@ -73,7 +72,7 @@
         <div class="menu-content pb-40">
           <div class="title text-center">
             <h2 class="mb-10 parent-cat">
-              <a class="text-white" href="">Giày nam</a>
+              <a class="text-white" href="">{{ __('index.shoes.men') }}</a>
             </h2>
             <ul class="child-cat">
               @foreach ($childsCatForMen as $childCatForMen)
@@ -103,7 +102,7 @@
               </div>
               <div class="price">
                 <h5 class="text-white">{{ $productForMen->name }}</h5>
-                <p class="text-white">{{ $productForMen->promotions->first() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></p>
+                <p class="text-white">{{ $productForMen->promotions->last() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -118,7 +117,7 @@
       <div class="countdown-content pb-40">
         <div class="title text-center">
           <h2 class="mb-10 parent-cat">
-            <a href="">Giày nữ</a>
+            <a href="">{{ __('index.shoes.women') }}</a>
           </h2>
           <ul class="child-cat">
             @foreach ($childsCatForWomen as $childCatForWomen)
@@ -141,13 +140,13 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal"  data-product="{{ $productForWomen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>
               <div class="price">
                 <h5>{{ $productForWomen->name }}</h5>
-                <p>{{ $productForWomen->promotions->first() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></p>
+                <p>{{ $productForWomen->promotions->last() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -156,53 +155,12 @@
     </div>
   </section>
   <!-- End women-product Area -->
-  <!-- Start Count Down Area -->
-  <div class="countdown-area">
-    <div class="container">
-      <div class="countdown-content">
-        <div class="title text-center">
-          <h1 class="mb-10">Exclusive Hot Deal Ends in:</h1>
-          <p>Who are in extremely love with eco friendly system.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-4 col-lg-4"></div>
-        <div class="col-xl-6 col-lg-7">
-          <div class="countdown d-flex justify-content-center justify-content-md-end" id="js-countdown">
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-days time" aria-labelledby="day-countdown">
-              </div>
-              <div class="countdown-label" id="day-countdown">Days</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-hours" aria-labelledby="hour-countdown">
-              </div>
-              <div class="countdown-label" id="hour-countdown">Hours</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-minutes" aria-labelledby="minute-countdown">
-              </div>
-              <div class="countdown-label" id="minute-countdown">Minutes</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-seconds" aria-labelledby="second-countdown">
-              </div>
-              <div class="countdown-label text" id="second-countdown">Seconds</div>
-            </div>
-            <a href="#" class="view-btn primary-btn2"><span>Shop Now</span></a>
-            <img src="{{ asset('public/img/cd.png') }}" class="img-fluid cd-img" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Count Down Area -->
   <!-- Start related-product Area --> 
   <section class="related-product-area section-gap" id="latest">
     <div class="container">
       <div class="related-content">
         <div class="title text-center">
-          <h2 class="mb-10">Sản phẩm mới</h2>
+          <h2 class="mb-10">{{ __('index.product.new') }}</h2>
         </div>
       </div>
       <div class="row">
@@ -226,7 +184,7 @@
     <div class="container">
     <div class="related-content">
       <div class="title text-center">
-        <h2 class="mb-10">Sản phẩm bán chạy</h2>
+        <h2 class="mb-10">{{ __('index.product.top_sell') }}</h2>
       </div>
     </div>
     <div class="row">
