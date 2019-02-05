@@ -16,8 +16,8 @@ class IndexController extends Controller
     public function index()
     {
         $parentCategories = app(CategoryService::class)->getParentList();
-        $productsForMen = app(ProductService::class)->getProductByCategory('Giày nam' ,['id', 'name', 'original_price']);
-        $productsForWomen = app(ProductService::class)->getProductByCategory('Giày nữ' ,['id', 'name', 'original_price']);
+        $productsForMen = app(ProductService::class)->getProductsByCat('Giày nam' ,['id', 'name', 'original_price']);
+        $productsForWomen = app(ProductService::class)->getProductsByCat('Giày nữ' ,['id', 'name', 'original_price']);
         $childsCatForMen = app(CategoryService::class)->getChildCatByParentCat('Giày nam', ['id', 'name']);
         $childsCatForWomen = app(CategoryService::class)->getChildCatByParentCat('Giày nữ', ['id', 'name']);
         $newProducts = app(ProductService::class)->getNewProducts(['id', 'name', 'original_price']);

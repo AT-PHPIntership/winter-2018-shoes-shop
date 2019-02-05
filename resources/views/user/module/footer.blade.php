@@ -14,18 +14,6 @@
         <div class="single-footer-widget">
           <h6>{{ __('index.footer.news_letter.title') }}</h6>
           <p>{{ __('index.footer.news_letter.content') }}</p>
-          <div class="" id="mc_embed_signup">
-            <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
-              <div class="d-flex flex-row">
-                <input class="form-control" name="EMAIL" placeholder="{{ __('index.footer.news_letter.email') }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ __('index.footer.news_letter.email') }} '" required="" type="email">
-                <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
-                <div style="position: absolute; left: -5000px;">
-                  <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-                </div>
-              </div>
-              <div class="info"></div>
-            </form>
-          </div>
         </div>
       </div>
       <div class="col-lg-3  col-md-6 col-sm-6">
@@ -57,7 +45,7 @@
     </div>
     <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
       <p class="footer-text m-0">
-        {{ __('index.footer.copy_right.title') }} &copy;<script>document.write(new Date().getFullYear());</script> {{ __('index.footer.copy_right.content') }}  <i class="fa fa-heart-o" aria-hidden="true"></i> {{ __('index.footer.copy_right.by') }}</a>
+        {{ __('index.footer.copy_right.title') }} &copy;<script>document.write(new Date().getFullYear());</script> {{ __('index.footer.copy_right.content') }} {{ __('index.footer.copy_right.by') }}</a>
       </p>
     </div>
   </div>
