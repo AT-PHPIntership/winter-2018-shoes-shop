@@ -2,6 +2,7 @@
 
 return [
     'header' => [
+        'title' => 'Shoes-Shop',
         'home' => 'Trang chủ',
         'login' => 'Đăng nhập',
         'search' => 'Tìm kiếm',
@@ -13,7 +14,7 @@ return [
     'footer' => [
         'about_us' => [
             'title' => 'Thông tin',
-            'content' => 'AsianTech',
+            'content' => 'Website bán giày dép',
         ],
         'news_letter' => [
             'title' => 'Bản tin',
@@ -28,7 +29,7 @@ return [
         ],
         'copy_right' => [
             'title' => 'Copyright',
-            'content' => 'All rights reserved | This template is made with',
+            'content' => 'All rights reserved | This template is made ',
             'by' => 'by ThanhBui - DungLe'
         ],
     ],
@@ -42,5 +43,16 @@ return [
     'product' => [
         'new' => 'Sản phẩm mới',
         'top_sell' => 'Sản phẩm bán chạy',
+    ],
+    'quick_view' => [
+        'previous' => 'Previous',
+        'next' => 'Next',
+        'category' => 'Danh mục',
+        'inventory' => 'Còn lại',
+        'detail' => 'Chi tiết',
+        'color' => 'Màu sắc',
+        'size' => 'Kích cở',
+        'quantity' => 'Số lượng',
+        'add_to_cart' => 'Thêm vào',
     ],
 ];

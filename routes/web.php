@@ -34,8 +34,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('/', 'IndexController@index')->name('index');
-    // Route::get('category', 'ProductController@category')->name('category');
     Route::get('category/filterProduct', 'ProductController@filterProduct');
     Route::get('category/{id}', 'ProductController@listProductByCatId')->name('category');
-    // Route::get('color', 'ProductController@listProductByCatId');
+    Route::get('getDetailProduct', 'ProductController@getDetailProduct');
 });

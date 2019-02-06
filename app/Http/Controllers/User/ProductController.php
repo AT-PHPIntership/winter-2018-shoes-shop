@@ -12,19 +12,6 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function category()
-    // {
-    //     $products = app(ProductService::class)->getProductWithPaginate();
-    //     $parentCategories = app(CategoryService::class)->getParentList();
-    //     $colors = app(ColorService::class)->getAll(['id','name']);
-    //     return view('user.pages.category', compact(['products', 'parentCategories', 'colors']));
-    // }
-
-    /**
      * Get list product by categoryId
      *
      * @param int $id id
@@ -34,7 +21,6 @@ class ProductController extends Controller
     public function listProductByCatId(int $id)
     {
         $products = app(ProductService::class)->getProductByCatIdWithPaginate($id);
-        // $parentCategories = app(CategoryService::class)->getParentList();
         $category = app(CategoryService::class)->getCategoryById($id);
         $colors = app(ColorService::class)->getAll(['id','name']);
         $sizes = app(SizeService::class)->getAll(['id','size']);
@@ -42,9 +28,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Get list product by colorId
+     * Get products after filter
      *
-     * @param int $id id
+     * @param Request $request request
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,5 +38,17 @@ class ProductController extends Controller
     {
         $products = app(ProductService::class)->filterProduct($request->all());
         return $products;
+    }
+    /**
+     * Get detail product
+     *
+     * @param Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getDetailProduct(Request $request)
+    {
+        $response = app(ProductService::class)->getProductById($request->input('id'));
+        return $response;
     }
 }

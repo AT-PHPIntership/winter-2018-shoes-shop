@@ -7,8 +7,7 @@
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-40">
           <div class="title text-center">
-            <h1 class="mb-10">{{ __('index.category') }}</h1>
-            {{-- <p>Who are in extremely love with eco friendly system.</p> --}}
+            <h2 class="mb-10">{{ __('index.category') }}</h1>
           </div>
         </div>
       </div>
@@ -41,7 +40,7 @@
               <div class="content">
                 <a href="#" target="_blank">
                   <div class="content-overlay"></div>
-                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c3.jpg') }}" alt="">
+                  <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_kid.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
                     <h3 class="content-title">{{ __('index.shoes.kid') }}</h3>
                   </div>
@@ -54,7 +53,7 @@
           <div class="content">
             <a href="#" target="_blank">
               <div class="content-overlay"></div>
-              <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/c4.jpg') }}" alt="">
+              <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_accessory.jpg') }}" alt="">
               <div class="content-details fadeIn-bottom">
                 <h3 class="content-title">{{ __('index.shoes.accessories') }}</h3>
               </div>
@@ -97,13 +96,13 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal" data-product="{{ $productForMen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>
               <div class="price">
                 <h5 class="text-white">{{ $productForMen->name }}</h5>
-                <p class="text-white">{{ $productForMen->promotions->first() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></p>
+                <p class="text-white">{{ $productForMen->promotions->last() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -141,13 +140,13 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#exampleModal"  data-product="{{ $productForWomen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>
               <div class="price">
                 <h5>{{ $productForWomen->name }}</h5>
-                <p>{{ $productForWomen->promotions->first() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></p>
+                <p>{{ $productForWomen->promotions->last() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -156,47 +155,6 @@
     </div>
   </section>
   <!-- End women-product Area -->
-  <!-- Start Count Down Area -->
-  <div class="countdown-area">
-    <div class="container">
-      <div class="countdown-content">
-        <div class="title text-center">
-          <h1 class="mb-10">Exclusive Hot Deal Ends in:</h1>
-          <p>Who are in extremely love with eco friendly system.</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-4 col-lg-4"></div>
-        <div class="col-xl-6 col-lg-7">
-          <div class="countdown d-flex justify-content-center justify-content-md-end" id="js-countdown">
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-days time" aria-labelledby="day-countdown">
-              </div>
-              <div class="countdown-label" id="day-countdown">Days</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-hours" aria-labelledby="hour-countdown">
-              </div>
-              <div class="countdown-label" id="hour-countdown">Hours</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-minutes" aria-labelledby="minute-countdown">
-              </div>
-              <div class="countdown-label" id="minute-countdown">Minutes</div>
-            </div>
-            <div class="countdown-item">
-              <div class="countdown-timer js-countdown-seconds" aria-labelledby="second-countdown">
-              </div>
-              <div class="countdown-label text" id="second-countdown">Seconds</div>
-            </div>
-            <a href="#" class="view-btn primary-btn2"><span>Shop Now</span></a>
-            <img src="{{ asset('public/img/cd.png') }}" class="img-fluid cd-img" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Count Down Area -->
   <!-- Start related-product Area --> 
   <section class="related-product-area section-gap" id="latest">
     <div class="container">
@@ -265,5 +223,6 @@
       </div>
     </div>
   </section>
-  <!-- End brand Area -->    
+  <!-- End brand Area -->  
+  <script>var getDetailProduct = "{{ url('getDetailProduct') }}";</script>  
 @endsection

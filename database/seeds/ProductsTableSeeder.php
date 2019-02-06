@@ -15,7 +15,7 @@ class ProductsTableSeeder extends Seeder
     {
         \DB::table('products')->truncate();
         $ids = Category::all('id');
-        for ($i=0; $i < 40; $i++) {
+        for ($i=0; $i < 200; $i++) {
             factory(Product::class)->create([
                 'category_id' => $ids->random()
             ]);

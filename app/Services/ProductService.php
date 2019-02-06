@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\OrderDetail;
+use App\Models\Order;
 use App\Models\Category;
 use App\Models\ProductDetail;
 use Carbon\Carbon;
@@ -35,15 +36,40 @@ class ProductService
     }
 
     /**
-     * Get categoriy by id
+     * Get product by id
      *
-     * @param int $id comment about this variable
+     * @param int $id id id
      *
      * @return \Illuminate\Http\Response
      */
     public function getProductById($id)
     {
-        return Product::findOrFail($id);
+        $product = Product::with(['category:id,name', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }, 'images:id,product_id,path', 'productDetails:id,product_id,color_id,size_id', 'productDetails.color:id,name', 'productDetails.size:id,size'])->findOrFail($id);
+        $data['product'] = [
+            'id' => $product->id,
+            'name' => $product->name,
+            'original_price' => $product->original_price,
+            'price' => $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : null,
+            'inventory' => $product->quantity - $product->total_sold,
+            'description' => $product->description,
+        ];
+        $data['category'] = [
+            'id' => $product->category->id,
+            'name' => $product->category->name,
+        ];
+        $data['images'] = $product->images;
+        $details = $product->productDetails->map(function ($item) {
+            return [
+                'colors' => $item['color'],
+                'sizes' => $item['size'],
+            ];
+        });
+        $data['colors'] = $details->pluck('colors');
+        $data['sizes'] = $details->pluck('sizes');
+        return json_encode($data);
     }
 
     /**
@@ -52,12 +78,12 @@ class ProductService
      * @param string $categoryName categoryName
      * @param array  $columns      columns
      *
-     * @return \Illuminate\Http\Response
+     * @return Product
      */
-    public function getProductByCategory(string $categoryName, array $columns = ['*'])
+    public function getProductsByCat(string $categoryName, array $columns = ['*'])
     {
-        $id = Category::where('name', $categoryName)->first()->id;
-        if (Category::where('parent_id', $id)->get()->count()) {
+        $id = Category::where('name', $categoryName)->first(['id'])->id;
+        if (Category::where('parent_id', $id)->count()) {
             $categoryIds = Category::where('parent_id', $id)->get(['id']);
         } else {
             $categoryIds = Category::where('id', $id)->get(['id']);
@@ -67,33 +93,43 @@ class ProductService
                   ->where('end_date', '>=', Carbon::now());
         }])
         ->whereIn('category_id', $categoryIds)
-        ->limit(8)
+        ->orderBy('updated_at', 'desc')
         ->get($columns);
     }
 
     /**
      * Get new products
      *
-     * @return \Illuminate\Http\Response
+     * @param array $columns columns
+     *
+     * @return Product
      */
     public function getNewProducts(array $columns = ['*'])
     {
         return Product::with(['images:id,path,product_id', 'promotions'])
-        ->orderBy('id', 'desc')
-        ->limit(8)
+        ->orderBy('updated_at', 'desc')
+        ->limit(config('define.limit_rows_product'))
         ->get($columns);
     }
 
     /**
      * Get top sell products
      *
+     * @param array $columns columns
+     *
      * @return \Illuminate\Http\Response
      */
     public function getTopSellProducts(array $columns = ['*'])
     {
-        $productIds = OrderDetail::select(\DB::raw('count(product_id) as total, product_id'))->groupBy('product_id')->orderBy('total', 'desc')->limit(8)->get()->pluck('product_id');
+        $productIds = OrderDetail::join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->select(\DB::raw('count(product_id) as total, product_id'))
+            ->where('orders.status', Order::ORDER_STATUS['DELIVERED'])
+            ->groupBy('product_id')->orderBy('total', 'desc')
+            ->limit(config('define.limit_rows_product'))
+            ->pluck('product_id');
         return Product::with(['images:id,path,product_id', 'promotions'])
         ->whereIn('id', $productIds)
+        ->limit(config('define.limit_rows_product'))
         ->get($columns);
     }
 
@@ -131,10 +167,9 @@ class ProductService
     }
 
     /**
-     * Get products by colorId and categoryId
+     * Filter products
      *
-     * @param int $colorId    colorId
-     * @param int $categoryId categoryId
+     * @param array $data data
      *
      * @return \Illuminate\Http\Response
      */
@@ -176,8 +211,5 @@ class ProductService
             $result[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
         }
         return $result;
-        $a = $data['sort'];
-        $a = explode('-', $a);
-        return $a[0];
     }
 }
