@@ -17,6 +17,9 @@ $(document).ready(function(){
     }
   });
 });
+function formatCurrencyVN(price){
+  return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(price);
+}
 $(document).ready(function(){
   $('#exampleModal').on('show.bs.modal', function (e) {
     var modal = $(this);
@@ -30,11 +33,11 @@ $(document).ready(function(){
         modal.find('#modal-name').text(data.product.name);
         modal.find('#modal-category').text(data.category.name);
         if (data.product.price) {
-          modal.find('#modal-price').text(data.product.price + 'đ');
-          modal.find('#modal-original-price').text(data.product.original_price + 'đ');
+          modal.find('#modal-price').text(data.product.price);
+          modal.find('#modal-original-price').text(data.product.original_price);
         } else {
           modal.find('#modal-original-price').text('');
-          modal.find('#modal-price').text(data.product.original_price + 'đ');
+          modal.find('#modal-price').text(data.product.original_price);
         }
         modal.find('#modal-inventory').text(data.product.inventory);
         modal.find('#modal-description').text(data.product.description);

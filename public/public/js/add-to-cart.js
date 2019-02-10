@@ -38,7 +38,7 @@ $(document).ready(function(){
       var size = {};
       product['id'] = +productId;
       product['name'] = productName;
-      product['price'] = productPrice;
+      product['price'] = +productPrice;
       product['quantity'] = +quantity;
       product['image'] = imagePath;
       color['id'] = +colorId;
