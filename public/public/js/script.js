@@ -38,6 +38,7 @@ $(document).ready(function(){
         }
         modal.find('#modal-inventory').text(data.product.inventory);
         modal.find('#modal-description').text(data.product.description);
+        modal.find('.js-add-cart').attr('data-product-id', data.product.id);
         var eleColor = "";
         $.each(data.colors, function(key, val){
           eleColor += '<option value="' + val.id + '">' + val.name + '</option>';

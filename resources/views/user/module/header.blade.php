@@ -47,9 +47,9 @@
             </div>
           </li>
           <li>
-            <a class="show-cart" href="">
+            <a class="show-cart" href="{{ route('user.cart') }}">
               <span class="lnr lnr-cart s-30"></span>
-              <span class="js-cnt-item">0</span>
+              <span id="js-total-item">0</span>
             </a>
           </li>              
         </ul>

@@ -31,5 +31,7 @@
     <script src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('public/js/nouislider.min.js') }}"></script>
     <script src="{{ asset('public/js/script.js') }}"></script>
+    <script src="{{ asset('public/js/add-to-cart.js') }}"></script>
+    <script src="{{ asset('public/js/show-cart.js') }}"></script>
   </body>
 </html>

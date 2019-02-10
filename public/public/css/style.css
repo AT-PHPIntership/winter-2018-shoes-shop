@@ -42,7 +42,7 @@
 .show-cart {
   position: relative;
 }
-.show-cart .js-cnt-item {
+.show-cart #js-total-item {
   position: absolute;
   right: 23px;
   top: 0;
@@ -107,4 +107,8 @@
 }
 .nav-left {
   flex-basis: 120%;
+}
+.img-product-cart {
+  width: 70px;
+  height: 70px;
 }
