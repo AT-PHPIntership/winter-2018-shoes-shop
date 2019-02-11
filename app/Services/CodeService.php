@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Code;
+use App\Models\Product;
 use Log;
 
 class CodeService
@@ -67,5 +68,36 @@ class CodeService
             Log::error($e);
         }
         return false;
+    }
+
+    /**
+     * Apply Code
+     *
+     * @param string $code       code
+     * @param array  $productIds productIds
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function applyCode(string $code, array $productIds)
+    {
+        $data = [];
+        $code = Code::where('name', $code)->first();
+        if ($code) {
+            $cateogry_id = $code->category_id;
+            $data['status'] = true;
+            $data['percent'] = $code->percent;
+            if (!$cateogry_id) {
+                $data['apply'] = null; //apply all products
+            } else {
+                foreach ($productIds as $productId) {
+                    if (Product::where('id', $productId)->where('category_id', $cateogry_id)->count()) {
+                        $data['apply'][] = $productId;
+                    }
+                }
+            }
+            return $data;
+        }
+        $data['status'] = false;
+        return $data;
     }
 }
