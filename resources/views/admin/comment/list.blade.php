@@ -39,7 +39,7 @@
                     <td>{{ $comment->parent ? $comment->parent->content : '' }}</td>
                     <td>{{ formatDateVN($comment->created_at) }}</td>
                     <td>
-                      <button data-id="{{ $comment->id }}" data-status="{{ $comment->status }}" class="js-status-cmt btn btn-block {{ $comment->status == 1 ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $comment->status == 1 ? __('comment.table.active') : __('comment.table.blocked') }}</button>
+                      <button data-id="{{ $comment->id }}" data-status="{{ $comment->status }}" class="js-status-cmt btn btn-block {{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? __('comment.table.active') : __('comment.table.blocked') }}</button>
                     </td>
                     <td>
                       <form class="form-inline" action="" method="POST">
