@@ -63,4 +63,8 @@
     </section>
   </div>
 @endsection
-<script>var changeStatus = "{{ url('admin/comments/changeStatus') }}"</script>
+<script>
+  var changeStatus = "{{ url('admin/comments/changeStatus') }}";
+  var acitve = "{{ __('comment.table.active') }}";
+  var blocked = "{{ __('comment.table.blocked') }}";
+</script>

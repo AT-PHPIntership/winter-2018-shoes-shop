@@ -16,10 +16,10 @@ $(document).ready(function(){
         if (data) {
           js_status.attr('data-status', status);
           if (status == 1) {
-            js_status.html('Hoạt động');
+            js_status.text(acitve);
             js_status.removeClass('btn-warning').addClass('btn-primary')
           } else {
-            js_status.html('Chặn');
+            js_status.text(blocked);
             js_status.removeClass('btn-primary').addClass('btn-warning');
           }
         }
