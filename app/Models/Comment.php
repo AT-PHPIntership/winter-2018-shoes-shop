@@ -17,4 +17,34 @@ class Comment extends Model
     protected $fillable = [
         'user_id', 'product_id', 'parent_id', 'content', 'comment'
     ];
+    
+    /**
+     * Comment belong to User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Comment belong to Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Child Comment belong to Parent Comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Comment::class, 'parent_id', 'id');
+    }
 }
