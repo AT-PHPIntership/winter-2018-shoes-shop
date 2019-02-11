@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::resource('promotions', 'PromotionController');
         Route::resource('codes', 'CodeController')->except(['show']);
         Route::resource('orders', 'OrderController')->except(['edit']);
-        Route::get('comments/changeStatus', 'CommentController@changeStatus');
+        Route::get('comments/change-status', 'CommentController@changeStatus');
         Route::resource('comments', 'CommentController')->only('index');
     });
 });

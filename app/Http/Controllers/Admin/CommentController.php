@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Controller;
 use App\Services\CommentService;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\PatchCommentRequest;
 
 class CommentController extends Controller
 {
@@ -22,11 +22,11 @@ class CommentController extends Controller
     /**
      * Change status comment
      *
-     * @param \Illuminate\Http\Request $request request
+     * @param PatchCommentRequest $request request
      *
      * @return \Illuminate\Http\Response
      */
-    public function changeStatus(Request $request)
+    public function changeStatus(PatchCommentRequest $request)
     {
         return app(CommentService::class)->changeStatus((int) $request->input('status'), (int) $request->input('id'));
     }

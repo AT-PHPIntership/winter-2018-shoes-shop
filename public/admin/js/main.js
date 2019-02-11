@@ -1,7 +1,5 @@
-$(function () {
-    $('.select2').select2()
-})
 $(document).ready(function(){
+  $('.select2').select2();
   $(".js-status-cmt").click(function(){
     var js_status = $(this);
     var id = js_status.data('id');
@@ -16,7 +14,7 @@ $(document).ready(function(){
         if (data) {
           js_status.attr('data-status', status);
           if (status == 1) {
-            js_status.text(acitve);
+            js_status.text(active);
             js_status.removeClass('btn-warning').addClass('btn-primary')
           } else {
             js_status.text(blocked);

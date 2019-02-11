@@ -41,7 +41,7 @@ class Comment extends Model
     /**
      * Child Comment belong to Parent Comment
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function parent()
     {

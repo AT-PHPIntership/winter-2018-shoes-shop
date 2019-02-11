@@ -23,7 +23,7 @@ class CommentService
      * @param int $status status
      * @param int $id     id
      *
-     * @return Comment
+     * @return boolean
      */
     public function changeStatus(int $status, int $id)
     {
