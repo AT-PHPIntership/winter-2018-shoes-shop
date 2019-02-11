@@ -1,6 +1,7 @@
 $(document).ready(function(){
-  var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
+  // Show list item cart
   function getListCartItem(){
+    var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
     var items = '';
     var subTotal = 0;
     $.each(arrProduct, function(key, val){
@@ -17,16 +18,16 @@ $(document).ready(function(){
       items += '</div>';
       items += '</div>';
       items += '<div class="col-md-2 col-6">';
-      items += '<div class="price">'+ formatCurrencyVN(val.product.price) +'</div>';
+      items += '<div class="price js-price-item">'+ formatCurrencyVN(val.product.price) +'</div>';
       items += '</div>';
       items += '<div class="col-md-2 col-6">';
-      items += '<input type="number" class="form-control w-50" value="'+ val.product.quantity +'" />';
+      items += '<input type="number" min="0" class="form-control w-50 js-quantity-item" value="'+ val.product.quantity +'" />';
       items += '</div>';
       items += '<div class="col-md-2 col-12">';
-      items += '<div class="total">'+ formatCurrencyVN(val.product.price * val.product.quantity) +'</div>';
+      items += '<div class="total js-total-price-item">'+ formatCurrencyVN(val.product.price * val.product.quantity) +'</div>';
       items += '</div>';
       items += '<div class="col-md-1 col-6">';
-      items += '<div class="text-center"><a class="js-remove-item" href="javascript:void(0)"><i class="fa fa-times fa-2x"></i></a></div>';
+      items += '<div class="text-center"><a class="js-remove-item" data-product-id="'+ val.product.id +'" href="javascript:void(0)"><i class="fa fa-times fa-2x"></i></a></div>';
       items += '</div>';
       items += '</div>';
       items += '</div>';
@@ -36,7 +37,46 @@ $(document).ready(function(){
     $('#cart-sub-total-price').html(formatCurrencyVN(subTotal));
   }
   getListCartItem();
-  $('.js-remove-item').click(function(){
-    $(this).parent().parent().parent().remove();
+
+  // Remove item
+  $('.list-cart-item').on('click', '.js-remove-item',function(){
+    if(confirm("Bạn có muốn xóa sản phẩm ?")){
+      var productId = $(this).attr('data-product-id');
+      var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
+      var totalItem = $('#js-total-item').text();
+      $.each(arrProduct, function(key, val){
+        if(+productId === val.product.id){
+          totalItem -= val.product.quantity;
+        }
+      });
+      $('#js-total-item').text(totalItem);
+      arrProduct = arrProduct.filter(function(val){
+        return val.product.id !== +productId;
+      });
+      localStorage.setItem('arrProduct', JSON.stringify(arrProduct));
+      getListCartItem();
+    }
+  });
+
+  // Change quantity item
+  $('.list-cart-item').on('click', '.js-quantity-item',function(){
+    var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
+    var quantity = $(this).val();
+    var productId = $(this).parent().parent().find('.js-remove-item').attr('data-product-id');
+    var totalItem = $('#js-total-item').text();
+    console.log(totalItem);
+    $.each(arrProduct, function(key, val){
+      if(+productId === val.product.id){
+        if(quantity > val.product.quantity){
+          totalItem += quantity - val.product.quantity;
+        }else{
+          totalItem -= val.product.quantity - quantity;
+        }
+        val.product.quantity = quantity;
+      }
+    });
+    $('#js-total-item').text(totalItem);
+    localStorage.setItem('arrProduct', JSON.stringify(arrProduct));
+    getListCartItem();
   });
 });
