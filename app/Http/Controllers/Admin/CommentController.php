@@ -38,15 +38,12 @@ class CommentController extends Controller
     /**
      * Change status comment
      *
-     * @param \Illuminate\Http\Request $request request
+     * @param Request $request request
      *
      * @return \Illuminate\Http\Response
      */
     public function changeStatus(Request $request)
     {
-        if ($request->ajax()) {
-            $response = app(CommentService::class)->changeStatus((int) $request->input('status'), (int) $request->input('id'));
-            return $response;
-        }
+        return app(CommentService::class)->changeStatus((int) $request->input('status'), (int) $request->input('id'));
     }
 }

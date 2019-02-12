@@ -22,7 +22,7 @@ class CommentService
      *
      * @param Comment $comment comment
      *
-     * @return Comment
+     * @return boolean
      */
     public function destroy(Comment $comment)
     {
@@ -34,7 +34,7 @@ class CommentService
             }
             $comment->delete();
             return $comment;
-        } catch (\xception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
         }
         return false;
@@ -46,7 +46,7 @@ class CommentService
      * @param int $status status
      * @param int $id     id
      *
-     * @return Comment
+     * @return boolean
      */
     public function changeStatus(int $status, int $id)
     {

@@ -39,10 +39,10 @@
                     <td>{{ $comment->parent ? $comment->parent->content : '' }}</td>
                     <td>{{ formatDateVN($comment->created_at) }}</td>
                     <td>
-                      <button data-id="{{ $comment->id }}" data-status="{{ $comment->status }}" class="js-status-cmt btn btn-block {{ $comment->status == 1 ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $comment->status == 1 ? __('comment.table.active') : __('comment.table.blocked') }}</button>
+                      <button data-id="{{ $comment->id }}" data-status="{{ $comment->status }}" class="js-status-cmt btn btn-block {{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? __('comment.table.active') : __('comment.table.blocked') }}</button>
                     </td>
                     <td>
-                      <form class="form-inline" action="{{ route('admin.comments.destroy', $comment) }}" method="POST">
+                      <form class="form-inline" action="{{ route('admin.comments.destroy', ['id' => $comment->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
@@ -63,4 +63,8 @@
     </section>
   </div>
 @endsection
-<script>var changeStatus = "{{ url('admin/comments/changeStatus') }}"</script>
+<script>
+  var changeStatus = "{{ url('admin/comments/change-status') }}";
+  var active = "{{ __('comment.table.active') }}";
+  var blocked = "{{ __('comment.table.blocked') }}";
+</script>
