@@ -108,3 +108,6 @@
 .nav-left {
   flex-basis: 120%;
 }
+.w-30 {
+  width: 30%;
+}

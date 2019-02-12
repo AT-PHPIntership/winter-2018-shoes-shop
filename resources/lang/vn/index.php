@@ -54,5 +54,6 @@ return [
         'size' => 'Kích cở',
         'quantity' => 'Số lượng',
         'add_to_cart' => 'Thêm vào',
+        'default_option' => 'Chọn',
     ],
 ];

@@ -224,5 +224,5 @@
     </div>
   </section>
   <!-- End brand Area -->  
-  <script>var getDetailProduct = "{{ url('getDetailProduct') }}"</script>  
+  <script>var getDetailProduct = "{{ url('get-detail-product') }}";</script>  
 @endsection

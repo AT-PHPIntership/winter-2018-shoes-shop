@@ -37,7 +37,8 @@
                 <div class="d-flex align-items-center">
                     {{ __('index.quick_view.color') }}: 
                   <div class="ml-15 form-group">
-                    <select class="form-control" id="modal-color" style="display: block;">
+                    <select class="form-control" id="modal-color">
+                      <option value="">{{ __('index.quick_view.default_option') }}</option>
                     </select>
                   </div>
                 </div>
@@ -45,16 +46,13 @@
                     {{ __('index.quick_view.size') }}: 
                   <div class="ml-15 form-group">
                     <select class="form-control" id="modal-size">
+                      <option value="">{{ __('index.quick_view.default_option') }}</option>
                     </select>
                   </div>
                 </div>
-                <div class="quantity-container d-flex align-items-center mt-15">
+                <div class="d-flex align-items-center mt-15">
                     {{ __('index.quick_view.quantity') }}:
-                  <input type="text" id="modal-quantity" class="quantity-amount ml-15" value="1" />
-                  <div class="arrow-btn d-inline-flex flex-column">
-                    <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
-                    <button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
-                  </div>
+                  <input type="number" id="modal-quantity" min="1" class="form-control w-30 ml-15" value="1"/>
                 </div>
                 <div class="d-flex mt-20">
                   <a href="javascript:void(0)" class="genric-btn primary js-addcart"><span>{{ __('index.quick_view.add_to_cart') }}</span></a>
@@ -66,4 +64,5 @@
       </div>
     </div>
   </div>
+  <script>var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";</script>
 </div>

@@ -42,12 +42,7 @@ $(document).ready(function(){
         $.each(data.colors, function(key, val){
           eleColor += '<option value="' + val.id + '">' + val.name + '</option>';
         });        
-        modal.find('#modal-color').html(eleColor);
-        var eleSize = "";
-        $.each(data.sizes, function(key, val){
-          eleSize += '<option value="' + val.id + '">' + val.size + '</option>';
-        });
-        modal.find('#modal-size').html(eleSize);
+        modal.find('#modal-color').append(eleColor);
         var eleImage = "";
         $.each(data.images, function(key, val){
           var active = '';
@@ -58,4 +53,31 @@ $(document).ready(function(){
       }
     });
   });
+  var productQuantity = []
+  $('#modal-color').change(function(){
+    var colorId = $(this).val();
+    $.ajax({
+      url: getSizesByColorId,
+      method:"get",
+      dataType:"JSON",
+      data: {colorId:colorId},
+      success: function(data){
+        productQuantity = data;
+        var eleSize = "";
+        $.each(data, function(key, val){
+          eleSize += '<option value="' + val.size_id + '">' + val.size + '</option>';
+        });
+        $('#modal-size').append(eleSize);
+      }
+    });
+  });
+  $('#modal-size').change(function(){
+    var sizeId = $(this).val();
+    $.each(productQuantity, function(key, val){
+      if (+sizeId == +val.size_id){
+        $('#modal-inventory').text(val.quantity);
+        $('#modal-quantity').attr('max', val.quantity);
+      }
+    });
+  })
 });
