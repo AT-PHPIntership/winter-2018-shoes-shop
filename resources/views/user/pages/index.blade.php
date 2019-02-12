@@ -102,7 +102,7 @@
               </div>
               <div class="price">
                 <h5 class="text-white">{{ $productForMen->name }}</h5>
-                <p class="text-white">{{ $productForMen->promotions->last() ? formatCurrencyVN(($productForMen->original_price * (100 - $productForMen->promotions->first()->percent))/100) : formatCurrencyVN($productForMen->original_price) }} <del class="text-gray">{{ $productForMen->promotions->first() ? formatCurrencyVN($productForMen->original_price) : '' }}</del></p>
+                <p class="text-white">{{ $productForMen->promotions->last() ? formatCurrencyVN(($productForMen->original_price * (100 - $productForMen->promotions->last()->percent))/100) : formatCurrencyVN($productForMen->original_price) }} <del class="text-gray">{{ $productForMen->promotions->last() ? formatCurrencyVN($productForMen->original_price) : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -146,7 +146,7 @@
               </div>
               <div class="price">
                 <h5>{{ $productForWomen->name }}</h5>
-                <p>{{ $productForWomen->promotions->last() ? formatCurrencyVN(($productForWomen->original_price * (100 - $productForWomen->promotions->first()->percent))/100) : formatCurrencyVN($productForWomen->original_price) }} <del class="text-gray">{{ $productForWomen->promotions->first() ? formatCurrencyVN($productForWomen->original_price) : '' }}</del></p>
+                <p>{{ $productForWomen->promotions->last() ? formatCurrencyVN(($productForWomen->original_price * (100 - $productForWomen->promotions->first()->percent))/100) : formatCurrencyVN($productForWomen->original_price) }} <del class="text-gray">{{ $productForWomen->promotions->last() ? formatCurrencyVN($productForWomen->original_price) : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -170,7 +170,7 @@
               <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
               <div class="desc">
                 <a href="#" class="title">{{ $newProduct->name }}</a>
-                <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? formatCurrencyVN(($newProduct->original_price * (100 - $newProduct->promotions->first()->percent))/100) : formatCurrencyVN($newProduct->original_price) }} <del>{{ $newProduct->promotions->first() ? formatCurrencyVN($newProduct->original_price) : '' }}</del></div>
+                <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->last() ? formatCurrencyVN(($newProduct->original_price * (100 - $newProduct->promotions->last()->percent))/100) : formatCurrencyVN($newProduct->original_price) }} <del>{{ $newProduct->promotions->last() ? formatCurrencyVN($newProduct->original_price) : '' }}</del></div>
               </div>
             </div>
           </div>
@@ -194,7 +194,7 @@
             <a href="#"><img src="{{ $topSellProduct->images->first() ? $topSellProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
             <div class="desc">
               <a href="#" class="title">{{ $topSellProduct->name }}</a>
-              <div class="price"><span class="lnr lnr-tag"></span> {{ $topSellProduct->promotions->first() ? formatCurrencyVN(($topSellProduct->original_price * (100 - $topSellProduct->promotions->first()->percent))/100) : formatCurrencyVN($topSellProduct->original_price) }} <del>{{ $topSellProduct->promotions->first() ? formatCurrencyVN($topSellProduct->original_price) : '' }}</del></div>
+              <div class="price"><span class="lnr lnr-tag"></span> {{ $topSellProduct->promotions->last() ? formatCurrencyVN(($topSellProduct->original_price * (100 - $topSellProduct->promotions->last()->percent))/100) : formatCurrencyVN($topSellProduct->original_price) }} <del>{{ $topSellProduct->promotions->last() ? formatCurrencyVN($topSellProduct->original_price) : '' }}</del></div>
             </div>
           </div>
         </div>

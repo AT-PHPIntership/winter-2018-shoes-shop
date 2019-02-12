@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\OrderDetail;
+use App\Models\Order;
 use App\Models\Category;
 use Carbon\Carbon;
 
@@ -56,18 +57,17 @@ class ProductService
     public function getProductsByCat(string $categoryName, array $columns = ['*'])
     {
         $id = Category::where('name', $categoryName)->first(['id'])->id;
-        if (Category::where('parent_id', $id)->count()) {
-            $categoryIds = Category::where('parent_id', $id)->get(['id']);
-        } else {
-            $categoryIds = Category::where('id', $id)->get(['id']);
-        }
-        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
+        $product = Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
-        }])
-        ->whereIn('category_id', $categoryIds)
-        ->orderBy('updated_at', 'desc')
-        ->get($columns);
+        }]);
+        if (Category::where('parent_id', $id)->count()) {
+            $ids = Category::where('parent_id', $id)->get(['id']);
+            $product = $product->whereIn('category_id', $ids);
+        } else {
+            $product = $product->where('category_id', $id);
+        }
+        return $product->orderBy('updated_at', 'desc')->get($columns);
     }
 
     /**
@@ -79,8 +79,10 @@ class ProductService
      */
     public function getNewProducts(array $columns = ['*'])
     {
-        return Product::with(['images:id,path,product_id', 'promotions'])
-        ->orderBy('updated_at', 'desc')
+        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])->orderBy('updated_at', 'desc')
         ->limit(config('define.limit_rows_product'))
         ->get($columns);
     }
@@ -100,8 +102,10 @@ class ProductService
             ->groupBy('product_id')->orderBy('total', 'desc')
             ->limit(config('define.limit_rows_product'))
             ->pluck('product_id');
-        return Product::with(['images:id,path,product_id', 'promotions'])
-        ->whereIn('id', $productIds)
+        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])->whereIn('id', $productIds)
         ->limit(config('define.limit_rows_product'))
         ->get($columns);
     }
