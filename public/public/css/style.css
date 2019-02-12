@@ -112,3 +112,14 @@
   width: 70px;
   height: 70px;
 }
+.mess-coupon {
+  line-height: 40px;
+  padding: 0 30px;
+  color: #f41068;
+  font-weight: bold;
+}
+.subtotal-area .subtotal{
+  margin-left: 0;
+  min-width: 200px;
+  text-align: right;
+}

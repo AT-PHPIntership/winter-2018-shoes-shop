@@ -87,7 +87,7 @@ class CodeService
             $data['status'] = true;
             $data['percent'] = $code->percent;
             if (!$cateogry_id) {
-                $data['apply'] = null; //apply all products
+                $data['apply'] = $productIds;
             } else {
                 foreach ($productIds as $productId) {
                     if (Product::where('id', $productId)->where('category_id', $cateogry_id)->count()) {

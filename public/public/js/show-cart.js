@@ -3,11 +3,11 @@ $(document).ready(function(){
   function getListCartItem(){
     var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
     var items = '';
-    var subTotal = 0;
+    var subAmount = 0;
     $.each(arrProduct, function(key, val){
       items += '<div class="cart-single-item">';
       items += '<div class="row align-items-center">';
-      items += '<div class="col-md-5 col-12">';
+      items += '<div class="col-md-4 col-12">';
       items += '<div class="product-item d-flex align-items-center">';
       var img = val.product.image ? val.product.image : '/public/img/default_product.png';
       items += '<img src="'+ img +'" class="img-fluid img-product-cart" alt="">';
@@ -26,15 +26,16 @@ $(document).ready(function(){
       items += '<div class="col-md-2 col-12">';
       items += '<div class="total js-total-price-item">'+ formatCurrencyVN(val.product.price * val.product.quantity) +'</div>';
       items += '</div>';
-      items += '<div class="col-md-1 col-6">';
+      items += '<div class="col-md-2 col-6">';
       items += '<div class="text-center"><a class="js-remove-item" data-product-id="'+ val.product.id +'" href="javascript:void(0)"><i class="fa fa-times fa-2x"></i></a></div>';
       items += '</div>';
       items += '</div>';
       items += '</div>';
-      subTotal += val.product.price * val.product.quantity;
+      subAmount += val.product.price * val.product.quantity;
     });
     $('.list-cart-item').html(items);
-    $('#cart-sub-total-price').html(formatCurrencyVN(subTotal));
+    $('#cart-sub-amount').text(formatCurrencyVN(subAmount));
+    $('#cart-amount').text(formatCurrencyVN(subAmount));
   }
   getListCartItem();
 
@@ -93,7 +94,34 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {code:code, productIds:productIds},
       success: function(data){
-        console.log(data);
+        if(data['status']){
+          var apply = data['apply'];
+          if(apply){
+            var percent = data['percent'];
+            $('#cart-code-percent').text(percent + '%');
+            var decrease = 0;
+            var productNames = [];
+            for (var i = 0; i < arrProduct.length; i++) {
+              for (var j = 0; j < apply.length; j++) {
+                if(+arrProduct[i].product.id === +apply[j]){
+                  decrease += (arrProduct[i].product.price * arrProduct[i].product.quantity * percent)/100;
+                  productNames[i] = arrProduct[i].product.name;
+                }
+              }
+            }
+            subAmount = 0;
+            $.each(arrProduct, function(key, val){
+              subAmount += val.product.price * val.product.quantity;
+            });
+            cartAmount = subAmount - decrease;
+            $('#cart-amount').text(formatCurrencyVN(cartAmount));
+            $('.mess-coupon').text('Áp mã thành công: '+ productNames);
+          }else{
+            $('.mess-coupon').text('Không có sản phẩm nào được áp dụng');
+          }
+        }else{
+          $('.mess-coupon').text('Áp mã thất bại');
+        }
       }
     });
   });
