@@ -18,6 +18,29 @@ class CommentService
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param Comment $comment comment
+     *
+     * @return boolean
+     */
+    public function destroy(Comment $comment)
+    {
+        try {
+            if (!$comment->children->isEmpty()) {
+                foreach ($comment->children as $child) {
+                    $child->delete();
+                }
+            }
+            $comment->delete();
+            return $comment;
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return false;
+    }
+    
+    /**
      * Change status comment
      *
      * @param int $status status

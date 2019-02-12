@@ -47,4 +47,14 @@ class Comment extends Model
     {
         return $this->belongsTo(Comment::class, 'parent_id', 'id');
     }
+
+    /**
+     * Parent Comment has many Child Comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany(Comment::class, 'parent_id', 'id');
+    }
 }

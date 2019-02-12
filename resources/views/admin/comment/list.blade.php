@@ -42,7 +42,7 @@
                       <button data-id="{{ $comment->id }}" data-status="{{ $comment->status }}" class="js-status-cmt btn btn-block {{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? __('comment.table.active') : __('comment.table.blocked') }}</button>
                     </td>
                     <td>
-                      <form class="form-inline" action="" method="POST">
+                      <form class="form-inline" action="{{ route('admin.comments.destroy', ['id' => $comment->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
@@ -54,7 +54,7 @@
             </div>
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
-
+                {{ $comments->links() }}
               </ul>
             </div>
           </div>
