@@ -14,14 +14,4 @@ class OrderDetail extends Model
     protected $fillable = [
         'order_id', 'product_id', 'price', 'quantity',
     ];
-
-    /**
-     * OrderDetail belong to Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
 }
