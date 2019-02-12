@@ -20,7 +20,6 @@
     @include('user.module.header')
     @yield('content')
     @include('user.module.footer')
-    @include('user.module.quickview')
     <script src="{{ asset('public/js/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('public/js/popper.min.js') }}" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>

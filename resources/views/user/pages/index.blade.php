@@ -96,13 +96,13 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target=""><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>
               <div class="price">
                 <h5 class="text-white">{{ $productForMen->name }}</h5>
-                <p class="text-white">{{ $productForMen->promotions->last() ? ($productForMen->original_price * $productForMen->promotions->first()->percent)/100 : $productForMen->original_price }}đ <del class="text-gray">{{ $productForMen->promotions->first() ? $productForMen->original_price.'đ' : '' }}</del></p>
+                <p class="text-white">{{ $productForMen->promotions->last() ? formatCurrencyVN(($productForMen->original_price * (100 - $productForMen->promotions->first()->percent))/100) : formatCurrencyVN($productForMen->original_price) }} <del class="text-gray">{{ $productForMen->promotions->first() ? formatCurrencyVN($productForMen->original_price) : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -140,13 +140,13 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target=""><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>
               <div class="price">
                 <h5>{{ $productForWomen->name }}</h5>
-                <p>{{ $productForWomen->promotions->last() ? ($productForWomen->original_price * $productForWomen->promotions->first()->percent)/100 : $productForWomen->original_price }}đ <del class="text-gray">{{ $productForWomen->promotions->first() ? $productForWomen->original_price.'đ' : '' }}</del></p>
+                <p>{{ $productForWomen->promotions->last() ? formatCurrencyVN(($productForWomen->original_price * (100 - $productForWomen->promotions->first()->percent))/100) : formatCurrencyVN($productForWomen->original_price) }} <del class="text-gray">{{ $productForWomen->promotions->first() ? formatCurrencyVN($productForWomen->original_price) : '' }}</del></p>
               </div>
             </div>
           @endforeach
@@ -170,7 +170,7 @@
               <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
               <div class="desc">
                 <a href="#" class="title">{{ $newProduct->name }}</a>
-                <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? ($newProduct->original_price * $newProduct->promotions->first()->percent)/100 : $newProduct->original_price }}đ <del>{{ $newProduct->promotions->first() ? $newProduct->original_price.'đ' : '' }}</del></div>
+                <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->first() ? formatCurrencyVN(($newProduct->original_price * (100 - $newProduct->promotions->first()->percent))/100) : formatCurrencyVN($newProduct->original_price) }} <del>{{ $newProduct->promotions->first() ? formatCurrencyVN($newProduct->original_price) : '' }}</del></div>
               </div>
             </div>
           </div>
@@ -194,7 +194,7 @@
             <a href="#"><img src="{{ $topSellProduct->images->first() ? $topSellProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
             <div class="desc">
               <a href="#" class="title">{{ $topSellProduct->name }}</a>
-              <div class="price"><span class="lnr lnr-tag"></span> {{ $topSellProduct->promotions->first() ? ($topSellProduct->original_price * $topSellProduct->promotions->first()->percent)/100 : $topSellProduct->original_price }}đ <del>{{ $topSellProduct->promotions->first() ? $topSellProduct->original_price.'đ' : '' }}</del></div>
+              <div class="price"><span class="lnr lnr-tag"></span> {{ $topSellProduct->promotions->first() ? formatCurrencyVN(($topSellProduct->original_price * (100 - $topSellProduct->promotions->first()->percent))/100) : formatCurrencyVN($topSellProduct->original_price) }} <del>{{ $topSellProduct->promotions->first() ? formatCurrencyVN($topSellProduct->original_price) : '' }}</del></div>
             </div>
           </div>
         </div>
