@@ -29,4 +29,14 @@ class OrderController extends Controller
     {
         return app(CodeService::class)->applyCode($request->input('code'), $request->input('productIds'));
     }
+
+    /**
+     * Show checkout
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function checkout()
+    {
+        return view('user.pages.checkout');
+    }
 }

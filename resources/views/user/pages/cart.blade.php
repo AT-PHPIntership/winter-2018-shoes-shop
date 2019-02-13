@@ -51,19 +51,19 @@
       </div>
     </div>
     <div class="subtotal-area d-flex align-items-center justify-content-end">
-      <div class="title text-uppercase">Tạm tính</div>
+      <div class="title text-uppercase">{{ __('cart.table.sub_amount') }}</div>
       <div class="subtotal" id="cart-sub-amount"></div>
     </div>
     <div class="subtotal-area d-flex align-items-center justify-content-end">
-      <div class="title text-uppercase">Code</div>
-      <div class="subtotal" id="cart-code-percent">_</div>
+      <div class="title text-uppercase">{{ __('cart.code.title') }}</div>
+      <div class="subtotal"><span id="cart-code-percent"></span>%</div>
     </div>
     <div class="subtotal-area d-flex align-items-center justify-content-end">
-      <div class="title text-uppercase">{{ __('cart.table.subtotal') }}</div>
+      <div class="title text-uppercase">{{ __('cart.table.amount') }}</div>
       <div class="subtotal" id="cart-amount"></div>
     </div>
     <div class="shipping-area d-flex justify-content-end">
-      <button class="view-btn color-2 mt-10"><span>{{ __('cart.checkout') }}</span></button>
+      <button class="view-btn js-checkout-order color-2 mt-10"><span>{{ __('cart.checkout') }}</span></button>
     </div>
   </div>
   <!-- End Cart Area -->

@@ -56,6 +56,9 @@ $(document).ready(function(){
       });
       localStorage.setItem('arrProduct', JSON.stringify(arrProduct));
       getListCartItem();
+      if($('.js-input-code').length && $('.js-input-code').val() != ''){
+        checkCode();
+      }
     }
   });
 
@@ -78,11 +81,14 @@ $(document).ready(function(){
     $('#js-total-item').text(totalItem);
     localStorage.setItem('arrProduct', JSON.stringify(arrProduct));
     getListCartItem();
+    if($('.js-input-code').length && $('.js-input-code').val() != ''){
+      checkCode();
+    }
   });
 
-  // Apply Code
-  $('.js-apply-code').click(function(){
-    var code = $(this).parent().find('.js-input-code').val();
+  // Check code
+  function checkCode(){
+    var code = $('.js-input-code').val();
     var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
     var productIds = [];
     $.each(arrProduct, function(key, val){
@@ -98,7 +104,7 @@ $(document).ready(function(){
           var apply = data['apply'];
           if(apply){
             var percent = data['percent'];
-            $('#cart-code-percent').text(percent + '%');
+            $('#cart-code-percent').text(percent);
             var decrease = 0;
             var productNames = [];
             for (var i = 0; i < arrProduct.length; i++) {
@@ -124,5 +130,21 @@ $(document).ready(function(){
         }
       }
     });
+  }
+
+  // Apply Code
+  $('.js-apply-code').click(function(){
+    checkCode();
   });
+
+  //Redirect checkout
+  // $('.js-checkout-order').click(function(){
+  //   var codeName = $('.js-input-code').val();
+  //   var codePercent = $('#cart-code-percent').text();
+  //   var code = {};
+  //   code['name'] = codeName;
+  //   code['percent'] = +codePercent;
+  //   localStorage.setItem('code', JSON.stringify(code));
+  //   window.location.href = "/checkout";
+  // });
 });

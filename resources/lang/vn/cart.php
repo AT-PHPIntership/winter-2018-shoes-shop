@@ -8,10 +8,12 @@ return [
         'price' => 'Giá',
         'quantity' => 'Số lượng',
         'total' => 'Thành tiền',
-        'subtotal' => 'Tổng cộng',
+        'sub_amount' => 'Tạm tính',
+        'amount' => 'Tổng cộng',
         'action' => 'Hành động',
     ],
     'code' => [
+        'title' => 'CODE',
         'question' => 'Mã giảm giá ?',
         'apply' => 'Áp dụng',
         'close' => 'Đóng',
