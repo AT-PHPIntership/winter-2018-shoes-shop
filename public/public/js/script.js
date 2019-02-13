@@ -19,6 +19,8 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   $('#exampleModal').on('show.bs.modal', function (e) {
+    $('#modal-color').html('<option value="">Chọn</option>');
+    $('#modal-size').html('<option value="">Chọn</option>');
     var modal = $(this);
     var id = $(e.relatedTarget).data('product');
     $.ajax({

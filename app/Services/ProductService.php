@@ -52,7 +52,7 @@ class ProductService
             'id' => $product->id,
             'name' => $product->name,
             'original_price' => $product->original_price,
-            'price' => $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : null,
+            'price' => $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null,
             'inventory' => $product->quantity - $product->total_sold,
             'description' => $product->description,
         ];
