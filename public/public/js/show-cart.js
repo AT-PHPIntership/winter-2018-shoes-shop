@@ -138,13 +138,13 @@ $(document).ready(function(){
   });
 
   //Redirect checkout
-  // $('.js-checkout-order').click(function(){
-  //   var codeName = $('.js-input-code').val();
-  //   var codePercent = $('#cart-code-percent').text();
-  //   var code = {};
-  //   code['name'] = codeName;
-  //   code['percent'] = +codePercent;
-  //   localStorage.setItem('code', JSON.stringify(code));
-  //   window.location.href = "/checkout";
-  // });
+  $('.js-checkout-order').click(function(){
+    var codeName = $('.js-input-code').val();
+    var codePercent = $('#cart-code-percent').text();
+    var code = {};
+    code['name'] = codeName;
+    code['percent'] = +codePercent;
+    localStorage.setItem('code', JSON.stringify(code));
+    window.location.href = "/checkout";
+  });
 });
