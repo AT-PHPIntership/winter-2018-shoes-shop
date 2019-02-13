@@ -36,13 +36,13 @@ class ProductService
     }
 
     /**
-     * Get product by id
+     * Get detail product
      *
      * @param int $id id id
      *
      * @return \Illuminate\Http\Response
      */
-    public function getProductById(int $id)
+    public function getDetailProduct(int $id)
     {
         $product = Product::with(['category:id,name', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())

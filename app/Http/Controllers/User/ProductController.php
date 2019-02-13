@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function getDetailProduct(Request $request)
     {
-        $response = app(ProductService::class)->getProductById($request->input('id'));
+        $response = app(ProductService::class)->getDetailProduct($request->input('id'));
         return $response;
     }
 
