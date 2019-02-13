@@ -53,34 +53,32 @@
                 @endif
               </div>
               <div class="category">{{ trans('product.category')}}: <span>{{ $product['category']['name'] }}</span></div>
-              <div class="available">{{ trans('product.quantity')}}: <span id="modal-inventory">{{ $product['product']['inventory'] }}</span></div>
+              <div class="available">{{ trans('product.quantity')}}: <span id="js-inventory">{{ $product['product']['inventory'] }}</span></div>
             </div>
             <div class="middle">
               <p class="content">{{ $product['product']['description'] }}</p>
             </div>
             <div class="add-cart">
               <div class="row">
-                <div class="form-group col-md-6 form-select" id="default-select">
-                  <label>{{ trans('product.select_color')}}: </label>
-                  <select id="modal-color">
+                <div class="form-group col-md-6">
+                  <label>{{ trans('product.color')}}: </label>
+                  <select id="js-color" class="form-control">
+                    <option>{{ trans('product.select_color')}}</option>
                     @foreach($product['colors'] as $color)
                       <option value="{{ $color->id }}">{{ $color->name }}</option>
                     @endforeach
                   </select>
                 </div>
-                <div class="form-group col-md-6 form-select" id="default-select">
+                <div class="form-group col-md-6">
                   <label>{{ trans('product.size')}}: </label>
-                  <select id="modal-size">
+                  <select id="js-size" class="form-control">
                   </select>
                 </div>
               </div>
-              <div class="quantity-container d-flex align-items-center mt-30">
+              <div class="d-flex align-items-center mt-30">
                 <label>{{ trans('product.quantity')}}: </label>
-                <input id="modal-quantity" type="text" class="quantity-amount ml-15" value="1" />
-                <div class="arrow-btn d-inline-flex flex-column">
-                    <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
-                    <button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
-                </div>
+                <input id="js-quantity" type="number" class="select-number ml-15" value="1" />
+                
               </div>
               <div class="d-flex mt-20">
               <a href="#" class="view-btn color-2"><span>{{ trans('product.add_cart')}}</span></a>
@@ -92,5 +90,5 @@
     </div>
   </div>
   <!-- End Product Details -->
-  <script>var getSizesByColorId = "{{ url('get-size-by-color-id') }}";</script>  
+  <script>var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";</script>  
 @endsection

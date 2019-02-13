@@ -19,7 +19,8 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   var productQuantity = []
-  $('#modal-color').change(function(){
+  $('#js-color').change(function(){
+    $('#js-size').html('<option>Chọn kích cỡ</option>');
     var colorId = $(this).val();
     $.ajax({
       url: getSizesByColorId,
@@ -32,16 +33,16 @@ $(document).ready(function(){
         $.each(data, function(key, val){
           eleSize += '<option value="' + val.size_id + '">' + val.size + '</option>';
         });
-        $('#modal-size').append(eleSize);
+        $('#js-size').append(eleSize);
       }
     });
   });
-  $('#modal-size').change(function(){
+  $('#js-size').change(function(){
     var sizeId = $(this).val();
     $.each(productQuantity, function(key, val){
       if (+sizeId == +val.size_id){
-        $('#modal-inventory').text(val.quantity);
-        $('#modal-quantity').attr('max', val.quantity);
+        $('#js-inventory').text(val.quantity);
+        $('#js-quantity').attr('max', val.quantity);
       }
     });
   })

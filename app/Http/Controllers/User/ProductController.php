@@ -58,6 +58,6 @@ class ProductController extends Controller
         if ($request->input('colorId')) {
             return $this->products->getSizesByColorId($request->input('colorId'));
         }
-        return null;
+        return $request->input('colorId');
     }
 }

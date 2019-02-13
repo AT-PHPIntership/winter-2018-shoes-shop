@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\Size;
 use Carbon\Carbon;
 
 class ProductService
