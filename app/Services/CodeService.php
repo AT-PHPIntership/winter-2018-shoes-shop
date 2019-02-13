@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Code;
 use App\Models\Product;
 use Log;
+use Carbon\Carbon;
 
 class CodeService
 {
@@ -73,31 +74,43 @@ class CodeService
     /**
      * Apply Code
      *
-     * @param string $code       code
-     * @param array  $productIds productIds
+     * @param string $code     code
+     * @param array  $products products
      *
      * @return \Illuminate\Http\Response
      */
-    public function applyCode(string $code, array $productIds)
+    public function applyCode(string $code, array $products)
     {
-        $data = [];
         $code = Code::where('name', $code)->first();
         if ($code) {
-            $cateogry_id = $code->category_id;
-            $data['status'] = true;
-            $data['percent'] = $code->percent;
-            if (!$cateogry_id) {
-                $data['apply'] = $productIds;
+            $cateogryId = $code->category_id;
+            $amountDecrease = 0;
+            if (!$cateogryId) {
+                foreach ($products as $pd) {
+                    $product = Product::with(['promotions' => function ($query) {
+                        $query->where('start_date', '<=', Carbon::now())
+                              ->where('end_date', '>=', Carbon::now());
+                    }])->find($pd['id']);
+                    if ($product) {
+                        $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
+                        $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
+                    }
+                }
             } else {
-                foreach ($productIds as $productId) {
-                    if (Product::where('id', $productId)->where('category_id', $cateogry_id)->count()) {
-                        $data['apply'][] = $productId;
+                foreach ($products as $pd) {
+                    $product = Product::with(['promotions' => function ($query) {
+                        $query->where('start_date', '<=', Carbon::now())
+                              ->where('end_date', '>=', Carbon::now());
+                    }])->where('id', $pd['id'])->where('category_id', $cateogryId)->first();
+                    if ($product) {
+                        $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
+                        $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
                     }
                 }
             }
-            return $data;
+            return $amountDecrease;
+        } else {
+            return null;
         }
-        $data['status'] = false;
-        return $data;
     }
 }

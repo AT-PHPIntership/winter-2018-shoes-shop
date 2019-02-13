@@ -43,11 +43,11 @@
         <span class="mess-coupon"></span>
       </div>
       <div class="cuppon-wrap d-flex align-items-center flex-wrap">
+        <span class="cupon-question"><span>{{ __('cart.code.question') }}</span></span>
         <div class="cupon-code">
           <input type="text" class="js-input-code">
           <button class="view-btn color-2 js-apply-code"><span>{{ __('cart.code.apply') }}</span></button>
         </div>
-        <a href="#" class="view-btn color-2 have-btn"><span>{{ __('cart.code.question') }}</span></a>
       </div>
     </div>
     <div class="subtotal-area d-flex align-items-center justify-content-end">
@@ -56,7 +56,7 @@
     </div>
     <div class="subtotal-area d-flex align-items-center justify-content-end">
       <div class="title text-uppercase">{{ __('cart.code.title') }}</div>
-      <div class="subtotal"><span id="cart-code-percent"></span>%</div>
+      <div class="subtotal">-<span id="cart-code-decrease"></span></div>
     </div>
     <div class="subtotal-area d-flex align-items-center justify-content-end">
       <div class="title text-uppercase">{{ __('cart.table.amount') }}</div>

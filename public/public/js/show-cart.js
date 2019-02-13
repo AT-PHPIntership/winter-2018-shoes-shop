@@ -35,7 +35,14 @@ $(document).ready(function(){
     });
     $('.list-cart-item').html(items);
     $('#cart-sub-amount').text(formatCurrencyVN(subAmount));
-    $('#cart-amount').text(formatCurrencyVN(subAmount));
+    var code = JSON.parse(localStorage.getItem("code"));
+    var codeDecrease = 0;
+    if(code){
+      codeDecrease = code['decrease'];
+      $('.js-input-code').val(code['name']);
+      $('#cart-code-decrease').text(formatCurrencyVN(codeDecrease));
+    }
+    $('#cart-amount').text(formatCurrencyVN(subAmount - codeDecrease));
   }
   getListCartItem();
 
@@ -56,9 +63,7 @@ $(document).ready(function(){
       });
       localStorage.setItem('arrProduct', JSON.stringify(arrProduct));
       getListCartItem();
-      if($('.js-input-code').length && $('.js-input-code').val() != ''){
-        checkCode();
-      }
+      checkCode();
     }
   });
 
@@ -81,52 +86,53 @@ $(document).ready(function(){
     $('#js-total-item').text(totalItem);
     localStorage.setItem('arrProduct', JSON.stringify(arrProduct));
     getListCartItem();
-    if($('.js-input-code').length && $('.js-input-code').val() != ''){
-      checkCode();
-    }
+    checkCode();
   });
 
-  // Check code
-  function checkCode(){
-    var code = $('.js-input-code').val();
+  // Get subAmount
+  function getSubAmount(){
+    subAmount = 0;
     var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
-    var productIds = [];
     $.each(arrProduct, function(key, val){
-      productIds[key] = val.product.id;
+      subAmount += val.product.price * val.product.quantity;
     });
+    return subAmount;
+  }
+
+  // Get Product: id, quantity
+  function getProduct(){
+    var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
+    var data = [];
+    var product = {};
+    $.each(arrProduct, function(key, val){
+      product['id'] = val.product.id;
+      product['quantity'] = val.product.quantity;
+      data[key] = product;
+    });
+    return data;
+  }
+
+  //check code
+  function checkCode(){
+    var codeName = $('.js-input-code').val();
+    var products = getProduct();
     $.ajax({
       url: 'cart/applyCode',
       method: "get",
-      dataType:"JSON",
-      data: {code:code, productIds:productIds},
+      data: {code:codeName, products:products},
       success: function(data){
-        if(data['status']){
-          var apply = data['apply'];
-          if(apply){
-            var percent = data['percent'];
-            $('#cart-code-percent').text(percent);
-            var decrease = 0;
-            var productNames = [];
-            for (var i = 0; i < arrProduct.length; i++) {
-              for (var j = 0; j < apply.length; j++) {
-                if(+arrProduct[i].product.id === +apply[j]){
-                  decrease += (arrProduct[i].product.price * arrProduct[i].product.quantity * percent)/100;
-                  productNames[i] = arrProduct[i].product.name;
-                }
-              }
-            }
-            subAmount = 0;
-            $.each(arrProduct, function(key, val){
-              subAmount += val.product.price * val.product.quantity;
-            });
-            cartAmount = subAmount - decrease;
-            $('#cart-amount').text(formatCurrencyVN(cartAmount));
-            $('.mess-coupon').text('Áp mã thành công: '+ productNames);
-          }else{
-            $('.mess-coupon').text('Không có sản phẩm nào được áp dụng');
-          }
-        }else{
+        if(data == ''){
           $('.mess-coupon').text('Áp mã thất bại');
+        }else{
+          var subAmount = getSubAmount();
+          var amount = subAmount - data;
+          $('.mess-coupon').text('Áp mã thành công');
+          $('#cart-code-decrease').text(formatCurrencyVN(data));
+          $('#cart-amount').text(formatCurrencyVN(amount));
+          code = {};
+          code['name'] = codeName;
+          code['decrease'] = +data;
+          localStorage.setItem('code', JSON.stringify(code));
         }
       }
     });
@@ -139,12 +145,6 @@ $(document).ready(function(){
 
   //Redirect checkout
   $('.js-checkout-order').click(function(){
-    var codeName = $('.js-input-code').val();
-    var codePercent = $('#cart-code-percent').text();
-    var code = {};
-    code['name'] = codeName;
-    code['percent'] = +codePercent;
-    localStorage.setItem('code', JSON.stringify(code));
     window.location.href = "/checkout";
   });
 });

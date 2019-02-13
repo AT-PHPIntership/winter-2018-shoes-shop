@@ -118,8 +118,15 @@
   color: #f41068;
   font-weight: bold;
 }
-.subtotal-area .subtotal{
+.subtotal-area .subtotal {
   margin-left: 0;
   min-width: 200px;
   text-align: right;
+}
+.cupon-area .cupon-code {
+  display: block;
+}
+.cupon-question {
+  padding: 0 20px;
+  font-weight: 600;
 }

@@ -27,7 +27,7 @@ class OrderController extends Controller
      */
     public function applyCode(Request $request)
     {
-        return app(CodeService::class)->applyCode($request->input('code'), $request->input('productIds'));
+        return app(CodeService::class)->applyCode($request->input('code'), $request->input('products'));
     }
 
     /**
