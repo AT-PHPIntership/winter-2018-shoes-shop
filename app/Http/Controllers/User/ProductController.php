@@ -42,9 +42,22 @@ class ProductController extends Controller
      */
     public function detail($id)
     {
-        $product = $this->products->getDetailById($id);
-        $colors = $this->colors->getColorsByProduct($id);
-        $sizes = $this->sizes->getSizesByProduct($id);
-        return view('user.pages.detail', compact('product', 'colors', 'sizes'));
+        $product = $this->products->getProductById($id);
+        return view('user.pages.detail', compact('product'));
+    }
+
+    /**
+     * Get sizes by colorId
+     *
+     * @param Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSizesByColorId(Request $request)
+    {
+        if ($request->input('colorId')) {
+            return $this->products->getSizesByColorId($request->input('colorId'));
+        }
+        return null;
     }
 }

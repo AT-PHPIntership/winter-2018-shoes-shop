@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Product;
+use Carbon\Carbon;
 
 class ProductService
 {
@@ -37,26 +38,26 @@ class ProductService
      *
      * @return \Illuminate\Http\Response
      */
-    public function getProductById($id)
-    {
-        $product = Product::with([
-            'images:product_id,path',
-            'category:id,name',
-            'productDetails' => function ($query) {
-                $query->with(['size:id,size', 'color:id,name']);
-            }
-        ])->findOrFail($id);
-        return $product;
-    }
+    // public function getProductById($id)
+    // {
+    //     $product = Product::with([
+    //         'images:product_id,path',
+    //         'category:id,name',
+    //         'productDetails' => function ($query) {
+    //             $query->with(['size:id,size', 'color:id,name']);
+    //         }
+    //     ])->findOrFail($id);
+    //     return $product;
+    // }
 
     /**
      * Get product by id
      *
-     * @param int $id id id
+     * @param int $id id product
      *
      * @return \Illuminate\Http\Response
      */
-    public function getDetailById(int $id)
+    public function getProductById(int $id)
     {
         $product = Product::with(['category:id,name', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
@@ -80,9 +81,8 @@ class ProductService
                 'colors' => $item['color'],
             ];
         });
-        $data['colors'] = $details->pluck('colors');
-        dd($data);
-        return json_encode($data);
+        $data['colors'] = $details->pluck('colors')->keyBy('id');
+        return $data;
     }
 
     /**

@@ -14,7 +14,7 @@ return [
     'category' => 'Danh mục',
     'quantity' => 'Số lượng',
     'total_sold' => 'Đã bán',
-    'size' => 'Size',
+    'size' => 'Kích cỡ',
     'color' => 'Màu',
     'description' => 'Mô tả',
     'select_size' => 'Chọn size',

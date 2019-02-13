@@ -21,5 +21,7 @@ return [
         'delete_success' => 'Đã xóa thành công',
         'delete_error' => 'Xóa thất bại',
         'del_question' => 'Bạn có muốn xóa không ?',
-    ]
+    ],
+    'home' => 'Trang chủ',
+    'product' => 'Sản phẩm',
 ];
