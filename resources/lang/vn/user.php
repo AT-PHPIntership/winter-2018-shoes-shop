@@ -35,4 +35,5 @@ return [
         'title' => 'Sửa người dùng',
     ],
     'select' => 'Chọn',
+    'register' => 'Đăng ký',
 ];
