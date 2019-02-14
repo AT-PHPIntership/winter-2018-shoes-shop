@@ -33,4 +33,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('/', 'IndexController@index')->name('index');
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::post('login', 'LoginController@handleLogin')->name('login');
+    Route::get('logout', 'LoginController@handleLogout')->name('logout');
  });

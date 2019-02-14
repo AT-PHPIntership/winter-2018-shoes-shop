@@ -8,7 +8,25 @@
           <li><a href="mailto:support@colorlib.com">support@colorlib.com</a></li>
         </ul>
         <ul class="list">
-          <li><a href="#">login</a></li>
+          @if(Auth::user())
+            <li class="dropdown user user-menu" style="width: 285px;">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="hidden-xs">@lang('admin.header.hello') {{ Auth::user()->profile->name }}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
+                  </div>
+                  <div class="pull-right">
+                  <a href="{{ route('user.logout') }}" class="btn btn-default btn-flat">{{ trans('login.logout') }}</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          @else
+            <li><a href="{{ route('user.login') }}">{{ trans('login.login') }}</a></li>
+          @endif          
         </ul>
       </div>
     </div>
