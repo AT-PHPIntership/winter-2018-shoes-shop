@@ -130,3 +130,13 @@
   padding: 0 20px;
   font-weight: 600;
 }
+.w-30 {
+  width: 30%;
+}
+.help-block {
+  color: #a94442;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}

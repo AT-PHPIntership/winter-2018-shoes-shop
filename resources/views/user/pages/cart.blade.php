@@ -67,4 +67,5 @@
     </div>
   </div>
   <!-- End Cart Area -->
+  <script src="{{ asset('public/js/show-cart.js') }}"></script>
 @endsection

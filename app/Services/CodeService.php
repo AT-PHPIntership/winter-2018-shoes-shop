@@ -79,7 +79,7 @@ class CodeService
      *
      * @return \Illuminate\Http\Response
      */
-    public function applyCode(string $code, array $products)
+    public function getDecreaseTotalAmount(string $code, array $products)
     {
         $code = Code::where('name', $code)->first();
         if ($code) {

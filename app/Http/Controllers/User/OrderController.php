@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Admin\Controller;
 use Illuminate\Http\Request;
 use App\Services\CodeService;
+use App\Http\Requests\User\PostCheckoutRequest;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
@@ -27,7 +29,7 @@ class OrderController extends Controller
      */
     public function applyCode(Request $request)
     {
-        return app(CodeService::class)->applyCode($request->input('code'), $request->input('products'));
+        return app(CodeService::class)->getDecreaseTotalAmount($request->input('code'), $request->input('products'));
     }
 
     /**
@@ -38,5 +40,19 @@ class OrderController extends Controller
     public function checkout()
     {
         return view('user.pages.checkout');
+    }
+
+    /**
+     * Handle checkout
+     *
+     * @param Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleCheckout(Request $request)
+    {
+        // $a = $request->input('code');
+        // \Log::debug($request->input('code'));
+        return app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'));
     }
 }

@@ -12,14 +12,14 @@ $(document).ready(function(){
   }
   $('.js-add-cart').click(function(){
     var productId = $(this).attr('data-product-id');
-    var productName = $('#modal-name').html();
-    var productPrice = $('#modal-price').html();
-    var colorId = $('#modal-color').val();
-    var colorName = $('#modal-color').children("option:selected").html();
-    var sizeId = $('#modal-size').val();
-    var sizeName = $('#modal-size').children("option:selected").html();
-    var quantity = $('#modal-quantity').val();
-    var imagePath = $('#modal-image').children().children().attr("src");
+    var productName = $('#js-name').html();
+    var productPrice = reverseFormatCurrencyVN($('#js-price').html());
+    var colorId = $('#js-color').val();
+    var colorName = $('#js-color').children("option:selected").html();
+    var sizeId = $('#js-size').val();
+    var sizeName = $('#js-size').children("option:selected").html();
+    var quantity = $('#js-quantity').val();
+    var imagePath = $('#js-image').children().children().attr("src");
     var totalItem = 0;
     var flag = 1;    
     $.each(arrProduct, function(key, val){

@@ -17,7 +17,22 @@ class ProductController extends Controller
      */
     public function getDetailProduct(Request $request)
     {
-        $response = app(ProductService::class)->getProductById($request->input('id'));
+        $response = app(ProductService::class)->getDetailProduct($request->input('id'));
         return $response;
+    }
+
+    /**
+     * Get sizes by colorId
+     *
+     * @param Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSizesByColorId(Request $request)
+    {
+        if ($request->input('colorId')) {
+            return app(ProductService::class)->getSizesByColorId($request->input('colorId'));
+        }
+        return null;
     }
 }

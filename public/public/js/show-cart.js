@@ -63,7 +63,12 @@ $(document).ready(function(){
       });
       localStorage.setItem('arrProduct', JSON.stringify(arrProduct));
       getListCartItem();
-      checkCode();
+      if(arrProduct.length == 0){
+        localStorage.removeItem('arrProduct');
+        localStorage.removeItem('code');
+      }else{
+        checkCode();
+      }
     }
   });
 
@@ -103,11 +108,11 @@ $(document).ready(function(){
   function getProduct(){
     var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
     var data = [];
-    var product = {};
     $.each(arrProduct, function(key, val){
-      product['id'] = val.product.id;
-      product['quantity'] = val.product.quantity;
-      data[key] = product;
+      data.push({
+        'id' : val.product.id,
+        'quantity' : val.product.quantity,
+      });
     });
     return data;
   }
@@ -116,26 +121,29 @@ $(document).ready(function(){
   function checkCode(){
     var codeName = $('.js-input-code').val();
     var products = getProduct();
-    $.ajax({
-      url: 'cart/applyCode',
-      method: "get",
-      data: {code:codeName, products:products},
-      success: function(data){
-        if(data == ''){
-          $('.mess-coupon').text('Áp mã thất bại');
-        }else{
-          var subAmount = getSubAmount();
-          var amount = subAmount - data;
-          $('.mess-coupon').text('Áp mã thành công');
-          $('#cart-code-decrease').text(formatCurrencyVN(data));
-          $('#cart-amount').text(formatCurrencyVN(amount));
-          code = {};
-          code['name'] = codeName;
-          code['decrease'] = +data;
-          localStorage.setItem('code', JSON.stringify(code));
+    if(codeName != '' && products.length != 0){
+      $.ajax({
+        url: 'cart/applyCode',
+        method: "get",
+        data: {code:codeName, products:products},
+        success: function(data){
+          if(data == ''){
+            $('.mess-coupon').text('Áp mã thất bại');
+          }else{
+            var subAmount = getSubAmount();
+            var amount = subAmount - data;
+            $('.mess-coupon').text('Áp mã thành công');
+            $('#cart-code-decrease').text(formatCurrencyVN(data));
+            $('#cart-amount').text(formatCurrencyVN(amount));
+            code = {};
+            code['name'] = codeName;
+            code['decrease'] = +data;
+            localStorage.setItem('code', JSON.stringify(code));
+          }
+          console.log(data);
         }
-      }
-    });
+      });
+    }
   }
 
   // Apply Code

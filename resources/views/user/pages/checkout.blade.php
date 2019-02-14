@@ -49,19 +49,29 @@
   <!-- End Checkout Area -->
   <!-- Start Billing Details Form -->
   <div class="container">
-    <form action="#" class="billing-form mb-100">
+    {{-- <form action="{{ route('user.handleCheckout') }}" method="POST" class="billing-form mb-100"> --}}
+      {{-- @csrf --}}
       <div class="row">
         <div class="col-lg-6 col-md-6">
           <h3 class="billing-title mt-20 mb-10">{{ __('checkout.billing_details') }}</h3>
           <div class="row">
             <div class="col-lg-6">
-              <input type="text" placeholder="{{ __('checkout.customer.name') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('checkout.customer.name') }}*'" required class="common-input">
+              <input type="text" class="customer-name common-input" name="customer_name" placeholder="{{ __('checkout.customer.name') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('checkout.customer.name') }}*'">
+              {{-- @if ($errors->has('customer_name'))
+                <span class="help-block">{{ $errors->first('customer_name') }}</span>
+              @endif --}}
             </div>
             <div class="col-lg-6">
-              <input type="text" placeholder="{{ __('checkout.customer.phone_number') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('checkout.customer.phone_number') }}*'" required class="common-input">
+              <input type="text" class="phone-number common-input" name="phone_number" placeholder="{{ __('checkout.customer.phone_number') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('checkout.customer.phone_number') }}*'">
+              {{-- @if ($errors->has('phone_number'))
+                <span class="help-block">{{ $errors->first('phone_number') }}</span>
+              @endif --}}
             </div>
             <div class="col-lg-12">
-              <input type="text" placeholder="{{ __('checkout.customer.address') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('checkout.customer.address') }}*'" required class="common-input">
+              <input type="text" class="shipping-address common-input" name="shipping_address" placeholder="{{ __('checkout.customer.address') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('checkout.customer.address') }}*'">
+              {{-- @if ($errors->has('shipping_address'))
+                <span class="help-block">{{ $errors->first('shipping_address') }}</span>
+              @endif --}}
             </div>
           </div>
         </div>
@@ -71,34 +81,29 @@
             <table class="w-100 table">
               <thead>
                 <tr class="row">
-                  <th class="col-lg-4">{{ __('cart.table.product') }}</th>
-                  <th class="col-lg-4">{{ __('cart.table.quantity') }}</th>
+                  <th class="col-lg-6">{{ __('cart.table.product') }}</th>
+                  <th class="col-lg-2">{{ __('cart.table.quantity') }}</th>
                   <th class="col-lg-4">{{ __('cart.table.total') }}</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr class="row">
-                  <td class="col-lg-4"><b>Nike 3</b> (<span>Đỏ</span>-<span>43</span>)</td>
-                  <td class="col-lg-4">2</td>
-                  <td class="col-lg-4">1.254.200</td>
-                </tr>
+              <tbody class="list-checkout-item">
               </tbody>
               <tfoot>
                 <tr class="row">
                   <td class="col-lg-8">{{ __('cart.table.sub_amount') }}</td>
-                  <td class="col-lg-4"><span id="cart-sub-amount"></span></td>
+                  <td class="col-lg-4"><span id="checkout-sub-amount"></span></td>
                 </tr>
                 <tr class="row">
-                  <td class="col-lg-8">{{ __('cart.code.title') }}</td>
-                  <td class="col-lg-4"><span id="cart-code-percent"></span></td>
+                  <td class="col-lg-8">{{ __('cart.code.title') }} (<small id="checkout-code-name"></small>)</td>
+                  <td class="col-lg-4">-<span id="checkout-code-decrease"></span></td>
                 </tr>
                 <tr class="row">
                   <td class="col-lg-8">{{ __('cart.table.amount') }}</td>
-                  <td class="col-lg-4"><span id="cart-amount"></span></td>
+                  <td class="col-lg-4"><span id="checkout-amount"></span></td>
                 </tr>
                 <tr class="row">
                   <td class="col-lg-12">
-                    <button type="submit" class="view-btn color-2 w-100 mt-20"><span>{{ __('checkout.title') }}</span></button>
+                    <button type="submit" id="js-handle-checkout" class="view-btn color-2 w-100 mt-20"><span>{{ __('checkout.title') }}</span></button>
                   </td>
                 </tr>
               </tfoot>
@@ -106,7 +111,9 @@
           </div>
         </div>
       </div>
-    </form>
+    {{-- </form> --}}
   </div>
   <!-- End Billing Details Form -->
+  <script src="{{ asset('public/js/show-checkout.js') }}"></script>
+  <script>var handleCheckoutUrl = "{{ url('/checkout/handle-checkout') }}";</script>
 @endsection

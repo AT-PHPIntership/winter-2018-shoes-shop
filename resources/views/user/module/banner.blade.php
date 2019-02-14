@@ -1,19 +1,6 @@
 <!-- start banner Area -->
 <section class="banner-area relative no-bg" id="home">
   <div class="container-fluid">
-    <!-- <div class="row"> -->
-    <!-- <div class="row fullscreen align-items-center justify-content-center"> -->
-    <!-- <div class="col-lg-6 col-md-12 d-flex align-self-end img-right no-padding">
-      <img class="img-fluid" src="img/header-img.png" alt="">
-      </div>
-      <div class="banner-content col-lg-6 col-md-12">
-      <h1 class="title-top"><span>Flat</span> 75%Off</h1>
-      <h1 class="text-uppercase">
-          It’s Happening <br>
-          this Season!
-      </h1>
-      <button class="primary-btn text-uppercase"><a href="#">Purchase Now</a></button>
-      </div>							 -->
     <div class="col-lg-12">
       <div id="carousel-slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
