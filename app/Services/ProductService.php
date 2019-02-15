@@ -175,24 +175,6 @@ class ProductService
     }
 
     /**
-     * Check if product detail is exist
-     *
-     * @param int $productId productId
-     * @param int $colorId   colorId
-     * @param int $sizeId    sizeId
-     *
-     * @return boolean
-     */
-    public function checkDetailExist($productId, $colorId, $sizeId)
-    {
-        $productDetail = ProductDetail::where('product_id', $productId)
-                    ->where('color_id', $colorId)
-                    ->where('size_id', $sizeId)
-                    ->first();
-        return $productDetail;
-    }
-
-    /**
      * Filter data of product detail
      *
      * @param array $colors     colorId
