@@ -146,7 +146,7 @@
               </div>
               <div class="price">
                 <h5>{{ $productForWomen->name }}</h5>
-                <p>{{ $productForWomen->promotions->last() ? formatCurrencyVN(($productForWomen->original_price * (100 - $productForWomen->promotions->first()->percent))/100) : formatCurrencyVN($productForWomen->original_price) }} <del class="text-gray">{{ $productForWomen->promotions->last() ? formatCurrencyVN($productForWomen->original_price) : '' }}</del></p>
+                <p>{{ $productForWomen->promotions->last() ? formatCurrencyVN(($productForWomen->original_price * (100 - $productForWomen->promotions->last()->percent))/100) : formatCurrencyVN($productForWomen->original_price) }} <del class="text-gray">{{ $productForWomen->promotions->last() ? formatCurrencyVN($productForWomen->original_price) : '' }}</del></p>
               </div>
             </div>
           @endforeach
