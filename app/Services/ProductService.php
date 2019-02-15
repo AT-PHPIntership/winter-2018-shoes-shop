@@ -7,6 +7,7 @@ use App\Models\ProductDetail;
 use App\Models\Image;
 use DB;
 use Log;
+use Session;
 use Illuminate\Http\UploadedFile;
 
 class ProductService
@@ -70,14 +71,7 @@ class ProductService
         $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
         DB::beginTransaction();
         try {
-            $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
-            // $newProduct = Product::create([
-            //     'name' => $data['name'],
-            //     'category_id' => $categoryId,
-            //     'original_price' => $data['original_price'],
-            //     'quantity' => $quantity,
-            //     'description' => $data['description'],
-            // ]);
+            $newProduct = $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
             for ($i=0; $i < count($data['color_id']); $i++) {
                 $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
                 if ($productDetail) {
@@ -87,7 +81,9 @@ class ProductService
                     $this->createProductDetail($newProduct->id, $data['color_id'][$i], $data['size_id'][$i], $data['quantity_type'][$i]);
                 }
             }
-            $this->createImages($data, $newProduct->id);
+            if (isset($data['upload_file'])) {
+                $this->createImages($data, $newProduct->id);
+            }
             DB::commit();
             return $newProduct;
         } catch (\Exception $e) {
@@ -120,20 +116,25 @@ class ProductService
      */
     public function createImages($data, $productId)
     {
-        if (isset($data['upload_file'])) {
-            foreach ($data['upload_file'] as $image) {
-                if ($image->isValid()) {
-                    $extensions = ['jpg' , 'jpeg' ,'png', 'gif'];
-                    if (in_array($image->extension(), $extensions)) {
+        foreach ($data['upload_file'] as $image) {
+            if ($image->isValid()) {
+                $extensions = ['jpg' , 'jpeg' ,'png', 'gif'];
+                if (in_array($image->extension(), $extensions)) {
+                    try {
                         Image::create([
                             'product_id' => $productId,
                             'path' => $this->uploadImage($image)
                         ]);
+                    } catch (\Exception $e) {
+                        Log::error($e);
                     }
+                } else {
+                    Session::flash('error', trans('product.image_error'));
                 }
+            } else {
+                Session::flash('error', trans('product.image_error'));
             }
         }
-        return true;
     }
 
     /**
@@ -148,7 +149,7 @@ class ProductService
      */
     public function createProductDetail($productId, $colorId, $sizeId, $quantity)
     {
-        $productDetail = ProductDetail::create([
+        ProductDetail::create([
             'product_id' => $productId,
             'color_id' => $colorId,
             'size_id' => $sizeId,
@@ -169,7 +170,7 @@ class ProductService
      */
     public function createProduct($name, $categoryId, $originalPrice, $quantity, $description)
     {
-        $productDetail = Product::create([
+        return Product::create([
             'name' => $name,
             'category_id' => $categoryId,
             'original_price' => $originalPrice,
