@@ -9,10 +9,11 @@ function previewImage()
   }
   $('#image-preview').html(images);
 }
-//Display children category list when click parent category
 $(document).ready(function(){
+  //Display children category list when click parent category
   $("#parent-category").on("click", function(){
     var id = $(this).val();
+    var categoryChildren = $('#category-children');
     $.ajax({
       url: getDetailUrl,
       method:"get",
@@ -23,25 +24,23 @@ $(document).ready(function(){
         $.each(data, function(key, val){
           category += '<option value="'+ val.id + '">' + val.name + '</option>';
         });
-        $("#category-children").html(category);
-        var hid = $('#category-children').attr('data-hidden');
+        categoryChildren.html(category);
+        var hid = categoryChildren.attr('data-hidden');
         if (data.length  > 0) {
           if (hid == 'hidden') {
-            $('#category-children').removeClass('hidden');
-            $('#category-children').attr('data-hidden', '');
+            categoryChildren.removeClass('hidden');
+            categoryChildren.attr('data-hidden', '');
           }
         } else {
           if (hid == '') {
-            $('#category-children').addClass('hidden');
-            $('#category-children').attr('data-hidden', 'hidden');
+            categoryChildren.addClass('hidden');
+            categoryChildren.attr('data-hidden', 'hidden');
           }
         }
       }
     });
   });
-});
-//Display product detail when click add button
-$(document).ready(function(){
+  //Display product detail when click add button
   $("#add-detail").on("click", function(){
     $('#show-detail li:first-child').clone().appendTo('#show-detail');
     var listBtnRemove = $('.js-btn-remove');

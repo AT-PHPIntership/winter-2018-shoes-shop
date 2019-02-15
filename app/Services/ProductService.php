@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Image;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use DB;
+use Log;
 use Illuminate\Http\UploadedFile;
 
 class ProductService
@@ -61,7 +61,7 @@ class ProductService
      *
      * @return \Illuminate\Http\Response
      */
-    public function storeProduct($data)
+    public function handleStoreProduct($data)
     {
         $quantity = 0;
         foreach ($data['quantity_type'] as $itemQuantity) {
@@ -70,26 +70,27 @@ class ProductService
         $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
         DB::beginTransaction();
         try {
-            $newProduct = Product::create([
-                'name' => $data['name'],
-                'category_id' => $categoryId,
-                'original_price' => $data['original_price'],
-                'quantity' => $quantity,
-                'description' => $data['description'],
-            ]);
+            $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
+            // $newProduct = Product::create([
+            //     'name' => $data['name'],
+            //     'category_id' => $categoryId,
+            //     'original_price' => $data['original_price'],
+            //     'quantity' => $quantity,
+            //     'description' => $data['description'],
+            // ]);
             for ($i=0; $i < count($data['color_id']); $i++) {
                 $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
                 if ($productDetail) {
                     $productDetail->quantity += $data['quantity_type'][$i];
                     $productDetail->save();
                 } else {
-                    $this->stroreProductDetail($newProduct->id, $data['color_id'][$i], $data['size_id'][$i], $data['quantity_type'][$i]);
+                    $this->createProductDetail($newProduct->id, $data['color_id'][$i], $data['size_id'][$i], $data['quantity_type'][$i]);
                 }
             }
-            $this->stroreImages($data, $newProduct->id);
+            $this->createImages($data, $newProduct->id);
             DB::commit();
             return $newProduct;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
             DB::rollback();
         }
@@ -112,12 +113,12 @@ class ProductService
     /**
      * Store image files
      *
-     * @param array $data      product
-     * @param int   $productId product
+     * @param array $data      image data
+     * @param int   $productId product id
      *
      * @return \Illuminate\Http\Response
      */
-    public function stroreImages($data, $productId)
+    public function createImages($data, $productId)
     {
         if (isset($data['upload_file'])) {
             foreach ($data['upload_file'] as $image) {
@@ -138,14 +139,14 @@ class ProductService
     /**
      * Store product detail of each product
      *
-     * @param int $productId product detail
-     * @param int $colorId   product detail
-     * @param int $sizeId    product detail
-     * @param int $quantity  product detail
+     * @param int $productId productId
+     * @param int $colorId   colorId
+     * @param int $sizeId    sizeId
+     * @param int $quantity  quantity
      *
      * @return \Illuminate\Http\Response
      */
-    public function stroreProductDetail($productId, $colorId, $sizeId, $quantity)
+    public function createProductDetail($productId, $colorId, $sizeId, $quantity)
     {
         $productDetail = ProductDetail::create([
             'product_id' => $productId,
@@ -153,15 +154,36 @@ class ProductService
             'size_id' => $sizeId,
             'quantity' => $quantity,
         ]);
-        return $productDetail;
+    }
+
+    /**
+     * Store product detail of each product
+     *
+     * @param string $name          product  name
+     * @param int    $categoryId    category id
+     * @param int    $originalPrice size id
+     * @param int    $quantity      quantity
+     * @param string $description   description
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createProduct($name, $categoryId, $originalPrice, $quantity, $description)
+    {
+        $productDetail = Product::create([
+            'name' => $name,
+            'category_id' => $categoryId,
+            'original_price' => $originalPrice,
+            'quantity' => $quantity,
+            'description' => $description,
+        ]);
     }
 
     /**
      * Check if product detail is exist
      *
-     * @param int $productId product detail
-     * @param int $colorId   product detail
-     * @param int $sizeId    product detail
+     * @param int $productId productId
+     * @param int $colorId   colorId
+     * @param int $sizeId    sizeId
      *
      * @return boolean
      */
