@@ -36,4 +36,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@handleLogin')->name('login');
     Route::get('logout', 'LoginController@handleLogout')->name('logout');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('profile', 'ProfileController@showProfile')->name('profile');
+        Route::post('profile', 'ProfileController@handleProfile')->name('profile');
+    });
  });

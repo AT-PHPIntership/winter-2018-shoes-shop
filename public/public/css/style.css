@@ -54,3 +54,12 @@
 .text-gray {
   color: #cccccc;
 }
+.p-60 {
+  padding: 60px 0;
+}
+.content {
+  max-width: 900px;
+}
+.box-title, .p-20 {
+  padding: 20px 0;
+}

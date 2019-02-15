@@ -16,7 +16,7 @@
               <ul class="dropdown-menu">
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
+                    <a href="{{ route('user.profile') }}" class="btn btn-default btn-flat">@lang('user.manage_account')</a>
                   </div>
                   <div class="pull-right">
                   <a href="{{ route('user.logout') }}" class="btn btn-default btn-flat">{{ trans('login.logout') }}</a>
