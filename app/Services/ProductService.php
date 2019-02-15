@@ -72,14 +72,9 @@ class ProductService
         DB::beginTransaction();
         try {
             $newProduct = $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
-            for ($i=0; $i < count($data['color_id']); $i++) {
-                $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
-                if ($productDetail) {
-                    $productDetail->quantity += $data['quantity_type'][$i];
-                    $productDetail->save();
-                } else {
-                    $this->createProductDetail($newProduct->id, $data['color_id'][$i], $data['size_id'][$i], $data['quantity_type'][$i]);
-                }
+            $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
+            foreach ($dataProductDetails as $detail) {
+                $this->createProductDetail($newProduct->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
             if (isset($data['upload_file'])) {
                 $this->createImages($data, $newProduct->id);
@@ -195,5 +190,34 @@ class ProductService
                     ->where('size_id', $sizeId)
                     ->first();
         return $productDetail;
+    }
+
+    /**
+     * Filter data of product detail
+     *
+     * @param array $colors     colorId
+     * @param array $sizes      sizeId
+     * @param array $quantities quantityId
+     *
+     * @return array
+     */
+    public function checkDuplicate($colors, $sizes, $quantities)
+    {
+        $output = [];
+        for ($i = 0; $i < count($colors); $i++) { //check each data of input
+            for ($j = 0; $j < $i; $j++) { //compare each data in output
+                if (($colors[$i] == $output[$j]['color']) && ($sizes[$i] == $output[$j]['size'])) {
+                    $output[$j]['quantity'] += $quantities[$i];
+                    break;
+                }
+            }
+            if ($j == $i) { //add data to output if not exist
+                $detail['color'] = $colors[$i];
+                $detail['size'] = $sizes[$i];
+                $detail['quantity'] = $quantities[$i];
+                array_push($output, $detail);
+            }
+        }
+        return $output;
     }
 }
