@@ -36,4 +36,7 @@ return [
     ],
     'select' => 'Chọn',
     'register' => 'Đăng ký',
+    'register_account' => 'Đăng ký tài khoản',
+    'register_success' => 'Đăng ký thành công!',
+    'register_error' => 'Đăng ký thất bại, vui lòng thử lại!',
 ];
