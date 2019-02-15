@@ -74,14 +74,14 @@ class CodeService
     /**
      * Apply Code
      *
-     * @param string $code     code
+     * @param string $codeName codeName
      * @param array  $products products
      *
      * @return \Illuminate\Http\Response
      */
-    public function getDecreaseTotalAmount(string $code, array $products)
+    public function getDecreaseTotalAmount(string $codeName, array $products)
     {
-        $code = Code::where('name', $code)->first();
+        $code = Code::where('name', $codeName)->first();
         if ($code) {
             $cateogryId = $code->category_id;
             $amountDecrease = 0;
@@ -89,7 +89,8 @@ class CodeService
                 foreach ($products as $pd) {
                     $product = Product::with(['promotions' => function ($query) {
                         $query->where('start_date', '<=', Carbon::now())
-                              ->where('end_date', '>=', Carbon::now());
+                              ->where('end_date', '>=', Carbon::now())
+                              ->whereRaw('max_sell - total_sold > 0');
                     }])->find($pd['id']);
                     if ($product) {
                         $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
@@ -100,7 +101,8 @@ class CodeService
                 foreach ($products as $pd) {
                     $product = Product::with(['promotions' => function ($query) {
                         $query->where('start_date', '<=', Carbon::now())
-                              ->where('end_date', '>=', Carbon::now());
+                              ->where('end_date', '>=', Carbon::now())
+                              ->whereRaw('max_sell - total_sold > 0');
                     }])->where('id', $pd['id'])->where('category_id', $cateogryId)->first();
                     if ($product) {
                         $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;

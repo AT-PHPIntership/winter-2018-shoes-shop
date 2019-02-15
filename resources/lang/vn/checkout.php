@@ -9,5 +9,9 @@ return [
         'name' => 'Tên',
         'phone_number' => 'Số điện thoại',
         'address' => 'Địa chỉ',
+    ],
+    'message' => [
+        'success' => 'Đặt hàng thành công',
+        'error' => 'Có lỗi trong quá trình xử lý',
     ]
 ];

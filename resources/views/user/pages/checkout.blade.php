@@ -48,7 +48,7 @@
   </div>
   <!-- End Checkout Area -->
   <!-- Start Billing Details Form -->
-  <div class="container">
+  <div class="container checkout-content">
     {{-- <form action="{{ route('user.handleCheckout') }}" method="POST" class="billing-form mb-100"> --}}
       {{-- @csrf --}}
       <div class="row">
@@ -103,6 +103,7 @@
                 </tr>
                 <tr class="row">
                   <td class="col-lg-12">
+                    <p class="message-checkout"></p>
                     <button type="submit" id="js-handle-checkout" class="view-btn color-2 w-100 mt-20"><span>{{ __('checkout.title') }}</span></button>
                   </td>
                 </tr>

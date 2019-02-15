@@ -51,8 +51,9 @@ class OrderController extends Controller
      */
     public function handleCheckout(Request $request)
     {
-        // $a = $request->input('code');
-        // \Log::debug($request->input('code'));
-        return app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'));
+        if (app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'))) {
+            return response()->json(array('success' => true, 'message' => trans('checkout.message.success')));
+        }
+        return response()->json(array('success' => false, 'message' => trans('checkout.message.error')));
     }
 }

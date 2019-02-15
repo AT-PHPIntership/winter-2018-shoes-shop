@@ -140,3 +140,12 @@
   margin-bottom: 10px;
   font-size: 14px;
 }
+.message-checkout {
+  font-weight: 600;
+}
+.message-checkout.success {
+  color: #28a745;
+}
+.message-checkout.danger {
+  color: #dc3545;
+}

@@ -32,13 +32,20 @@ $(document).ready(function(){
     customer['customerName'] = $('.customer-name').val();
     customer['phoneNumber'] = $('.phone-number').val();
     customer['shippingAddress'] = $('.shipping-address').val();
-    $.ajax({
-      url: handleCheckoutUrl,
-      method: "get",
-      data: {code:code, arrProduct:arrProduct, customer:customer},
-      success: function(data){
-        console.log(data);
-      }
-    });
+    if(arrProduct && arrProduct.length){
+      $.ajax({
+        url: handleCheckoutUrl,
+        method: "get",
+        data: {code:code, arrProduct:arrProduct, customer:customer},
+        success: function(data){
+          $('.message-checkout').text(data.message);
+          $('.message-checkout').addClass(data.success ? 'success' : 'error');
+          if(data.success){
+            localStorage.removeItem('arrProduct');
+            localStorage.removeItem('code');
+          }
+        }
+      });
+    }
   });
 });
