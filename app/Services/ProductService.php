@@ -162,7 +162,7 @@ class ProductService
      *
      * @param string $name          product  name
      * @param int    $categoryId    category id
-     * @param int    $originalPrice size id
+     * @param int    $originalPrice original price
      * @param int    $quantity      quantity
      * @param string $description   description
      *
