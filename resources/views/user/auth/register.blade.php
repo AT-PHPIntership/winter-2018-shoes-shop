@@ -13,7 +13,7 @@
             <div class="box-header with-border">
             <h3 class="box-title">@lang('user.register_account')</h3>
             </div>
-            <form method="POST" role="form" enctype="multipart/form-data" action="{{ route('user.user.store') }}">
+            <form method="POST" role="form" enctype="multipart/form-data" action="{{ route('user.register') }}">
               @csrf
               <div class="box-body row">
                 <div class="col-md-6">

@@ -11,7 +11,7 @@
           @if(Auth::user())
             <li class="dropdown user user-menu" style="width: 285px;">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{-- <span class="hidden-xs">@lang('admin.header.hello') {{ Auth::user()->profile->name }}</span> --}}
+                <span class="hidden-xs">@lang('admin.header.hello') {{ Auth::user()->profile->name }}</span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-footer">
@@ -26,7 +26,7 @@
             </li>
           @else
             <li><a href="{{ route('user.login') }}">{{ trans('login.login') }}</a></li>
-            <li><a href="{{ route('user.user.create') }}">{{ trans('user.register') }}</a></li>
+            <li><a href="{{ route('user.register') }}">{{ trans('user.register') }}</a></li>
           @endif          
         </ul>
       </div>

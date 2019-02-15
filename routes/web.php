@@ -36,5 +36,6 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@handleLogin')->name('login');
     Route::get('logout', 'LoginController@handleLogout')->name('logout');
-    Route::resource('user', 'UserController')->only('create', 'store');
+    Route::get('register', 'RegisterController@showRegister')->name('register');
+    Route::post('register', 'RegisterController@handleRegister')->name('register');
  });

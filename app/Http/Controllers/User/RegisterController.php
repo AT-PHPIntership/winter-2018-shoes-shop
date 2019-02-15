@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\User\RegisterRequest;
 use App\Services\UserService;
 
-class UserController extends Controller
+class RegisterController extends Controller
 {
     private $userService;
 
@@ -27,7 +27,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function showRegister()
     {
         return view('user.auth.register');
     }
@@ -38,7 +38,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegisterRequest $request)
+    public function handleRegister(RegisterRequest $request)
     {
         $data = $request->all();
         if ($this->userService->register($data)) {
