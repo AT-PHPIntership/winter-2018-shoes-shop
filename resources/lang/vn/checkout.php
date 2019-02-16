@@ -6,6 +6,7 @@ return [
     'order' => 'Đơn hàng',
     'billing_details' => 'Chi tiết thanh toán',
     'customer' => [
+        'info' => 'Thông tin giao hàng',
         'name' => 'Tên',
         'phone_number' => 'Số điện thoại',
         'address' => 'Địa chỉ',

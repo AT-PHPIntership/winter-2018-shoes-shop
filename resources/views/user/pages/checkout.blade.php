@@ -53,7 +53,7 @@
       <div class="col-lg-6 col-md-6">
         <h3 class="billing-title mt-20 mb-10">{{ __('checkout.billing_details') }}</h3>
         <div class="row">
-          <h5 class="col-lg-12">Thông tinh giao hàng</h5>
+          <h5 class="col-lg-12">{{ __('checkout.customer.info') }} <small class="user-email" data-id="{{ Auth::user() ? Auth::user()->id : '' }}">{{ Auth::user() ? Auth::user()->email : '' }}</small></h5>
           <div class="col-lg-6">
             <b class="mt-10 d-block">{{ __('checkout.customer.name') }}* <span class="error err-customer-name"></span></b>
             <input type="text" value="{{ Auth::user() ? Auth::user()->profile->name : '' }}" class="customer-name common-input" name="customer_name" placeholder="{{ __('checkout.customer.name') }}" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('checkout.customer.name') }}'">

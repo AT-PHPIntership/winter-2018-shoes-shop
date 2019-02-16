@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Code;
 use App\Models\OrderDetail;
 use App\Models\ProductDetail;
+use App\Models\Profile;
 use Carbon\Carbon;
 use Log;
 use DB;
@@ -89,13 +90,27 @@ class OrderService
                 $code = Code::where('name', $code['name'])->where('times', '>', 0)->first();
             }
             $totalAmount = $this->getTotalAmount($products, $code);
-            $order = Order::create([
-                'code_id' => $code ? $code->id : null,
-                'customer_name' => $customer['customerName'],
-                'shipping_address' => $customer['shippingAddress'],
-                'phone_number' => $customer['phoneNumber'],
-                'total_amount' => $totalAmount,
-            ]);
+            if ($customer['userId']) {
+                $data = [
+                    'user_id' => $customer['userId'],
+                    'code_id' => $code ? $code->id : null,
+                    'total_amount' => $totalAmount,
+                ];
+                Profile::where('user_id', $customer['userId'])->update([
+                    'name' => $customer['customerName'],
+                    'phonenumber' => $customer['phoneNumber'],
+                    'address' => $customer['shippingAddress'],
+                ]);
+            } else {
+                $data = [
+                    'code_id' => $code ? $code->id : null,
+                    'customer_name' => $customer['customerName'],
+                    'shipping_address' => $customer['shippingAddress'],
+                    'phone_number' => $customer['phoneNumber'],
+                    'total_amount' => $totalAmount,
+                ];
+            }
+            $order = Order::create($data);
             foreach ($arrProduct as $val) {
                 $price = $this->getPrice($val['product']['id']);
                 OrderDetail::create([

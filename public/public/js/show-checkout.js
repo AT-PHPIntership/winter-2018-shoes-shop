@@ -28,11 +28,13 @@ $(document).ready(function(){
   $('#js-handle-checkout').click(function(){
     var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
     var code = JSON.parse(localStorage.getItem("code"));
+    var userId = $('.user-email').attr('data-id');
     var customerName = $('.customer-name').val();
     var phoneNumber = $('.phone-number').val();
     var regexPhone = /((0)+([0-9]{9})\b)/g;
     var shippingAddress = $('.shipping-address').val();
     var flag = 1;
+    var customer = {};
     $('.err-customer-name').text('');
     $('.err-phone-number').text('');
     $('.err-shipping-address').text('');
@@ -53,25 +55,25 @@ $(document).ready(function(){
       flag = 0;
     }
     if(flag){
-      var customer = {};
+      customer['userId'] = userId;
       customer['customerName'] = customerName;
       customer['phoneNumber'] = phoneNumber;
       customer['shippingAddress'] = shippingAddress;
     }
-    if(arrProduct && arrProduct.length && customer && customer.length){
-      // $.ajax({
-      //   url: handleCheckoutUrl,
-      //   method: "get",
-      //   data: {code:code, arrProduct:arrProduct, customer:customer},
-      //   success: function(data){
-      //     $('.message-checkout').text(data.message);
-      //     $('.message-checkout').addClass(data.success ? 'success' : 'error');
-      //     if(data.success){
-      //       localStorage.removeItem('arrProduct');
-      //       localStorage.removeItem('code');
-      //     }
-      //   }
-      // });
+    if(arrProduct && arrProduct.length && customer && Object.keys(customer).length){
+      $.ajax({
+        url: handleCheckoutUrl,
+        method: "get",
+        data: {code:code, arrProduct:arrProduct, customer:customer},
+        success: function(data){
+          $('.message-checkout').text(data.message);
+          $('.message-checkout').addClass(data.success ? 'success' : 'error');
+          if(data.success){
+            localStorage.removeItem('arrProduct');
+            localStorage.removeItem('code');
+          }
+        }
+      });
     }
   });
 });
