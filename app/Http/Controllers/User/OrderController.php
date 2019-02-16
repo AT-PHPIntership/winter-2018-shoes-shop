@@ -51,6 +51,21 @@ class OrderController extends Controller
      */
     public function handleCheckout(Request $request)
     {
+        $validator = \Validator::make($request->all(), [
+            'customer.customerName' => 'required',
+            'customer.phoneNumber' => 'required|numeric|min:10',
+            'customer.shippingAddress' => 'required',
+            'arrProduct.*.product.id' => 'required|exists:products,id',
+            'arrProduct.*.color.id' => 'required|exists:colors,id',
+            'arrProduct.*.color.name' => 'required|exists:colors,name',
+            'arrProduct.*.size.id' => 'required|exists:sizes,id',
+            'arrProduct.*.size.name' => 'required|exists:sizes,size',
+            'code.name' => 'required|exists:codes,name',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(array('success' => true, 'message' => $validator->errors()->all()));
+        }
         if (app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'))) {
             return response()->json(array('success' => true, 'message' => trans('checkout.message.success')));
         }

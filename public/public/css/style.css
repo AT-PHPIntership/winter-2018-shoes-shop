@@ -133,12 +133,9 @@
 .w-30 {
   width: 30%;
 }
-.help-block {
+.error {
   color: #a94442;
-  display: block;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 13px;
 }
 .message-checkout {
   font-weight: 600;
@@ -148,4 +145,29 @@
 }
 .message-checkout.danger {
   color: #dc3545;
+}
+.item-user {
+  padding: 15px;
+  position: relative;
+}
+.list-info {
+  position: absolute;
+  left: 0;
+  bottom: -40px;
+  z-index: 999;
+  width: 100%;
+}
+.list-info li {
+  background-color: #f41068;
+  width: 100%;
+  display: none;
+  padding: 10px 0;
+  border-top: 1px solid #fff;
+}
+.list-user:hover .list-info li {
+  display: block;
+  z-index: 1000;
+}
+.checkout-content {
+  margin-bottom: 50px;
 }

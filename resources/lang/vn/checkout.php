@@ -13,5 +13,7 @@ return [
     'message' => [
         'success' => 'Đặt hàng thành công',
         'error' => 'Có lỗi trong quá trình xử lý',
+        'required' => 'Vui lòng điền',
+        'err_phone_number' => 'Không đúng định dạng',
     ]
 ];
