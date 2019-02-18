@@ -4,12 +4,28 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
+use App\Http\Requests\User\ProfileRequest;
+use App\Services\UserService;
 
 class ProfileController extends Controller
 {
+    private $userService;
+
+    /**
+    * Contructer
+    *
+    * @param App\Service\UserService $userService userService
+    *
+    * @return void
+    */
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
    /**
      * Show profile information.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function showProfile()
@@ -22,17 +38,15 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request request
-     * @param App\Models\User          $user    user
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function handleProfile(ProfileRequest $request)
     {
-        dd($request);
-        // $data = $request->all();
-        // if ($this->userService->updateProfile($data)) {
-        //     return redirect()->route('user.profile')->with('success', trans('common.message.edit_success'));
-        // }
-        // return redirect()->route('user.profile', $user)->with('error', trans('common.message.edit_error'));
+        $data = $request->all();
+        if ($this->userService->updateProfile($data)) {
+            return redirect()->route('user.profile')->with('success', trans('common.message.edit_success'));
+        }
+        return redirect()->route('user.profile')->with('error', trans('common.message.edit_error'));
     }
 }
