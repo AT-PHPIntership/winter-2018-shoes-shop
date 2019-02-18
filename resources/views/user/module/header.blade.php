@@ -7,20 +7,16 @@
           <li><a href="tel:+12312-3-1209">+12312-3-1209</a></li>
           <li><a href="mailto:support@colorlib.com">support@colorlib.com</a></li>
         </ul>
-        <ul class="list">
+        <ul class="list-user">
           @if(Auth::user())
-            <li class="dropdown user user-menu" style="width: 285px;">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <li class="item-user">
+              <a href="#">
                 <span class="hidden-xs">@lang('admin.header.hello') {{ Auth::user()->profile->name }}</span>
               </a>
-              <ul class="dropdown-menu">
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
-                  </div>
-                  <div class="pull-right">
+              <ul class="list-info">
+                <li>
+                  <a href="#" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
                   <a href="{{ route('user.logout') }}" class="btn btn-default btn-flat">{{ trans('login.logout') }}</a>
-                  </div>
                 </li>
               </ul>
             </li>
