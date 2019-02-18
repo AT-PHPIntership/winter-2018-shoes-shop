@@ -85,7 +85,7 @@ class ProductService
                 'colors' => $item['color'],
             ];
         });
-        $data['colors'] = $details->pluck('colors');
+        $data['colors'] = $details->pluck('colors')->keyBy('colors');
         return json_encode($data);
     }
 
@@ -99,7 +99,7 @@ class ProductService
     public function getSizesByColorId(int $colorId)
     {
         return Size::join('product_details', 'sizes.id', '=', 'product_details.size_id')
-            ->where('product_details.color_id', $colorId)->orderBy('size_id')->get(['size_id', 'size', 'quantity']);
+            ->where('product_details.color_id', $colorId)->orderBy('size_id')->get(['size_id', 'size', \DB::raw('`quantity` - `total_sold` as inventory')]);
     }
 
     /**
@@ -115,7 +115,8 @@ class ProductService
         $id = Category::where('name', $categoryName)->first(['id'])->id;
         $product = Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
-                  ->where('end_date', '>=', Carbon::now());
+                  ->where('end_date', '>=', Carbon::now())
+                  ->whereRaw('max_sell - total_sold > 0');
         }]);
         if (Category::where('parent_id', $id)->count()) {
             $ids = Category::where('parent_id', $id)->get(['id']);
@@ -137,7 +138,8 @@ class ProductService
     {
         return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
-                  ->where('end_date', '>=', Carbon::now());
+                  ->where('end_date', '>=', Carbon::now())
+                  ->whereRaw('max_sell - total_sold > 0');
         }])->orderBy('updated_at', 'desc')
         ->limit(config('define.limit_rows_product'))
         ->get($columns);
@@ -160,7 +162,8 @@ class ProductService
             ->pluck('product_id');
         return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
-                  ->where('end_date', '>=', Carbon::now());
+                  ->where('end_date', '>=', Carbon::now())
+                  ->whereRaw('max_sell - total_sold > 0');
         }])->whereIn('id', $productIds)
         ->limit(config('define.limit_rows_product'))
         ->get($columns);

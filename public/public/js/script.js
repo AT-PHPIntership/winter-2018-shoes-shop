@@ -22,8 +22,8 @@ $(document).ready(function(){
   }
 
   $('#modal-product').on('show.bs.modal', function (e) {
-    $('#js-color').html('<option value="">Chọn</option>');
-    $('#js-size').html('<option value="">Chọn</option>');
+    $('#js-color').html('<option value="">'+ option_default +'</option>');
+    $('#js-size').html('<option value="">'+ option_default +'</option>');
     var modal = $(this);
     var id = $(e.relatedTarget).data('product');
     $.ajax({
@@ -58,32 +58,36 @@ $(document).ready(function(){
       }
     });
   });
-  var productQuantity = []
+  var productInventory = []
   $('#js-color').change(function(){
-    $('#js-size').html('<option value="">Chọn</option>');
+    $('#js-size').html('<option value="">'+ option_default +'</option>');
     var colorId = $(this).val();
-    $.ajax({
-      url: getSizesByColorId,
-      method:"get",
-      dataType:"JSON",
-      data: {colorId:colorId},
-      success: function(data){
-        productQuantity = data;
-        var eleSize = "";
-        $.each(data, function(key, val){
-          eleSize += '<option value="' + val.size_id + '">' + val.size + '</option>';
-        });
-        $('#js-size').append(eleSize);
-      }
-    });
+    if(colorId){
+      $.ajax({
+        url: getSizesByColorId,
+        method:"get",
+        dataType:"JSON",
+        data: {colorId:colorId},
+        success: function(data){
+          productInventory = data;
+          var eleSize = "";
+          $.each(data, function(key, val){
+            eleSize += '<option value="' + val.size_id + '">' + val.size + '</option>';
+          });
+          $('#js-size').append(eleSize);
+        }
+      });
+    }
   });
   $('#js-size').change(function(){
     var sizeId = $(this).val();
-    $.each(productQuantity, function(key, val){
-      if (+sizeId == +val.size_id){
-        $('#js-inventory').text(val.quantity);
-        $('#js-quantity').attr('max', val.quantity);
-      }
-    });
+    if(sizeId){
+      $.each(productInventory, function(key, val){
+        if (+sizeId == +val.size_id){
+          $('#js-inventory').text(val.inventory);
+          $('#js-quantity').attr('max', val.inventory);
+        }
+      });
+    }
   })
 });
