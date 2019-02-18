@@ -160,4 +160,25 @@ class UserService
             DB::rollback();
         }
     }
+
+    /**
+     * Update the password.
+     *
+     * @param array $data data
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(array $data)
+    {
+        $user = \Auth::user();
+        DB::beginTransaction();
+        try {
+            $user->password = bcrypt($data['new_password']);
+            DB::commit();
+            return $user;
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollback();
+        }
+    }
 }

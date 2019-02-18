@@ -5,11 +5,8 @@
       <h1 class="box-title text-uppercase">@lang('user.manage_account')</h1>
     </section>
     <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          @include('user.module.message')
-        </div>
-      </div>
+    <a class="btn btn-success btn-md" href="{{ route('user.password')}}">@lang('user.change_password')</a>
+      @include('user.module.message')
       <div class="row">
         <div class="col-md-12">
           <div class="box box-primary">

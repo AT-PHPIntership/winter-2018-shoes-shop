@@ -19,6 +19,8 @@ return [
         'confirm_password' => 'Nhập lại mật khẩu',
         'address' => 'Địa chỉ',
         'info' => 'Thông tin',
+        'current_password' => 'Mật khẩu hiện tại',
+        'new_password' => 'Mật khẩu mới',
     ],
     'gender' => [
         'other' => 'Khác',
@@ -36,4 +38,8 @@ return [
     ],
     'select' => 'Chọn',
     'manage_account' => 'Quản lý tài khoản',
+    'change_password' => 'Đổi mật khẩu',
+    'wrong_password' => 'Mật khẩu cũ không chính xác!',
+    'change_password_success' => 'Đổi mật khẩu thành công!',
+    'change_password_error' => 'Đổi mật khẩu thất bại!',
 ];
