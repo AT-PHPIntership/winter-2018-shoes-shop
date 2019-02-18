@@ -36,4 +36,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/search', 'IndexController@search')->name('search');
 });

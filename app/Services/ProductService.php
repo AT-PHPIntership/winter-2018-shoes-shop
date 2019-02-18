@@ -119,4 +119,23 @@ class ProductService
         ->limit(config('define.limit_rows_product'))
         ->get($columns);
     }
+
+    /**
+     * Get list product
+     *
+     * @param string $search search
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchProduct(string $search)
+    {
+        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now())
+                  ->whereRaw('max_sell - total_sold > 0');
+        }])->where('name', 'like', '%'.$search.'%')
+        ->orderBy('updated_at', 'desc')
+        ->paginate(5)
+        ->appends(['s' => $search]);
+    }
 }
