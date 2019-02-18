@@ -16,4 +16,6 @@ return [
         'female' => 2,
     ],
     'upload_folder' => '/upload/',
+    'image_default_product' => '/public/img/default_product.png',
+    'limit_rows_product' => 8,
 ];

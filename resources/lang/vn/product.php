@@ -23,4 +23,5 @@ return [
     'out_stock' => 'Hết hàng',
     'in_stock' => 'Còn hàng',
     'add_cart' => 'Thêm vào giỏ hàng',
+    'product_detail' => 'Chi tiết sản phẩm'
 ];

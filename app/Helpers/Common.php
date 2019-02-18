@@ -27,3 +27,17 @@ if (! function_exists('formatDateVN')) {
         return date(config('define.format_date_vn'), strtotime($date));
     }
 }
+
+if (! function_exists('formatCurrencyVN')) {
+    /**
+     * Function formatCurrencyVN convert decimal to currency VN
+     *
+     * @param float $number number
+     *
+     * @return string
+     */
+    function formatCurrencyVN(float $number)
+    {
+        return number_format($number).' đ';
+    }
+}

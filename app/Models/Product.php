@@ -47,7 +47,11 @@ class Product extends Model
     }
 
     /**
+<<<<<<< HEAD
      * Promotion belong to product
+=======
+     * Product belong to promotion
+>>>>>>> 51247e27b8c2d3b8b7f23ad427677cb17f4f69f2
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
