@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Admin\Controller;
-use App\Services\LoginService;
 
 class LoginController extends Controller
 {
@@ -37,7 +36,10 @@ class LoginController extends Controller
     public function handleLogin(Request $request)
     {
         $data = $request->except(['_token']);
-        return app(LoginService::class)->userLogin($data);
+        if (\Auth::attempt($data)) {
+            return redirect()->route('user.index');
+        }
+        return redirect()->back()->with("error", trans('login.error'));
     }
 
     /**
