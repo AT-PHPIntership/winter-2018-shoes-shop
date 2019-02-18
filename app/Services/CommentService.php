@@ -57,4 +57,16 @@ class CommentService
             return false;
         }
     }
+
+    /**
+     * Get comments by productId
+     *
+     * @param int $productId productId
+     *
+     * @return Comment
+     */
+    public function getCommentsByProductId(int $productId)
+    {
+        return Comment::with(['children', 'user:id', 'user.profile:user_id,name,avatar'])->where('product_id', $productId)->where('parent_id', null)->orderBy('updated_at', 'desc')->get(); 
+    }
 }

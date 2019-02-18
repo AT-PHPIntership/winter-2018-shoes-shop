@@ -93,20 +93,43 @@
       <div class="row">
         <div class="col-xl-6">
           <div class="total-comment">
-            <div class="single-comment">
-              <div class="user-details d-flex align-items-center flex-wrap">
-                <img src="{{ config('define.image_default_product') }}" class="img-fluid order-1 order-sm-1" alt="">
-                <div class="user-name order-3 order-sm-2">
-                  <h5>Blake Ruiz</h5>
-                  <span>12th Feb, 2017 at 05:56 pm</span>
-                </div>
-                <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-              </div>
-              <p class="user-comment">
-                Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer hears tales of diamonds and begins dreaming of vast riches. He sells his farm and hikes off over the horizon, never to be heard from again.
-              </p>
-            </div>
-            <div class="single-comment reply-comment">
+            <ul class="comment-list">
+              <li>
+                @foreach ($comments as $comment)
+                  <div class="single-comment">
+                    <div class="user-details d-flex align-items-center flex-wrap">
+                      <img src="{{ $comment->user->profile->avatar ? $comment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
+                      <div class="user-name order-3 order-sm-2">
+                        <h5>{{ $comment->user->profile->name }}</h5>
+                        <span>{{ $comment->created_at }}</span>
+                      </div>
+                      <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
+                    </div>
+                    <p class="user-comment">{{ $comment->content }}</p>
+                  </div>
+                  <ul class="reply-list">
+                    @if ($comment->children->count())
+                      <li>
+                        @foreach ($comment->children as $childComment)
+                          <div class="single-comment reply-comment">
+                            <div class="user-details d-flex align-items-center flex-wrap">
+                              <img src="{{ $childComment->user->profile->avatar ? $childComment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
+                              <div class="user-name order-3 order-sm-2">
+                                <h5>{{ $childComment->user->profile->name }}</h5>
+                                <span>{{ $childComment->created_at }}</span>
+                              </div>
+                            </div>
+                            <p class="user-comment">{{ $childComment->content }}</p>
+                          </div>
+                        @endforeach
+                      </li>
+                    @endif
+                  </ul>
+                @endforeach
+              </li>
+            </ul>
+            
+            {{-- <div class="single-comment reply-comment">
               <div class="user-details d-flex align-items-center flex-wrap">
                 <img src="{{ config('define.image_default_product') }}" class="img-fluid order-1 order-sm-1" alt="">
                 <div class="user-name order-3 order-sm-2">
@@ -131,21 +154,18 @@
               <p class="user-comment">
                 Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer hears tales of diamonds and begins dreaming of vast riches. He sells his farm and hikes off over the horizon, never to be heard from again.
               </p>
+            </div> --}}
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="add-review">
+            <h3>Post a comment</h3>
+            <div class="main-form">
+              <textarea placeholder="Messege" onfocus="this.placeholder=''" onblur="this.placeholder = 'Messege'" required class="common-textarea"></textarea>
+              <a href="javascript:void(0)" data-user-id="{{ }}" data-product-id="{{ request()->route('id') }}" class="view-btn color-2"><span>Submit Now</span></a>
             </div>
           </div>
         </div>
-        {{-- <div class="col-xl-6">
-          <div class="add-review">
-            <h3>Post a comment</h3>
-            <form action="#" class="main-form">
-              <input type="text" placeholder="Your Full name" onfocus="this.placeholder=''" onblur="this.placeholder = 'Your Full name'" required class="common-input">
-              <input type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email Address" onfocus="this.placeholder=''" onblur="this.placeholder = 'Email Address'" required class="common-input">
-              <input type="text" placeholder="Phone Number" onfocus="this.placeholder=''" onblur="this.placeholder = 'Phone Number'" required class="common-input">
-              <textarea placeholder="Messege" onfocus="this.placeholder=''" onblur="this.placeholder = 'Messege'" required class="common-textarea"></textarea>
-              <button class="view-btn color-2"><span>Submit Now</span></button>
-            </form>
-          </div>
-        </div> --}}
       </div>
     </div>
   </div>

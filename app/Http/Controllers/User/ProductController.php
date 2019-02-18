@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Admin\Controller;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
+use App\Services\CommentService;
 
 class ProductController extends Controller
 {
@@ -18,7 +19,8 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = app(ProductService::class)->getDetailProduct($id);
-        return view('user.pages.detail', compact('product'));
+        $comments = app(CommentService::class)->getCommentsByProductId($id);
+        return view('user.pages.detail', compact(['product', 'comments']));
     }
 
     /**
