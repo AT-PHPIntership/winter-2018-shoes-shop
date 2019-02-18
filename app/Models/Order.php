@@ -44,4 +44,14 @@ class Order extends Model
     {
         return $this->belongsTo(Code::class);
     }
+
+    /**
+     * Order has many orderDetails
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

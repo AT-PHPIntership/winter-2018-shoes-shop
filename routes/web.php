@@ -28,13 +28,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::resource('category', 'CategoryController');
         Route::resource('promotions', 'PromotionController');
         Route::resource('codes', 'CodeController')->except(['show']);
-        Route::resource('orders', 'OrderController')->only(['index']);
+        Route::resource('orders', 'OrderController')->except(['edit']);
+        Route::get('comments/change-status', 'CommentController@changeStatus');
+        Route::resource('comments', 'CommentController')->only(['index', 'destroy']);
     });
 });
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
-    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/home', 'IndexController@index')->name('index');
+    Route::get('get-detail-product', 'ProductController@getDetailProduct');
+    Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
     Route::get('category/filterProduct', 'ProductController@filterProduct');
     Route::get('category/{id}', 'ProductController@listProductByCatId')->name('category');
-    Route::get('getDetailProduct', 'ProductController@getDetailProduct');
 });

@@ -16,8 +16,14 @@ $(document).ready(function(){
       }
     }
   });
+  
+  function formatCurrencyVN(price){
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(price);
+  }
 
-  $('#exampleModal').on('show.bs.modal', function (e) {
+  $('#modal-product').on('show.bs.modal', function (e) {
+    $('#js-color').html('<option value="">'+ option_default +'</option>');
+    $('#js-size').html('<option value="">'+ option_default +'</option>');
     var modal = $(this);
     var id = $(e.relatedTarget).data('product');
     $.ajax({
@@ -26,36 +32,65 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {id:id},
       success: function(data){
-        modal.find('#modal-name').text(data.product.name);
-        modal.find('#modal-category').text(data.category.name);
+        modal.find('#js-name').text(data.product.name);
+        modal.find('#js-category').text(data.category.name);
         if (data.product.price) {
-          modal.find('#modal-price').text(data.product.price + 'đ');
-          modal.find('#modal-original-price').text(data.product.original_price + 'đ');
+          modal.find('#js-price').text(formatCurrencyVN(data.product.price));
+          modal.find('#js-original-price').text(formatCurrencyVN(data.product.original_price));
         } else {
-          modal.find('#modal-original-price').text('');
-          modal.find('#modal-price').text(data.product.original_price + 'đ');
+          modal.find('#js-original-price').text('');
+          modal.find('#js-price').text(formatCurrencyVN(data.product.original_price));
         }
-        modal.find('#modal-inventory').text(data.product.inventory);
-        modal.find('#modal-description').text(data.product.description);
+        modal.find('#js-inventory').text(data.product.inventory);
+        modal.find('#js-description').text(data.product.description);
         var eleColor = "";
         $.each(data.colors, function(key, val){
           eleColor += '<option value="' + val.id + '">' + val.name + '</option>';
         });        
-        modal.find('#modal-color').html(eleColor);
-        var eleSize = "";
-        $.each(data.sizes, function(key, val){
-          eleSize += '<option value="' + val.id + '">' + val.size + '</option>';
-        });
-        modal.find('#modal-size').html(eleSize);
+        modal.find('#js-color').append(eleColor);
         var eleImage = "";
         $.each(data.images, function(key, val){
           var active = '';
           active = (key == 0) ? 'active' : '';
           eleImage += '<div class="carousel-item ' + active + '"><img class="d-block" src="' + val.path + '" alt=""></div>';
         });
-        modal.find('#modal-image').html(eleImage);
+        modal.find('#js-image').html(eleImage);
       }
     });
+  });
+
+  var productInventory = []
+  $('#js-color').change(function(){
+    $('#js-size').html('<option value="">'+ option_default +'</option>');
+    var colorId = $(this).val();
+    if(colorId){
+      $.ajax({
+        url: getSizesByColorId,
+        method:"get",
+        dataType:"JSON",
+        data: {colorId:colorId},
+        success: function(data){
+          productInventory = data;
+          var eleSize = "";
+          $.each(data, function(key, val){
+            eleSize += '<option value="' + val.size_id + '">' + val.size + '</option>';
+          });
+          $('#js-size').append(eleSize);
+        }
+      });
+    }
+  });
+
+  $('#js-size').change(function(){
+    var sizeId = $(this).val();
+    if(sizeId){
+      $.each(productInventory, function(key, val){
+        if (+sizeId == +val.size_id){
+          $('#js-inventory').text(val.inventory);
+          $('#js-quantity').attr('max', val.inventory);
+        }
+      });
+    }
   });
 
   filter_data();
@@ -72,6 +107,7 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice},
       success: function(data){
+        console.log(data);
         var list = '';
         if (data.length) {
           $.each(data, function(key, val){
@@ -82,16 +118,16 @@ $(document).ready(function(){
             list += '<div class="content-details fadeIn-bottom">';
             list += '<div class="bottom d-flex align-items-center justify-content-center">';
             list += '<a href="#"><span class="lnr lnr-cart"></span></a>';
-            list += '<a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>';
+            list += '<a href="#" data-toggle="modal" data-target="#modal-product"  data-product="'+ val.id +'"><span class="lnr lnr-frame-expand"></span></a>';
             list += '</div>';
             list += '</div>';
             list += '</div>';
             list += '<div class="price">';
             list += '<h5>'+ val.name +'</h5>';
             if (val.price) {
-              list += '<p>'+ val.price +'đ <del class="text-gray">'+ val.original_price +'đ</del></p>';
+              list += '<p>'+ formatCurrencyVN(val.price) +' <del class="text-gray">'+ formatCurrencyVN(val.original_price) +'</del></p>';
             } else {
-              list += '<p>'+ val.original_price +'đ</p>';
+              list += '<p>'+ formatCurrencyVN(val.original_price) +'</p>';
             }
             list += '</div>';
             list += '</div>';

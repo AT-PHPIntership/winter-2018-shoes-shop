@@ -5,9 +5,9 @@
     <div class="container">
       <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
         <div class="col-first">
-          <h1>Danh mục</h1>
+          <h1>{{ __('index.category.title') }}</h1>
           <nav class="d-flex align-items-center justify-content-start">
-            <a href="{{ route('user.index') }}">Home<i class="fa fa-caret-right" aria-hidden="true"></i></a>
+            <a href="{{ route('user.index') }}">{{ __('index.header.home') }}<i class="fa fa-caret-right" aria-hidden="true"></i></a>
             <a href="javascript:void(0)" id="active-category" data-id="{{ $category->id }}">{{ $category->name }}</a>
           </nav>
         </div>
@@ -18,22 +18,22 @@
   <div class="container">
     <div class="row">
       <div class="col-xl-9 col-lg-8 col-md-7">
-        {{-- <h2>Danh sách sản phẩm</h2> --}}
+        <h3 class="mb-10">{{ __('index.category.list_product') }}</h3>
         <!-- Start Filter Bar -->
         <div class="row">
           <div class="col-lg-3 col-md-12 col-sm-6">
             <select class="form-control form-control-sm js-slt-sort">
-              <option value="">Sắp xếp</option>
-              <option value="name-asc">Tên: A-Z</option>
-              <option value="name-desc">Tên: Z-A</option>
-              <option value="price-asc">Giá: Tăng dần</option>
-              <option value="price-desc">Giá: Giảm dần</option>
-              <option value="updated-asc">Cũ nhất</option>
-              <option value="updated-desc">Mới nhất</option>
+              <option value="">{{ __('index.category.sort.title') }}</option>
+              <option value="name-asc">{{ __('index.category.sort.name_asc') }}</option>
+              <option value="name-desc">{{ __('index.category.sort.name_desc') }}</option>
+              <option value="price-asc">{{ __('index.category.sort.price_asc') }}</option>
+              <option value="price-desc">{{ __('index.category.sort.price_desc') }}</option>
+              <option value="updated-asc">{{ __('index.category.sort.updated_asc') }}</option>
+              <option value="updated-desc">{{ __('index.category.sort.updated_desc') }}</option>
             </select>
           </div>
           <div class="col-lg-9 col-md-12 col-sm-6">
-            <span>Lọc theo: </span>
+            <span>{{ __('index.category.sort.filter_by') }}: </span>
             <ul class="active-filter-list">
             </ul>
           </div>
@@ -63,49 +63,25 @@
           </div>
         </section>
         <!-- End Best Seller -->
-        <!-- Start Filter Bar -->
-        {{-- <div class="filter-bar d-flex flex-wrap align-items-center public-pag"> --}}
-          {{-- <ul class="pagination pagination-sm no-margin pull-right public-pag"> --}}
-            {{-- {{ $products->links() }} --}}
-          {{-- </ul> --}}
-        {{-- </div> --}}
-        <!-- End Filter Bar -->
       </div>
       <div class="col-xl-3 col-lg-4 col-md-5">
-        {{-- <div class="sidebar-categories">
-          <div class="head">Browse Categories</div>
-          <ul class="main-categories">
-            @foreach ($parentCategories as $parentCategory)
-              <li class="main-nav-list">
-                <a data-toggle="collapse" href="#cat-{{ $parentCategory->id }}" aria-expanded="false" aria-controls="cat-{{ $parentCategory->id }}"><span class="lnr lnr-arrow-right"></span>{{ $parentCategory->name }}<span class="number">({{ $parentCategory->products->count() }})</span></a>
-                @if ($parentCategory->children->count())
-                  <ul class="collapse" id="cat-{{ $parentCategory->id }}" data-toggle="collapse" aria-expanded="false" aria-controls="cat-{{ $parentCategory->id }}">
-                    @foreach ($parentCategory->children as $subCategory)
-                      <li class="main-nav-list child"><a href="{{ route('user.listProductByCatId', ['id' => $subCategory->id]) }}">{{ $subCategory->name }}<span class="number">({{ $subCategory->products->count() }})</span></a></li>
-                    @endforeach
-                  </ul>
-                @endif
-              </li>
-            @endforeach
-          </ul>
-        </div> --}}
         <div class="sidebar-filter mt-50">
           <div class="common-filter">
-            <div class="head">Giá</div>
+            <div class="head">{{ __('index.category.price.title') }}</div>
             <div class="price-range-area">
               <div id="price-range"></div>
               <div class="value-wrapper d-flex">
-                <div class="price">Giá:</div>
+                <div class="price">{{ __('index.category.price.title') }}:</div>
                 <div id="lower-value"></div>
                 <span>đ</span>
-                <div class="to">to</div>
+                <div class="to">{{ __('index.category.price.to') }}</div>
                 <div id="upper-value"></div>
                 <span>đ</span>
               </div>
             </div>
           </div>
           <div class="common-filter">
-            <div class="head">Màu sắc</div>
+            <div class="head">{{ __('index.category.color.title') }}</div>
             <form action="#">
               <ul class="list-color row">
                 @foreach ($colors as $color)
@@ -120,7 +96,7 @@
             </form>
           </div>
           <div class="common-filter">
-            <div class="head">Kích cở</div>
+            <div class="head">{{ __('index.category.size.title') }}</div>
             <form action="#">
               <ul class="list-size row">
                 @foreach ($sizes as $size)
@@ -138,5 +114,9 @@
       </div>
     </div>
   </div>
-  <script>var filterProductUrl = "{{ url('category/filterProduct') }}";</script>
+  <script>
+    var filterProductUrl = "{{ url('category/filterProduct') }}";
+    var option_default = "{{ __('index.quick_view.default_option') }}";
+    var getDetailProduct = "{{ url('get-detail-product') }}";
+  </script>
 @endsection

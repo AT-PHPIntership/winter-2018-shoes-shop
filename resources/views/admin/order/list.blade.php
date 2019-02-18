@@ -29,7 +29,7 @@
                   <th class="w-10">@lang('order.table.id')</th>
                   <th>@lang('order.table.user')</th>
                   <th>@lang('order.table.code')</th>
-                  <th>@lang('order.table.amount')</th>
+                  <th>@lang('order.table.total_amount')</th>
                   <th>@lang('order.table.created_at')</th>
                   <th>@lang('order.table.delivered_at')</th>
                   <th>@lang('order.table.status')</th>
@@ -69,8 +69,8 @@
                       @endswitch
                     </td>
                     <td>
-                      <a class="btn btn-info btn-xs" href="">@lang('common.show')</a>
-                      <form class="form-inline" action="" method="POST">
+                      <a class="btn btn-info btn-xs" href="{{ route('admin.orders.show', ['id' => $order->id]) }}">@lang('common.show')</a>
+                      <form class="form-inline" action="{{ route('admin.orders.destroy', ['id' => $order->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>

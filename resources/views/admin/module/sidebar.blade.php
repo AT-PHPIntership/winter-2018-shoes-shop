@@ -80,6 +80,17 @@
                 <li><a href="{{ route('admin.codes.create') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.code.add')</a></li>
             </ul>
         </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-comments"></i> <span>@lang('admin.sidebar.comment.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.comments.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.comment.list')</a></li>
+            </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
