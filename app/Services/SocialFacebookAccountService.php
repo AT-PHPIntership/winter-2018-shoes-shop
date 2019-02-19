@@ -42,7 +42,6 @@ class SocialFacebookAccountService
                     Profile::create([
                         'user_id' => $user->id,
                         'name' => $providerUser->name,
-                        'gender' => '',
                         'address' => '',
                         'phonenumber' => '',
                         'avatar' => $providerUser->avatar,
