@@ -38,4 +38,17 @@ class ProductController extends Controller
         $products = $this->products->getListWithPaginate();
         return view('admin.product.list', compact('products'));
     }
+
+    /**
+     * Display the specified product.
+     *
+     * @param int $id product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $product = $this->products->getProductbyId($id);
+        return view('admin.product.detail', compact('product'));
+    }
 }

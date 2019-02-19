@@ -31,14 +31,21 @@ class ProductService
     }
 
     /**
-     * Get categoriy by id
+     * Get specified product by id
      *
-     * @param int $id comment about this variable
+     * @param int $id product
      *
      * @return \Illuminate\Http\Response
      */
     public function getProductById($id)
     {
-        return Product::findOrFail($id);
+        $product = Product::with([
+            'images:product_id,path',
+            'category:id,name',
+            'productDetails' => function ($query) {
+                $query->with(['size:id,size', 'color:id,name']);
+            }
+        ])->findOrFail($id);
+        return $product;
     }
 }

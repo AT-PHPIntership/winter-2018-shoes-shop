@@ -1,6 +1,5 @@
 @extends('admin.module.master')
 @section('content')
-
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -44,12 +43,12 @@
                       <td>{{ $key + 1 }}</td>
                       <td>{{ $product->name }}</td>
                       <td>{{ $product->original_price }}</td>
-                      <th>{{ $product->category->name }}</th>
+                      <td>{{ $product->category->name }}</td>
                       <td>{{ $product->quantity }}</td>
                       <td>{{ $product->total_sold }}</td>
                       <td>
                           <button class="btn btn-info btn-xs">
-                            <a href="#" style="color: #fff;">{{ trans('common.detail')}}</a>
+                          <a href="{{ route('admin.product.show', $product->id)}}" style="color: #fff;">{{ trans('common.detail')}}</a>
                           </button>
                           <button type="" class="btn btn-primary btn-xs">{{ trans('common.edit')}}</button>
                           <button type="" class="btn btn-danger btn-xs">{{ trans('common.delete')}}</button>
