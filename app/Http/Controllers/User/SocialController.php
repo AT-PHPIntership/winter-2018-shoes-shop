@@ -24,6 +24,8 @@ class SocialController extends Controller
     /**
     * Create a redirect method to social api.
     *
+    * @param collection $provider provider
+    *
     * @return void
     */
     public function redirect($provider)
@@ -34,8 +36,7 @@ class SocialController extends Controller
     /**
      * Return a callback method from social api.
      *
-     * @param collection                         $provider provider
-     * @param \App\Services\SocialAccountService $service  social account
+     * @param collection $provider provider
      *
      * @return callback URL from social
      */
