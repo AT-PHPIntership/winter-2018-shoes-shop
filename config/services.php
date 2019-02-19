@@ -39,5 +39,9 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-
+    'facebook' => [
+        'client_id' => '259180498363125',
+        'client_secret' => 'b0f9eed59c94f64ebe19d37a9f19ead3',
+        'redirect' => 'https://shoes.shop/callback',
+    ],
 ];
