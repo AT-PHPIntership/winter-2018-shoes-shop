@@ -1,0 +1,23 @@
+.text-uppercase {
+  text-transform: uppercase;
+}
+.btn {
+  border-radius: 10px;
+  margin: 20px 10px;
+  padding: 10px 20px;
+  box-shadow: none;
+  border: 1px solid transparent;
+}
+.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.btn-danger {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+.box-social a {
+  text-decoration: none;
+}

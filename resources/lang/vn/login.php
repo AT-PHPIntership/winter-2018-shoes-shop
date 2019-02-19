@@ -5,4 +5,6 @@ return [
    'error' => 'Đăng nhập thất bại, vui lòng kiểm tra lại!',
    'login' => 'Đăng nhập',
    'logout' => 'Đăng xuất',
+   'facebook' => 'Faceboook',
+   'google+' => 'Google+',
 ];

@@ -40,8 +40,8 @@ return [
         ],
     ],
     'facebook' => [
-        'client_id' => '259180498363125',
-        'client_secret' => 'b0f9eed59c94f64ebe19d37a9f19ead3',
-        'redirect' => 'https://shoes.shop/callback',
+        'client_id'     => env('FACEBOOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOOK_CLIENT_SECRET'),
+        'redirect'      => env('FACEBOOOK_REDIRECT'),
     ],
 ];

@@ -39,6 +39,6 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@handleLogin')->name('login');
     Route::get('logout', 'LoginController@handleLogout')->name('logout');
-    Route::get('/redirect', 'SocialAuthFacebookController@redirect');
-    Route::get('/callback', 'SocialAuthFacebookController@callback');
+    Route::get('/{provider}/redirect', 'SocialController@redirect');
+    Route::get('/{provider}/callback', 'SocialController@callback');
  });
