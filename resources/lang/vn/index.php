@@ -56,4 +56,14 @@ return [
         'add_to_cart' => 'Thêm vào',
         'default_option' => 'Chọn',
     ],
+    'detail' => [
+        'comment' => [
+            'title' => 'Bình luận',
+            'empty' => 'Chưa có bình luận nào',
+            'post' => 'Gửi bình luận',
+            'login' => 'Bạn cần đăng nhập để bình luận',
+            'mess_error' => 'Bình luận thất bại',
+            'required' => 'Không được bỏ trống',
+        ],
+    ]
 ];

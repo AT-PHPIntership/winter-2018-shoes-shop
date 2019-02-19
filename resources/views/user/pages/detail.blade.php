@@ -89,87 +89,77 @@
       </div>
     </div>
     <div class="comment-content">
-      <h3>Bình luận</h3>
+      <h3>{{ __('index.detail.comment.title') }}</h3>
       <div class="row">
         <div class="col-xl-6">
           <div class="total-comment">
             <ul class="comment-list">
-              <li>
+              @if ($comments->isEmpty())
+                <b>{{ __('index.detail.comment.empty') }}</b>
+              @else
                 @foreach ($comments as $comment)
-                  <div class="single-comment">
-                    <div class="user-details d-flex align-items-center flex-wrap">
-                      <img src="{{ $comment->user->profile->avatar ? $comment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
-                      <div class="user-name order-3 order-sm-2">
-                        <h5>{{ $comment->user->profile->name }}</h5>
-                        <span>{{ $comment->created_at }}</span>
+                  <li class="comment-item">
+                    <div class="single-comment">
+                      <div class="user-details d-flex align-items-center flex-wrap">
+                        <img src="{{ $comment->user->profile->avatar ? $comment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
+                        <div class="user-name order-3 order-sm-2">
+                          <h5>{{ $comment->user->profile->name }}</h5>
+                          <span>{{ $comment->created_at->format('d/m/Y - H:i:s') }}</span>
+                        </div>
+                        @if (Auth::user())
+                          <a href="javascript:void(0)" data-comment-id="{{ $comment->id }}" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
+                        @endif
                       </div>
-                      <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
+                      <p class="user-comment">{{ $comment->content }}</p>
                     </div>
-                    <p class="user-comment">{{ $comment->content }}</p>
-                  </div>
-                  <ul class="reply-list">
-                    @if ($comment->children->count())
-                      <li>
+                    <ul class="reply-list-{{ $comment->id }}">
+                      @if ($comment->children->count())
                         @foreach ($comment->children as $childComment)
-                          <div class="single-comment reply-comment">
-                            <div class="user-details d-flex align-items-center flex-wrap">
-                              <img src="{{ $childComment->user->profile->avatar ? $childComment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
-                              <div class="user-name order-3 order-sm-2">
-                                <h5>{{ $childComment->user->profile->name }}</h5>
-                                <span>{{ $childComment->created_at }}</span>
+                          <li>
+                            <div class="single-comment reply-comment">
+                              <div class="user-details d-flex align-items-center flex-wrap">
+                                <img src="{{ $childComment->user->profile->avatar ? $childComment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
+                                <div class="user-name order-3 order-sm-2">
+                                  <h5>{{ $childComment->user->profile->name }}</h5>
+                                  <span>{{ $childComment->created_at->format('d/m/Y - H:i:s') }}</span>
+                                </div>
                               </div>
+                              <p class="user-comment">{{ $childComment->content }}</p>
                             </div>
-                            <p class="user-comment">{{ $childComment->content }}</p>
-                          </div>
+                          </li>
                         @endforeach
-                      </li>
-                    @endif
-                  </ul>
+                      @endif
+                    </ul>
+                  </li>
                 @endforeach
-              </li>
+              @endif
             </ul>
-            
-            {{-- <div class="single-comment reply-comment">
-              <div class="user-details d-flex align-items-center flex-wrap">
-                <img src="{{ config('define.image_default_product') }}" class="img-fluid order-1 order-sm-1" alt="">
-                <div class="user-name order-3 order-sm-2">
-                  <h5>Logan May</h5>
-                  <span>12th Feb, 2017 at 05:56 pm</span>
-                </div>
-                <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-              </div>
-              <p class="user-comment">
-                Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer hears tales of diamonds and begins dreaming of vast riches. He sells his farm and hikes off over the horizon, never to be heard from again.
-              </p>
-            </div>
-            <div class="single-comment">
-              <div class="user-details d-flex align-items-center flex-wrap">
-                <img src="{{ config('define.image_default_product') }}" class="img-fluid order-1 order-sm-1" alt="">
-                <div class="user-name order-3 order-sm-2">
-                  <h5>Aaron Anderson</h5>
-                  <span>12th Feb, 2017 at 05:56 pm</span>
-                </div>
-                <a href="#" class="view-btn color-2 reply order-2 order-sm-3"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
-              </div>
-              <p class="user-comment">
-                Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer hears tales of diamonds and begins dreaming of vast riches. He sells his farm and hikes off over the horizon, never to be heard from again.
-              </p>
-            </div> --}}
           </div>
         </div>
         <div class="col-xl-6">
           <div class="add-review">
-            <h3>Post a comment</h3>
-            <div class="main-form">
-              <textarea placeholder="Messege" onfocus="this.placeholder=''" onblur="this.placeholder = 'Messege'" required class="common-textarea"></textarea>
-              <a href="javascript:void(0)" data-user-id="{{ }}" data-product-id="{{ request()->route('id') }}" class="view-btn color-2"><span>Submit Now</span></a>
-            </div>
+            <h3>{{ __('index.detail.comment.post') }}</h3>
+            @if (Auth::user())
+              <div class="main-form">
+                <textarea id="js-comment-content" placeholder="Messege" onfocus="this.placeholder=''" onblur="this.placeholder = 'Messege'" required class="common-textarea"></textarea>
+                <span class="mess-error comment-error"></span>
+                <a href="javascript:void(0)" id="js-add-comment" data-user-id="{{ Auth::user()->id }}" data-product-id="{{ request()->route('id') }}" class="view-btn color-2 btn-comment"><span>Submit Now</span></a>
+              </div>
+              <span></span>
+            @else
+              <b>{{ __('index.detail.comment.login') }}</b>
+            @endif
           </div>
         </div>
       </div>
     </div>
   </div>
   <!-- End Product Details -->
-  <script>var option_default = "{{ __('index.quick_view.default_option') }}";</script>
-  <script>var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";</script>  
+  <script>
+    var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
+    var addCommentUrl = "{{ url('add-comment') }}";
+    var option_default = "{{ __('index.quick_view.default_option') }}";
+    var required = "{{ __('index.detail.comment.required') }}";
+  </script>
+  <script src="{{ asset('public/js/comment-product.js') }}"></script> 
 @endsection

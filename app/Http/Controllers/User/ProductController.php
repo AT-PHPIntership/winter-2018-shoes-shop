@@ -13,7 +13,7 @@ class ProductController extends Controller
      * Display a specific product.
      *
      * @param int $id product
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function detail($id)

@@ -120,5 +120,43 @@
   width: 30%;
 }
 .comment-content {
-  margin-top: 100px;
+  margin: 100px 0;
+}
+.item-user {
+  min-width: 255px;
+  width: 100%;
+  padding: 15px;
+  position: relative;
+}
+.list-info {
+  position: absolute;
+  left: 0;
+  bottom: -40px;
+  z-index: 999;
+  width: 100%;
+}
+.list-info li {
+  background-color: #f41068;
+  width: 100%;
+  display: none;
+  padding: 10px 0;
+  border-top: 1px solid #fff;
+}
+.list-user:hover .list-info li {
+  display: block;
+  z-index: 1000;
+}
+.single-comment .user-details img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.view-btn.color-2.btn-comment {
+  border: 1px solid #ccc;
+}
+.mess-error{
+  font-size: 13px;
+  color: red;
+  padding: 0 10px;
 }

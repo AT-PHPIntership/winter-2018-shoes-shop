@@ -17,17 +17,4 @@ class SizeService
     {
         return Size::get($columns);
     }
-
-    /**
-     * Get data from sizes depend on product
-     *
-     * @param int $id product
-     *
-     * @return object
-     */
-    public function getSizesByProduct(int $id)
-    {
-        $allsizes = $this->getSizes(['id', 'size']);
-        return $allsizes;
-    }
 }
