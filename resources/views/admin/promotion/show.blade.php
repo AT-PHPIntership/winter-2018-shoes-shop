@@ -19,7 +19,6 @@
                   <p><b>@lang('promotion.table.name'):</b> {{ $promotion->name }}</p>
                   <p><b>@lang('promotion.table.percent'):</b> {{ $promotion->percent }}%</p>
                   <p><b>@lang('promotion.table.description'):</b> {{ $promotion->description }}</p>
-                  <p><b>@lang('promotion.table.max_sell'):</b> {{ $promotion->max_sell }}</p>
                   <p><b>@lang('promotion.table.total_sold'):</b> {{ $promotion->total_sold }}</p>
                   <p><b>@lang('promotion.table.start_date'):</b> {{ formatDateVN($promotion->start_date) }}</p>
                   <p><b>@lang('promotion.table.end_date'):</b> {{ formatDateVN($promotion->end_date) }}</p>
