@@ -6,8 +6,6 @@ use App\Models\Product;
 use App\Models\OrderDetail;
 use App\Models\Order;
 use App\Models\Category;
-use App\Models\ProductDetail;
-use App\Models\Size;
 use Carbon\Carbon;
 
 class ProductService
