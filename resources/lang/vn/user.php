@@ -36,4 +36,9 @@ return [
     ],
     'select' => 'Chọn',
     'manage_account' => 'Quản lý tài khoản',
+    'manage_order' => 'Quản lý đơn hàng',
+    'profile' => 'Thông tin cá nhân',
+    'change_password' => 'Đổi mật khẩu',
+    'order_detail' => 'Chi tiết đơn hàng',
+    'order_list' => 'Danh sách đơn hàng',
 ];

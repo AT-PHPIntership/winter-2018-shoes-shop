@@ -1,22 +1,24 @@
 @extends('user.module.master')
 @section('content')
-  <div class="content-wrapper p-60">
-    <section class="content content-header">
-      <h1 class="box-title text-uppercase">@lang('user.manage_account')</h1>
-    </section>
-    <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          @include('user.module.message')
+  <div class="content-wrapper p-t-50">
+    @include('user.module.sidebar')
+    <div class="content">
+      <section class="content-header">
+        <h1 class="box-title text-uppercase">@lang('user.manage_account')</h1>
+      </section>
+      <section class="">
+        <div class="row">
+          <div class="col-md-12">
+            @include('user.module.message')
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">@lang('user.show')</h3>
-            </div>
-              <form method="POST" role="form" enctype="multipart/form-data" action="{{ route('user.profile') }}">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">@lang('user.show')</h3>
+              </div>
+              <form class="m-b-50" method="POST" role="form" enctype="multipart/form-data" action="{{ route('user.profile') }}">
                 @csrf
                 <div class="box-body row">
                   <div class="col-md-6">
@@ -80,8 +82,8 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
   <script src="{!! asset('public/js/script.js') !!}"></script>
 @endsection
