@@ -85,8 +85,8 @@ class ProductService
                 'colors' => $item['color'],
             ];
         });
-        $data['colors'] = $details->pluck('colors')->keyBy('colors');
-        return json_encode($data);
+        $data['colors'] = $details->pluck('colors')->keyBy('id');
+        return $data;
     }
 
     /**
