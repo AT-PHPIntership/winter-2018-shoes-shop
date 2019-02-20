@@ -127,3 +127,16 @@
   margin-left: 20px;
   padding-left: 5px;
 }
+.full-with {
+  width: 100%;
+}
+.prodcut-item {
+  padding: 10px;
+}
+.item-padding {
+  padding: 10px;
+}
+.product-img {
+  height: 100px;
+  width: 100px;
+}
