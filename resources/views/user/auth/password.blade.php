@@ -51,5 +51,4 @@
       </section>
     </div>
   </div>
-  <script src="{!! asset('public/js/script.js') !!}"></script>
 @endsection

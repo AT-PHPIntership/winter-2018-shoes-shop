@@ -18,7 +18,7 @@
                 <i class="fa fa-files-o"></i> <span>@lang('user.manage_order')</span>
             </a>
             <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i> @lang('user.order_list')</a></li>
+            <li class="active"><a href="{{ route('user.orders')}}"><i class="fa fa-circle-o"></i> @lang('user.order_list')</a></li>
             </ul>
         </li>
       </ul>
