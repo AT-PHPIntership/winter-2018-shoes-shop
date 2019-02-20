@@ -96,7 +96,7 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target=""><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#modal-product" data-product="{{ $productForMen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>
@@ -140,7 +140,7 @@
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                    <a href="#" data-toggle="modal" data-target=""><span class="lnr lnr-frame-expand"></span></a>
+                    <a href="#" data-toggle="modal" data-target="#modal-product"  data-product="{{ $productForWomen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
               </div>
@@ -223,5 +223,7 @@
       </div>
     </div>
   </section>
-  <!-- End brand Area -->    
+  <!-- End brand Area -->  
+  <script>var option_default = "{{ __('index.quick_view.default_option') }}";</script>
+  <script>var getDetailProduct = "{{ url('get-detail-product') }}";</script>  
 @endsection

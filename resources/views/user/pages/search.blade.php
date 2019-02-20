@@ -19,7 +19,7 @@
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12">
         <!-- List Products -->
-        <section class="lattest-product-area pb-40 category-list">
+        <section class="lattest-product-area pb-40 category-list mb-100">
           <h3>{{ __('search.search.result') }}: {{ $products->total() }} {{ __('search.search.product') }}</h3>
           <div class="row">
             @foreach ($products as $product)
@@ -30,13 +30,13 @@
                   <div class="content-details fadeIn-bottom">
                     <div class="bottom d-flex align-items-center justify-content-center">
                       <a href="#"><span class="lnr lnr-cart"></span></a>
-                      <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                      <a href="#" data-toggle="modal" data-target="#modal-product" data-product="{{ $product->id }}"><span class="lnr lnr-frame-expand"></span></a>
                     </div>
                   </div>
                 </div>
                 <div class="price">
                   <h5>{{ $product->name }}</h5>
-                  <p>{{ $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : $product->original_price }}đ <del class="text-gray">{{ $product->promotions->first() ? $product->original_price.'đ' : '' }}</del></p>
+                  <p>{{ $product->promotions->last() ? formatCurrencyVN(($product->original_price * (100 - $product->promotions->last()->percent))/100) : formatCurrencyVN($product->original_price) }} <del class="text-gray">{{ $product->promotions->last() ? formatCurrencyVN($product->original_price) : '' }}</del></p>
                 </div>
               </div>
             @endforeach
@@ -49,4 +49,8 @@
       </div>
     </div>
   </div>
+  <script>
+    var option_default = "{{ __('index.quick_view.default_option') }}";
+    var getDetailProduct = "{{ url('get-detail-product') }}";
+  </script>
 @endsection
