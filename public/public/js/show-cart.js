@@ -128,7 +128,7 @@ $(document).ready(function(){
         data: {code:codeName, products:products},
         success: function(data){
           if(data == ''){
-            $('.mess-coupon').text('Áp mã thất bại');
+            $('.mess-coupon').text('Áp mã thất bại (Mã đã hết hoặc sai mã)');
           }else{
             var subAmount = getSubAmount();
             var amount = subAmount - data;
@@ -140,7 +140,6 @@ $(document).ready(function(){
             code['decrease'] = +data;
             localStorage.setItem('code', JSON.stringify(code));
           }
-          console.log(data);
         }
       });
     }

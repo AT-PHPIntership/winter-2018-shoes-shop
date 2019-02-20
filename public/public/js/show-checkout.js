@@ -8,7 +8,7 @@ $(document).ready(function(){
       items += '<tr class="row">';
       items += '<td class="col-lg-6"><b>'+ val.product.name +'</b> <p class="mb-0">('+ val.color.name +'-'+ val.size.name +')</p></td>';
       items += '<td class="col-lg-2 text-center">'+ val.product.quantity +'</td>';
-      items += '<td class="col-lg-4">'+ val.product.price +'</td>';
+      items += '<td class="col-lg-4">'+ formatCurrencyVN(val.product.price) +'</td>';
       items += '</tr>';
       subAmount += val.product.price * val.product.quantity;
     });

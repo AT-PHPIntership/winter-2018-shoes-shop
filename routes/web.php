@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 });
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
-    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/home', 'IndexController@index')->name('index');
     Route::get('cart', 'OrderController@cart')->name('cart');
     Route::get('cart/applyCode', 'OrderController@applyCode');
     Route::get('checkout', 'OrderController@checkout');

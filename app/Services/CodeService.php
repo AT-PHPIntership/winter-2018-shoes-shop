@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Code;
 use App\Models\Product;
+use App\Models\UserCode;
 use Log;
 use Carbon\Carbon;
 
@@ -81,38 +82,60 @@ class CodeService
      */
     public function getDecreaseTotalAmount(string $codeName, array $products)
     {
-        $code = Code::where('name', $codeName)->first();
-        if ($code) {
-            $cateogryId = $code->category_id;
-            $amountDecrease = 0;
-            if (!$cateogryId) {
-                foreach ($products as $pd) {
-                    $product = Product::with(['promotions' => function ($query) {
-                        $query->where('start_date', '<=', Carbon::now())
-                              ->where('end_date', '>=', Carbon::now())
-                              ->whereRaw('max_sell - total_sold > 0');
-                    }])->find($pd['id']);
-                    if ($product) {
-                        $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
-                        $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
+        try {
+            $code = Code::where('name', $codeName)->where('times', '>', 0)->first();
+            if ($code) {
+                $cateogryId = $code->category_id;
+                $amountDecrease = 0;
+                if (!$cateogryId) {
+                    foreach ($products as $pd) {
+                        $product = Product::with(['promotions' => function ($query) {
+                            $query->where('start_date', '<=', Carbon::now())
+                                ->where('end_date', '>=', Carbon::now());
+                        }])->find($pd['id']);
+                        if ($product) {
+                            $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
+                            $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
+                        }
+                    }
+                } else {
+                    foreach ($products as $pd) {
+                        $product = Product::with(['promotions' => function ($query) {
+                            $query->where('start_date', '<=', Carbon::now())
+                                ->where('end_date', '>=', Carbon::now());
+                        }])->where('id', $pd['id'])->where('category_id', $cateogryId)->first();
+                        if ($product) {
+                            $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
+                            $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
+                        }
                     }
                 }
+                return $amountDecrease;
             } else {
-                foreach ($products as $pd) {
-                    $product = Product::with(['promotions' => function ($query) {
-                        $query->where('start_date', '<=', Carbon::now())
-                              ->where('end_date', '>=', Carbon::now())
-                              ->whereRaw('max_sell - total_sold > 0');
-                    }])->where('id', $pd['id'])->where('category_id', $cateogryId)->first();
-                    if ($product) {
-                        $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
-                        $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
-                    }
-                }
+                return null;
             }
-            return $amountDecrease;
-        } else {
-            return null;
+        } catch (\Exception $e) {
+            Log::error($e);
+            return false;
+        }
+    }
+
+    /**
+     * Check code with user
+     *
+     * @param string $codeName codeName
+     * @param int    $userId   userId
+     *
+     * @return boolean
+     */
+    public function checkCodeWithUser(string $codeName, int $userId)
+    {
+        try {
+            $code = Code::where('name', $codeName)->first();
+            return UserCode::where('user_id', $userId)->where('code_id', $code->id)->first();
+        } catch (\Exception $e) {
+            Log::error($e);
+            return false;
         }
     }
 }

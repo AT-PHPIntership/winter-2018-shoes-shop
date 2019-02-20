@@ -8,6 +8,7 @@ use App\Models\Code;
 use App\Models\OrderDetail;
 use App\Models\ProductDetail;
 use App\Models\Profile;
+use App\Models\Promotion;
 use Carbon\Carbon;
 use Log;
 use DB;
@@ -113,10 +114,13 @@ class OrderService
             $order = Order::create($data);
             foreach ($arrProduct as $val) {
                 $price = $this->getPrice($val['product']['id']);
+                if ($price['promotion']) {
+                    Promotion::where('id', $price['promotion'])->increment('total_sold', $val['product']['quantity']);
+                }
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $val['product']['id'],
-                    'price' => $price,
+                    'price' => $price['value'],
                     'quantity' => $val['product']['quantity'],
                     'size' => $val['size']['name'],
                     'color' => $val['color']['name'],
@@ -150,7 +154,7 @@ class OrderService
         try {
             $totalAmount = 0;
             foreach ($products as $value) {
-                $price = $this->getPrice($value['id']);
+                $price = $this->getPrice($value['id'])['value'];
                 $totalAmount += $price * $value['quantity'];
             }
             if ($code) {
@@ -168,20 +172,22 @@ class OrderService
      *
      * @param int $productId productId
      *
-     * @return decimal
+     * @return array
      */
     public function getPrice(int $productId)
     {
         try {
+            $price = [];
             $product = Product::with(['promotions' => function ($query) {
                 $query->where('start_date', '<=', Carbon::now())
-                        ->where('end_date', '>=', Carbon::now())
-                        ->whereRaw('max_sell - total_sold > 0');
+                        ->where('end_date', '>=', Carbon::now());
             }])->find($productId);
             if ($product->promotions->last()) {
-                $price = $product->original_price * (100 - $product->promotions->last()->percent) / 100;
+                $price['value'] = $product->original_price * (100 - $product->promotions->last()->percent) / 100;
+                $price['promotion'] = $product->promotions->last()->id;
             } else {
-                $price = $product->original_price;
+                $price['value'] = $product->original_price;
+                $price['promotion'] = null;
             }
             return $price;
         } catch (\Exception $e) {

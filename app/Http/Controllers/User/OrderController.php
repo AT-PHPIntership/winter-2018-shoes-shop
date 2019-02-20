@@ -63,6 +63,9 @@ class OrderController extends Controller
             'arrProduct.*.size.name' => 'required|exists:sizes,size',
             'code.name' => 'exists:codes,name',
         ]);
+        if ((!empty($request->input('code.name')) && !empty($request->input('code.name')) && app(CodeService::class)->checkCodeWithUser($request->input('code.name'), $request->input('customer.userId')))) {
+            return response()->json(array('success' => false, 'message' => trans('checkout.message.err_used_code')));
+        }
         if ($validator->fails()) {
             return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
         }

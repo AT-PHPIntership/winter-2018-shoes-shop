@@ -19,29 +19,34 @@
   <div class="container">
     <div class="checkput-login">
       <div class="top-title">
-        <p>Returning Customer? <a data-toggle="collapse" href="#checkout-login" aria-expanded="false" aria-controls="checkout-login">Click here to login</a></p>
+        <p>{{ __('login.have_account') }} <a data-toggle="collapse" href="#checkout-login" aria-expanded="false" aria-controls="checkout-login">{{ __('login.login_here') }}</a></p>
       </div>
       <div class="collapse" id="checkout-login">
         <div class="checkout-login-collapse d-flex flex-column">
-          <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing & Shipping section.</p>
-          <form action="#" class="d-block">
+          <form method="POST" action="{{ route('user.login') }}" class="d-block">
+            @csrf
             <div class="row">
               <div class="col-lg-4">
-                <input type="text" placeholder="Username or Email*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Username or Email*'" required class="common-input mt-10">
+                <input  type="email" name="email" placeholder="{{ __('login.email') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('login.email') }}*'" required class="common-input mt-10">
+                @if ($errors->has('email'))
+                  <span class="cl-red">{{ $errors->first('email') }}</span>
+                @endif
               </div>
               <div class="col-lg-4">
-                <input type="password" placeholder="Password*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Password*'" required class="common-input mt-10">
+                <input type="password" name="password" placeholder="{{ __('login.password') }}*" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('login.password') }}*'" required class="common-input mt-10">
+                @if ($errors->has('password'))
+                  <span class="cl-red">{{ $errors->first('password') }}</span>
+                @endif
               </div>
             </div>
             <div class="d-flex align-items-center flex-wrap">
-              <button class="view-btn color-2 mt-20 mr-20"><span>Login</span></button>
+              <button class="view-btn color-2 mt-20 mr-20"><span>{{ __('login.login') }}</span></button>
               <div class="mt-20">
-                <input type="checkbox" class="pixel-checkbox" id="login-1">
-                <label for="login-1">Remember me</label>
+                <input type="checkbox" name="remember" class="pixel-checkbox" id="login-1">
+                <label for="login-1">{{ __('login.remember_me') }}</label>
               </div>
             </div>
           </form>
-          <a href="#" class="mt-10">Lost your password?</a>
         </div>
       </div>
     </div>

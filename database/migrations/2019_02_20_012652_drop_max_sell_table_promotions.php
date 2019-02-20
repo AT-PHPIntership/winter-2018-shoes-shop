@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyLengthPriceOrderDetailsTable extends Migration
+class DropMaxSellTablePromotions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class ModifyLengthPriceOrderDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::table('order_details', function (Blueprint $table) {
-            $table->decimal('price', 10, 2)->change();
+        Schema::table('promotions', function (Blueprint $table) {
+            $table->dropColumn('max_sell');
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
@@ -25,8 +25,8 @@ class ModifyLengthPriceOrderDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('order_details', function (Blueprint $table) {
-            $table->decimal('price')->change();
+        Schema::table('promotions', function (Blueprint $table) {
+            $table->integer('max_sell');
         });
     }
 }
