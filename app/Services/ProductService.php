@@ -178,29 +178,6 @@ class ProductService
     }
 
     /**
-     * Get products by categoryId
-     *
-     * @param int $id id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getProductByCatIdWithPaginate(int $id)
-    {
-        if (Category::where('parent_id', $id)->get()->count()) {
-            $ids = Category::where('parent_id', $id)->get(['id'])->pluck('id')->toArray();
-        } else {
-            $ids = Category::where('id', $id)->get(['id'])->pluck('id')->toArray();
-        }
-        return Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
-            $query->where('start_date', '<=', Carbon::now())
-                  ->where('end_date', '>=', Carbon::now());
-        }])
-        ->whereIn('category_id', $ids)
-        // ->paginate(config('define.paginate.limit_rows_12'));
-        ->get();
-    }
-
-    /**
      * Filter products
      *
      * @param array $data data
@@ -215,8 +192,13 @@ class ProductService
         }])
         ->join('categories as c', 'c.id', '=', 'products.category_id')
         ->join('product_details as pd', 'pd.product_id', '=', 'products.id')
-        ->select('products.id', 'products.name', 'products.original_price')
-        ->where('category_id', $data['categoryId']);
+        ->select('products.id', 'products.name', 'products.original_price');
+        if (Category::where('parent_id', $data['categoryId'])->count()) {
+            $ids = Category::where('parent_id', $data['categoryId'])->orWhere('id', $data['categoryId'])->pluck('id')->toArray();
+        } else {
+            $ids = Category::where('id', $data['categoryId'])->pluck('id')->toArray();
+        }
+        $products->whereIn('category_id', $ids);
         if (isset($data['colorIds'])) {
             $products->whereIn('color_id', $data['colorIds']);
         }

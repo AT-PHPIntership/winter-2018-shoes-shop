@@ -107,7 +107,6 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice},
       success: function(data){
-        console.log(data);
         var list = '';
         if (data.length) {
           $.each(data, function(key, val){

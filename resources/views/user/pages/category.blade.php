@@ -42,24 +42,6 @@
         <!-- Start Best Seller -->
         <section class="lattest-product-area pb-40 category-list">
           <div class="row" id="list-product">
-            @foreach ($products as $product)
-              <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product">
-                <div class="content">
-                  <div class="content-overlay"></div>
-                  <img class="content-image img-fluid d-block mx-auto size-product" src="{{ $product->images->first() ? $product->images->first()->path : config('define.image_default_product') }}" alt="">
-                  <div class="content-details fadeIn-bottom">
-                    <div class="bottom d-flex align-items-center justify-content-center">
-                      <a href="#"><span class="lnr lnr-cart"></span></a>
-                      <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="price">
-                  <h5>{{ $product->name }}</h5>
-                  <p>{{ $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : $product->original_price }}đ <del class="text-gray">{{ $product->promotions->first() ? $product->original_price.'đ' : '' }}</del></p>
-                </div>
-              </div>
-            @endforeach
           </div>
         </section>
         <!-- End Best Seller -->

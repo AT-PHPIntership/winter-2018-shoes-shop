@@ -20,7 +20,6 @@ class ProductController extends Controller
      */
     public function listProductByCatId(int $id)
     {
-        $products = app(ProductService::class)->getProductByCatIdWithPaginate($id);
         $category = app(CategoryService::class)->getCategoryById($id);
         $colors = app(ColorService::class)->getAll(['id','name']);
         $sizes = app(SizeService::class)->getAll(['id','size']);
