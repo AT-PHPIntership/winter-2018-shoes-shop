@@ -57,14 +57,35 @@
           </div>
         </div>
       </div>
-      <h4>@lang('statistical.revenue.title')</h4>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <!-- DONUT CHART -->
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Donut Chart</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <canvas id="pieChart" style="height:250px"></canvas>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+      {{-- <h4>@lang('statistical.revenue.title')</h4>
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisDay')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisDay'] }}đ</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisDay'] }}</span>
             </div>
           </div>
         </div>
@@ -73,7 +94,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisWeek')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisWeek'] }}đ</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisWeek'] }}</span>
             </div>
           </div>
         </div>
@@ -82,7 +103,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisMonth')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisMonth'] }}đ</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisMonth'] }}</span>
             </div>
           </div>
         </div>
@@ -91,7 +112,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisYear')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisYear'] }}đ</span>
+              <span class="info-box-number">{{ $arrRevenue['revenueThisYear'] }}</span>
             </div>
           </div>
         </div>
@@ -157,7 +178,16 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </section>
   </div>
+  <script>
+    var confirmed = "{{ __('order.status.confirmed') }}";
+    var processing = "{{ __('order.status.processing') }}";
+    var quality_check = "{{ __('order.status.quality_check') }}";
+    var dispatched_item = "{{ __('order.status.dispatched_item') }}";
+    var delivered = "{{ __('order.status.delivered') }}";
+    var canceled = "{{ __('order.status.canceled') }}";
+    var pending = "{{ __('order.status.pending') }}";
+  </script>
 @endsection

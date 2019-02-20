@@ -37,6 +37,9 @@
     <script src="{!! asset('admin/js/jquery-ui.min.js') !!}"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{!! asset('admin/js/bootstrap.min.js') !!}"></script>
+    <!-- Chart -->
+    <script src="{{ asset('admin/js/Chart.js') }}"></script>
+    <script src="{{ asset('admin/js/order-chart.js') }}"></script>
     <!-- Select2 -->
     <script src="{!! asset('admin/js/select2.full.min.js') !!}"></script>
     <!-- AdminLTE App -->

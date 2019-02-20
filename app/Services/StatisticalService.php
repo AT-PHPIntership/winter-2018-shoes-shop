@@ -77,6 +77,7 @@ class StatisticalService
      */
     public function getTopSellBetweenDate(string $fromDate, string $toDate)
     {
+        // \DB::enableQueryLog();
         return \DB::table('orders as o')
         ->join('order_details as od', 'o.id', '=', 'od.order_id')
         ->join('products as p', 'od.product_id', '=', 'p.id')
@@ -87,5 +88,18 @@ class StatisticalService
         ->groupBy('product_id')
         ->limit(config('define.statistical.limit_top_sell'))
         ->get();
+        // dd(\DB::getQueryLog());
+    }
+
+    /**
+     * Get quantity order by status
+     *
+     * @return array
+     */
+    public function getQuantityOrderByStatus()
+    {
+        return [
+            'confirmed' => Order::where('status', 1)->count(),
+        ];
     }
 }
