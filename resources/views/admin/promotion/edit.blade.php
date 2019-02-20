@@ -60,14 +60,6 @@
                     <span class="help-block">{{ $errors->first('product_id') }}</span>
                   @endif
                 </div>
-                
-                <div class="form-group">
-                  <label for="promotion-ip-maxsell">@lang('promotion.table.max_sell') *</label>
-                  <input type="number" name="max_sell" class="form-control" id="promotion-ip-maxsell" value="{{ $promotion->max_sell }}">
-                  @if ($errors->has('max_sell'))
-                    <span class="help-block">{{ $errors->first('max_sell') }}</span>
-                  @endif
-                </div>
                 <div class="form-group">
                   <label for="promotion-ip-startdate">@lang('promotion.table.start_date') *</label>
                   <input type="date" name="start_date" class="form-control" id="promotion-ip-startdate" value="{{ $promotion->start_date }}">
