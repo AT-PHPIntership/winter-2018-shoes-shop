@@ -45,5 +45,6 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         Route::get('password', 'ProfileController@showPassword')->name('password');
         Route::post('password', 'ProfileController@handlePassword')->name('password');
         Route::get('orders', 'OrderController@index')->name('orders');
+        Route::get('order/{id}', 'OrderController@show')->name('order.show');
     });
  });

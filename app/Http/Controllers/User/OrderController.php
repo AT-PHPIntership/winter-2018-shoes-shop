@@ -19,5 +19,17 @@ class OrderController extends Controller
         $orders = Order::where('user_id', $user_id)->get();
         return view('user.pages.order.list', compact('orders'));
     }
-
+    /**
+     * Show order detail to follow
+     * 
+     * @param int $id order id
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function show(int $id)
+    {
+        $user_id = \Auth::user()->id;
+        $order = Order::where('user_id', $user_id)->findOrFail($id);
+        return view('user.pages.order.detail', compact('order'));
+    }
 }

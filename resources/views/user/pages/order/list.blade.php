@@ -18,9 +18,10 @@
 					<div class="box">
 						<div class="box-header with-border">
 							<h5>@lang('order.order') <strong class="order-num">#{{ $order->id}}:</strong>{{ $order->created_at}}</h5>
+						<div class="pull-right"><a href="{{ route('user.order.show', $order->id)}}">@lang('order.status.follow')</a></div>
 						</div>
 						<div class="box-body">
-							<div class="col-sm-9 item-detail">
+							<div class="item-detail">
 								<ul class="product-menu">
 									@foreach ($order->orderDetails as $detail)
 									<li class="row prodcut-item">
