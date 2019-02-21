@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'order' => 'Đơn hàng',
+    'none_order' => ' Chưa có đơn hàng!',
     'title' => 'Quản lý đơn hàng',
     'list' => [
         'title' => 'Danh sách đơn hàng',
