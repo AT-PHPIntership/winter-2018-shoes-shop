@@ -1,3 +1,6 @@
+function formatCurrencyVN(number){
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(number);
+}
 $('.js-addcart').each(function(){
     var nameProduct = $(this).parent().parent().parent().find('.top .head').html();
     $(this).on('click', function(){

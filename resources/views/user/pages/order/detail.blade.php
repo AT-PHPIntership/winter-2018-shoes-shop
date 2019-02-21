@@ -12,7 +12,7 @@
 					<div class="box">
 						<div class="box-header with-border">
 							<h5>@lang('order.order') <strong class="order-num">#{{ $order->id}}:</strong>{{ $order->created_at}}</h5>
-							<div class="pull-right">@lang('order.table.amount'): {{ $order->total_amount}} VNĐ</div>
+							<div class="pull-right">@lang('order.table.amount'): {{ formatCurrencyVN($order->total_amount) }} </div>
 						</div>
 						<div class="box-body with-border">
 							<div class="timeline">
@@ -56,15 +56,21 @@
 						<div class="box-body with-border">
 							<div class="item-detail">
 								<ul class="product-menu">
+									@php
+										$subtotal = 0;
+									@endphp
 									@foreach ($order->orderDetails as $detail)
-									<li class="row prodcut-item">
-										<div class="col-sm-3">
-											<img class="product-img" src="{{ $detail->product->images->first() ? $detail->product->images->first()->path : config('define.path.default_image') }}" alt="hình ảnh">
-										</div>
-										<span class="col-sm-5 item-padding">{{ $detail->product->description ? $detail->product->description : "" }}</span>
-										<span class="col-sm-2 item-padding">@lang('order.unit_price'): {{ $detail->product->original_price }}</span>
-										<span class="col-sm-2 item-padding">@lang('order.table.quantity'): {{ $detail->quantity }}</span>
-									</li>
+										@php
+											$subtotal += $detail->price * $detail->quantity;
+										@endphp
+										<li class="row prodcut-item">
+											<div class="col-sm-3">
+												<img class="product-img" src="{{ $detail->product->images->first() ? $detail->product->images->first()->path : config('define.path.default_image') }}" alt="hình ảnh">
+											</div>
+											<span class="col-sm-5 item-padding">{{ $detail->product->description ? $detail->product->description : "" }}</span>
+											<span class="col-sm-2 item-padding">@lang('order.unit_price'): {{ formatCurrencyVN($detail->price) }}</span>
+											<span class="col-sm-2 item-padding">@lang('order.table.quantity'): {{ $detail->quantity }}</span>
+										</li>
 									@endforeach
 								</ul>
 							</div>
@@ -85,9 +91,9 @@
 								<div class="box-footer">
 									<h5 class="box-title">@lang('order.payment.pay')</h5>
 									<div class="own-info">
-										<p>@lang('order.payment.subtotal')<span class="pull-right"> 600000VNĐ</span></p>
-										<p>@lang('order.payment.discount')<span class="pull-right"> 100000VNĐ</span></p>
-										<p>@lang('order.payment.total')<span class="pull-right">{{ $order->total_amount}}VNĐ</span></p>
+										<p>@lang('order.payment.subtotal')<span class="pull-right">{{ formatCurrencyVN($subtotal) }}</span></p>
+										<p>@lang('order.payment.discount')<span class="pull-right">{{ formatCurrencyVN($subtotal - $order->total_amount) }}</span></p>
+										<p>@lang('order.payment.total')<span class="pull-right">{{ formatCurrencyVN($order->total_amount) }}</span></p>
 									</div>
 								</div>
 							</div>
