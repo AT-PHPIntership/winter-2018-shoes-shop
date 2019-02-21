@@ -99,7 +99,27 @@ class StatisticalService
     public function getQuantityOrderByStatus()
     {
         return [
-            'confirmed' => Order::where('status', 1)->count(),
+            'confirmed' => Order::where('status', Order::ORDER_STATUS['CONFIRMED'])->count(),
+            'processing' => Order::where('status', Order::ORDER_STATUS['PROCESSING'])->count(),
+            'quality_check' => Order::where('status', Order::ORDER_STATUS['QUALITY_CHECK'])->count(),
+            'dispatched_item' => Order::where('status', Order::ORDER_STATUS['DISPATCHED_ITEM'])->count(),
+            'delivered' => Order::where('status', Order::ORDER_STATUS['DELIVERED'])->count(),
+            'canceled' => Order::where('status', Order::ORDER_STATUS['CANCELED'])->count(),
+            'pending' => Order::where('status', Order::ORDER_STATUS['PENDING'])->count(),
         ];
+    }
+
+    /**
+     * Get list order from date to date
+     *
+     * @param string $fromDate fromDate
+     * @param string $toDate   toDate
+     *
+     * @return Order
+     */
+    public function getOrdersBetweenTwoDate(string $fromDate, string $toDate)
+    {
+        return Order::with(['user:id', 'user.profile:user_id,name', 'code:id,name'])->where('status', Order::ORDER_STATUS['DELIVERED'])->whereBetween('delivered_at', [$fromDate, $toDate])->get();
+        // dd($a);
     }
 }

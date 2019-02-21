@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    const PENDING_STATUS = 0;
-    const CONFIRMED_STATUS = 1;
-    const PROCESSING_STATUS = 2;
-    const QUALITY_CHECK_STATUS = 4;
-    const DISPATCHED_ITEM_STATUS = 5;
-    const DELIVERED_STATUS = 6;
-    const CANCELED_STATUS = 7;
+    const ORDER_STATUS = [
+        'PENDING' => 0,
+        'CONFIRMED' => 1,
+        'PROCESSING' => 2,
+        'QUALITY_CHECK' => 3,
+        'DISPATCHED_ITEM' => 4,
+        'DELIVERED' => 5,
+        'CANCELED' => 6,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -41,5 +43,15 @@ class Order extends Model
     public function code()
     {
         return $this->belongsTo(Code::class);
+    }
+
+    /**
+     * Order has many orderDetails
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

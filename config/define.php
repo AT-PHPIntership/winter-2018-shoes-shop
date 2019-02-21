@@ -18,4 +18,5 @@ return [
     'statistical' => [
         'limit_top_sell' => 5,
     ],
+    'upload_folder' => '/upload/',
 ];

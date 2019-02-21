@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'order' => 'Đơn hàng',
     'title' => 'Quản lý đơn hàng',
     'list' => [
         'title' => 'Danh sách đơn hàng',
@@ -13,12 +14,20 @@ return [
         'delivered_at' => 'Ngày giao',
         'shipping_address' => 'Địa chỉ',
         'phone_number' => 'Số điện thoại',
-        'amount' => 'Tổng tiền',
+        'total_amount' => 'Tổng tiền',
         'status' => 'Trạng thái',
-        'action' => 'Hành động'
+        'action' => 'Hành động',
+        'product' => 'Sản phẩm',
+        'original_price' => 'Giá thực',
+        'price' => 'Giá',
+        'quantity' => 'Số lượng',
+        'category' => 'Danh mục',
+        'total_price' => 'Thành tiền (Chưa áp dụng code)',
+        'amount' => 'Tổng',
     ],
     'show' => [
         'title' => 'Chi tiết đơn hàng',
+        'product' => 'Sản phẩm',
     ],
     'status' => [
         'pending' => 'Đang chờ',

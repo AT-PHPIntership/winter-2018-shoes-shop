@@ -59,11 +59,9 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
-          <!-- DONUT CHART -->
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Donut Chart</h3>
-
+              <h3 class="box-title">{{ __('order.order') }}</h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -71,11 +69,22 @@
               </div>
             </div>
             <div class="box-body">
-              <canvas id="pieChart" style="height:250px"></canvas>
+              <div class="col-md-8">
+                <canvas id="pieChart"></canvas>
+              </div>
+              <div class="col-md-4">
+                <ul class="chart-legend clearfix">
+                  <li><i class="fa fa-circle-o text-yellow"></i> {{ __('order.status.pending') }}</li>
+                  <li><i class="fa fa-circle-o text-green"></i> {{ __('order.status.confirmed') }}</li>
+                  <li><i class="fa fa-circle-o text-maroon"></i> {{ __('order.status.processing') }}</li>
+                  <li><i class="fa fa-circle-o text-olive"></i> {{ __('order.status.quality_check') }}</li>
+                  <li><i class="fa fa-circle-o text-purple"></i> {{ __('order.status.dispatched_item') }}</li>
+                  <li><i class="fa fa-circle-o text-navy"></i> {{ __('order.status.delivered') }}</li>
+                  <li><i class="fa fa-circle-o text-red"></i> {{ __('order.status.canceled') }}</li>
+                </ul>
+              </div>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </div>
       </div>
       {{-- <h4>@lang('statistical.revenue.title')</h4>
@@ -145,7 +154,7 @@
                   <a href="">{{ ($key + 1).'. '.$topSell->name }}</a>
                   <span class="pull-right badge bg-red">{{ $topSell->product_quantity - $topSell->total_sold }}</span>
                   <span class="pull-right badge bg-green">{{ $topSell->total }}</span>
-                </b>                
+                </b>                {{ __('order.status.confirmed') }}
               @endforeach
             </div>
           </div>
@@ -182,12 +191,33 @@
     </section>
   </div>
   <script>
-    var confirmed = "{{ __('order.status.confirmed') }}";
-    var processing = "{{ __('order.status.processing') }}";
-    var quality_check = "{{ __('order.status.quality_check') }}";
-    var dispatched_item = "{{ __('order.status.dispatched_item') }}";
-    var delivered = "{{ __('order.status.delivered') }}";
-    var canceled = "{{ __('order.status.canceled') }}";
-    var pending = "{{ __('order.status.pending') }}";
+    var confirmed = {
+      'title' : "{{ __('order.status.confirmed') }}",
+      'quantity' : "{{ $arrQuantityOrder['confirmed'] }}",
+    };
+    var processing = {
+      'title' : "{{ __('order.status.processing') }}",
+      'quantity' : "{{ $arrQuantityOrder['processing'] }}",
+    };
+    var quality_check = {
+      'title' : "{{ __('order.status.quality_check') }}",
+      'quantity' : "{{ $arrQuantityOrder['quality_check'] }}",
+    };
+    var dispatched_item = {
+      'title' : "{{ __('order.status.dispatched_item') }}",
+      'quantity' : "{{ $arrQuantityOrder['dispatched_item'] }}",
+    };
+    var delivered = {
+      'title' : "{{ __('order.status.delivered') }}",
+      'quantity' : "{{ $arrQuantityOrder['delivered'] }}",
+    };
+    var canceled = {
+      'title' : "{{ __('order.status.canceled') }}",
+      'quantity' : "{{ $arrQuantityOrder['canceled'] }}",
+    };
+    var pending = {
+      'title' : "{{ __('order.status.pending') }}",
+      'quantity' : "{{ $arrQuantityOrder['pending'] }}",
+    };
   </script>
 @endsection

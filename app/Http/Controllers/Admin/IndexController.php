@@ -20,6 +20,7 @@ class IndexController extends Controller
         $arrTotal = app(StatisticalService::class)->getTotal();
         $arrRevenue = app(StatisticalService::class)->getRevenue();
         $arrTopSell = app(StatisticalService::class)->getTopSell();
-        return view('admin.index', compact(['arrTotal', 'arrRevenue', 'arrTopSell']));
+        $arrQuantityOrder = app(StatisticalService::class)->getQuantityOrderByStatus();
+        return view('admin.index', compact(['arrTotal', 'arrRevenue', 'arrTopSell', 'arrQuantityOrder']));
     }
 }

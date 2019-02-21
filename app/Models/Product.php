@@ -45,14 +45,4 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
-
-    /**
-     * Product has many comments
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
 }

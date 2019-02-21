@@ -1,48 +1,47 @@
   var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
   var pieChart       = new Chart(pieChartCanvas)
-  console.log(confirmed);
   var PieData        = [
     {
-    value    : 700,
-    color    : '#f56954',
-    highlight: '#f56954',
-    label    : confirmed
-    },
-    {
-    value    : 500,
-    color    : '#00a65a',
-    highlight: '#00a65a',
-    label    : processing
-    },
-    {
-    value    : 400,
-    color    : '#f39c12',
-    highlight: '#f39c12',
-    label    : quality_check
-    },
-    {
-    value    : 600,
-    color    : '#00c0ef',
-    highlight: '#00c0ef',
-    label    : dispatched_item
-    },
-    {
-    value    : 300,
+    value    : confirmed['quantity'],
     color    : '#3c8dbc',
     highlight: '#3c8dbc',
-    label    : delivered
+    label    : confirmed['title'],
     },
     {
-    value    : 100,
-    color    : '#d2d6de',
-    highlight: '#d2d6de',
-    label    : canceled
+    value    : processing['quantity'],
+    color    : '#d81b60',
+    highlight: '#d81b60',
+    label    : processing['title'],
     },
     {
-    value    : 200,
-    color    : '#d2d6de',
-    highlight: '#d2d6de',
-    label    : pending
+    value    : quality_check['quantity'],
+    color    : '#3d9970',
+    highlight: '#3d9970',
+    label    : quality_check['title'],
+    },
+    {
+    value    : dispatched_item['quantity'],
+    color    : '#605ca8',
+    highlight: '#605ca8',
+    label    : dispatched_item['title'],
+    },
+    {
+    value    : delivered['quantity'],
+    color    : '#001f3f',
+    highlight: '#001f3f',
+    label    : delivered['title'],
+    },
+    {
+    value    : canceled['quantity'],
+    color    : '#dd4b39',
+    highlight: '#dd4b39',
+    label    : canceled['title'],
+    },
+    {
+    value    : pending['quantity'],
+    color    : '#f39c12',
+    highlight: '#f39c12',
+    label    : pending['title'],
     }
   ]
   var pieOptions     = {
