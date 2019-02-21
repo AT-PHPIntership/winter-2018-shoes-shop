@@ -1,3 +1,6 @@
+function formatCurrencyVN(number){
+  return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(number);
+}
 $(document).ready(function(){
   $('.select2').select2();
   $('#datepicker-from').datepicker({

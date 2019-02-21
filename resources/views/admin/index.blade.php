@@ -57,37 +57,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-12 col-xs-12">
-          <div class="box box-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title">{{ __('order.order') }}</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="col-md-8">
-                <canvas id="pieChart"></canvas>
-              </div>
-              <div class="col-md-4">
-                <ul class="chart-legend clearfix">
-                  <li><i class="fa fa-circle-o text-yellow"></i> {{ __('order.status.pending') }}</li>
-                  <li><i class="fa fa-circle-o text-green"></i> {{ __('order.status.confirmed') }}</li>
-                  <li><i class="fa fa-circle-o text-maroon"></i> {{ __('order.status.processing') }}</li>
-                  <li><i class="fa fa-circle-o text-olive"></i> {{ __('order.status.quality_check') }}</li>
-                  <li><i class="fa fa-circle-o text-purple"></i> {{ __('order.status.dispatched_item') }}</li>
-                  <li><i class="fa fa-circle-o text-navy"></i> {{ __('order.status.delivered') }}</li>
-                  <li><i class="fa fa-circle-o text-red"></i> {{ __('order.status.canceled') }}</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {{-- <h4>@lang('statistical.revenue.title')</h4>
+      <h4>@lang('statistical.revenue.title')</h4>
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
@@ -126,7 +96,7 @@
           </div>
         </div>
       </div>
-      <h4>@lang('statistical.top_sell.title') 
+      {{-- <h4>@lang('statistical.top_sell.title') 
         <span class="badge bg-green">@lang('statistical.top_sell.sold')</span>
         <span class="badge bg-red">@lang('statistical.top_sell.remain')</span>
       </h4>
@@ -188,6 +158,36 @@
           </div>
         </div>
       </div> --}}
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{ __('order.order') }}</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="col-md-8">
+                <canvas id="pieChart"></canvas>
+              </div>
+              <div class="col-md-4">
+                <ul class="chart-legend clearfix">
+                  <li><i class="fa fa-circle-o text-yellow"></i> {{ __('order.status.pending') }}</li>
+                  <li><i class="fa fa-circle-o text-green"></i> {{ __('order.status.confirmed') }}</li>
+                  <li><i class="fa fa-circle-o text-maroon"></i> {{ __('order.status.processing') }}</li>
+                  <li><i class="fa fa-circle-o text-olive"></i> {{ __('order.status.quality_check') }}</li>
+                  <li><i class="fa fa-circle-o text-purple"></i> {{ __('order.status.dispatched_item') }}</li>
+                  <li><i class="fa fa-circle-o text-navy"></i> {{ __('order.status.delivered') }}</li>
+                  <li><i class="fa fa-circle-o text-red"></i> {{ __('order.status.canceled') }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
   <script>

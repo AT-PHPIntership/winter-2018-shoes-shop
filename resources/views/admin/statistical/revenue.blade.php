@@ -8,41 +8,41 @@
     </section>
     <section class="content">
       <div class="row">
-        <div class="col-md-2">
-          <div class="box-top">
-            <a class="btn btn-primary btn-md" href=""><i class="fa fa-download"> CSV</i></a>
-          </div>
-        </div>
         <form action="{{ route('admin.statisticals.revenue') }}" method="GET">
           @csrf
           <div class="col-md-2">
             <div class="box-top">
-              <div class="input-group date">
+              <button type="submit" class="btn btn-primary btn-md"><i class="fa fa-download"> CSV</i></button>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="box-top">
+              <div class="input-group date wp-from-date">
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" name="from_date" class="form-control pull-right" id="datepicker-from" placeholder="Từ ngày">
+                <input type="text" name="from_date" autocomplete="off" class="form-control pull-right js-from-date" id="datepicker-from" placeholder="Từ ngày" required>
               </div>
             </div>
           </div>
           <div class="col-md-2">
             <div class="box-top">
-              <div class="input-group date">
+              <div class="input-group date wp-to-date">
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" name="to_date" class="form-control pull-right" id="datepicker-to" placeholder="Đến ngày">
+                <input type="text" name="to_date" autocomplete="off" class="form-control pull-right js-to-date" id="datepicker-to" placeholder="Đến ngày" required>
               </div>
             </div>
           </div>
-          <div class="col-md-1">
-            <div class="box-top">
-              <button type="submit" class="btn btn-default"><i class="fa fa-repeat"></i></button>
-            </div>
-          </div>
         </form>
+        <div class="col-md-1">
+          <div class="box-top">
+            <a id="js-show-revenue" href="javascript:void(0)" class="btn btn-default"><i class="fa fa-repeat"></i></a>
+          </div>
+        </div>
       </div>
-      <div class="row">
+      <div class="row mb-100">
         <div class="col-md-12">
           <div class="box">
             <div class="box-body">
@@ -58,33 +58,14 @@
                     <th>{{ __('statistical.revenue.order_total_amount') }}</th>
                   </tr>
                 </thead>
-                @if (isset($orders))
-                  <tbody>
-                    @php
-                      $total = 0;
-                    @endphp
-                    @foreach ($orders as $key => $order)
-                      <tr>
-                        <td>{{ ($key + 1).'.' }}</td>
-                        <td>{{ $order->id }}</td>
-                        <td>{{ $order->user ? $order->user->profile->name : $order->customer_name }}</td>
-                        <td>{{ $order->code ? $order->code->name : '' }}</td>
-                        <td>{{ formatDateVN($order->created_at) }}</td>
-                        <td>{{ formatDateVN($order->delivered_at) }}</td>
-                        <td>{{ formatCurrencyVN($order->total_amount) }}</td>
-                        @php
-                          $total += $order->total_amount;
-                        @endphp
-                      </tr>
-                    @endforeach
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colspan="6">{{ __('statistical.revenue.order_total_all') }}</th>
-                      <th>{{ formatCurrencyVN($total) }}</th>
-                    </tr>
-                  </tfoot>
-                @endif
+                <tbody id="js-body-order">
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th colspan="6">{{ __('statistical.revenue.order_total_all') }}</th>
+                    <th id="total-all"></th>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -92,4 +73,6 @@
       </div>
     </section>
   </div>
+  <script>var showRevenueUrl = "{{ url('admin/statisticals/revenue') }}";</script>
+  <script src="{{ asset('admin/js/show-revenue.js') }}"></script>
 @endsection

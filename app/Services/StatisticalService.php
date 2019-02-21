@@ -119,7 +119,28 @@ class StatisticalService
      */
     public function getOrdersBetweenTwoDate(string $fromDate, string $toDate)
     {
-        return Order::with(['user:id', 'user.profile:user_id,name', 'code:id,name'])->where('status', Order::ORDER_STATUS['DELIVERED'])->whereBetween('delivered_at', [$fromDate, $toDate])->get();
-        // dd($a);
+        $orders = Order::with(['user:id', 'user.profile:user_id,name', 'code:id,name'])->where('status', Order::ORDER_STATUS['DELIVERED'])->whereBetween('delivered_at', [$fromDate, $toDate])->get();
+        $data = [];
+        foreach ($orders as $key => $order) {
+            $data[$key]['id'] = $key + 1;
+            $data[$key]['order_id'] = $order['id'];
+            $data[$key]['user_name'] = $order['user_id'] ? $order['user']['profile']['name'] : $order['customer_name'];
+            $data[$key]['code_name'] = $order['code_id'] ? $order['code']['name'] : '';
+            $data[$key]['order_created_at'] = date("Y-m-d", strtotime($order['created_at']));
+            $data[$key]['order_delivered_at'] = $order['delivered_at'];
+            $data[$key]['order_total_amount'] = $order['total_amount'];
+        }
+        return $data;
+    }
+
+
+    /**
+     * Get list order from date to date
+     *
+     * @return Order
+     */
+    public function getInventory()
+    {
+        return Product::with(['category:id,name'])->orderBy('total_sold', 'asc')->get();
     }
 }

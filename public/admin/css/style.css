@@ -56,3 +56,12 @@
 .w-140 {
     width: 140px;
 }
+.mb-100 {
+    margin-bottom: 100px;
+}
+.bd-red {
+    border: 1px solid red;
+}
+.txt-red {
+    color: red;
+}

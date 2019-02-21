@@ -95,7 +95,7 @@
             </a>
             <ul class="treeview-menu">
                 <li class="active"><a href="{{ route('admin.statisticals.revenue') }}"><i class="fa fa-circle-o"></i> Doanh thu</a></li>
-                <li><a href=""><i class="fa fa-circle-o"></i> abc</a></li>
+                <li><a href="{{ route('admin.statisticals.product') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.statistical.product')</a></li>
             </ul>
         </li>
       </ul>
