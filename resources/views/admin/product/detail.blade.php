@@ -26,13 +26,15 @@
                   <p>{{ trans('product.description')}}: {{ $product->description ? $product->description : '-'}}</p>
                   <ul class="product-menu">
                     @foreach($product->images as $key => $image)
-                      <li class="product-item"><img src="{{ $image->path }}" class="product-img" alt="Product image"></li>
+                      <li class="product-item"><img src="{{$image->path}}" class="product-img" alt="Product image"></li>
                     @endforeach
                   </ul>
                 </div>
                 <div class="col-md-5">
                   <div class="picture">
-                    <img src="{{ $product->images->first()->path }}" class="product-picture" alt="Product image">
+                    @if($product->images->first())
+                    <img src="{{$product->images->first()->path }}" class="product-picture" alt="Product image">
+                    @endif
                   </div>
               </div>
             </div>
