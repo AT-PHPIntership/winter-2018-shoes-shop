@@ -4,7 +4,7 @@
     @include('user.module.sidebar')
     <div class="content">
       <section class="content-header">
-        <h1 class="box-title text-uppercase">@lang('user.manage_account')</h1>
+        <h2 class="box-title text-uppercase">@lang('user.manage_account')</h2>
       </section>
       <section class="">
         @include('user.module.message')

@@ -47,7 +47,7 @@ class OrderController extends Controller
      */
     public function show(int $id)
     {
-        $orders = $this->orderService->getAuthOrderById($id);
+        $order = $this->orderService->getAuthOrderById($id);
         return view('user.pages.order.detail', compact('order'));
     }
 }

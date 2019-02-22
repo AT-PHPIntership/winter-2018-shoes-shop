@@ -1,7 +1,5 @@
 <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar p-20">
-      <!-- sidebar menu: : style can be found in sidebar.less -->
+    <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">{{ \Auth::user()->profile->name}}</li>
         <li class="treeview">
@@ -23,5 +21,4 @@
         </li>
       </ul>
     </section>
-    <!-- /.sidebar -->
 </aside>

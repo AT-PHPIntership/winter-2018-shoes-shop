@@ -32,6 +32,7 @@ return [
     ],
     'status' => [
         'follow' => 'Theo dõi',
+        'cancel' => 'Đã hủy',
         'pending' => 'Đang chờ',
         'confirmed' => 'Đã xác nhận',
         'processing' => 'Đang xử lý',
@@ -50,7 +51,7 @@ return [
         'processed' => 'Đơn hàng của bạn đã được xử lý: ',
         'dispatched' => 'Đơn hàng của bạn đã được vận chuyển: ',
         'delivered' => 'Đơn hàng của bạn đã được giao: ',
-        'canceled' => 'Đơn hàng của bạn đã được hủy: ',
+        'canceled' => 'Đơn hàng của bạn đã bị hủy: ',
     ],
     'payment' => [
         'pay' => 'Thanh toán: ',
