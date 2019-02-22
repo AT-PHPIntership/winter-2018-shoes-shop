@@ -11,14 +11,14 @@ class CategoryService
     /**
      * Handle get children list of category
      *
-     * int $id parent category
-     * 
+     * @param int   $id      parent category
+     * @param array $columns columns
+     *
      * @return \Illuminate\Http\Response
      */
-    public function getChildren($id)
+    public function getChildren(int $id, array $columns = ['*'])
     {
-        $children = Category::select('id', 'name')->where('parent_id', $id)
-                    ->get();
+        $children = Category::where('parent_id', $id)->get($columns);
         return $children;
     }
     /**

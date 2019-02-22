@@ -9,10 +9,12 @@ class SizeService
     /**
      * Get data form table size
      *
+     * @param array $columns columns
+     *
      * @return object
      */
-    public function getSizes()
+    public function getSizes(array $columns = ['*'])
     {
-        return Size::select('id', 'size')->get();
+        return Size::get($columns);
     }
 }

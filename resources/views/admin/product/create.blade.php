@@ -31,17 +31,19 @@
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.category')}}</label>
-                        <select class="form-control" name="category_id" id="parent_category">
-                          <option></option>
+                        <select class="form-control" name="parent_category_id" id="parent-category">
+                          <option value="">{{ trans('product.choose_category')}}</option>
                           @foreach($categories as $category)
                             <option value={{$category->id}}>{{$category->name}}</option>
                           @endforeach
                         </select>
-                        @if ($errors->has('category_id'))
-                          <span class="help-block">{{ $errors->first('category_id') }}</span>
+                        @if ($errors->has('parent_category_id'))
+                          <span class="help-block">{{ $errors->first('parent_category_id') }}</span>
                         @endif
                       </div>
-                      <div class="form-group" id="category-children">
+                      <div class="form-group">
+                        <select name="child_category_id" id="category-children" data-hidden="hidden" class="form-control hidden">
+                        </select>
                         @if ($errors->has('child_category_id'))
                           <span class="help-block">{{ $errors->first('category_id') }}</span>
                         @endif
@@ -60,9 +62,9 @@
                       <div class="form-group">
                         <label>{{ trans('product.images')}}</label>
                         <div class="product-images">
-                          <div id="image_preview"></div>
-                          <input type="file" id="upload_file" name="upload_file[]"
-                           accept="image/gif, image/jpg, image/jpeg, image/png" onchange="preview_image();" multiple/>
+                          <div id="image-preview"></div>
+                          <input type="file" id="upload-file" name="upload_file[]"
+                           accept="image/gif, image/jpg, image/jpeg, image/png" onchange="previewImage();" multiple/>
                         </div>
                       </div>
                     </div>
@@ -72,7 +74,29 @@
                       <label>{{ trans('product.detail_type')}}</label>
                       <div class="margin-b-10">
                         <button type="button" id="add-detail" class="btn btn-success"> + </button>
-                        <ul class="detail-menu list-unstyled" id="show-detail">                          
+                        <ul class="detail-menu list-unstyled" id="show-detail">   
+                          <li class="js-row row margin-y-10">
+                            <div class="col-xs-4">
+                              <select name="color_id[]" id="color" class="form-control" placeholder="Chọn màu">
+                                @foreach($colors as $val)
+                                  <option value="{{$val->id}}">{{$val->name}}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                            <div class="col-xs-3">
+                              <select name="size_id[]" class="form-control" placeholder="Chọn size">
+                                @foreach($sizes as $val)
+                                  <option value="{{$val->id}}">{{$val->size}}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                            <div class="col-xs-4">
+                              <input name="quantity_type[]" type="number" class="form-control" placeholder="Số lượng">
+                            </div>
+                            <div class="col-xs-1">
+                              <button type="button" class="js-btn-remove btn"> x </button>
+                            </div>
+                          </li>
                         </ul>
                         @if ($errors->has('color_id'))
                           <span class="help-block">{{ $errors->first('color_id') }}</span>
@@ -100,5 +124,6 @@
       </div>
     </section>
   </div>
+  <script>var getDetailUrl = "{{ url('admin/category/children') }}"</script>
   <script src="{!! asset('admin/js/product_detail.js') !!}"></script>
 @endsection

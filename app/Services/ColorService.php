@@ -9,10 +9,12 @@ class ColorService
     /**
      * Get data from colors table
      *
+     * @param array $columns columns
+     *
      * @return object
      */
-    public function getColors()
+    public function getColors(array $columns = ['*'])
     {
-        return Color::select('id', 'name')->get();
+        return Color::get($columns);
     }
 }

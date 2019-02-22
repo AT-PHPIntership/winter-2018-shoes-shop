@@ -8,8 +8,10 @@ use App\Models\Image;
 use App\Models\Category;
 use App\Models\Size;
 use App\Models\Color;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use DB;
+use Log;
+use Session;
+use Illuminate\Http\UploadedFile;
 
 class ProductService
 {
@@ -63,56 +65,26 @@ class ProductService
      *
      * @return \Illuminate\Http\Response
      */
-    public function storeProduct($data)
+    public function handleStoreProduct($data)
     {
+        $quantity = 0;
+        foreach ($data['quantity_type'] as $itemQuantity) {
+            $quantity = $quantity + $itemQuantity;
+        }
+        $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
         DB::beginTransaction();
         try {
-            if (isset($data['quantity_type'])) {
-                $quantity = 0;
-                foreach ($data['quantity_type'] as $itemQuantity) {
-                    $quantity = $quantity + $itemQuantity;
-                }
-                $newProduct = Product::create([
-                    'name' => $data['name'],
-                    'category_id' => $data['category_id'],
-                    'original_price' => $data['original_price'],
-                    'quantity' => $quantity,
-                    'description' => $data['description'],
-                ]);
-                for ($i=0; $i < count($data['color_id']); $i++) {
-                    $productDetail = $this->checkDetailExist($newProduct->id, $data['color_id'][$i], $data['size_id'][$i]);
-                    if ($productDetail) {
-                        $productDetail->quantity += $data['quantity_type'][$i];
-                        $productDetail->save();
-                    } else {
-                        ProductDetail::create([
-                            'product_id' => $newProduct->id,
-                            'color_id' => $data['color_id'][$i],
-                            'size_id' => $data['size_id'][$i],
-                            'quantity' => $data['quantity_type'][$i],
-                        ]);
-                    }
-                }
-            } else {
-                $product->update([
-                    'name' => $data['name'],
-                    'category_id' => $data['category_id'],
-                    'original_price' => $data['original_price'],
-                    'quantity' => 0,
-                    'description' => $data['description'],
-                ]);
+            $newProduct = $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
+            $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
+            foreach ($dataProductDetails as $detail) {
+                $this->createProductDetail($newProduct->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
             if (isset($data['upload_file'])) {
-                foreach ($data['upload_file'] as $image) {
-                    Image::create([
-                        'product_id' => $newProduct->id,
-                        'path' => $this->uploadImage($image)
-                    ]);
-                }
+                $this->createImages($data, $newProduct->id);
             }
             DB::commit();
             return $newProduct;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
             DB::rollback();
         }
@@ -121,7 +93,7 @@ class ProductService
     /**
      * Upload Image
      *
-     * @param string $image Image
+     * @param array $image files
      *
      * @return \Illuminate\Http\Response
      */
@@ -242,13 +214,12 @@ class ProductService
     /**
      * Check if product detail is exist
      *
-     * @param int $productId product detail
-     * @param int $colorId   product detail
-     * @param int $sizeId    product detail
+     * @param array $data      image data
+     * @param int   $productId product id
      *
-     * @return boolean
+     * @return \Illuminate\Http\Response
      */
-    public function checkDetailExist($productId, $colorId, $sizeId)
+    public function createImages($data, $productId)
     {
         $productDetail = ProductDetail::where('product_id', $productId)
                     ->where('color_id', $colorId)
