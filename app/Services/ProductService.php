@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\OrderDetail;
 use App\Models\Order;
 use App\Models\Category;
+use App\Models\Size;
 use Carbon\Carbon;
 
 class ProductService
@@ -98,7 +99,9 @@ class ProductService
     public function getSizesByColorId(int $colorId)
     {
         return Size::join('product_details', 'sizes.id', '=', 'product_details.size_id')
-            ->where('product_details.color_id', $colorId)->orderBy('size_id')->get(['size_id', 'size', \DB::raw('`quantity` - `total_sold` as inventory')]);
+            ->where('product_details.color_id', $colorId)
+            ->orderBy('sizes.id')->get(['sizes.id', 'size', \DB::raw('`quantity` - `total_sold` as inventory')])
+            ->keyBy('id');
     }
 
     /**

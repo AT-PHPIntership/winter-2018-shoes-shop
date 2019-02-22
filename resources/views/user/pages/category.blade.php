@@ -101,4 +101,5 @@
     var option_default = "{{ __('index.quick_view.default_option') }}";
     var getDetailProduct = "{{ url('get-detail-product') }}";
   </script>
+  <script src="{{ asset('public/js/filter-product.js') }}"></script>
 @endsection
