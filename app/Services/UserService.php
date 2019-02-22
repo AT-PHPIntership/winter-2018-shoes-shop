@@ -129,4 +129,56 @@ class UserService
         }
         return false;
     }
+
+    /**
+     * Update the profile.
+     *
+     * @param array $data data
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(array $data)
+    {
+        $user = \Auth::user();
+        DB::beginTransaction();
+        try {
+            $inputProfile = [
+                'name' => $data['name'],
+                'gender' => $data['gender'],
+                'address' => $data['address'],
+                'phonenumber' => $data['phonenumber'],
+            ];
+            if (isset($data['avatar'])) {
+                $inputProfile['avatar'] = $this->uploadAvatar($data['avatar']);
+                File::delete(public_path('upload/'.$user->profile->avatar));
+            }
+            $user->profile->update($inputProfile);
+            DB::commit();
+            return $user;
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollback();
+        }
+    }
+
+    /**
+     * Update the password.
+     *
+     * @param array $data data
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(array $data)
+    {
+        $user = \Auth::user();
+        DB::beginTransaction();
+        try {
+            $user->password = bcrypt($data['new_password']);
+            DB::commit();
+            return $user;
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollback();
+        }
+    }
 }

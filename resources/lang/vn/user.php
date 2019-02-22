@@ -19,6 +19,8 @@ return [
         'confirm_password' => 'Nhập lại mật khẩu',
         'address' => 'Địa chỉ',
         'info' => 'Thông tin',
+        'current_password' => 'Mật khẩu hiện tại',
+        'new_password' => 'Mật khẩu mới',
     ],
     'gender' => [
         'other' => 'Khác',
@@ -35,4 +37,13 @@ return [
         'title' => 'Sửa người dùng',
     ],
     'select' => 'Chọn',
+    'manage_order' => 'Quản lý đơn hàng',
+    'profile' => 'Thông tin cá nhân',
+    'change_password' => 'Đổi mật khẩu',
+    'order_detail' => 'Chi tiết đơn hàng',
+    'order_list' => 'Danh sách đơn hàng',
+    'manage_account' => 'Quản lý tài khoản',
+    'wrong_password' => 'Mật khẩu cũ không chính xác!',
+    'change_password_success' => 'Đổi mật khẩu thành công!',
+    'change_password_error' => 'Đổi mật khẩu thất bại!',
 ];

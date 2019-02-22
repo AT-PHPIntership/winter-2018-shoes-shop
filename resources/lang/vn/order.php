@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'order' => 'Đơn hàng',
+    'none_order' => ' Chưa có đơn hàng!',
     'title' => 'Quản lý đơn hàng',
     'list' => [
         'title' => 'Danh sách đơn hàng',
@@ -29,6 +31,8 @@ return [
         'product' => 'Sản phẩm',
     ],
     'status' => [
+        'follow' => 'Theo dõi',
+        'cancel' => 'Đã hủy',
         'pending' => 'Đang chờ',
         'confirmed' => 'Đã xác nhận',
         'processing' => 'Đang xử lý',
@@ -36,5 +40,23 @@ return [
         'dispatched_item' => 'Đã gửi hàng',
         'delivered' => 'Đã giao hàng',
         'canceled' => 'Hủy đơn hàng',
+        'ordered' => 'Đã đặt hàng',
+        'processed' => 'Đã xử lý',
+        'dispatched' => 'Đã vận chuyển',        
+    ],
+    'unit_price' => 'Đơn giá',
+    'delivery_address' => 'Địa chỉ nhận hàng',
+    'timeline' => [
+        'ordered' => '>Đơn hàng của bạn đã được nhận: ',
+        'processed' => 'Đơn hàng của bạn đã được xử lý: ',
+        'dispatched' => 'Đơn hàng của bạn đã được vận chuyển: ',
+        'delivered' => 'Đơn hàng của bạn đã được giao: ',
+        'canceled' => 'Đơn hàng của bạn đã bị hủy: ',
+    ],
+    'payment' => [
+        'pay' => 'Thanh toán: ',
+        'subtotal' => 'Tạm tính: ',
+        'discount' => 'Giảm giá: ',
+        'total' => 'Tổng: ',
     ]
 ];

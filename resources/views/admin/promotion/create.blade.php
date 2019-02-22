@@ -54,13 +54,6 @@
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="promotion-ip-maxsell">@lang('promotion.table.max_sell') *</label>
-                  <input type="number" name="max_sell" class="form-control" id="promotion-ip-maxsell" value="{{ old('max_sell') }}">
-                  @if ($errors->has('max_sell'))
-                    <span class="help-block">{{ $errors->first('max_sell') }}</span>
-                  @endif
-                </div>
-                <div class="form-group">
                   <label for="promotion-ip-startdate">@lang('promotion.table.start_date') *</label>
                   <input type="date" name="start_date" class="form-control" id="promotion-ip-startdate" value="{{ old('start_date') }}">
                   @if ($errors->has('start_date'))
