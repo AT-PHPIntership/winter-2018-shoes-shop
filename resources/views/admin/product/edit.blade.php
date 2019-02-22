@@ -1,6 +1,5 @@
 @extends('admin.module.master')
 @section('content')
-{{-- @dd($product->description) --}}
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -38,12 +37,29 @@
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.category')}}</label>
-                        <select class="form-control" name="category_id">
-                          @foreach($categories as $category)
-                            <option {{ ($category->id == $product->category_id) ? "selected" : ""}} value={{$category->id}}>{{$category->name}}</option>
-                          @endforeach
+                        <select class="form-control" name="parent_category_id" id="parent-category">
+                          <option value="">{{ trans('product.choose_category')}}</option>
+                          @if($product->category->parent_id)
+                            @foreach($categories as $category)
+                              <option {{ ($category->id == $product->category->parent_id) ? "selected" : ""}} value={{$category->id}}>{{$category->name}}</option>
+                            @endforeach
+                          @else
+                            @foreach($categories as $category)
+                              <option {{ ($category->id == $product->category_id) ? "selected" : ""}} value={{$category->id}}>{{$category->name}}</option>
+                            @endforeach
+                          @endif
                         </select>
-                        @if ($errors->has('category_id'))
+                        @if ($errors->has('parent_category_id'))
+                          <span class="help-block">{{ $errors->first('parent_category_id') }}</span>
+                        @endif
+                      </div>
+                      <div class="form-group">
+                      <select name="child_category_id" id="category-children" data-hidden="hidden" class="form-control {{ $product->category->parent_id ? '' : 'hidden' }}">
+                          @if($product->category->parent_id)
+                            <option value={{$product->category_id}}>{{$product->category->name}}</option>
+                          @endif
+                        </select>
+                        @if ($errors->has('child_category_id'))
                           <span class="help-block">{{ $errors->first('category_id') }}</span>
                         @endif
                       </div>
@@ -61,13 +77,13 @@
                       <div class="form-group">
                         <label>{{ trans('product.images')}}</label>
                         <div class="product-images">
-                          <div id="image_preview">
+                          <div id="image-preview">
                             @foreach($product->images as $key => $image)
                               <img src="{{ $image->path }}" class="detail-img" alt="Product image">
                             @endforeach
                           </div>
-                          <input type="file" id="upload_file" name="upload_file[]"
-                           accept="image/gif, image/jpg, image/jpeg, image/png" onchange="preview_image();" multiple/>
+                          <input type="file" id="upload-file" name="upload_file[]"
+                           accept="image/gif, image/jpg, image/jpeg, image/png" onchange="previewImage();" multiple/>
                         </div>
                       </div>
                     </div>
@@ -129,5 +145,6 @@
       </div>
     </section>
   </div>
+  <script>var getDetailUrl = "{{ url('admin/category/children') }}"</script>
   <script src="{!! asset('admin/js/product_detail.js') !!}"></script>
 @endsection

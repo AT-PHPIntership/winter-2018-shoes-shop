@@ -181,7 +181,7 @@ class ProductService
      *
      * @param array $colors     colorId
      * @param array $sizes      sizeId
-     * @param array $quantities quantityId
+     * @param array $quantities quantity
      *
      * @return array
      */
@@ -282,7 +282,7 @@ class ProductService
     /**
      * Check if product name alredy exist
      *
-     * @param string $name product
+     * @param string $name name
      *
      * @return boolean
      */
@@ -295,10 +295,10 @@ class ProductService
     /**
      * Check if product information are correct
      *
-     * @param string $name        product
-     * @param int    $categoryId  product
-     * @param string $price       product
-     * @param string $description product
+     * @param string $name        name
+     * @param int    $categoryId  categoryId
+     * @param string $price       price
+     * @param string $description description
      *
      * @return boolean
      */
@@ -315,9 +315,9 @@ class ProductService
     /**
      * Check if product detail is exist
      *
-     * @param int $productId product detail
-     * @param int $colorId   product detail
-     * @param int $sizeId    product detail
+     * @param int $productId productId
+     * @param int $colorId   colorId
+     * @param int $sizeId    sizeId
      *
      * @return boolean
      */
@@ -349,7 +349,7 @@ class ProductService
     /**
      * Get id of size
      *
-     * @param string $name size name
+     * @param string $name size
      *
      * @return int
      */
@@ -392,12 +392,11 @@ class ProductService
         foreach ($data['quantity_type'] as $itemQuantity) {
             $quantity = $quantity + $itemQuantity;
         }
-        // fix in view
         $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
         DB::beginTransaction();
         try {
-            $this->updateProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
-            DB::table('product_details')->where('product_id', $product->id)->delete();            
+            $this->updateProduct($product->id, $data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
+            DB::table('product_details')->where('product_id', $product->id)->delete();
             $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
             foreach ($dataProductDetails as $detail) {
                 $this->createProductDetail($product->id, $detail['color'], $detail['size'], $detail['quantity']);
@@ -415,8 +414,9 @@ class ProductService
     }
 
     /**
-     * Update product 
+     * Update product
      *
+     * @param int    $id            product id
      * @param string $name          product  name
      * @param int    $categoryId    category id
      * @param int    $originalPrice original price
@@ -425,10 +425,9 @@ class ProductService
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateProduct($name, $categoryId, $originalPrice, $quantity, $description)
+    public function updateProduct($id, $name, $categoryId, $originalPrice, $quantity, $description)
     {
-        // fix in view
-        Product::update([
+        Product::where('id', $id)->update([
             'name' => $name,
             'category_id' => $categoryId,
             'original_price' => $originalPrice,
