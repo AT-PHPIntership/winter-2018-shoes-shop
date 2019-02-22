@@ -44,8 +44,52 @@
 .help-block {
     color: #a94442;
 }
+.product-menu {
+  list-style-type: none;
+}
+.product-item {
+  padding: 5px 10px;
+  float: left;
+}
+.product-img {
+  height: 80px;
+  width: 80px;
+}
+.product-picture {
+  height: 250px;
+  width: 250px
+}
+.margin-b-10 {
+  margin-bottom: 10px;
+}
+.margin-y-10 {
+  padding: 10px 0;
+}
+.detail-menu {
+  padding: 5px 30px;
+}
+.detail-img {
+  height: 80px;
+  width: 80px;
+  padding: 5px;
+}
+.preview {
+  display: inline;
+  position: relative;
+}
+.btn-remove-img {
+  position: absolute;
+  right: 0;
+  margin: 5px;
+  padding: 0px 5px;
+  background: #e1e1e1;
+  border-radius: 5px;
+}
 .w-10 {
     width: 10px;
+}
+.w-100 {
+    width: 100px;
 }
 .w-140 {
     width: 140px;

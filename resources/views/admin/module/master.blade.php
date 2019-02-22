@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="{!! asset('admin/css/style.css') !!}">
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <!-- jQuery 3 -->
+    <script src="{!! asset('admin/js/jquery.min.js') !!}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{!! asset('admin/js/jquery-ui.min.js') !!}"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Insert header page -->
@@ -31,10 +36,6 @@
     <!-- Insert footer -->
     @include('admin.module.footer')
 
-    <!-- jQuery 3 -->
-    <script src="{!! asset('admin/js/jquery.min.js') !!}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{!! asset('admin/js/jquery-ui.min.js') !!}"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{!! asset('admin/js/bootstrap.min.js') !!}"></script>
     <!-- Select2 -->

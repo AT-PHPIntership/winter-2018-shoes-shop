@@ -19,14 +19,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Auth::routes();
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'HomeController@index')->name('index');
-        Route::resource('product', 'ProductController');
         Route::post('category/search', [
             'as' => 'category.search',
             'uses' => 'CategoryController@searchData'
         ]);
         Route::resource('users', 'UserController');
+        Route::get('category/children', 'CategoryController@getChildren');
         Route::resource('category', 'CategoryController');
+        Route::get('product/detail', 'ProductController@getDetail');
+        Route::resource('product', 'ProductController')->except('edit', 'update', 'destroy');
         Route::resource('promotions', 'PromotionController');
         Route::resource('codes', 'CodeController')->except(['show']);
+        Route::resource('orders', 'OrderController')->except(['edit']);
+        Route::get('comments/change-status', 'CommentController@changeStatus');
+        Route::resource('comments', 'CommentController')->only(['index', 'destroy']);
     });
 });

@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'category_id', 'original_price', 'quantity', 'description'
+    ];
+
     use SoftDeletes;
 
     /**
