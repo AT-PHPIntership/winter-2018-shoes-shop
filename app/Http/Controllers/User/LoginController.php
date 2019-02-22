@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Admin\Controller;
-use App\Services\LoginService;
+use App\Http\Requests\User\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -30,22 +30,27 @@ class LoginController extends Controller
     }
 
     /**
-     * Show the application's login form.
+     * Handle login process.
+     *
+     * @param \Illuminate\Http\Request $request request
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleLogin(Request $request)
+    public function handleLogin(LoginRequest $request)
     {
         $data = $request->except(['_token']);
-        return app(LoginService::class)->userLogin($data);
+        if (\Auth::attempt($data)) {
+            return redirect()->route('user.index');
+        }
+        return redirect()->back()->with("error", trans('login.error'));
     }
 
     /**
-     * Show the application's login form.
+     * Handle logout process.
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleLogout(Request $request)
+    public function handleLogout()
     {
         \Auth::logout();
         return redirect()->route('user.login');

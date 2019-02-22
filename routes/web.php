@@ -35,10 +35,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 });
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
-    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/home', 'IndexController@index')->name('index');
+    Route::get('/search', 'IndexController@search')->name('search');
+    Route::get('get-detail-product', 'ProductController@getDetailProduct');
+    Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
+    Route::get('cart', 'OrderController@cart')->name('cart');
+    Route::get('cart/applyCode', 'OrderController@applyCode');
+    Route::get('checkout', 'OrderController@checkout');
+    Route::get('checkout/handle-checkout', 'OrderController@handleCheckout');
+    Route::get('getDetailProduct', 'ProductController@getDetailProduct');
+    Route::get('get-detail-product', 'ProductController@getDetailProduct');
+    Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@handleLogin')->name('login');
     Route::get('logout', 'LoginController@handleLogout')->name('logout');
+    Route::get('category/filterProduct', 'ProductController@filterProduct');
+    Route::get('category/{id}', 'ProductController@listProductByCatId')->name('category');
     Route::middleware(['auth'])->group(function () {
         Route::get('profile', 'ProfileController@showProfile')->name('profile');
         Route::post('profile', 'ProfileController@handleProfile')->name('profile');
@@ -47,4 +59,4 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         Route::get('orders', 'OrderController@index')->name('orders');
         Route::get('order/{id}', 'OrderController@show')->name('order.show');
     });
- });
+});

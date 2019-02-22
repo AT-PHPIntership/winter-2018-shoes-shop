@@ -40,4 +40,4 @@ if (! function_exists('formatCurrencyVN')) {
     {
         return number_format($number).' đ';
     }
- }
+}

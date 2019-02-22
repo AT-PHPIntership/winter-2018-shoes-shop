@@ -5,6 +5,7 @@ return [
     'paginate' => [
         'limit_rows' => 10,
         'number_order' => 4,
+        'limit_rows_12' => 12,
     ],
     'format_date_vn' => 'd-m-Y',
     'path' => [
@@ -18,4 +19,6 @@ return [
         'female' => 2,
     ],
     'upload_folder' => '/upload/',
+    'image_default_product' => '/public/img/default_product.png',
+    'limit_rows_product' => 8,
 ];

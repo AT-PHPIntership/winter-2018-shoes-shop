@@ -16,7 +16,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         view()->composer(['admin.user.create', 'admin.user.edit'], 'App\Http\ViewComposers\RoleComposer');
         view()->composer(['admin.promotion.create', 'admin.promotion.edit'], 'App\Http\ViewComposers\ProductComposer');
-        view()->composer(['admin.code.create', 'admin.code.edit'], 'App\Http\ViewComposers\CategoryComposer');
+        view()->composer(['admin.code.create', 'admin.code.edit', 'user.module.header'], 'App\Http\ViewComposers\CategoryComposer');
     }
 
     /**
