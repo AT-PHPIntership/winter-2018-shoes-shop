@@ -230,4 +230,22 @@ class ProductService
         }
         return $result;
     }
+    
+    /** 
+     * Get list product
+     *
+     * @param string $search search
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchProduct(string $search)
+    {
+        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])->where('name', 'like', '%'.$search.'%')
+        ->orderBy('updated_at', 'desc')
+        ->paginate(config('define.paginate.limit_rows_12'), ['name', 'id', 'original_price'])
+        ->appends(['s' => $search]);
+    }
 }

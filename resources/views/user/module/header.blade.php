@@ -56,8 +56,10 @@
         <ul class="navbar-nav">
           <li>
             <div class="form-search">
-              <input type="text" name="search" class="ip-search" placeholder="{{ __('index.header.search') }}">
-              <button class="btn-search"><i class="lnr lnr-pencil"></i></button>
+              <form action="{{ route('user.search') }}" method="get">
+                <input type="text" name="s" class="ip-search" placeholder="{{ __('index.header.search') }}">
+                <button type="submit" class="btn-search"><i class="lnr lnr-pencil"></i></button>
+              </form>
             </div>
           </li>
           <li>

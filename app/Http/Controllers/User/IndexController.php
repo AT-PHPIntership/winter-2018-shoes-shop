@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Admin\Controller;
 use App\Services\ProductService;
 use App\Services\CategoryService;
+use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
@@ -22,5 +23,18 @@ class IndexController extends Controller
         $newProducts = app(ProductService::class)->getNewProducts(['id', 'name', 'original_price']);
         $topSellProducts = app(ProductService::class)->getTopSellProducts(['id', 'name', 'original_price']);
         return view('user.pages.index', compact(['productsForMen', 'productsForWomen', 'childsCatForMen', 'childsCatForWomen', 'newProducts', 'topSellProducts']));
+    }
+
+    /**
+     * Change status comment
+     *
+     * @param Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $products = app(ProductService::class)->searchProduct($request->input('s'));
+        return view('user.pages.search', compact('products'));
     }
 }
