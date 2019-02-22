@@ -1,54 +1,53 @@
 //Display choosen images
-function preview_image() 
+function previewImage() 
 {
-  var total_file=document.getElementById("upload_file").files.length;
-  for(var i=0;i<total_file;i++)
+  var totalFile = $('#upload-file').get(0).files.length;
+  var images = "";
+  for(var i = 0; i < totalFile; i++)
   {
-    $('#image_preview').append("<img class='detail-img' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+    images += "<img class='detail-img' src='" + URL.createObjectURL(event.target.files[i]) + "'>";
   }
+  $('#image-preview').html(images);
 }
-  
-//Display product detail when click add button
 $(document).ready(function(){
-  $("#add-detail").on("click", function(){
+  //Display children category list when click parent category
+  $("#parent-category").on("click", function(){
+    var id = $(this).val();
+    var categoryChildren = $('#category-children');
     $.ajax({
-      url: "detail",
+      url: getDetailUrl,
       method:"get",
       dataType:"JSON",
+      data: {id:id},
       success: function(data){
-        var color = '<select name="color_id[]" id="color" class="form-control" placeholder="Chọn màu">';
-        $.each(data.color, function(key, val){
-          color += '<option value="'+ val.id + '">' + val.name + '</option>';
+        var category = "";
+        $.each(data, function(key, val){
+          category += '<option value="'+ val.id + '">' + val.name + '</option>';
         });
-        color += '</select>';
-        var size = '<select name="size_id[]" class="form-control" placeholder="Chọn size">';
-        $.each(data.size, function(key, val){
-          size += '<option value="'+ val.id + '">' + val.size + '</option>';
-        });
-        size += '</select>';
-        
-        var output = '<li class="js-row row margin-y-10">';
-        output += '<div class="col-xs-4">';
-        output += color;
-        output += '</div>';
-        output += '<div class="col-xs-4">';
-        output += size;
-        output += '</div>';
-        output += '<div class="col-xs-3">';
-        output += '<input name="quantity_type[]" type="quantity_type" class="form-control" placeholder="Số lượng">';
-        output += '</div>';
-        output += '<div class="col-xs-1">';
-        output += '<button type="button" class="js-btn-remove btn"> x </button>';
-        output += '</div>';
-        output += '</li>';
-        $("#show-detail").append(output);
-        var listBtnRemove = document.getElementsByClassName('js-btn-remove');
-        for (var i = 0; i < listBtnRemove.length; i++) {
-          listBtnRemove[i].addEventListener("click", function(){
-            $(this.parentElement.parentElement).remove();
-          });
+        categoryChildren.html(category);
+        var hid = categoryChildren.attr('data-hidden');
+        if (data.length  > 0) {
+          if (hid == 'hidden') {
+            categoryChildren.removeClass('hidden');
+            categoryChildren.attr('data-hidden', '');
+          }
+        } else {
+          if (hid == '') {
+            categoryChildren.addClass('hidden');
+            categoryChildren.attr('data-hidden', 'hidden');
+          }
         }
       }
     });
+  });
+  //Display product detail when click add button
+  $("#add-detail").on("click", function(){
+    $('#show-detail li:first-child').clone().appendTo('#show-detail');
+    var listBtnRemove = $('.js-btn-remove');
+    for (var i = 1; i < listBtnRemove.length; i++) {
+      $(listBtnRemove[i]).on("click", function(){
+        $(this.parentElement.parentElement).remove();
+      });
+    }
   });
 });

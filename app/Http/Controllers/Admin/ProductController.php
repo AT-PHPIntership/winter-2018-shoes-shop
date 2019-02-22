@@ -9,8 +9,9 @@ use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
-use App\Http\Requests\Admin\UploadRequest;
 use Excel;
+use App\Http\Requests\Admin\PostProductRequest;
+use App\Http\Requests\Admin\UploadRequest;
 
 class ProductController extends Controller
 {
@@ -22,10 +23,10 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param ProductService  $productService  get services
-     * @param CategoryService $categoryService get services
-     * @param SizeService     $sizeService     get services
-     * @param ColorService    $colorService    get services
+     * @param ProductService  $productService  productService
+     * @param CategoryService $categoryService categoryService
+     * @param SizeService     $sizeService     sizeService
+     * @param ColorService    $colorService    colorService
      *
      * @return void
      */
@@ -68,7 +69,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->getChildren();
+        $categories = $this->categories->getParentList();
         $sizes = $this->sizes->getSizes();
         $colors = $this->colors->getColors();
         return view('admin.product.create', compact('categories', 'sizes', 'colors'));
@@ -77,23 +78,21 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request comment about this variable
+     * @param \Illuminate\Http\Request $request request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostProductRequest $request)
     {
         $data = $request->all();
-        if ($this->products->storeProduct($data)) {
-            session()->flash('success', trans('common.message.create_success'));
-            return redirect()->route('admin.product.index');
+        if ($this->products->handleStoreProduct($data)) {
+            return redirect()->route('admin.product.index')->with('success', trans('common.message.create_success'));
         }
-        session()->flash('error', trans('common.message.create_error'));
-        return redirect()->route('admin.product.create');
+        return redirect()->route('admin.product.create')->with('error', trans('common.message.create_error'));
     }
 
     /**
-     * Get all color from data.
+     * Get all color and size from database.
      *
      * @return \Illuminate\Http\Response
      */

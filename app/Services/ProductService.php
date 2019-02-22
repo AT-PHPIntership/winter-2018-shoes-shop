@@ -8,8 +8,10 @@ use App\Models\Image;
 use App\Models\Category;
 use App\Models\Size;
 use App\Models\Color;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use DB;
+use Log;
+use Session;
+use Illuminate\Http\UploadedFile;
 
 class ProductService
 {
@@ -57,7 +59,7 @@ class ProductService
     }
 
     /**
-     * Get specified product by id
+     * Store specified product by id
      *
      * @param array $data product
      *
@@ -87,6 +89,7 @@ class ProductService
             DB::rollback();
         }
     }
+
     /**
      * Upload Image
      *
@@ -100,6 +103,7 @@ class ProductService
         $image->move('upload', $fileName);
         return $fileName;
     }
+
     /**
      * Store image files
      *
@@ -130,6 +134,7 @@ class ProductService
             }
         }
     }
+
     /**
      * Store product detail of each product
      *
@@ -149,8 +154,9 @@ class ProductService
             'quantity' => $quantity,
         ]);
     }
+
     /**
-     * Store product detail of each product
+     * Store product
      *
      * @param string $name          product  name
      * @param int    $categoryId    category id
@@ -170,6 +176,7 @@ class ProductService
             'description' => $description,
         ]);
     }
+
     /**
      * Filter data of product detail
      *
