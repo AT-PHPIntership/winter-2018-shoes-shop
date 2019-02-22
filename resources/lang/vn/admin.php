@@ -50,6 +50,9 @@ return [
             'list' => 'Danh sách mã giảm giá',
             'add' => 'Thêm mã giảm giá',
         ],
+        'statistical' => [
+            'product' => 'Sản phẩm',
+        ]
     ],
     'header' => [
         'hello' => 'Xin chào',
