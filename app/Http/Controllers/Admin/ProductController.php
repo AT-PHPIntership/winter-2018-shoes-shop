@@ -126,7 +126,7 @@ class ProductController extends Controller
         try {
             $path = $request->file('csv_file')->getRealPath();
             $data = Excel::load($path)->get();
-            if ($this->products->importData($data)) {
+            if ($this->products->handleImportData($data)) {
                 session()->flash('success', trans('common.message.upload_success'));
                 return redirect()->route('admin.product.index');
             }

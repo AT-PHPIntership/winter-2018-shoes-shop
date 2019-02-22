@@ -23,7 +23,7 @@ return [
         'delete_error' => 'Xóa thất bại',
         'del_question' => 'Bạn có muốn xóa không ?',
         'upload_success' => 'Thêm file thành công!',
-        'request_upload' => 'Vui lòng chọn file!',
+        'request_upload' => 'Vui lòng chọn file csv!',
         'file_error' => 'Dữ liệu nhập vào không đúng tại dòng :line, vui lòng kiểm tra lại!',
     ]
 ];

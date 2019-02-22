@@ -24,7 +24,7 @@ class UploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'csv_file' => 'required|file',
+            'csv_file' => 'required|mimes:csv,txt',
         ];
     }
 
@@ -37,7 +37,7 @@ class UploadRequest extends FormRequest
     {
         return [
             'csv_file.required' => trans('common.message.request_upload'),
-            'csv_file.file' => trans('common.message.request_upload'),
+            'csv_file.mimes' => trans('common.message.request_upload'),
         ];
     }
 }

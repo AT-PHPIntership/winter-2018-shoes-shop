@@ -63,47 +63,34 @@ class ProductService
      *
      * @return \Illuminate\Http\Response
      */
-    public function storeProduct($data)
+    public function handleStoreProduct($data)
     {
         $quantity = 0;
         foreach ($data['quantity_type'] as $itemQuantity) {
             $quantity = $quantity + $itemQuantity;
         }
+        $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
         DB::beginTransaction();
         try {
-            $newProduct = Product::create([
-                'name' => $data['name'],
-                'category_id' => $data['category_id'],
-                'original_price' => $data['original_price'],
-                'quantity' => $quantity,
-                'description' => $data['description'],
-            ]);
-            for ($i=0; $i < count($data['color_id']); $i++) {
-                ProductDetail::create([
-                    'product_id' => $newProduct->id,
-                    'color_id' => $data['color_id'][$i],
-                    'size_id' => $data['size_id'][$i],
-                    'quantity' => $data['quantity_type'][$i],
-                ]);
+            $newProduct = $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
+            $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
+            foreach ($dataProductDetails as $detail) {
+                $this->createProductDetail($newProduct->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
-            foreach ($data['upload_file'] as $image) {
-                Image::create([
-                    'product_id' => $newProduct->id,
-                    'path' => $this->uploadImage($image)
-                ]);
+            if (isset($data['upload_file'])) {
+                $this->createImages($data, $newProduct->id);
             }
             DB::commit();
             return $newProduct;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e);
             DB::rollback();
         }
     }
-
     /**
      * Upload Image
      *
-     * @param string $image Image
+     * @param array $image files
      *
      * @return \Illuminate\Http\Response
      */
@@ -113,30 +100,123 @@ class ProductService
         $image->move('upload', $fileName);
         return $fileName;
     }
+    /**
+     * Store image files
+     *
+     * @param array $data      image data
+     * @param int   $productId product id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createImages($data, $productId)
+    {
+        foreach ($data['upload_file'] as $image) {
+            if ($image->isValid()) {
+                $extensions = ['jpg' , 'jpeg' ,'png', 'gif'];
+                if (in_array($image->extension(), $extensions)) {
+                    try {
+                        Image::create([
+                            'product_id' => $productId,
+                            'path' => $this->uploadImage($image)
+                        ]);
+                    } catch (\Exception $e) {
+                        Log::error($e);
+                    }
+                } else {
+                    Session::flash('error', trans('product.image_error'));
+                }
+            } else {
+                Session::flash('error', trans('product.image_error'));
+            }
+        }
+    }
+    /**
+     * Store product detail of each product
+     *
+     * @param int $productId productId
+     * @param int $colorId   colorId
+     * @param int $sizeId    sizeId
+     * @param int $quantity  quantity
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createProductDetail($productId, $colorId, $sizeId, $quantity)
+    {
+        ProductDetail::create([
+            'product_id' => $productId,
+            'color_id' => $colorId,
+            'size_id' => $sizeId,
+            'quantity' => $quantity,
+        ]);
+    }
+    /**
+     * Store product detail of each product
+     *
+     * @param string $name          product  name
+     * @param int    $categoryId    category id
+     * @param int    $originalPrice original price
+     * @param int    $quantity      quantity
+     * @param string $description   description
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createProduct($name, $categoryId, $originalPrice, $quantity, $description)
+    {
+        return Product::create([
+            'name' => $name,
+            'category_id' => $categoryId,
+            'original_price' => $originalPrice,
+            'quantity' => $quantity,
+            'description' => $description,
+        ]);
+    }
+    /**
+     * Filter data of product detail
+     *
+     * @param array $colors     colorId
+     * @param array $sizes      sizeId
+     * @param array $quantities quantityId
+     *
+     * @return array
+     */
+    public function checkDuplicate($colors, $sizes, $quantities)
+    {
+        $output = [];
+        for ($i = 0; $i < count($colors); $i++) { //check each data of input
+            for ($j = 0; $j < $i; $j++) { //compare each data in output
+                if (($colors[$i] == $output[$j]['color']) && ($sizes[$i] == $output[$j]['size'])) {
+                    $output[$j]['quantity'] += $quantities[$i];
+                    break;
+                }
+            }
+            if ($j == $i) { //add data to output if not exist
+                $detail['color'] = $colors[$i];
+                $detail['size'] = $sizes[$i];
+                $detail['quantity'] = $quantities[$i];
+                array_push($output, $detail);
+            }
+        }
+        return $output;
+    }
 
     /**
      * Handle process import file csv including products data.
      *
-     * @param \Illuminate\Http\Request $data of products
+     * @param \Illuminate\Http\Request $data data
      *
      * @return \Illuminate\Http\Response
      */
-    public function importData($data)
+    public function handleImportData($data)
     {
-        foreach ($data as $key => $value) {
-            $categoryId = $this->getCategoryByName($value->category);
-            $sizeId = $this->getSizeByName($value->size);
-            $colorId = $this->getColorByName($value->color);
-            if ((!$categoryId) || (!$sizeId) || (!$colorId)) {
-                session()->flash('error', trans('common.message.file_error', ['line' => $key + 2]));
-                return false;
-            }
+        if (!$this->previousCheck($data)) {
+            return false;
         }
         foreach ($data as $key => $value) {
             $categoryId = $this->getCategoryByName($value->category);
             $sizeId = $this->getSizeByName($value->size);
             $colorId = $this->getColorByName($value->color);
             $checkName = $this->checkNameExist($value->name);
+            DB::beginTransaction();
             if ($checkName) {
                 $product = $this->checkInfoCorrect($value->name, $categoryId, $value->original_price, $value->description);
                 if (!$product) {
@@ -145,19 +225,14 @@ class ProductService
                 }
                 if ($product) {
                         $product->quantity += $value->quantity;
-                        $product->save();
+                        $product->save(); //update quantity of product
                     try {
                         $productDetail = $this->checkDetailExist($product->id, $colorId, $sizeId);
                         if ($productDetail) {
                             $productDetail->quantity += $value->quantity;
-                            $productDetail->save();
+                            $productDetail->save(); //update quantity of product detail
                         } else {
-                            ProductDetail::create([
-                                'product_id' => $product->id,
-                                'color_id' => $colorId,
-                                'size_id' => $sizeId,
-                                'quantity' => $value->quantity,
-                            ]);
+                            $this->createProductDetail($product->id, $colorId, $sizeId, $value->quantity);
                         }
                     } catch (Exception $e) {
                         Log::error($e);
@@ -166,23 +241,33 @@ class ProductService
                 }
             } else {
                 try {
-                    $product = Product::create([
-                        'name' => $value->name,
-                        'category_id' => $categoryId,
-                        'original_price' => $value->original_price,
-                        'quantity' => $value->quantity,
-                        'description' => $value->description,
-                    ]);
-                    ProductDetail::create([
-                        'product_id' => $product->id,
-                        'color_id' => $colorId,
-                        'size_id' => $sizeId,
-                        'quantity' => $value->quantity,
-                    ]);
+                    $newProduct = $this->createProduct($value->name, $categoryId, $value->original_price, $value->quantity, $value->description);
+                    $this->createProductDetail($newProduct->id, $colorId, $sizeId, $value->quantity);
                 } catch (Exception $e) {
                     Log::error($e);
                     DB::rollback();
                 }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Check previously if category, zise, color exist
+     *
+     * @param \Illuminate\Http\Request $data data
+     *
+     * @return boolean
+     */
+    public function previousCheck($data)
+    {
+        foreach ($data as $key => $value) {
+            $categoryId = $this->getCategoryByName($value->category);
+            $sizeId = $this->getSizeByName($value->size);
+            $colorId = $this->getColorByName($value->color);
+            if ((!$categoryId) || (!$sizeId) || (!$colorId)) {
+                session()->flash('error', trans('common.message.file_error', ['line' => $key + 2]));
+                return false;
             }
         }
         return true;
