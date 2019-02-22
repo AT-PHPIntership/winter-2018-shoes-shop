@@ -22,7 +22,7 @@ $(document).ready(function(){
       }
     }
   });
-
+  
   $('#modal-product').on('show.bs.modal', function (e) {
     $('#js-color').html('<option value="">'+ option_default +'</option>');
     $('#js-size').html('<option value="">'+ option_default +'</option>');
@@ -62,6 +62,7 @@ $(document).ready(function(){
       }
     });
   });
+
   var productInventory = []
   $('#js-color').change(function(){
     $('#js-size').html('<option value="">'+ option_default +'</option>');
@@ -76,18 +77,19 @@ $(document).ready(function(){
           productInventory = data;
           var eleSize = "";
           $.each(data, function(key, val){
-            eleSize += '<option value="' + val.size_id + '">' + val.size + '</option>';
+            eleSize += '<option value="' + val.id + '">' + val.size + '</option>';
           });
           $('#js-size').append(eleSize);
         }
       });
     }
   });
+
   $('#js-size').change(function(){
     var sizeId = $(this).val();
     if(sizeId){
       $.each(productInventory, function(key, val){
-        if (+sizeId == +val.size_id){
+        if (+sizeId == +val.id){
           $('#js-inventory').text(val.inventory);
           $('#js-quantity').attr('max', val.inventory);
         }

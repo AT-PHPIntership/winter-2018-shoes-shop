@@ -37,14 +37,14 @@
       </button>
       <div class="nav-left collapse navbar-collapse align-items-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
-          <li><a href="#home">{{ __('index.header.home') }}</a></li>
+          <li><a href="{{ route('user.index') }}">{{ __('index.header.home') }}</a></li>
           @foreach ($parentCategories as $parentCategory)
             <li class="dropdown">
-              <a href="" id="navbardrop" data-toggle="dropdown">{{ $parentCategory->name }}</a>
+              <a href="{{ route('user.category', ['id' => $parentCategory->id]) }}" id="navbardrop">{{ $parentCategory->name }}</a>
               @if ($parentCategory->children->count())
                 <div class="dropdown-menu">
                   @foreach ($parentCategory->children as $subCategory)
-                    <a class="dropdown-item" href="#">{{ $subCategory->name }}</a>
+                    <a class="dropdown-item" href="{{ route('user.category', ['id' => $subCategory->id]) }}">{{ $subCategory->name }}</a>
                   @endforeach
                 </div>
               @endif

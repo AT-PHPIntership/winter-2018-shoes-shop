@@ -33,7 +33,6 @@ return [
             'by' => 'by ThanhBui - DungLe'
         ],
     ],
-    'category' => 'Danh mục',
     'shoes' => [
         'men' => 'Giày nam',
         'women' => 'Giày nữ',
@@ -55,5 +54,29 @@ return [
         'quantity' => 'Số lượng',
         'add_to_cart' => 'Thêm vào',
         'default_option' => 'Chọn',
+    ],
+    'category' => [
+        'title' => 'Danh mục',
+        'list_product' => 'Danh sách sản phẩm',
+        'sort' => [
+            'title' => 'Sắp xếp',
+            'filter_by' => 'Lọc theo',
+            'name_asc' => 'Tên: A-Z',
+            'name_desc' => 'Tên: Z-A',
+            'price_asc' => 'Giá: Tăng dần',
+            'price_desc' => 'Giá: Giảm dần',
+            'updated_asc' => 'Cũ nhất',
+            'updated_desc' => 'Mới nhất',
+        ],
+        'price' => [
+            'title' => 'Giá',
+            'to' => 'đến',
+        ],
+        'color' => [
+            'title' => 'Màu sắc',
+        ],
+        'size' => [
+            'title' => 'Kích cở',
+        ],
     ],
 ];

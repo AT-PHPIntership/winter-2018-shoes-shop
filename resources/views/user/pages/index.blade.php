@@ -7,7 +7,7 @@
       <div class="row d-flex justify-content-center">
         <div class="menu-content pb-40">
           <div class="title text-center">
-            <h2 class="mb-10">{{ __('index.category') }}</h1>
+            <h2 class="mb-10">{{ __('index.category.title') }}</h1>
           </div>
         </div>
       </div>
