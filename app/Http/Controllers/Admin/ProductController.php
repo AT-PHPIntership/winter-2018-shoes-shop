@@ -24,10 +24,10 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param ProductService  $productService  get services
-     * @param CategoryService $categoryService get services
-     * @param SizeService     $sizeService     get services
-     * @param ColorService    $colorService    get services
+     * @param ProductService  $productService  productService
+     * @param CategoryService $categoryService categoryService
+     * @param SizeService     $sizeService     sizeService
+     * @param ColorService    $colorService    colorService
      *
      * @return void
      */
@@ -79,7 +79,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request comment about this variable
+     * @param \Illuminate\Http\Request $request request
      *
      * @return \Illuminate\Http\Response
      */
@@ -126,7 +126,7 @@ class ProductController extends Controller
         try {
             $path = $request->file('csv_file')->getRealPath();
             $data = Excel::load($path)->get();
-            if ($this->products->importData($data)) {
+            if ($this->products->handleImportData($data)) {
                 session()->flash('success', trans('common.message.upload_success'));
                 return redirect()->route('admin.product.index');
             }
@@ -162,7 +162,8 @@ class ProductController extends Controller
     public function update(PutProductRequest $request, Product $product)
     {
         $data = $request->all();
-        if ($this->products->updateProduct($data, $product)) {
+        dd($data);
+        if ($this->products->handleUpdateProduct($data, $product)) {
             session()->flash('success', trans('common.message.edit_success'));
             return redirect()->route('admin.product.index');
         }
