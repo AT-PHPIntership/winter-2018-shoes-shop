@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyLengthPriceOrderDetailsTable extends Migration
+class AddColorSizeToOrderDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,11 @@ class ModifyLengthPriceOrderDetailsTable extends Migration
     public function up()
     {
         Schema::table('order_details', function (Blueprint $table) {
-            $table->decimal('price', 10, 2)->change();
+            $table->string('color')->after('quantity');
+            $table->tinyInteger('size')->after('quantity');
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
@@ -26,7 +27,8 @@ class ModifyLengthPriceOrderDetailsTable extends Migration
     public function down()
     {
         Schema::table('order_details', function (Blueprint $table) {
-            $table->decimal('price')->change();
+            $table->dropColumn('color');
+            $table->dropColumn('size');
         });
     }
 }

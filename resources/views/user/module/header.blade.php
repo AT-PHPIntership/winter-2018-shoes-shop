@@ -7,8 +7,22 @@
           <li><a href="tel:+12312-3-1209">{{ __('index.header.contact.phone') }}</a></li>
           <li><a href="mailto:support@colorlib.com">{{ __('index.header.contact.email') }}</a></li>
         </ul>
-        <ul class="list">
-          <li><a href="#">{{ __('index.header.login') }}</a></li>
+        <ul class="list-user">
+          @if(Auth::user())
+            <li class="item-user">
+              <a href="#">
+                <span class="hidden-xs">@lang('admin.header.hello') {{ Auth::user()->profile->name }}</span>
+              </a>
+              <ul class="list-info">
+                <li>
+                  <a href="#" class="btn btn-default btn-flat">@lang('admin.header.per-info')</a>
+                  <a href="{{ route('user.logout') }}" class="btn btn-default btn-flat">{{ trans('login.logout') }}</a>
+                </li>
+              </ul>
+            </li>
+          @else
+            <li class="item-user"><a href="{{ route('user.login') }}">{{ trans('login.login') }}</a></li>
+          @endif          
         </ul>
       </div>
     </div>
@@ -47,9 +61,9 @@
             </div>
           </li>
           <li>
-            <a class="show-cart" href="">
+            <a class="show-cart" href="{{ route('user.cart') }}">
               <span class="lnr lnr-cart s-30"></span>
-              <span class="js-cnt-item">0</span>
+              <span id="js-total-item">0</span>
             </a>
           </li>              
         </ul>

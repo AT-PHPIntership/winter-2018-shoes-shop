@@ -1,3 +1,9 @@
+function formatCurrencyVN(number){
+  return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(number);
+}
+function reverseFormatCurrencyVN(price){
+  return price.trim().slice(0, price.length - 7).replace('.', '');
+}
 $(document).ready(function(){
   $(".owl-carousel").owlCarousel({
     loop:true,
@@ -16,14 +22,11 @@ $(document).ready(function(){
       }
     }
   });
-  
-  function formatCurrencyVN(price){
-    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(price);
-  }
 
   $('#modal-product').on('show.bs.modal', function (e) {
     $('#js-color').html('<option value="">'+ option_default +'</option>');
     $('#js-size').html('<option value="">'+ option_default +'</option>');
+    $('#js-quantity').val(1);
     var modal = $(this);
     var id = $(e.relatedTarget).data('product');
     $.ajax({
@@ -43,6 +46,7 @@ $(document).ready(function(){
         }
         modal.find('#js-inventory').text(data.product.inventory);
         modal.find('#js-description').text(data.product.description);
+        modal.find('.js-add-cart').attr('data-product-id', data.product.id);
         var eleColor = "";
         $.each(data.colors, function(key, val){
           eleColor += '<option value="' + val.id + '">' + val.name + '</option>';

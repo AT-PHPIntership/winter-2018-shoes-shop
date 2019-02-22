@@ -55,7 +55,7 @@
                   <input type="number" id="js-quantity" min="1" class="form-control w-30 ml-15" value="1"/>
                 </div>
                 <div class="d-flex mt-20">
-                  <a href="javascript:void(0)" class="genric-btn primary js-addcart"><span>{{ __('index.quick_view.add_to_cart') }}</span></a>
+                  <a href="javascript:void(0)" data-product-id="" class="genric-btn primary js-add-cart"><span>{{ __('index.quick_view.add_to_cart') }}</span></a>
                 </div>
               </div>
             </div>

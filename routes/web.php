@@ -38,4 +38,14 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('/home', 'IndexController@index')->name('index');
     Route::get('get-detail-product', 'ProductController@getDetailProduct');
     Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
+    Route::get('cart', 'OrderController@cart')->name('cart');
+    Route::get('cart/applyCode', 'OrderController@applyCode');
+    Route::get('checkout', 'OrderController@checkout');
+    Route::get('checkout/handle-checkout', 'OrderController@handleCheckout');
+    Route::get('getDetailProduct', 'ProductController@getDetailProduct');
+    Route::get('get-detail-product', 'ProductController@getDetailProduct');
+    Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::post('login', 'LoginController@handleLogin')->name('login');
+    Route::get('logout', 'LoginController@handleLogout')->name('logout');
 });

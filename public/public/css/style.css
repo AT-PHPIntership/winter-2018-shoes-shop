@@ -42,7 +42,7 @@
 .show-cart {
   position: relative;
 }
-.show-cart .js-cnt-item {
+.show-cart #js-total-item {
   position: absolute;
   right: 23px;
   top: 0;
@@ -108,6 +108,70 @@
 .nav-left {
   flex-basis: 120%;
 }
+.img-product-cart {
+  width: 70px;
+  height: 70px;
+}
+.mess-coupon {
+  line-height: 40px;
+  padding: 0 30px;
+  color: #f41068;
+  font-weight: bold;
+}
+.subtotal-area .subtotal {
+  margin-left: 0;
+  min-width: 200px;
+  text-align: right;
+}
+.cupon-area .cupon-code {
+  display: block;
+}
+.cupon-question {
+  padding: 0 20px;
+  font-weight: 600;
+}
 .w-30 {
   width: 30%;
+}
+.error {
+  color: #a94442;
+  font-size: 13px;
+}
+.message-checkout {
+  font-weight: 600;
+}
+.message-checkout.success {
+  color: #28a745;
+}
+.message-checkout.danger {
+  color: #dc3545;
+}
+.list-user {
+  min-width: 255px;
+}
+.item-user {
+  width: 100%;
+  padding: 15px;
+  position: relative;
+}
+.list-info {
+  position: absolute;
+  left: 0;
+  bottom: -40px;
+  z-index: 999;
+  width: 100%;
+}
+.list-info li {
+  background-color: #f41068;
+  width: 100%;
+  display: none;
+  padding: 10px 0;
+  border-top: 1px solid #fff;
+}
+.list-user:hover .list-info li {
+  display: block;
+  z-index: 1000;
+}
+.checkout-content {
+  margin-bottom: 50px;
 }
