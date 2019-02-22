@@ -9,6 +9,7 @@ return [
     'path' => [
         'avatar' => '/upload/',
         'default_avatar' => '/admin/images/default_avatar.png',
+        'default_image' => '/admin/images/default_image.png'
     ],
     'gender' => [
         'other' => 0,

@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box-top">
-          <a class="btn btn-success btn-md" href="#">{{ trans('common.new')}}</a>
+          <a class="btn btn-success btn-md" href="{{ route('admin.product.create')}}">{{ trans('common.new')}}</a>
           </div>
         </div>
         <div class="col-xs-12">
