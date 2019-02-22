@@ -63,11 +63,23 @@ class CategoryController extends Controller
     {
         $input = $request->all();
         if ($this->categories->storeCategory($input)) {
-            session()->flash('success', trans('common.message.create_success'));
-            return redirect()->route('admin.category.index');
-        } else {
-            Session::flash('error', _('common.message.create_error'));
-            return redirect()->route('admin.adcategory.create');
+            return redirect()->route('admin.category.index')->with('success', trans('common.message.create_success'));
+        }
+        return redirect()->route('admin.adcategory.create')->with('error', _('common.message.create_error'));
+    }
+
+    /**
+     * Get children category from ajax request
+     *
+     * @param object $request request
+     *
+     * @return json()
+     */
+    public function getChildren(Request $request)
+    {
+        if ($request->ajax()) {
+            $response = $this->categories->getChildren((int) $request->input('id'), ['id', 'name']);
+            return $response;
         }
     }
 }

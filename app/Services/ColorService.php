@@ -7,7 +7,7 @@ use App\Models\Color;
 class ColorService
 {
     /**
-     * Get all data table products
+     * Get data from colors table
      *
      * @param array $columns columns
      *

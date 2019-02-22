@@ -7,7 +7,7 @@ use App\Models\Size;
 class SizeService
 {
     /**
-     * Get all data table products
+     * Get data form table size
      *
      * @param array $columns columns
      *

@@ -17,4 +17,8 @@ return [
     'size' => 'Size',
     'color' => 'Màu',
     'description' => 'Mô tả',
+    'detail_type' => 'Chi tiết từng loại',
+    'images' => 'Hình ảnh sản phẩm',
+    'choose_category' => 'Chọn danh mục',
+    'image_error' => 'Ảnh không hợp lệ!',
 ];
