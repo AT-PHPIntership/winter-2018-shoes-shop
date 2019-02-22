@@ -36,4 +36,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('/home', 'IndexController@index')->name('index');
+    Route::get('get-detail-product', 'ProductController@getDetailProduct');
+    Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
 });
