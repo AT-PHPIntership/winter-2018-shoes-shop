@@ -7,7 +7,7 @@
         <h1 class="box-title text-uppercase">@lang('user.manage_order')</h1>
       </section>
       <section class="orders">
-					<h3>@lang('user.order_list')</h3>
+				<h3>@lang('user.order_list')</h3>
 				<div class="text-dark">
 					@if(count($orders) == 0)
 						<div class="box">
@@ -38,6 +38,7 @@
 					</div>
 					@endforeach
 				</div>
+				<div>{{ $orders->links() }}</div>
       </section>
     </div>
   </div>

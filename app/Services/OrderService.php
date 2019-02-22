@@ -64,4 +64,28 @@ class OrderService
         }
         return false;
     }
+
+    /**
+     * Get own orders
+     *
+     * @return object
+     */
+    public function getAuthOrderWithPaginate()
+    {
+        $user_id = \Auth::user()->id;
+        $orders = Order::where('user_id', $user_id)->orderBy('id', 'desc')->paginate(config('define.paginate.number_order'));
+        return $orders;
+    }
+
+    /**
+     * Get own order by id
+     *
+     * @param int $id id
+     * 
+     * @return object
+     */
+    public function getAuthOrderById($id)
+    {
+        return Order::findOrFail($id);
+    }
 }
