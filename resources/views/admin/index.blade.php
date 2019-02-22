@@ -24,7 +24,7 @@
           <div class="small-box bg-green">
             <div class="inner">
               <h3>{{ $arrTotal['totalProduct'] }}</h3>
-              <p>@lang('statistical.product')</p>
+              <p>@lang('statistical.product.title')</p>
             </div>
             <div class="icon">
               <i class="fa fa-black-tie"></i>
