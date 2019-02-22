@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Log;
 class ProductService
 {
     /**
+     * Get all data table products
+     *
+     * @param array $columns columns
+     *
+     * @return object
+     */
+    public function getAll(array $columns = ['*'])
+    {
+        return Product::get($columns);
+    }
+    
+    /**
      * Get products list form database
      *
      * @return \Illuminate\Http\Response
@@ -34,7 +46,14 @@ class ProductService
      */
     public function getProductById($id)
     {
-        return Product::findOrFail($id);
+        $product = Product::with([
+            'images:product_id,path',
+            'category:id,name',
+            'productDetails' => function ($query) {
+                $query->with(['size:id,size', 'color:id,name']);
+            }
+        ])->findOrFail($id);
+        return $product;
     }
 
     /**

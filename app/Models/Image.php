@@ -35,6 +35,6 @@ class Image extends Model
      */
     public function getPathAttribute($path)
     {
-        return '/upload/'.$path;
+        return config('define.upload_folder').$path;
     }
 }
