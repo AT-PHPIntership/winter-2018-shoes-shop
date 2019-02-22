@@ -21,10 +21,10 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param ProductService  $productService  get services
-     * @param CategoryService $categoryService get services
-     * @param SizeService     $sizeService     get services
-     * @param ColorService    $colorService    get services
+     * @param ProductService  $productService  productService
+     * @param CategoryService $categoryService categoryService
+     * @param SizeService     $sizeService     sizeService
+     * @param ColorService    $colorService    colorService
      *
      * @return void
      */
@@ -76,7 +76,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request comment about this variable
+     * @param \Illuminate\Http\Request $request request
      *
      * @return \Illuminate\Http\Response
      */
