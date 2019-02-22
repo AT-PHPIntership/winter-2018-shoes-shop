@@ -44,6 +44,6 @@ class SocialController extends Controller
     {
         $user = $this->service->createOrGetUser($provider);
         auth()->login($user);
-        return redirect()->to('/');
+        return redirect()->to('/home');
     }
 }

@@ -7,4 +7,9 @@ return [
    'logout' => 'Đăng xuất',
    'facebook' => 'Faceboook',
    'google+' => 'Google+',
+   'have_account' => 'Bạn đã có tài khoản ?',
+   'login_here' => 'Đăng nhập tại đây',
+   'email' => 'Email',
+   'password' => 'Password',
+   'remember_me' => 'Nhớ mật khẩu',
 ];

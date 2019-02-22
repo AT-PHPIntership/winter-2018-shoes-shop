@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 class RedirectIfAuthenticated
 {
@@ -19,10 +20,10 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            if (Auth::user()->role->name == 'admin') {
+            if (Auth::user()->role->id == Role::ADMIN_ROLE) {
                 return redirect('/admin/index');
             }
-            return redirect('/');
+            return redirect('/home');
         }
         return $next($request);
     }
