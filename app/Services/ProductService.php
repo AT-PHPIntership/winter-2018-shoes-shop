@@ -230,8 +230,8 @@ class ProductService
         }
         return $result;
     }
-    
-    /** 
+
+    /**
      * Get list product
      *
      * @param string $search search
