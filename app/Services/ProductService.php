@@ -180,7 +180,7 @@ class ProductService
      *
      * @param array $data data
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function filterProduct(array $data)
     {

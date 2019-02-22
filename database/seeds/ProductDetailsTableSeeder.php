@@ -19,7 +19,7 @@ class ProductDetailsTableSeeder extends Seeder
         $product_ids = Product::all('id');
         $size_ids = Size::all('id');
         $color_ids = Color::all('id');
-        for ($i= 0; $i < 300; $i++) { 
+        for ($i= 0; $i < 40; $i++) { 
             factory(ProductDetail::class)->create([
                 'product_id' => $product_ids->random(),
                 'size_id' => $size_ids->random(),
