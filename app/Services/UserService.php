@@ -139,11 +139,10 @@ class UserService
      */
     public function register(array $data)
     {
-        $roleCustomer = Role::select('id')->where('name', 'customer')->first();
         DB::beginTransaction();
         try {
             $user = User::create([
-                'role_id' => $roleCustomer->id,
+                'role_id' => Role::CUSTOMER_ROLE,
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
             ]);

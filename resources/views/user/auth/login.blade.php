@@ -17,6 +17,7 @@
 					<span class="login100-form-title p-b-26">
 						@lang('login.welcome')
 					</span>
+					<span class="dis-block text-center">{{ request()->has('regis_success') ? request()->get('regis_success') : '' }}</span>
 					<div class="wrap-input100 validate-input">
                         <input class="input100" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
                     </div>
