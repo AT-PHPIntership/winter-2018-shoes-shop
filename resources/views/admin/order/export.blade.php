@@ -60,19 +60,19 @@
     <div class="main mt-10">
       <div class="order-info">
         <p class="text-center">{{ __('order.table.order_id') }}: {{ $order->id }}</p>
-        <p class="text-center">{{ __('order.table.created_at') }}: {{ formatDateVN($order->id) }}</p>
+        <p class="text-center">{{ __('order.table.created_at') }}: {{ formatDateVN($order->created_at) }}</p>
         <p>{{ __('order.table.customer_name') }}: {{ $order->user_id ? $order->user->profile->name : $order->customer_name }}</p>
-        <p>SĐT: 0792760420</p>
-        <p>Địa chỉ: 12 Nguyễn Văn Thoại, Đà Nẵng</p>
+        <p>{{ __('order.table.phone_number') }}: {{ $order->user_id ? $order->user->profile->phonenumber : $order->phone_number }}</p>
+        <p>{{ __('order.table.shipping_address') }}: {{ $order->user_id ? $order->user->profile->address : $order->shipping_address }}</p>
       </div>
       <table class="w-100 mt-10">
         <thead>
           <tr>
-            <th>TT</th>
-            <th>Sản phẩm</th>
-            <th>SL</th>
-            <th>Giá</th>
-            <th>Thành tiền</th>
+            <th>{{ __('order.table.number_acr') }}</th>
+            <th>{{ __('order.table.product') }}</th>
+            <th>{{ __('order.table.quantity_acr') }}</th>
+            <th>{{ __('order.table.price') }}</th>
+            <th>{{ __('order.table.total_price_acr') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -97,22 +97,22 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="4">Tạm tính:</td>
+            <td colspan="4">{{ __('order.table.sub_total_amount') }}:</td>
             <td>{{ formatCurrencyVN($subTotalAmount) }}</td>
           </tr>
           <tr>
-            <td colspan="4">Mã khuyến mãi:</td>
-            <td>{{ formatCurrencyVN($subTotalAmount - $order->total_amount) }}</td>
+            <td colspan="4">{{ __('order.table.code') }}:</td>
+            <td>-{{ formatCurrencyVN($subTotalAmount - $order->total_amount) }}</td>
           </tr>
           <tr>
-            <td colspan="4">Tổng tiền:</td>
+            <td colspan="4">{{ __('order.table.total_amount') }}:</td>
             <td>{{ formatCurrencyVN($order->total_amount) }}</td>
           </tr>
         </tfoot>
       </table>
       <div class="text-center mt-30">
-        <p>Cảm ơn quý khách</p>
-        <p>Hẹn gặp lại!</p>
+        <p>{{ __('order.table.thanks') }}</p>
+        <p>{{ __('order.table.see_u_later') }}</p>
       </div>
     </div>
   </div>

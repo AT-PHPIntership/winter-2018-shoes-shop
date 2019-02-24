@@ -76,7 +76,6 @@ class OrderController extends Controller
     public function export(int $id)
     {
         $order = app(OrderService::class)->getOrderById($id);
-        // return view('admin.order.export', compact('order'));
         $pdf = PDF::loadView('admin.order.export', compact('order'));
         return $pdf->download('export.pdf');
     }

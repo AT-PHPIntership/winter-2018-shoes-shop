@@ -35,7 +35,7 @@
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->user ? $order->user->profile->name : $order->customer_name }}</td>
                     <td>{{ $order->code ? $order->code->name : '' }}</td>
-                    <td>{{ $order->total_amount }}</td>
+                    <td>{{ formatCurrencyVN($order->total_amount) }}</td>
                     <td>{{ formatDateVN($order->created_at) }}</td>
                     <td>{{ $order->delivered_at ? formatDateVN($order->delivered_at) : '' }}</td>
                     <td>

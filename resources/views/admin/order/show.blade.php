@@ -11,16 +11,16 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">@lang('order.show.title')</h3>
+              <h3 class="box-title">@lang('order.show.title') <a class="btn btn-default btn-xs" href="{{ route('admin.orders.export', ['id' => $order->id]) }}"><i class="fa fa-download"></i></a></h3>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="box-body">
-                  <p><b>@lang('order.table.user'):</b> {{ $order->user !== null ? $order->user->profile->name : $order->customer_name }}</p>
-                  <p><b>@lang('order.table.code'):</b> {{ $order->code !== null ? $order->code->name : '' }}</p>
-                  <p><b>@lang('order.table.total_amount'):</b> {{ $order->total_amount }}</p>
-                  <p><b>@lang('order.table.shipping_address'):</b> {{ $order->shipping_address }}</p>
-                  <p><b>@lang('order.table.phone_number'):</b> {{ $order->phone_number }}</p>
+                  <p><b>@lang('order.table.user'):</b> {{ $order->user ? $order->user->profile->name : $order->customer_name }}</p>
+                  <p><b>@lang('order.table.code'):</b> {{ $order->code ? $order->code->name : '' }}</p>
+                  <p><b>@lang('order.table.total_amount'):</b> {{ formatCurrencyVN($order->total_amount) }}</p>
+                  <p><b>@lang('order.table.shipping_address'):</b> {{ $order->user ? $order->user->profile->address : $order->shipping_address }}</p>
+                  <p><b>@lang('order.table.phone_number'):</b> {{ $order->user_id ? $order->user->profile->phonenumber : $order->phone_number }}</p>
                   <p><b>@lang('order.table.created_at'):</b> {{ formatDateVN($order->created_at) }}</p>
                   <div class="row">
                     <form action="{{ route('admin.orders.update', ['id' => $order->id]) }}" method="post">
@@ -87,10 +87,10 @@
                         <td>{{ $orderDetail->id }}</td>
                         <td>{{ $orderDetail->product->name }}</td>
                         <td>{{ $orderDetail->product->category->name }}</td>
-                        <td>{{ $orderDetail->product->original_price }}</td>
-                        <td>{{ $orderDetail->price }}</td>
+                        <td>{{ formatCurrencyVN($orderDetail->product->original_price) }}</td>
+                        <td>{{ formatCurrencyVN($orderDetail->price) }}</td>
                         <td>{{ $orderDetail->quantity }}</td>
-                        <td>{{ $orderDetail->price * $orderDetail->quantity }}</td>
+                        <td>{{ formatCurrencyVN($orderDetail->price * $orderDetail->quantity) }}</td>
                       </tr>
                       @php
                         $total_price += $orderDetail->price * $orderDetail->quantity;
@@ -98,7 +98,7 @@
                     @endforeach
                     <tr>
                       <td colspan="6">@lang('order.table.total_price')</td>
-                      <td colspan="1">{{ $total_price }}</td>
+                      <td colspan="1">{{ formatCurrencyVN($total_price) }}</td>
                     </tr>
                   </table>  
                 </div>

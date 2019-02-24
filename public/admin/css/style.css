@@ -68,3 +68,13 @@
 .w-125 {
     width: 125px;
 }
+.no-ptb {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.no-mh {
+    min-height: 0;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}

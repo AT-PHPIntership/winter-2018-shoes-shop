@@ -29,7 +29,11 @@ return [
         'category' => 'Danh mục',
         'price' => 'Giá',
         'quantity' => 'Số lượng',
+        'total_sold' => 'Đã bán',
         'inventory' => 'Còn lại',
+        'inventory_product' => 'Tồn kho',
+        'top_sell_product' => 'Bán chạy',
+        'over_product' => 'Sắp (đã) hết hàng',
     ],
     'top_sell' => [
         'title' => 'Sản phẩm bán chạy',

@@ -77,7 +77,6 @@ class StatisticalService
      */
     public function getTopSellBetweenDate(string $fromDate, string $toDate)
     {
-        // \DB::enableQueryLog();
         return \DB::table('orders as o')
         ->join('order_details as od', 'o.id', '=', 'od.order_id')
         ->join('products as p', 'od.product_id', '=', 'p.id')
@@ -88,7 +87,6 @@ class StatisticalService
         ->groupBy('product_id')
         ->limit(config('define.statistical.limit_top_sell'))
         ->get();
-        // dd(\DB::getQueryLog());
     }
 
     /**
@@ -137,10 +135,16 @@ class StatisticalService
     /**
      * Get list order from date to date
      *
+     * @param string $field field
+     * @param string $sort  sort
+     *
      * @return Order
      */
-    public function getInventory()
+    public function sortProduct(string $field, string $sort)
     {
-        return Product::with(['category:id,name'])->orderBy('total_sold', 'asc')->get();
+        if ($field == 'inventory') {
+            return Product::with(['category:id,name'])->select(['products.*', \DB::raw('`quantity` - `total_sold` as inventory')])->orderBy('inventory', $sort)->get();
+        }
+        return Product::with(['category:id,name'])->select(['products.*', \DB::raw('`quantity` - `total_sold` as inventory')])->orderBy($field, $sort)->get();
     }
 }

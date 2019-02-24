@@ -34,5 +34,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::resource('comments', 'CommentController')->only(['index', 'destroy']);
         Route::get('statisticals/revenue', 'StatisticalController@revenue')->name('statisticals.revenue');
         Route::get('statisticals/product', 'StatisticalController@product')->name('statisticals.product');
+        Route::get('statisticals/product/export/{str}', 'StatisticalController@exportProduct')->name('statisticals.product.export');
     });
 });
