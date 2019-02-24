@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Controller;
 use App\Services\OrderService;
 use App\Models\Order;
 use App\Http\Requests\Admin\PatchOrderRequest;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -63,5 +64,20 @@ class OrderController extends Controller
             return redirect()->route('admin.orders.index')->with('success', trans('common.message.delete_success'));
         }
         return redirect()->back()->with('error', trans('common.message.delete_error'));
+    }
+
+    /**
+     * Export pdf
+     *
+     * @param int $id id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export(int $id)
+    {
+        $order = app(OrderService::class)->getOrderById($id);
+        // return view('admin.order.export', compact('order'));
+        $pdf = PDF::loadView('admin.order.export', compact('order'));
+        return $pdf->download('export.pdf');
     }
 }

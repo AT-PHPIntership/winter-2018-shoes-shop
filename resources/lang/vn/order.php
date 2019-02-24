@@ -24,6 +24,9 @@ return [
         'category' => 'Danh mục',
         'total_price' => 'Thành tiền (Chưa áp dụng code)',
         'amount' => 'Tổng',
+        'bill' => 'Hóa đơn bán hàng',
+        'order_id' => 'Mã hóa đơn',
+        'customer_name' => 'Tên khách hàng',
     ],
     'show' => [
         'title' => 'Chi tiết đơn hàng',

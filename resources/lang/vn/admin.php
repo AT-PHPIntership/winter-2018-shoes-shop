@@ -4,6 +4,7 @@ return [
     'index' => [
         'home' => 'Trang chủ',
         'user' => 'Người dùng',
+        'address' => 'Đà Nẵng',
     ],
     'footer' => [
         'version' => 'Version 1.0',
