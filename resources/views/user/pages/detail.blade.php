@@ -22,20 +22,24 @@
       <div class="row align-items-center">
         <div class="col-12 col-md-6">
           <div class="single_product_thumb">
-            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators menu-control">
-                @foreach($product['images'] as $key => $image)
-                  <li class="{{ $key == 0 ? 'active' : '' }} control-item" data-target="#product_details_slider" data-slide-to="{{$key}}" style="background-image: url({{$image->path}});"></li>
-                @endforeach
-              </ol>
-              <div class="carousel-inner">
-                @foreach($product['images'] as $key => $image)
-                  <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img class="d-block w-100" src="{{$image->path}}" alt="Slide">
-                  </div>
-                @endforeach
+            @if ($product['images']->count())
+              <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators menu-control">
+                  @foreach($product['images'] as $key => $image)
+                    <li class="{{ $key == 0 ? 'active' : '' }} control-item" data-target="#product_details_slider" data-slide-to="{{$key}}" style="background-image: url({{$image->path}});"></li>
+                  @endforeach
+                </ol>
+                <div class="carousel-inner">
+                  @foreach($product['images'] as $key => $image)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                      <img class="d-block w-100" src="{{$image->path}}" alt="Slide">
+                    </div>
+                  @endforeach
+                </div>
               </div>
-            </div>
+            @else
+              <img class="content-image img-fluid d-block mx-auto size-product" src="{{ config('define.image_default_product') }}" alt="">                
+            @endif
           </div>
         </div>
         <div class="col-12 col-md-6">

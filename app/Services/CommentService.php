@@ -70,7 +70,7 @@ class CommentService
     {
         return Comment::with(['children' => function ($query) use ($productId) {
             $query->where('product_id', $productId);
-        }, 'user:id', 'user.profile:user_id,name,avatar'])->where('product_id', $productId)->where('parent_id', null)->get();
+        }, 'user:id', 'user.profile:user_id,name,avatar'])->where('product_id', $productId)->where('parent_id', null)->where('status', Comment::ACTIVE_STATUS)->get();
     }
 
     /**

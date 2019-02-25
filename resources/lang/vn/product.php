@@ -23,5 +23,9 @@ return [
     'out_stock' => 'Hết hàng',
     'in_stock' => 'Còn hàng',
     'add_cart' => 'Thêm vào giỏ hàng',
-    'product_detail' => 'Chi tiết sản phẩm'
+    'product_detail' => 'Chi tiết sản phẩm',
+    'detail_type' => 'Chi tiết từng loại',
+    'images' => 'Hình ảnh sản phẩm',
+    'choose_category' => 'Chọn danh mục',
+    'image_error' => 'Ảnh không hợp lệ!',
 ];
