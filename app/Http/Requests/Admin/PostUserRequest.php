@@ -26,12 +26,12 @@ class PostUserRequest extends FormRequest
     {
         return [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5|max:255|',
+            'password' => 'required|min:5',
             'confirm_password' => 'required|same:password',
             'name' => 'required',
-            'gender' => 'in:'.Profile::OTHER.','.Profile::MALE.','.Profile::FEMALE.'',
-            'address' => 'required|max:255',
-            'phonenumber' => 'required|numeric|min:10',
+            'gender' => 'nullable|in:'.Profile::OTHER.','.Profile::MALE.','.Profile::FEMALE.'',
+            'address' => 'max:255',
+            'phonenumber' => 'nullable|numeric|min:10',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'role_id' => 'required|exists:m_roles,id'
         ];

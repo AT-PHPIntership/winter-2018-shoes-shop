@@ -26,9 +26,11 @@ class PutUserRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'password' => 'nullable|min:5|confirmed',
+            'password_confirmation' => 'required_with:password',
             'gender' => 'in:'.Profile::OTHER.','.Profile::MALE.','.Profile::FEMALE.'',
-            'address' => 'required|max:255',
-            'phonenumber' => 'required|numeric|min:10',
+            'address' => 'max:255',
+            'phonenumber' => 'nullable|numeric|min:10',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'role_id' => 'required|exists:m_roles,id'
         ];

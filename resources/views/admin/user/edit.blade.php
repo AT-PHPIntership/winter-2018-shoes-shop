@@ -23,10 +23,28 @@
               @method('PUT')
               <div class="box-body">
                 <div class="form-group">
+                  <label>@lang('user.table.email')</label>
+                  <input type="text" readonly class="form-control" value="{{ $user->email }}">
+                </div>
+                <div class="form-group">
                   <label for="exampleInputName">@lang('user.table.name') *</label>
                   <input type="text" name="name" class="form-control" id="exampleInputName" value="{{ $user->profile->name }}">
                   @if ($errors->has('name'))
                     <span class="help-block">{{ $errors->first('name') }}</span>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="ip-password">@lang('user.table.password')</label>
+                  <input type="password" name="password" class="form-control" id="ip-password">
+                  @if ($errors->has('password'))
+                    <span class="help-block">{{ $errors->first('password') }}</span>
+                  @endif
+                </div>
+                <div class="form-group">
+                  <label for="ip-confirm-password">@lang('user.table.confirm_password')</label>
+                  <input type="password" name="password_confirmation" class="form-control" id="ip-confirm-password">
+                  @if ($errors->has('password_confirmation'))
+                    <span class="help-block">{{ $errors->first('password_confirmation') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
@@ -41,14 +59,14 @@
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPhoneNumber">@lang('user.table.phone') *</label>
+                  <label for="exampleInputPhoneNumber">@lang('user.table.phone')</label>
                   <input type="text" name="phonenumber" class="form-control" id="exampleInputPhoneNumber" value="{{ $user->profile->phonenumber }}">
                   @if ($errors->has('phonenumber'))
                     <span class="help-block">{{ $errors->first('phonenumber') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputAddress">@lang('user.table.address') *</label>
+                  <label for="exampleInputAddress">@lang('user.table.address')</label>
                   <input type="text" name="address" class="form-control" id="exampleInputAddress" value="{{ $user->profile->address }}">
                   @if ($errors->has('address'))
                     <span class="help-block">{{ $errors->first('address') }}</span>
@@ -63,10 +81,12 @@
                       @endif
                     </div>
                   @endif
-                  <input type="file" name="avatar" id="exampleInputAvatar">
+                  <input type="file" name="avatar" id="exampleInputAvatar" onchange="previewAvatar();">
                   @if ($errors->has('avatar'))
                     <span class="help-block">{{ $errors->first('avatar') }}</span>
                   @endif
+                  <div class="block-img" id="preview-avatar">
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputRole">@lang('user.table.role') *</label>
