@@ -21,7 +21,7 @@ class CategoryService
         $children = Category::where('parent_id', $id)->get($columns);
         return $children;
     }
-
+    
     /**
      * Get all data table categories
      *
@@ -50,13 +50,13 @@ class CategoryService
     /**
      * Handle get parents list from database
      *
+     * @param array $columns columns
+     *
      * @return \Illuminate\Http\Response
      */
-    public function getParentList()
+    public function getParentList(array $columns = ['*'])
     {
-        $categories = Category::with(['children', 'products:id,category_id'])->select('id', 'name', 'parent_id')
-                        ->whereNull('parent_id')
-                        ->get();
+        $categories = Category::whereNull('parent_id')->get($columns);
         return $categories;
     }
 
@@ -98,5 +98,65 @@ class CategoryService
     public function getCategoryById(int $id)
     {
         return Category::findOrFail($id);
+    }
+
+    /**
+     * Handle update category from view
+     *
+     * @param array    $input    data from request
+     * @param Category $category of category
+     *
+     * @return array
+     */
+    public function updateCategory(array $input, $category)
+    {
+        if (count($category->children)) {
+            if ($input['parent_id']) {
+                session()->flash('error', trans('category.message.level_error'));
+                return false;
+            }
+        } else {
+            if ($input['parent_id']) {
+                if (($this->isChild($input['parent_id'])) || ($input['parent_id'] == $category->id)) {
+                    session()->flash('error', trans('category.request.level_error'));
+                    return false;
+                }
+            }
+        }
+        return $category->update($input);
+    }
+
+    /**
+     * Check if category is children
+     *
+     * @param int $id of category
+     *
+     * @return boolean
+     */
+    public function isChild($id)
+    {
+        $category = Category::find($id);
+        return (isset($category->parent_id));
+    }
+
+    /**
+     * Delete category
+     *
+     * @param int $id id
+     *
+     * @return boolean
+     */
+    public function deleteCategory($id)
+    {
+        $category = $this->getCategoryById($id);
+        foreach ($category->children as $child) {
+            if (!($child->delete())) {
+                return false;
+            };
+        }
+        if (!($category->delete())) {
+            return false;
+        };
+        return true;
     }
 }
