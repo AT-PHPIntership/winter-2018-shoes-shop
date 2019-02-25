@@ -7,13 +7,13 @@ use App\Models\Size;
 class SizeService
 {
     /**
-     * Get all data table products
+     * Get data form table size
      *
      * @param array $columns columns
      *
      * @return object
      */
-    public function getAll(array $columns = ['*'])
+    public function getSizes(array $columns = ['*'])
     {
         return Size::get($columns);
     }

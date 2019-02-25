@@ -21,8 +21,8 @@ class ProductController extends Controller
     public function listProductByCatId(int $id)
     {
         $category = app(CategoryService::class)->getCategoryById($id);
-        $colors = app(ColorService::class)->getAll(['id','name']);
-        $sizes = app(SizeService::class)->getAll(['id','size']);
+        $colors = app(ColorService::class)->getColors(['id','name']);
+        $sizes = app(SizeService::class)->getSizes(['id','size']);
         return view('user.pages.category', compact(['colors', 'sizes', 'category']));
     }
 

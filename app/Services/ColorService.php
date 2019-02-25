@@ -7,13 +7,13 @@ use App\Models\Color;
 class ColorService
 {
     /**
-     * Get all data table products
+     * Get data from colors table
      *
      * @param array $columns columns
      *
      * @return object
      */
-    public function getAll(array $columns = ['*'])
+    public function getColors(array $columns = ['*'])
     {
         return Color::get($columns);
     }

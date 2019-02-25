@@ -11,7 +11,8 @@ return [
     'path' => [
         'avatar' => '/upload/',
         'default_avatar' => '/admin/images/default_avatar.png',
-        'default_image' => '/public/images/default_image.png'
+        'default_image' => '/public/images/default_image.png',
+        'default_image_admin' => '/admin/images/default_image.png',
     ],
     'gender' => [
         'other' => 0,
