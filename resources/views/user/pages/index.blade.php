@@ -95,7 +95,7 @@
                 <img class="content-image img-fluid d-block mx-auto size-product" src="{{ $productForMen->images->first() ? $productForMen->images->first()->path : config('define.image_default_product') }}" alt="">
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
-                    <a href="#"><span class="lnr lnr-cart"></span></a>
+                    <a href="{{ route('user.detail', ['id' => $productForMen->id]) }}"><span class="lnr lnr-cart"></span></a>
                     <a href="#" data-toggle="modal" data-target="#modal-product" data-product="{{ $productForMen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
@@ -139,7 +139,7 @@
                 <img class="content-image img-fluid d-block mx-auto size-product" src="{{ $productForWomen->images->first() ? $productForWomen->images->first()->path : config('define.image_default_product') }}" alt="">
                 <div class="content-details fadeIn-bottom">
                   <div class="bottom d-flex align-items-center justify-content-center">
-                    <a href="#"><span class="lnr lnr-cart"></span></a>
+                    <a href="{{ route('user.detail', ['id' => $productForWomen->id]) }}"><span class="lnr lnr-cart"></span></a>
                     <a href="#" data-toggle="modal" data-target="#modal-product"  data-product="{{ $productForWomen->id }}"><span class="lnr lnr-frame-expand"></span></a>
                   </div>
                 </div>
@@ -167,9 +167,9 @@
         @foreach ($newProducts as $newProduct)
           <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
             <div class="single-search-product d-flex">
-              <a href="#"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
+              <a href="{{ route('user.detail', ['id' => $newProduct->id]) }}"><img src="{{ $newProduct->images->first() ? $newProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
               <div class="desc">
-                <a href="#" class="title">{{ $newProduct->name }}</a>
+                <a href="{{ route('user.detail', ['id' => $newProduct->id]) }}" class="title">{{ $newProduct->name }}</a>
                 <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->last() ? formatCurrencyVN(($newProduct->original_price * (100 - $newProduct->promotions->last()->percent))/100) : formatCurrencyVN($newProduct->original_price) }} <del>{{ $newProduct->promotions->last() ? formatCurrencyVN($newProduct->original_price) : '' }}</del></div>
               </div>
             </div>
@@ -191,9 +191,9 @@
       @foreach ($topSellProducts as $topSellProduct)
         <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
           <div class="single-search-product d-flex">
-            <a href="#"><img src="{{ $topSellProduct->images->first() ? $topSellProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
+            <a href="{{ route('user.detail', ['id' => $topSellProduct->id]) }}"><img src="{{ $topSellProduct->images->first() ? $topSellProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
             <div class="desc">
-              <a href="#" class="title">{{ $topSellProduct->name }}</a>
+              <a href="{{ route('user.detail', ['id' => $topSellProduct->id]) }}" class="title">{{ $topSellProduct->name }}</a>
               <div class="price"><span class="lnr lnr-tag"></span> {{ $topSellProduct->promotions->last() ? formatCurrencyVN(($topSellProduct->original_price * (100 - $topSellProduct->promotions->last()->percent))/100) : formatCurrencyVN($topSellProduct->original_price) }} <del>{{ $topSellProduct->promotions->last() ? formatCurrencyVN($topSellProduct->original_price) : '' }}</del></div>
             </div>
           </div>
