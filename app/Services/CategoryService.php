@@ -159,4 +159,23 @@ class CategoryService
         };
         return true;
     }
+
+    /**
+     * Search data of categories.
+     *
+     * @param \Illuminate\Http\Request $request from search form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchData(Request $request)
+    {
+        $data = $request->data_search;
+        $categories = Category::where('name', 'LIKE', '%'.$data.'%')
+                        ->orWhereHas('parent', function ($subquery) use ($data) {
+                            $subquery->where('name', 'LIKE', '%'.$data.'%');
+                        })
+                        ->orderBy('updated_at', 'desc')
+                        ->paginate(config('define.number_element_in_table'));
+        return $categories;
+    }
 }

@@ -132,4 +132,17 @@ class CategoryController extends Controller
         }
         return redirect()->route('admin.category.index');
     }
+
+    /**
+     * Search data of categories.
+     *
+     * @param \Illuminate\Http\Request $request from search form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function searchData(Request $request)
+    {
+        $categories = $this->categories->searchData($request);
+        return view('admin.category.list', compact('categories'));
+    }
 }
