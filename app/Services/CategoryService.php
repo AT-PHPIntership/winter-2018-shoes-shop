@@ -101,7 +101,7 @@ class CategoryService
             }
         } else {
             if ($input['parent_id']) {
-                if ( ($this->isChild($input['parent_id'])) || ($input['parent_id'] == $category->id) ) {
+                if (($this->isChild($input['parent_id'])) || ($input['parent_id'] == $category->id)) {
                     session()->flash('error', trans('category.request.level_error'));
                     return false;
                 }
