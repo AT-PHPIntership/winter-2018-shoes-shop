@@ -102,6 +102,7 @@
               <tr class="row">
                 <td class="col-lg-12">
                   <p class="message-checkout"></p>
+                  <span class="pull-left d-none" id="js-your-cart"><a href="{{ route('user.orders') }}">{{ __('cart.your_cart') }}</a></span>
                   <button type="submit" id="js-handle-checkout" class="view-btn color-2 w-100 mt-20"><span>{{ __('checkout.title') }}</span></button>
                 </td>
               </tr>

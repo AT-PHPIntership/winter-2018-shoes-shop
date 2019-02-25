@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SetNullableParentIdCategories extends Migration
+class CreateSocialAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class SetNullableParentIdCategories extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->integer('parent_id')->nullable()->change();
-        });
+        Schema::create('social_accounts', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->string('provider_user_id');
+            $table->string('provider');
+            $table->timestamps();
+          });
     }
 
     /**
@@ -25,8 +28,6 @@ class SetNullableParentIdCategories extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->integer('parent_id')->default('0')->change();
-        });
+        Schema::dropIfExists('social_accounts');
     }
 }

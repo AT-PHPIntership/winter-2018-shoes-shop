@@ -2,7 +2,7 @@ function formatCurrencyVN(number){
   return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(number);
 }
 function reverseFormatCurrencyVN(price){
-  return price.trim().slice(0, price.length - 7).replace('.', '');
+  return price.replace(/[^0-9]/g, "");
 }
 //Display choosen images
 function previewImage(input) 

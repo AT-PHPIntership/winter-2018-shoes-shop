@@ -68,4 +68,6 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         Route::get('orders', 'OrderController@index')->name('orders');
         Route::get('order/{id}', 'OrderController@show')->name('order.show');
     });
+    Route::get('/{provider}/redirect', 'SocialController@redirect');
+    Route::get('/{provider}/callback', 'SocialController@callback');
 });

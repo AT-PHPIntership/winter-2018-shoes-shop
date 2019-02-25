@@ -19,4 +19,5 @@ return [
         'close' => 'Đóng',
     ],
     'checkout' => 'Thanh toán',
+    'your_cart' => 'Đơn hàng của bạn',
 ];

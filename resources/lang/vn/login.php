@@ -5,6 +5,8 @@ return [
    'error' => 'Đăng nhập thất bại, vui lòng kiểm tra lại!',
    'login' => 'Đăng nhập',
    'logout' => 'Đăng xuất',
+   'facebook' => 'Faceboook',
+   'google+' => 'Google+',
    'have_account' => 'Bạn đã có tài khoản ?',
    'login_here' => 'Đăng nhập tại đây',
    'email' => 'Email',

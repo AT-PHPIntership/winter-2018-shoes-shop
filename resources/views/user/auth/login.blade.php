@@ -7,6 +7,7 @@
 	<link rel="icon" type="image/png" href="{{ asset('auth/images/icons/favicon.ico') }}"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset('auth/css/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('auth/css/main.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('auth/css/style.css') }}">
 </head>
 <body>
 	<div class="limiter">
@@ -40,6 +41,10 @@
 								{{ __('Login') }}
 							</button>
 						</div>
+					</div>
+					<div class="box-social text-uppercase p-t-30">
+						<a href="{{url('facebook/redirect')}}" class="btn btn-success">@lang('login.facebook')</a>
+						<a href="{{url('google/redirect')}}" class="btn btn-danger">@lang('login.google+')</a>
 					</div>
 				</form>
 			</div>

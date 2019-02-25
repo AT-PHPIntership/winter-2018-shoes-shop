@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
             if (Auth::user()->role->id == Role::ADMIN_ROLE) {
                 return redirect('/admin/index');
             }
-            return redirect('/');
+            return redirect('/home');
         }
         return $next($request);
     }

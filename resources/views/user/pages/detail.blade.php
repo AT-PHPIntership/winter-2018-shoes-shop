@@ -49,10 +49,10 @@
               <div class="price d-flex align-items-center">
                 <span class="lnr lnr-tag"></span>
                 @if($product['product']['price'])
-                  <span class="ml-10">{{ formatCurrencyVN($product['product']['original_price']) }}</span>
-                  <span class="ml-10">{{ formatCurrencyVN($product['product']['price']) }}</span>
+                  <span class="ml-10" id="js-price">{{ formatCurrencyVN($product['product']['price']) }}</span>
+                  <del class="ml-10" id="js-original-price">{{ formatCurrencyVN($product['product']['original_price']) }}</del>
                 @else
-                  <span class="ml-10">{{ formatCurrencyVN($product['product']['original_price']) }}</span>
+                  <span class="ml-10" id="js-price">{{ formatCurrencyVN($product['product']['original_price']) }}</span>
                 @endif
               </div>
               <div class="category">{{ trans('product.category')}}: <span>{{ $product['category']['name'] }}</span></div>
@@ -81,11 +81,11 @@
               <div class="d-flex align-items-center mt-30">
                 <label>{{ trans('product.quantity')}}: </label>
                 <div class="form-group col-md-6">
-                  <input id="js-quantity" type="number" class="select-number ml-15 form-control" value="1" />
+                  <input id="js-quantity" type="number" min="1" class="select-number ml-15 form-control" value="1" />
                 </div>
               </div>
               <div class="d-flex mt-20">
-              <a href="javascript:void(0)" data-product-id="{{ $product['product']['id'] }}" class="view-btn color-2"><span>{{ trans('product.add_cart')}}</span></a>
+              <a href="javascript:void(0)" data-product-id="{{ $product['product']['id'] }}" class="view-btn color-2 js-add-cart"><span>{{ trans('product.add_cart')}}</span></a>
               </div>
             </div>
           </div>
