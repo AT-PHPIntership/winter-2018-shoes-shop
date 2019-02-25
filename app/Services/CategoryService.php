@@ -69,10 +69,6 @@ class CategoryService
      */
     public function storeCategory(array $input)
     {
-        if ($this->isChild($input['parent_id'])) {
-            session()->flash('error', trans('category.request.level_error'));
-            return false;
-        }
         return Category::create($input);
     }
 
@@ -98,17 +94,17 @@ class CategoryService
      */
     public function updateCategory(array $input, $category)
     {
-        if ($category->parent_id) {
-            if ($input['parent_id']) {
-                if ($this->isChild($input['parent_id'])) {
-                    session()->flash('error', trans('category.request.level_error'));
-                    return false;
-                }
-            }
-        } else {
+        if (count($category->children)) {
             if ($input['parent_id']) {
                 session()->flash('error', trans('category.message.level_error'));
                 return false;
+            }
+        } else {
+            if ($input['parent_id']) {
+                if ( ($this->isChild($input['parent_id'])) || ($input['parent_id'] == $category->id) ) {
+                    session()->flash('error', trans('category.request.level_error'));
+                    return false;
+                }
             }
         }
         return $category->update($input);
@@ -124,6 +120,6 @@ class CategoryService
     public function isChild($id)
     {
         $category = Category::find($id);
-        return ($category->parent_id);
+        return (isset($category->parent_id));
     }
 }
