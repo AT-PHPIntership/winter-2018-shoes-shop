@@ -54,7 +54,11 @@
                           <button type="button" class="btn btn-primary btn-xs">
                             <a href="{{ route('admin.product.edit', $product->id)}}" class="text-white">{{ trans('common.edit')}}</a>
                           </button>
-                          <button type="" class="btn btn-danger btn-xs">{{ trans('common.delete')}}</button>
+                          <form class="form-inline" action="{{ route('admin.product.destroy', $product) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">{{ trans('common.delete') }}</button>
+                          </form>
                         </td>
                     </tr>
                   @endforeach
