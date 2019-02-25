@@ -257,7 +257,7 @@ class ProductService
         ->appends(['s' => $search]);
     }
 
-    /** 
+    /**
      * Get specified product by id
      *
      * @param array $data product
@@ -646,7 +646,7 @@ class ProductService
     {
         try {
             if (!$product->images->isEmpty()) {
-                foreach($product->images as $image) {
+                foreach ($product->images as $image) {
                     File::delete(public_path('upload/'.$image->path));
                 }
             }

@@ -171,7 +171,8 @@ class ProductController extends Controller
         return redirect()->route('admin.product.edit', $product->id);
     }
 
-    /* Remove the specified resource from storage.
+    /**
+    * Remove the specified resource from storage.
     *
     * @param App\Models\Product $product product
     *

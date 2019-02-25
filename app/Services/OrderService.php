@@ -89,7 +89,7 @@ class OrderService
      * Get own order by id
      *
      * @param int $id id
-     * 
+     *
      * @return object
      */
     public function getAuthOrderById($id)

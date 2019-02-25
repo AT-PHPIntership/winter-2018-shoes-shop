@@ -42,9 +42,9 @@ class OrderController extends Controller
     }
     /**
      * Show order detail to follow
-     * 
+     *
      * @param int $id order id
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)

@@ -51,7 +51,7 @@ return [
         'canceled' => 'Hủy đơn hàng',
         'ordered' => 'Đã đặt hàng',
         'processed' => 'Đã xử lý',
-        'dispatched' => 'Đã vận chuyển',        
+        'dispatched' => 'Đã vận chuyển',
     ],
     'unit_price' => 'Đơn giá',
     'delivery_address' => 'Địa chỉ nhận hàng',
