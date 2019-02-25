@@ -138,4 +138,25 @@ class CategoryService
         $category = Category::find($id);
         return (isset($category->parent_id));
     }
+
+    /**
+     * Delete category
+     *
+     * @param int $id id
+     *
+     * @return boolean
+     */
+    public function deleteCategory($id)
+    {
+        $category = $this->getCategoryById($id);
+        foreach ($category->children as $child) {
+            if (!($child->delete())) {
+                return false;
+            };
+        }
+        if (!($category->delete())) {
+            return false;
+        };
+        return true;
+    }
 }

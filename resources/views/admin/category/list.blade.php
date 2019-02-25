@@ -42,11 +42,11 @@
                     <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>
                       <button class="btn btn-primary btn-xs">
-                        <a href="{{ route('admin.category.edit', $category->id)}}" style="color: #fff;">{{ trans('common.edit') }}</a>
+                        <a href="{{ route('admin.category.edit', $category->id)}}" style="color: #fff;">{{  trans('common.edit') }}</a>
                       </button>
-                      <button type="submit" class="btn btn-danger btn-xs">
-                        <a href="#" style="color: #fff;">{{ trans('common.delete') }}</a>
-                      </button>
+                      {{ Form::model($category, ['url' => ['admin/category', $category->id], 'method'=> 'DELETE', 'enctype' => 'multipart/form-data', 'style' => 'display: inline-block;'])}}
+                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('{{trans('common.message.confirm_delete')}}')">{{  trans('common.delete') }}</button>
+                      {{ Form::close()}}
                   </tr>
                 @endforeach
                 </tbody>

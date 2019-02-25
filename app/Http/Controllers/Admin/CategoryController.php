@@ -115,4 +115,21 @@ class CategoryController extends Controller
         }
         return redirect()->route('admin.category.edit', $category->id);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id comment about this variable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if ($this->categories->deleteCategory($id)) {
+            session()->flash('success', trans('common.message.delete_success'));
+        } else {
+            session()->flash('error', trans('common.message.delete_error'));
+        }
+        return redirect()->route('admin.category.index');
+    }
 }
