@@ -38,6 +38,6 @@ if (! function_exists('formatCurrencyVN')) {
      */
     function formatCurrencyVN(float $number)
     {
-        return number_format($number).' đ';
+        return number_format($number, 0, '', '.').' đ';
     }
 }

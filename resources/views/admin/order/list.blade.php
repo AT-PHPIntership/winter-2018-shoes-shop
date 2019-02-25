@@ -8,11 +8,6 @@
     </section>
     <section class="content">
       <div class="row">
-        <div class="col-md-2">
-          <div class="box-top">
-            <a class="btn btn-success btn-md" href="">@lang('common.new')</a>
-          </div>
-        </div>
         <div class="col-md-12">
           @include('admin.module.message')
         </div>
@@ -33,14 +28,14 @@
                   <th>@lang('order.table.created_at')</th>
                   <th>@lang('order.table.delivered_at')</th>
                   <th>@lang('order.table.status')</th>
-                  <th class="w-100">@lang('order.table.action')</th>
+                  <th class="w-125">@lang('order.table.action')</th>
                 </tr>
                 @foreach ($orders as $order)
                   <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->user ? $order->user->profile->name : $order->customer_name }}</td>
                     <td>{{ $order->code ? $order->code->name : '' }}</td>
-                    <td>{{ $order->total_amount }}</td>
+                    <td>{{ formatCurrencyVN($order->total_amount) }}</td>
                     <td>{{ formatDateVN($order->created_at) }}</td>
                     <td>{{ $order->delivered_at ? formatDateVN($order->delivered_at) : '' }}</td>
                     <td>
@@ -69,6 +64,7 @@
                       @endswitch
                     </td>
                     <td>
+                      <a class="btn btn-default btn-xs" href="{{ route('admin.orders.export', ['id' => $order->id]) }}"><i class="fa fa-download"></i></a>
                       <a class="btn btn-info btn-xs" href="{{ route('admin.orders.show', ['id' => $order->id]) }}">@lang('common.show')</a>
                       <form class="form-inline" action="{{ route('admin.orders.destroy', ['id' => $order->id]) }}" method="POST">
                         @csrf

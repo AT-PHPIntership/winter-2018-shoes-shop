@@ -4,6 +4,7 @@ return [
     'index' => [
         'home' => 'Trang chủ',
         'user' => 'Người dùng',
+        'address' => 'Đà Nẵng',
     ],
     'footer' => [
         'version' => 'Version 1.0',
@@ -50,6 +51,9 @@ return [
             'list' => 'Danh sách mã giảm giá',
             'add' => 'Thêm mã giảm giá',
         ],
+        'statistical' => [
+            'product' => 'Sản phẩm',
+        ]
     ],
     'header' => [
         'hello' => 'Xin chào',

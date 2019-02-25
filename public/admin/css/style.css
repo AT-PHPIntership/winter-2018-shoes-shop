@@ -91,6 +91,31 @@
 .w-100 {
     width: 100px;
 }
+.b-block {
+    display: block;
+}
 .w-140 {
     width: 140px;
+}
+.mb-100 {
+    margin-bottom: 100px;
+}
+.bd-red {
+    border: 1px solid red;
+}
+.txt-red {
+    color: red;
+}
+.w-125 {
+    width: 125px;
+}
+.no-ptb {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.no-mh {
+    min-height: 0;
+}
+.mb-10 {
+    margin-bottom: 10px;
 }

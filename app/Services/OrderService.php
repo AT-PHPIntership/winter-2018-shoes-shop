@@ -53,7 +53,7 @@ class OrderService
      */
     public function getOrderById($id)
     {
-        return Order::with(['code:id,name', 'user:id', 'user.profile:id,name,user_id', 'orderDetails', 'orderDetails.product:id,name,original_price,category_id', 'orderDetails.product.category:id,name'])->findOrFail($id);
+        return Order::with(['code:id,name', 'user:id', 'user.profile:id,name,user_id,address,phonenumber', 'orderDetails', 'orderDetails.product:id,name,original_price,category_id', 'orderDetails.product.category:id,name'])->findOrFail($id);
     }
 
     /**
