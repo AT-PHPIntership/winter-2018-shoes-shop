@@ -10,8 +10,6 @@ use App\Models\Size;
 use Carbon\Carbon;
 use App\Models\ProductDetail;
 use App\Models\Image;
-use App\Models\Category;
-use App\Models\Size;
 use App\Models\Color;
 use DB;
 use Log;

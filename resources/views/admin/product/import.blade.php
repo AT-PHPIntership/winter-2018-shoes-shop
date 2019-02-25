@@ -23,7 +23,7 @@
                   <h2 class="text-center padding-bot-20">@lang('common.upload')</h2>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <input type="file" id="csv_file" name="csv_file">
+                      <input type="file" id="csv_file" name="csv_file" accept=".csv">
                       @if ($errors->has('csv_file'))
                         <span class="help-block">
                           <strong>{{ $errors->first('csv_file') }}</strong>
