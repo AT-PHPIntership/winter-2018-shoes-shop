@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Comment;
+use App\Models\User;
 use Log;
 
 class CommentService
@@ -56,5 +57,52 @@ class CommentService
             Log::error($e);
             return false;
         }
+    }
+
+    /**
+     * Get comments by productId
+     *
+     * @param int $productId productId
+     *
+     * @return Comment
+     */
+    public function getCommentsByProductId(int $productId)
+    {
+        return Comment::with(['children' => function ($query) use ($productId) {
+            $query->where('product_id', $productId);
+        }, 'user:id', 'user.profile:user_id,name,avatar'])->where('product_id', $productId)->where('parent_id', null)->where('status', Comment::ACTIVE_STATUS)->get();
+    }
+
+    /**
+     * Add comment
+     *
+     * @param array $data data
+     *
+     * @return Comment
+     */
+    public function addComment(array $data)
+    {
+        try {
+            $param = [
+                'user_id' => $data['userId'],
+                'product_id' => $data['productId'],
+                'content' => $data['commentContent'],
+            ];
+            if (isset($data['commentId'])) {
+                $param['parent_id'] = $data['commentId'];
+            }
+            $comment = Comment::create($param);
+            $user = User::with('profile:user_id,name,avatar')->findOrFail($data['userId']);
+            $result = [];
+            $result['user_name'] = $user->profile->name;
+            $result['user_avatar'] = asset($user->profile->avatar ? $user->profile->avatar : config('define.path.default_avatar'));
+            $result['comment_id'] = $comment->id;
+            $result['comment_content'] = $comment->content;
+            $result['comment_created_at'] = $comment->created_at->format('d/m/Y - H:i:s');
+            return $result;
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+        return false;
     }
 }

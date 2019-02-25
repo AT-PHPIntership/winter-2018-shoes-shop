@@ -31,7 +31,7 @@
               </div>
               <div class="middle">
                 <p class="content" id="js-description"></p>
-                <a href="#" class="view-full">{{ __('index.quick_view.detail') }} <span class="lnr lnr-arrow-right"></span></a>
+                <a href="" id="js-link-detail" class="view-full">{{ __('index.quick_view.detail') }} <span class="lnr lnr-arrow-right"></span></a>
               </div>
               <div class="bottom no-bg">
                 <div class="d-flex align-items-center">
@@ -64,5 +64,8 @@
       </div>
     </div>
   </div>
-  <script>var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";</script>
+  <script>
+    var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
+    var detailProductUrl = "{{ url('detail') }}";  
+  </script>
 </div>

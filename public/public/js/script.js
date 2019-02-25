@@ -58,6 +58,7 @@ $(document).ready(function(){
         modal.find('#js-inventory').text(data.product.inventory);
         modal.find('#js-description').text(data.product.description);
         modal.find('.js-add-cart').attr('data-product-id', data.product.id);
+        modal.find('#js-link-detail').attr('href', detailProductUrl + '/' + data.product.id);
         var eleColor = "";
         $.each(data.colors, function(key, val){
           eleColor += '<option value="' + val.id + '">' + val.name + '</option>';

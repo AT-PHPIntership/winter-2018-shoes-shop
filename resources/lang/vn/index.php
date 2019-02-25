@@ -56,6 +56,7 @@ return [
         'default_option' => 'Chọn',
     ],
     'category' => [
+        
         'title' => 'Danh mục',
         'list_product' => 'Danh sách sản phẩm',
         'sort' => [
@@ -79,4 +80,14 @@ return [
             'title' => 'Kích cở',
         ],
     ],
+    'detail' => [
+        'comment' => [
+            'title' => 'Bình luận',
+            'empty' => 'Chưa có bình luận nào',
+            'post' => 'Gửi bình luận',
+            'login' => 'Bạn cần đăng nhập để bình luận',
+            'mess_error' => 'Bình luận thất bại',
+            'required' => 'Không được bỏ trống',
+        ],
+    ]
 ];

@@ -8,6 +8,7 @@ use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
 use Illuminate\Http\Request;
+use App\Services\CommentService;
 
 class ProductController extends Controller
 {
@@ -38,6 +39,21 @@ class ProductController extends Controller
         $products = app(ProductService::class)->filterProduct($request->all());
         return $products;
     }
+    
+    /**
+     * Display a specific product.
+     *
+     * @param int $id product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $product = app(ProductService::class)->getDetailProduct($id);
+        $comments = app(CommentService::class)->getCommentsByProductId($id);
+        return view('user.pages.detail', compact(['product', 'comments']));
+    }
+
     /**
      * Get detail product
      *
@@ -60,9 +76,6 @@ class ProductController extends Controller
      */
     public function getSizesByColorId(Request $request)
     {
-        if ($request->input('colorId')) {
-            return app(ProductService::class)->getSizesByColorId($request->input('colorId'));
-        }
-        return null;
+        return app(ProductService::class)->getSizesByColorId($request->input('colorId'));
     }
 }

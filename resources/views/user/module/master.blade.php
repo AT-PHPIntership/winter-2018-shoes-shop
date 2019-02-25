@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
-  <head>
+  <head> 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="">
     <meta name="author" content="CodePixar">
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ __('index.header.title') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('public/css/linearicons.css') }}">
