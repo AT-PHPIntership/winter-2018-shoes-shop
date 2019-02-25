@@ -151,3 +151,7 @@
 .w-30 {
   width: 30%;
 }
+#js-pagi-filter a.active {
+  background-color: #f41068;
+  color: white;
+}

@@ -43,6 +43,8 @@
         <section class="lattest-product-area pb-40 category-list">
           <div class="row" id="list-product">
           </div>
+          <div class="pagination" id="js-pagi-filter">
+          </div>
         </section>
         <!-- End Best Seller -->
       </div>
