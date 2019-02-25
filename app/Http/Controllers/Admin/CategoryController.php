@@ -6,7 +6,8 @@ use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Controller;
-use App\Http\Requests\Admin\CategoryRequest;
+use App\Http\Requests\Admin\PostCategoryRequest;
+use App\Http\Requests\Admin\PutCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -48,8 +49,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->categories->getParentList();
-        return view('admin.category.create', compact('categories'));
+        $parents = $this->categories->getParentList();
+        return view('admin.category.create', compact('parents'));
     }
 
     /**
@@ -59,7 +60,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(PostCategoryRequest $request)
     {
         $input = $request->all();
         if ($this->categories->storeCategory($input)) {
@@ -81,5 +82,37 @@ class CategoryController extends Controller
             $response = $this->categories->getChildren((int) $request->input('id'), ['id', 'name']);
             return $response;
         }
+        return redirect()->route('admin.category.create')->with('error', trans('common.message.create_error'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id comment about this variable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $category = $this->categories->getCategoryById($id);
+        $parents = $this->categories->getParentList();
+        return view('admin.category.edit', compact('parents', 'category'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param PutCategoryRequest  $request  from edit form
+     * @param App\Models\Category $category biding of id from edit form
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PutCategoryRequest $request, Category $category)
+    {
+        $input = $request->all();
+        if ($this->categories->updateCategory($input, $category)) {
+            return redirect()->route('admin.category.index')->with('success', trans('common.message.edit_success'));
+        }
+        return redirect()->route('admin.category.edit', $category->id);
     }
 }
