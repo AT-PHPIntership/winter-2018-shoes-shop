@@ -21,7 +21,6 @@ class CategoryService
         $children = Category::where('parent_id', $id)->get($columns);
         return $children;
     }
-
     /**
      * Get all data table categories
      *

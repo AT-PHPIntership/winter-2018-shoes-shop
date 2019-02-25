@@ -1,30 +1,36 @@
 @extends('admin.module.master')
 @section('content')
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-uppercase">{{ trans('product.manage')}}</h1>
     </section>
     <!-- Main content -->
     <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          @include('admin.module.message')
+        </div>
+      </div>
       <div class="row"> 
         <div class="col-xs-12">
           <!-- ./product info box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">{{ trans('product.create')}}</h3>
+              <h3 class="box-title">{{ trans('product.edit')}}</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" enctype='multipart/form-data' method='POST' action="{{ route('admin.product.store') }}">
+            <form role="form" enctype='multipart/form-data' method='POST' action="{{ route('admin.product.update', $product->id) }}">
               @csrf
+              @method('PUT')
               <div class="box-body">
                 <div class="row">
                   <div class="col-xs-6">
                     <div class="box-body">
                       <div class="form-group">
                         <label for="name">{{ trans('product.name')}}</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" value="{{ $product->name }}">
                         @if ($errors->has('name'))
                           <span class="help-block">{{ $errors->first('name') }}</span>
                         @endif
@@ -33,36 +39,49 @@
                         <label>{{ trans('product.category')}}</label>
                         <select class="form-control" name="parent_category_id" id="parent-category">
                           <option value="">{{ trans('product.choose_category')}}</option>
-                          @foreach($categories as $category)
-                            <option value={{$category->id}}>{{$category->name}}</option>
-                          @endforeach
+                          @if($product->category->parent_id)
+                            @foreach($categories as $category)
+                              <option {{ ($category->id == $product->category->parent_id) ? "selected" : ""}} value={{$category->id}}>{{$category->name}}</option>
+                            @endforeach
+                          @else
+                            @foreach($categories as $category)
+                              <option {{ ($category->id == $product->category_id) ? "selected" : ""}} value={{$category->id}}>{{$category->name}}</option>
+                            @endforeach
+                          @endif
                         </select>
                         @if ($errors->has('parent_category_id'))
                           <span class="help-block">{{ $errors->first('parent_category_id') }}</span>
                         @endif
                       </div>
                       <div class="form-group">
-                        <select name="child_category_id" id="category-children" data-hidden="hidden" class="form-control hidden">
+                      <select name="child_category_id" id="category-children" data-hidden="hidden" class="form-control {{ $product->category->parent_id ? '' : 'hidden' }}">
+                          @if($product->category->parent_id)
+                            <option value={{$product->category_id}}>{{$product->category->name}}</option>
+                          @endif
                         </select>
                         @if ($errors->has('child_category_id'))
                           <span class="help-block">{{ $errors->first('category_id') }}</span>
                         @endif
                       </div>
                       <div class="form-group">
-                        <label for="original_price">{{ trans('product.price')}}</label>
-                        <input type="text" class="form-control" name="original_price">
+                        <label for="price">{{ trans('product.price')}}</label>
+                        <input type="text" class="form-control" name="original_price" value="{{ $product->original_price }}">
                         @if ($errors->has('original_price'))
                           <span class="help-block">{{ $errors->first('original_price') }}</span>
                         @endif
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.description')}}</label>
-                        <textarea name="description" class="form-control" rows="3"></textarea>
+                        <textarea name="description" class="form-control" rows="3">{{ $product->description }}</textarea>
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.images')}}</label>
                         <div class="product-images">
-                          <div id="image-preview"></div>
+                          <div id="image-preview">
+                            @foreach($product->images as $key => $image)
+                              <img src="{{ $image->path }}" class="detail-img" alt="Product image">
+                            @endforeach
+                          </div>
                           <input type="file" id="upload-file" name="upload_file[]"
                            accept="image/gif, image/jpg, image/jpeg, image/png" onchange="previewImage();" multiple/>
                         </div>
@@ -74,29 +93,31 @@
                       <label>{{ trans('product.detail_type')}}</label>
                       <div class="margin-b-10">
                         <button type="button" id="add-detail" class="btn btn-success"> + </button>
-                        <ul class="detail-menu list-unstyled" id="show-detail">   
-                          <li class="js-row row margin-y-10">
-                            <div class="col-xs-4">
-                              <select name="color_id[]" id="color" class="form-control" placeholder="Chọn màu">
-                                @foreach($colors as $val)
-                                  <option value="{{$val->id}}">{{$val->name}}</option>
-                                @endforeach
-                              </select>
-                            </div>
-                            <div class="col-xs-3">
-                              <select name="size_id[]" class="form-control" placeholder="Chọn size">
-                                @foreach($sizes as $val)
-                                  <option value="{{$val->id}}">{{$val->size}}</option>
-                                @endforeach
-                              </select>
-                            </div>
-                            <div class="col-xs-4">
-                              <input name="quantity_type[]" type="number" class="form-control" placeholder="Số lượng">
-                            </div>
-                            <div class="col-xs-1">
-                              <button type="button" class="js-btn-remove btn"> x </button>
-                            </div>
-                          </li>
+                        <ul class="detail-menu list-unstyled" id="show-detail">                          
+                          @foreach($product->productDetails as $detail)
+                            <li class="js-row row margin-y-10">
+                              <div class="col-xs-4">
+                                <select name="color_id[]" id="color" class="form-control" placeholder="Chọn màu">
+                                  @foreach($colors as $val)
+                                    <option {{ ($val->id == $detail->color_id) ? "selected" : ""}} value="{{ $val->id}}">{{ $val->name}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                              <div class="col-xs-4">
+                                <select name="size_id[]" class="form-control" placeholder="Chọn size">
+                                  @foreach($sizes as $val)
+                                    <option {{ ($val->id == $detail->size_id) ? "selected" : ""}} value="{{ $val->id}}">{{ $val->size}}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                              <div class="col-xs-3">
+                                <input name="quantity_type[]" value="{{ $detail->quantity}}" type="quantity_type" class="form-control" placeholder="Số lượng">
+                              </div>
+                              <div class="col-xs-1">
+                                <button type="button" class="js-btn-remove btn"> x </button>
+                              </div>
+                            </li>
+                          @endforeach
                         </ul>
                         @if ($errors->has('color_id'))
                           <span class="help-block">{{ $errors->first('color_id') }}</span>
