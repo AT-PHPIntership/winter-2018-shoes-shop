@@ -19,11 +19,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Auth::routes();
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'IndexController@index')->name('index');
-        Route::resource('product', 'ProductController');
-        Route::post('category/search', [
-            'as' => 'category.search',
-            'uses' => 'CategoryController@searchData'
-        ]);
+        Route::post('category/search','CategoryController@searchData')->name('category.search');
         Route::resource('users', 'UserController');
         Route::get('category/children', 'CategoryController@getChildren');
         Route::resource('category', 'CategoryController');
