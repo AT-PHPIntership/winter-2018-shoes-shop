@@ -14,7 +14,7 @@ class AddTotalSoldToProductDetailsTable extends Migration
     public function up()
     {
         Schema::table('product_details', function (Blueprint $table) {
-            $table->integer('total_sold')->after('quantity');
+            $table->integer('total_sold')->default('0')->after('quantity');
         });
     }
 
