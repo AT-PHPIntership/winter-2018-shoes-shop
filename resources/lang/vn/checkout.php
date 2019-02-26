@@ -17,6 +17,7 @@ return [
         'err_used_code' => 'Bạn đã sử dụng code này',
         'required' => 'Vui lòng điền',
         'err_phone_number' => 'Không đúng định dạng',
+        'thanks' => 'Cảm ơn bạn đã đặt hàng!',
     ],
     'confermation' => [
         'title' => 'Xác nhận đơn hàng',

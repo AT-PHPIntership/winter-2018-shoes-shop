@@ -26,7 +26,7 @@ return [
         'total_price' => 'Thành tiền (Chưa áp dụng code)',
         'amount' => 'Tổng',
         'bill' => 'Hóa đơn bán hàng',
-        'order_id' => 'Mã hóa đơn',
+        'order_id' => 'Mã đơn hàng',
         'customer_name' => 'Tên khách hàng',
         'number_acr' => 'TT',
         'quantity_acr' => 'SL',

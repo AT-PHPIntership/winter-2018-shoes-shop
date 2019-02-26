@@ -9,9 +9,12 @@ use App\Models\OrderDetail;
 use App\Models\ProductDetail;
 use App\Models\Profile;
 use App\Models\Promotion;
+use App\Models\User;
 use Carbon\Carbon;
 use Log;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmOrder;
 
 class OrderService
 {
@@ -155,6 +158,10 @@ class OrderService
                 ->increment('total_sold', $val['product']['quantity']);
                 Product::where('id', $val['product']['id'])
                 ->increment('total_sold', $val['product']['quantity']);
+            }
+            if ($customer['userId']) {
+                $user = User::find($customer['userId']);
+                Mail::to($user->email)->send(new ConfirmOrder($order));
             }
             DB::commit();
             return true;

@@ -66,12 +66,13 @@ $(document).ready(function(){
         method: "get",
         data: {code:code, arrProduct:arrProduct, customer:customer},
         success: function(data){
-          $('.message-checkout').text(data.message);
-          $('.message-checkout').addClass(data.success ? 'success' : 'error');
           if(data.success){
             localStorage.removeItem('arrProduct');
             localStorage.removeItem('code');
             window.location.href = confermationUrl;
+          }else{
+            $('.message-checkout').text(data.message);
+            $('.message-checkout').addClass('error');
           }
         }
       });
