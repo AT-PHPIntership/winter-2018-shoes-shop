@@ -17,5 +17,10 @@ return [
         'err_used_code' => 'Bạn đã sử dụng code này',
         'required' => 'Vui lòng điền',
         'err_phone_number' => 'Không đúng định dạng',
-    ]
+    ],
+    'confermation' => [
+        'title' => 'Xác nhận đơn hàng',
+        'thanks' => 'Cảm ơn! Đơn đặt hàng của bạn đã được nhận.',
+        'your_order' => 'Xem đơn hàng của bạn tại đây',
+    ],
 ];

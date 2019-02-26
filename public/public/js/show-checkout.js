@@ -69,9 +69,9 @@ $(document).ready(function(){
           $('.message-checkout').text(data.message);
           $('.message-checkout').addClass(data.success ? 'success' : 'error');
           if(data.success){
-            $('#js-your-cart').removeClass('d-none');
             localStorage.removeItem('arrProduct');
             localStorage.removeItem('code');
+            window.location.href = confermationUrl;
           }
         }
       });

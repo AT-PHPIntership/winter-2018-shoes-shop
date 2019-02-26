@@ -86,6 +86,16 @@ class OrderController extends Controller
     }
 
     /**
+     * Show confermation
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function confermation()
+    {
+        return view('user.pages.confermation');
+    }
+
+    /**
      * Handle checkout
      *
      * @param Request $request request

@@ -117,6 +117,7 @@
     var handleCheckoutUrl = "{{ url('/checkout/handle-checkout') }}";
     var required = "{{ __('checkout.message.required') }}";
     var errPhoneNumber = "{{ __('checkout.message.err_phone_number') }}"
+    var confermationUrl = "{{ url('/checkout/confermation') }}";
   </script>
   <script src="{{ asset('public/js/show-checkout.js') }}"></script>
 @endsection

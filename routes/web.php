@@ -52,6 +52,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('cart/applyCode', 'OrderController@applyCode');
     Route::get('checkout', 'OrderController@checkout');
     Route::get('checkout/handle-checkout', 'OrderController@handleCheckout');
+    Route::get('checkout/confermation', 'OrderController@confermation');
     Route::get('getDetailProduct', 'ProductController@getDetailProduct');
     Route::get('detail/{id}', 'ProductController@detail')->name('detail');
     Route::post('add-comment', 'CommentController@addComment');

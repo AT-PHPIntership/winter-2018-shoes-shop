@@ -488,3 +488,6 @@
   width: 540px;
   height: 540px;
 }
+.confermation {
+  min-height: 400px;
+}
