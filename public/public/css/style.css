@@ -476,3 +476,7 @@
   color: red;
   padding: 0 10px;
 }
+#js-pagi-filter a.active {
+  background-color: #f41068;
+  color: white;
+}
