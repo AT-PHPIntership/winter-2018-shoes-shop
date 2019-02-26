@@ -80,8 +80,8 @@ class OrderService
      */
     public function getAuthOrderWithPaginate()
     {
-        $user_id = \Auth::user()->id;
-        $orders = Order::where('user_id', $user_id)->orderBy('id', 'desc')->paginate(config('define.paginate.number_order'));
+        $userId = \Auth::user()->id;
+        $orders = Order::where('user_id', $userId)->orderBy('id', 'desc')->paginate(config('define.paginate.number_order'));
         return $orders;
     }
 

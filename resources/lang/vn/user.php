@@ -4,6 +4,7 @@ return [
     'title' => 'Quản lý người dùng',
     'list' => [
         'title' => 'Danh sách người dùng',
+        'trash' => 'Danh sách bị chặn',
     ],
     'show' => 'Thông tin cá nhân',
     'table' => [
@@ -21,6 +22,8 @@ return [
         'info' => 'Thông tin',
         'current_password' => 'Mật khẩu hiện tại',
         'new_password' => 'Mật khẩu mới',
+        'block' => 'Chặn',
+        'restore' => 'Khôi phục',
     ],
     'gender' => [
         'other' => 'Khác',

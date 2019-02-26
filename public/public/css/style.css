@@ -480,3 +480,11 @@
   background-color: #f41068;
   color: white;
 }
+.quick-view-img {
+  width: 350px;
+  height: 350px;
+}
+.detail-img {
+  width: 540px;
+  height: 540px;
+}

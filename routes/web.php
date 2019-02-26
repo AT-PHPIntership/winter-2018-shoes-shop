@@ -20,6 +20,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'IndexController@index')->name('index');
         Route::post('category/search','CategoryController@searchData')->name('category.search');
+        Route::get('users/trash', 'UserController@trash')->name('users.trash');
+        Route::patch('users/restore/{id}', 'UserController@restore')->name('users.restore');
+        Route::delete('users/force-delete/{id}', 'UserController@forceDelete')->name('users.force-delete');
         Route::resource('users', 'UserController');
         Route::get('category/children', 'CategoryController@getChildren');
         Route::resource('category', 'CategoryController');

@@ -9,12 +9,6 @@
     <section class="content">
       <div class="row">
         <div class="col-md-12">
-          <div class="box-top">
-            <a class="btn btn-success btn-md" href="{{ route('admin.users.create') }}">@lang('common.new')</a>
-            <a class="btn btn-warning btn-md" href="{{ route('admin.users.trash') }}"><i class="fa fa-trash"></i></a>
-          </div>
-        </div>
-        <div class="col-md-12">
           @include('admin.module.message')
         </div>
       </div>
@@ -22,7 +16,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">@lang('user.list.title')</h3>
+              <h3 class="box-title">@lang('user.list.trash')</h3>
             </div>
             <div class="box-body">
               <table class="table table-bordered">
@@ -40,16 +34,15 @@
                     <td>{{ $user->profile->name }}</td>
                     <td>{{ $user->role->name }}</td>
                     <td>
-                        <a class="btn btn-info btn-xs" href="{{ route('admin.users.show', $user->id) }}">@lang('common.show')</a>
-                        @if ( Auth::user()->id == $user->id ||  $user->role_id != \App\Models\Role::ADMIN_ROLE)
-                          <a class="btn btn-primary btn-xs" href="{{ route('admin.users.edit', $user->id)}}">@lang('common.edit')</a>                            
-                        @endif
-                        <form class="form-inline" action="{{ route('admin.users.destroy', ['id' => $user->id]) }}" method="POST">
+                        <form class="form-inline" action="{{ route('admin.users.restore', ['id' => $user->id]) }}" method="POST">
+                          @csrf
+                          @method('PATCH')
+                          <button type="submit" class="btn btn-info btn-xs">@lang('user.table.restore')</button>
+                        </form>
+                        <form class="form-inline" action="{{ route('admin.users.force-delete', ['id' => $user->id]) }}" method="POST">
                           @csrf
                           @method('DELETE')
-                          @if ($user->role_id != \App\Models\Role::ADMIN_ROLE)
-                            <button type="submit" class="btn btn-warning btn-xs" onclick="return confirm('@lang('common.message.block_question')')">@lang('common.block')</button>
-                          @endif
+                          <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
                         </form>
                     </td>
                   </tr>

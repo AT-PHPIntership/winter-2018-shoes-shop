@@ -18,7 +18,7 @@
   <!-- Start Product Details -->
   <div class="container">
     <div class="product-quick-view">
-      <h3>{{ trans('product.product_detail') }}</h3>
+      <h3 class="mb-10">{{ trans('product.product_detail') }}</h3>
       <div class="row align-items-center">
         <div class="col-12 col-md-6">
           <div class="single_product_thumb">
@@ -32,7 +32,7 @@
                 <div class="carousel-inner">
                   @foreach($product['images'] as $key => $image)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                      <img class="d-block w-100" src="{{$image->path}}" alt="Slide">
+                      <img class="d-block w-100 detail-img" src="{{$image->path}}" alt="Slide">
                     </div>
                   @endforeach
                 </div>
