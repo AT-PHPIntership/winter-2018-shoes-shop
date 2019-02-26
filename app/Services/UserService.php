@@ -24,6 +24,52 @@ class UserService
     }
 
     /**
+     * Get all data trash
+     *
+     * @return object
+     */
+    public function getTrashWithPaginate()
+    {
+        return User::onlyTrashed()->with(['role', 'profile'])->paginate(config('define.paginate.limit_rows'));
+    }
+
+    /**
+     * Restore user
+     *
+     * @param int $id id
+     *
+     * @return boolean
+     */
+    public function restore(int $id)
+    {
+        return User::onlyTrashed()->where('id', $id)->restore();
+    }
+
+
+    /**
+     * Force delete user
+     *
+     * @param int $id id
+     *
+     * @return boolean
+     */
+    public function forceDelete(int $id)
+    {
+        try {
+            $user = User::onlyTrashed()->where('id', $id)->first();
+            if ($user->role_id != Role::ADMIN_ROLE) {
+                if ($user->profile->avatar) {
+                    File::delete(public_path($user->profile->avatar));
+                }
+                return $user->forceDelete();
+            }
+        } catch (Exception $e) {
+            Log::error($e);
+            return false;
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param array $data data
@@ -120,9 +166,6 @@ class UserService
     {
         try {
             if ($user->role_id != Role::ADMIN_ROLE) {
-                if ($user->profile->avatar) {
-                    File::delete(public_path('upload/'.$user->profile->avatar));
-                }
                 return $user->delete();
             }
         } catch (Exception $e) {

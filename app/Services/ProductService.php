@@ -227,15 +227,18 @@ class ProductService
                 $products->orderBy('updated_at', $sort[1]);
             }
         }
-        $products = $products->distinct('product_id')->get();
+        $products = $products->distinct('product_id')->paginate(config('define.paginate.limit_rows_12'));
         $result = [];
+        $items = [];
         foreach ($products as $key => $product) {
-            $result[$key]['id'] = $product->id;
-            $result[$key]['name'] = $product->name;
-            $result[$key]['original_price'] = $product->original_price;
-            $result[$key]['price'] =  $product->promotions->first() ? ($product->original_price * $product->promotions->first()->percent)/100 : null;
-            $result[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
+            $items[$key]['id'] = $product->id;
+            $items[$key]['name'] = $product->name;
+            $items[$key]['original_price'] = $product->original_price;
+            $items[$key]['price'] =  $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null;
+            $items[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
         }
+        $result['products'] = $items;
+        $result['page'] = $products->lastPage();
         return $result;
     }
 

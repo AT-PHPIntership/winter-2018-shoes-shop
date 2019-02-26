@@ -3,7 +3,7 @@ $(document).ready(function(){
 	filter_data();
 	
 	// filter product
-  function filter_data(){
+  function filter_data(page = 1){
     var categoryId = $('#active-category').attr('data-id');
     var colorIds = get_filter('js-ck-color');
     var sizeIds = get_filter('js-ck-size');
@@ -14,11 +14,12 @@ $(document).ready(function(){
       url: filterProductUrl,
       method:"get",
       dataType:"JSON",
-      data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice},
+      data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice, page:page},
       success: function(data){
         var list = '';
-        if (data.length) {
-          $.each(data, function(key, val){
+        var pagi = '';
+        if (data['products'].length) {
+          $.each(data['products'], function(key, val){
             list += '<div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product">';
             list += '<div class="content">';
             list += '<div class="content-overlay"></div>';
@@ -40,6 +41,16 @@ $(document).ready(function(){
             list += '</div>';
             list += '</div>';
           });
+          for (var i = 1; i < data['page']; i++) {
+            if (data['page'] > 2) {
+              var active = '';
+              if(page == i){
+                active = 'active';
+              }
+              pagi += '<a class="'+ active +'" href="'+ filterProductUrl +'?page='+ i +'">'+ i +'</a>';
+            }
+          }
+            $('#js-pagi-filter').html(pagi);
         } else {
           list = '<p class="ml-20 mt-20 text-red">Không có sản phẩm</p>';
         }
@@ -111,8 +122,20 @@ $(document).ready(function(){
       ];
       nonLinearSlider.noUiSlider.on('update', function (values, handle) {
         nodes[handle].innerHTML = values[handle];
+      });
+      $('#lower-value').bind("DOMSubtreeModified",function(){
+        filter_data();
+      });
+      $('#upper-value').bind("DOMSubtreeModified",function(){
         filter_data();
       });
     }
+  });
+
+  // Click Pagination
+  $(document).on('click','#js-pagi-filter a', function(e){
+    e.preventDefault();
+    var page = $(this).attr('href').split('page=')[1];
+    filter_data(page);
   });
 });

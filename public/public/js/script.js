@@ -68,7 +68,7 @@ $(document).ready(function(){
         $.each(data.images, function(key, val){
           var active = '';
           active = (key == 0) ? 'active' : '';
-          eleImage += '<div class="carousel-item ' + active + '"><img class="d-block" src="' + val.path + '" alt=""></div>';
+          eleImage += '<div class="carousel-item ' + active + '"><img class="d-block quick-view-img" src="' + val.path + '" alt=""></div>';
         });
         modal.find('#js-image').html(eleImage);
       }
