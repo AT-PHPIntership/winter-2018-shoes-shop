@@ -28,8 +28,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::resource('category', 'CategoryController');
         Route::get('product/detail', 'ProductController@getDetail');
         Route::get('product/{id}/detail', 'ProductController@getDetail');
-        Route::get('product/import', 'ProductController@importFile')->name('product.import');
         Route::get('product/export/sample', 'ProductController@exportSampleFile')->name('product.export.sample');
+        Route::get('product/export/data', 'ProductController@exportDataFile')->name('product.export.data');
+        Route::get('product/import', 'ProductController@importFile')->name('product.import');
         Route::post('product/import/process', 'ProductController@processImport')->name('product.import.process');
         Route::resource('product', 'ProductController');
         Route::resource('promotions', 'PromotionController');
