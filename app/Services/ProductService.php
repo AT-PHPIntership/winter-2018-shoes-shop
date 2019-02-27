@@ -419,12 +419,12 @@ class ProductService
         if (!$this->previousCheck($data)) {
             return false;
         }
+        DB::beginTransaction();
         foreach ($data as $key => $value) {
             $categoryId = $this->getCategoryByName($value->category);
             $sizeId = $this->getSizeByName($value->size);
             $colorId = $this->getColorByName($value->color);
             $checkName = $this->checkNameExist($value->name);
-            DB::beginTransaction();
             if ($checkName) {
                 $product = $this->checkInfoCorrect($value->name, $categoryId, $value->original_price, $value->description);
                 if (!$product) {
@@ -457,6 +457,7 @@ class ProductService
                 }
             }
         }
+        DB::commit();
         return true;
     }
 

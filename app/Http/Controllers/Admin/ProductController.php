@@ -184,4 +184,39 @@ class ProductController extends Controller
         }
         return redirect()->route('admin.product.index')->with('error', trans('common.message.delete_error'));
     }
+
+    /**
+     * Export sample csv file to import product
+     * 
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function exportSampleFile()
+    {
+        return Excel::create('sample_product_CSV', function ($excel){
+            $excel->sheet('sheet', function ($sheet){
+                $sheet->cell('A1', function ($cell) {
+                    $cell->setValue('name');
+                });
+                $sheet->cell('B1', function ($cell) {
+                    $cell->setValue('category');
+                });
+                $sheet->cell('C1', function ($cell) {
+                    $cell->setValue('original_price');
+                });
+                $sheet->cell('D1', function ($cell) {
+                    $cell->setValue('description');
+                });
+                $sheet->cell('E1', function ($cell) {
+                    $cell->setValue('color');
+                });
+                $sheet->cell('F1', function ($cell) {
+                    $cell->setValue('size');
+                });
+                $sheet->cell('G1', function ($cell) {
+                    $cell->setValue('quantity');
+                });
+            });
+        })->download('csv');
+    }
 }
