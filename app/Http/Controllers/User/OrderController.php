@@ -104,27 +104,28 @@ class OrderController extends Controller
      */
     public function handleCheckout(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'customer.userId' => 'exists:users,id',
-            'customer.customerName' => 'required',
-            'customer.phoneNumber' => 'required|numeric|min:10',
-            'customer.shippingAddress' => 'required',
-            'arrProduct.*.product.id' => 'required|exists:products,id',
-            'arrProduct.*.color.id' => 'required|exists:colors,id',
-            'arrProduct.*.color.name' => 'required|exists:colors,name',
-            'arrProduct.*.size.id' => 'required|exists:sizes,id',
-            'arrProduct.*.size.name' => 'required|exists:sizes,size',
-            'code.name' => 'exists:codes,name',
-        ]);
-        if ((!empty($request->input('code.name')) && !empty($request->input('code.name')) && app(CodeService::class)->checkCodeWithUser($request->input('code.name'), $request->input('customer.userId')))) {
-            return response()->json(array('success' => false, 'message' => trans('checkout.message.err_used_code')));
-        }
-        if ($validator->fails()) {
-            return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
-        }
-        if (app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'))) {
-            return response()->json(array('success' => true, 'message' => trans('checkout.message.success')));
-        }
-        return response()->json(array('success' => false, 'message' => trans('checkout.message.error')));
+        return app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'));
+        // $validator = \Validator::make($request->all(), [
+        //     'customer.userId' => 'exists:users,id',
+        //     'customer.customerName' => 'required',
+        //     'customer.phoneNumber' => 'required|numeric|min:10',
+        //     'customer.shippingAddress' => 'required',
+        //     'arrProduct.*.product.id' => 'required|exists:products,id',
+        //     'arrProduct.*.color.id' => 'required|exists:colors,id',
+        //     'arrProduct.*.color.name' => 'required|exists:colors,name',
+        //     'arrProduct.*.size.id' => 'required|exists:sizes,id',
+        //     'arrProduct.*.size.name' => 'required|exists:sizes,size',
+        //     'code.name' => 'exists:codes,name',
+        // ]);
+        // if ((!empty($request->input('code.name')) && !empty($request->input('code.name')) && app(CodeService::class)->checkCodeWithUser($request->input('code.name'), $request->input('customer.userId')))) {
+        //     return response()->json(array('success' => false, 'message' => trans('checkout.message.err_used_code')));
+        // }
+        // if ($validator->fails()) {
+        //     return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
+        // }
+        // if (app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'))) {
+        //     return response()->json(array('success' => true, 'message' => trans('checkout.message.success')));
+        // }
+        // return response()->json(array('success' => false, 'message' => trans('checkout.message.error')));
     }
 }

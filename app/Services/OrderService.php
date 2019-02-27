@@ -111,66 +111,69 @@ class OrderService
      */
     public function order(array $code = null, array $arrProduct, array $customer)
     {
-        DB::beginTransaction();
-        try {
-            $products = data_get($arrProduct, '*.product');
-            if ($code) {
-                $code = Code::where('name', $code['name'])->where('times', '>', 0)->first();
-            }
-            $totalAmount = $this->getTotalAmount($products, $code);
-            if ($customer['userId']) {
-                $data = [
-                    'user_id' => $customer['userId'],
-                    'code_id' => $code ? $code->id : null,
-                    'total_amount' => $totalAmount,
-                ];
-                Profile::where('user_id', $customer['userId'])->update([
-                    'name' => $customer['customerName'],
-                    'phonenumber' => $customer['phoneNumber'],
-                    'address' => $customer['shippingAddress'],
-                ]);
-            } else {
-                $data = [
-                    'code_id' => $code ? $code->id : null,
-                    'customer_name' => $customer['customerName'],
-                    'shipping_address' => $customer['shippingAddress'],
-                    'phone_number' => $customer['phoneNumber'],
-                    'total_amount' => $totalAmount,
-                ];
-            }
-            $order = Order::create($data);
-            foreach ($arrProduct as $val) {
-                $price = $this->getPrice($val['product']['id']);
-                if ($price['promotion']) {
-                    Promotion::where('id', $price['promotion'])->increment('total_sold', $val['product']['quantity']);
-                }
-                OrderDetail::create([
-                    'order_id' => $order->id,
-                    'product_id' => $val['product']['id'],
-                    'price' => $price['value'],
-                    'quantity' => $val['product']['quantity'],
-                    'size' => $val['size']['name'],
-                    'color' => $val['color']['name'],
-                ]);
-                ProductDetail::where('product_id', $val['product']['id'])
-                ->where('color_id', $val['color']['id'])
-                ->where('size_id', $val['size']['id'])
-                ->increment('total_sold', $val['product']['quantity']);
-                Product::where('id', $val['product']['id'])
-                ->increment('total_sold', $val['product']['quantity']);
-            }
-            if ($customer['userId']) {
-                $user = User::find($customer['userId']);
-                Mail::to($user->email)->send(new ConfirmOrder($order));
-                // dispatch(new \App\Jobs\SendConfirmOrder($user, $order));
-            }
-            DB::commit();
-            return true;
-        } catch (\Exception $e) {
-            Log::error($e);
-            DB::rollback();
-        }
-        return false;
+        $a = app(ProductService::class)->checkQuantityProducts($arrProduct);
+        \Log::debug(count($a));
+        return $a;
+        // DB::beginTransaction();
+        // try {
+        //     $products = data_get($arrProduct, '*.product');
+        //     if ($code) {
+        //         $code = Code::where('name', $code['name'])->where('times', '>', 0)->first();
+        //     }
+        //     $totalAmount = $this->getTotalAmount($products, $code);
+        //     if ($customer['userId']) {
+        //         $data = [
+        //             'user_id' => $customer['userId'],
+        //             'code_id' => $code ? $code->id : null,
+        //             'total_amount' => $totalAmount,
+        //         ];
+        //         Profile::where('user_id', $customer['userId'])->update([
+        //             'name' => $customer['customerName'],
+        //             'phonenumber' => $customer['phoneNumber'],
+        //             'address' => $customer['shippingAddress'],
+        //         ]);
+        //     } else {
+        //         $data = [
+        //             'code_id' => $code ? $code->id : null,
+        //             'customer_name' => $customer['customerName'],
+        //             'shipping_address' => $customer['shippingAddress'],
+        //             'phone_number' => $customer['phoneNumber'],
+        //             'total_amount' => $totalAmount,
+        //         ];
+        //     }
+        //     $order = Order::create($data);
+        //     foreach ($arrProduct as $val) {
+        //         $price = $this->getPrice($val['product']['id']);
+        //         if ($price['promotion']) {
+        //             Promotion::where('id', $price['promotion'])->increment('total_sold', $val['product']['quantity']);
+        //         }
+        //         OrderDetail::create([
+        //             'order_id' => $order->id,
+        //             'product_id' => $val['product']['id'],
+        //             'price' => $price['value'],
+        //             'quantity' => $val['product']['quantity'],
+        //             'size' => $val['size']['name'],
+        //             'color' => $val['color']['name'],
+        //         ]);
+        //         ProductDetail::where('product_id', $val['product']['id'])
+        //         ->where('color_id', $val['color']['id'])
+        //         ->where('size_id', $val['size']['id'])
+        //         ->increment('total_sold', $val['product']['quantity']);
+        //         Product::where('id', $val['product']['id'])
+        //         ->increment('total_sold', $val['product']['quantity']);
+        //     }
+        //     if ($customer['userId']) {
+        //         $user = User::find($customer['userId']);
+        //         Mail::to($user->email)->send(new ConfirmOrder($order));
+        //         // dispatch(new \App\Jobs\SendConfirmOrder($user, $order));
+        //     }
+        //     DB::commit();
+        //     return true;
+        // } catch (\Exception $e) {
+        //     Log::error($e);
+        //     DB::rollback();
+        // }
+        // return false;
     }
 
     /**

@@ -26,7 +26,7 @@ $(document).ready(function(){
             list += '<img class="content-image img-fluid d-block mx-auto size-product" src="'+ val.image +'" alt="">';
             list += '<div class="content-details fadeIn-bottom">';
             list += '<div class="bottom d-flex align-items-center justify-content-center">';
-            list += '<a href="#"><span class="lnr lnr-cart"></span></a>';
+            list += '<a href="'+ detailProductUrl +'/'+ val.id +'"><span class="lnr lnr-cart"></span></a>';
             list += '<a href="#" data-toggle="modal" data-target="#modal-product"  data-product="'+ val.id +'"><span class="lnr lnr-frame-expand"></span></a>';
             list += '</div>';
             list += '</div>';
