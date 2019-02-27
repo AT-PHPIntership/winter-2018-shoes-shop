@@ -143,7 +143,7 @@ class StatisticalController extends Controller
                         $sheet->cell('D'.$i, $value->category->name);
                         $sheet->cell('E'.$i, $value->original_price);
                         $sheet->cell('F'.$i, $value->quantity);
-                        $sheet->cell('G'.$i, null, $value->total_sold, true);
+                        $sheet->cell('G'.$i, $value->total_sold);
                         $sheet->cell('H'.$i, $value->inventory);
                     }
                 }
