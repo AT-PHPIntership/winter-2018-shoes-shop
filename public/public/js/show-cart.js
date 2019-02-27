@@ -21,7 +21,7 @@ $(document).ready(function(){
       items += '<div class="price js-price-item">'+ formatCurrencyVN(val.product.price) +'</div>';
       items += '</div>';
       items += '<div class="col-md-2 col-6">';
-      items += '<input type="number" min="0" class="form-control w-50 js-quantity-item" value="'+ val.product.quantity +'" />';
+      items += '<input type="number" min="1" max="" class="form-control w-50 js-quantity-item" value="'+ val.product.quantity +'" />';
       items += '</div>';
       items += '<div class="col-md-2 col-12">';
       items += '<div class="total js-total-price-item">'+ formatCurrencyVN(val.product.price * val.product.quantity) +'</div>';
@@ -129,6 +129,9 @@ $(document).ready(function(){
         success: function(data){
           if(data == ''){
             $('.mess-coupon').text('Áp mã thất bại (Mã đã hết hoặc sai mã)');
+            localStorage.removeItem('code');
+            $('#cart-code-decrease').text('');
+            $('#cart-amount').text(formatCurrencyVN(getSubAmount()));
           }else{
             var subAmount = getSubAmount();
             var amount = subAmount - data;

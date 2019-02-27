@@ -139,6 +139,7 @@ class OrderService
                 ];
             }
             $order = Order::create($data);
+            \Log::debug($order);
             foreach ($arrProduct as $val) {
                 $price = $this->getPrice($val['product']['id']);
                 if ($price['promotion']) {
@@ -161,7 +162,7 @@ class OrderService
             }
             if ($customer['userId']) {
                 $user = User::find($customer['userId']);
-                Mail::to($user->email)->send(new ConfirmOrder($order));
+                // Mail::to($user->email)->send(new ConfirmOrder($order));
                 // dispatch(new \App\Jobs\SendConfirmOrder($user, $order));
             }
             DB::commit();

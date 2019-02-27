@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Services\CodeService;
 use App\Http\Requests\User\PostCheckoutRequest;
 use App\Services\OrderService;
+use App\Services\ProductService;
 
 class OrderController extends Controller
 {
@@ -121,6 +122,10 @@ class OrderController extends Controller
         }
         if ($validator->fails()) {
             return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
+        }
+        $error = app(ProductService::class)->checkQuantityProducts($request->input('arrProduct'));
+        if (count($error)) {
+            return response()->json(array('success' => false, 'message' => $error));
         }
         if (app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'))) {
             return response()->json(array('success' => true, 'message' => trans('checkout.message.success')));

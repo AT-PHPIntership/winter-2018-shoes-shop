@@ -71,7 +71,15 @@ $(document).ready(function(){
             localStorage.removeItem('code');
             window.location.href = confermationUrl;
           }else{
-            $('.message-checkout').text(data.message);
+            if(typeof(data.message) == 'object'){
+              var mess = '';
+              $.each(data.message, function(key, val){
+                mess += 'Sản phẩm ' + val.product + '(' + val.color + '-' + val.size + ') chỉ còn ' + val.inventory + ' sản phẩm. ';
+              });
+              $('.message-checkout').text(mess);
+            }else{
+              $('.message-checkout').text(data.message);
+            }
             $('.message-checkout').addClass('error');
           }
         }

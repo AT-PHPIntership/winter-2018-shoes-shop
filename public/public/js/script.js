@@ -37,7 +37,7 @@ $(document).ready(function(){
   $('#modal-product').on('show.bs.modal', function (e) {
     $('#js-color').html('<option value="">'+ option_default +'</option>');
     $('#js-size').html('<option value="">'+ option_default +'</option>');
-    $('#js-quantity').val(1);
+    $('#js-quantity').val(0);
     var modal = $(this);
     var id = $(e.relatedTarget).data('product');
     $.ajax({
@@ -79,12 +79,13 @@ $(document).ready(function(){
   $('#js-color').change(function(){
     $('#js-size').html('<option value="">'+ option_default +'</option>');
     var colorId = $(this).val();
+    var productId = $('.js-add-cart').attr('data-product-id');
     if(colorId){
       $.ajax({
         url: getSizesByColorId,
         method:"get",
         dataType:"JSON",
-        data: {colorId:colorId},
+        data: {colorId:colorId,productId:productId},
         success: function(data){
           productInventory = data;
           var eleSize = "";
@@ -102,8 +103,22 @@ $(document).ready(function(){
     if(sizeId){
       $.each(productInventory, function(key, val){
         if (+sizeId == +val.id){
-          $('#js-inventory').text(val.inventory);
-          $('#js-quantity').attr('max', val.inventory);
+          var inventory = val.inventory;
+          var productId = $('.js-add-cart').attr("data-product-id");
+          var colorId = $('#js-color').val();
+          var arrProduct = JSON.parse(localStorage.getItem('arrProduct'));
+          if(!arrProduct || !arrProduct.length){
+            arrProduct = [];
+          }
+          if(arrProduct.length){
+            $.each(arrProduct, function(key, val){
+              if(val.product.id == productId && val.color.id == colorId && val.size.id == sizeId){
+                inventory -= val.product.quantity;
+              }
+            });
+          }
+          $('#js-inventory').text(inventory);
+          $('#js-quantity').attr('max', inventory);
         }
       });
     }

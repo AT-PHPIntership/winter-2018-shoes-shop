@@ -150,11 +150,11 @@ class CategoryService
     {
         $category = $this->getCategoryById($id);
         foreach ($category->children as $child) {
-            if (!($child->delete())) {
+            if (!($child->forceDelete())) {
                 return false;
             };
         }
-        if (!($category->delete())) {
+        if (!($category->forceDelete())) {
             return false;
         };
         return true;
