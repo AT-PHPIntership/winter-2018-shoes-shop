@@ -42,7 +42,7 @@
     @endphp
     @foreach ($order->orderDetails as $orderDetail)
       <tr>
-        <td>{{ $orderDetail->product->name }} <p>({{ $orderDetail->product->color.'-'.$orderDetail->product->size }})</p></td>
+        <td>{{ $orderDetail->product->name }} <p>({{ $orderDetail->color.'-'.$orderDetail->size }})</p></td>
         <td>{{ formatCurrencyVN($orderDetail->price) }}</td>
         <td>{{ $orderDetail->quantity }}</td>
         <td>{{ formatCurrencyVN($orderDetail->price * $orderDetail->quantity) }}</td>
