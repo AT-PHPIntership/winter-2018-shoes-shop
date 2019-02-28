@@ -32,6 +32,7 @@ class ConfirmOrder extends Mailable
     public function build()
     {
         return $this->view('user.pages.confirm-order')
-                    ->with(['order' => $this->order]);;
+                    ->with(['order' => $this->order]);
+        ;
     }
 }

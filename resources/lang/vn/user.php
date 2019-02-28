@@ -49,4 +49,8 @@ return [
     'wrong_password' => 'Mật khẩu cũ không chính xác!',
     'change_password_success' => 'Đổi mật khẩu thành công!',
     'change_password_error' => 'Đổi mật khẩu thất bại!',
+    'register' => 'Đăng ký',
+    'register_account' => 'Đăng ký tài khoản',
+    'register_success' => 'Đăng ký thành công!',
+    'register_error' => 'Đăng ký thất bại, vui lòng thử lại!',
 ];

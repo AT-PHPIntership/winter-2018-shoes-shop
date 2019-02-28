@@ -21,7 +21,8 @@
               </ul>
             </li>
           @else
-            <li class="item-user"><a href="{{ route('user.login') }}">{{ trans('login.login') }}</a></li>
+            <li class="p-15"><a href="{{ route('user.login') }}">{{ trans('login.login') }}</a></li>
+            <li class="p-15"><a href="{{ route('user.register') }}">{{ trans('user.register') }}</a></li>
           @endif          
         </ul>
       </div>
