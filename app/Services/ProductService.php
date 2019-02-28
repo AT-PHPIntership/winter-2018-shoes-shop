@@ -98,16 +98,18 @@ class ProductService
     }
 
     /**
-     * Get sizes by colorId
+     * Get sizes by colorId and productId
      *
-     * @param int $colorId colorId colorId
+     * @param int $colorId   colorId
+     * @param int $productId productId
      *
      * @return \Illuminate\Http\Response
      */
-    public function getSizesByColorId(int $colorId)
+    public function getSizesByColorId(int $colorId, int $productId)
     {
         return Size::join('product_details', 'sizes.id', '=', 'product_details.size_id')
             ->where('product_details.color_id', $colorId)
+            ->where('product_details.product_id', $productId)
             ->orderBy('sizes.id')->get(['sizes.id', 'size', \DB::raw('`quantity` - `total_sold` as inventory')])
             ->keyBy('id');
     }
@@ -651,13 +653,48 @@ class ProductService
         try {
             if (!$product->images->isEmpty()) {
                 foreach ($product->images as $image) {
-                    File::delete(public_path('upload/'.$image->path));
+                    File::delete(public_path($image->path));
                 }
             }
-            return $product->delete();
+            return $product->forceDelete();
         } catch (Exception $e) {
             Log::error($e);
         }
         return false;
+    }
+
+    /**
+     * Check quantity products in order
+     *
+     * @param array $products products
+     *
+     * @return array
+     */
+    public function checkQuantityProducts($products)
+    {
+        try {
+            $error = [];
+            foreach ($products as $key => $product) {
+                $productDetail = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')
+                    ->join('colors', 'colors.id', '=', 'product_details.color_id')
+                    ->join('sizes', 'sizes.id', '=', 'product_details.size_id')
+                    ->where('product_id', $product['product']['id'])
+                    ->where('color_id', $product['color']['id'])
+                    ->where('size_id', $product['size']['id'])
+                    ->select('products.name as name', 'product_details.quantity', 'product_details.total_sold', 'colors.name as color', 'sizes.size as size')
+                    ->first();
+                $inventory = $productDetail->quantity - $productDetail->total_sold;
+                if ($inventory < $product['product']['quantity']) {
+                    $error[$key]['product'] = $productDetail->name;
+                    $error[$key]['color'] = $productDetail->color;
+                    $error[$key]['size'] = $productDetail->size;
+                    $error[$key]['inventory'] = $inventory;
+                }
+            }
+            return $error;
+        } catch (Exception $e) {
+            Log::error($e);
+            return false;
+        }
     }
 }

@@ -27,7 +27,6 @@ class PostPromotionRequest extends FormRequest
             'name' => 'required|unique:promotions,name',
             'product_id' => 'exists:products,id',
             'percent' => 'required|numeric|min:1|max:100',
-            'max_sell' => 'required|numeric',
             'start_date' => 'required|date|after:yesterday',
             'end_date' => 'required|date|after:start_date',
         ];

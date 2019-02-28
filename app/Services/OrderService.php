@@ -139,6 +139,7 @@ class OrderService
                 ];
             }
             $order = Order::create($data);
+            \Log::debug($order);
             foreach ($arrProduct as $val) {
                 $price = $this->getPrice($val['product']['id']);
                 if ($price['promotion']) {

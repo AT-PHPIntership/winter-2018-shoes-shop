@@ -52,7 +52,7 @@
                 </div>
                 <div class="d-flex align-items-center mt-15">
                     {{ __('index.quick_view.quantity') }}:
-                  <input type="number" id="js-quantity" min="1" class="form-control w-30 ml-15" value="1"/>
+                  <input type="number" id="js-quantity" min="0" class="form-control w-30 ml-15" value="0"/>
                 </div>
                 <div class="d-flex mt-20">
                   <a href="javascript:void(0)" data-product-id="" class="genric-btn primary js-add-cart"><span>{{ __('index.quick_view.add_to_cart') }}</span></a>

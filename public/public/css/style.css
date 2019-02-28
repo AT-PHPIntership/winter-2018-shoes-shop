@@ -491,3 +491,6 @@
 .confermation {
   min-height: 400px;
 }
+.bd-red {
+  border: 1px solid red; 
+}

@@ -76,6 +76,6 @@ class ProductController extends Controller
      */
     public function getSizesByColorId(Request $request)
     {
-        return app(ProductService::class)->getSizesByColorId($request->input('colorId'));
+        return app(ProductService::class)->getSizesByColorId($request->input('colorId'), $request->input('productId'));
     }
 }

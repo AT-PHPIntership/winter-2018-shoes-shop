@@ -66,7 +66,7 @@
                 <div class="form-group col-md-6">
                   <label>{{ trans('product.color')}}: </label>
                   <select id="js-color" class="form-control">
-                    <option>{{ trans('product.select_color')}}</option>
+                    <option value="">{{ trans('product.select_color')}}</option>
                     @foreach($product['colors'] as $color)
                       <option value="{{ $color->id }}">{{ $color->name }}</option>
                     @endforeach
@@ -81,7 +81,7 @@
               <div class="d-flex align-items-center mt-30">
                 <label>{{ trans('product.quantity')}}: </label>
                 <div class="form-group col-md-6">
-                  <input id="js-quantity" type="number" min="1" class="select-number ml-15 form-control" value="1" />
+                  <input id="js-quantity" type="number" min="0" class="select-number ml-15 form-control" value="0" />
                 </div>
               </div>
               <div class="d-flex mt-20">

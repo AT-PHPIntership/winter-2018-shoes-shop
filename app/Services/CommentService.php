@@ -68,9 +68,9 @@ class CommentService
      */
     public function getCommentsByProductId(int $productId)
     {
-        return Comment::with(['children' => function ($query) use ($productId) {
+        return Comment::join('users', 'comments.user_id', '=', 'users.id')->with(['children' => function ($query) use ($productId) {
             $query->where('product_id', $productId);
-        }, 'user:id', 'user.profile:user_id,name,avatar'])->where('product_id', $productId)->where('parent_id', null)->where('status', Comment::ACTIVE_STATUS)->get();
+        }, 'user.profile:user_id,name,avatar'])->whereNull('deleted_at')->where('product_id', $productId)->where('parent_id', null)->where('status', Comment::ACTIVE_STATUS)->get();
     }
 
     /**
