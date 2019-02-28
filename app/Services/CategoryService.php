@@ -42,7 +42,7 @@ class CategoryService
     public function getList()
     {
         $categories = Category::select('id', 'name', 'parent_id')
-                    ->orderBy('updated_at', 'desc')
+                    ->orderBy('id', 'desc')
                     ->paginate(config('define.number_element_in_table'));
         return $categories;
     }

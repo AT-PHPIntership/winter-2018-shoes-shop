@@ -123,7 +123,7 @@
             @foreach ($childsCatForWomen as $childCatForWomen)
               <li>
                 <h3>
-                  <a class="text-white" href="{{ route('user.category', ['id' => $childCatForWomen->id]) }}">{{ $childCatForWomen->name }}</a>
+                  <a href="{{ route('user.category', ['id' => $childCatForWomen->id]) }}">{{ $childCatForWomen->name }}</a>
                 </h3>
               </li>
             @endforeach

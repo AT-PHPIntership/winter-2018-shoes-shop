@@ -30,7 +30,7 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>{{ trans('common.table.num')}}</th>
+                    <th>{{ trans('product.id')}}</th>
                     <th>{{ trans('product.name')}}</th>
                     <th>{{ trans('product.price')}}</th>
                     <th>{{ trans('product.category')}}</th>
@@ -40,9 +40,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($products as $key => $product)
+                  @foreach($products as $product)
                     <tr>
-                      <td>{{ $key + 1 }}</td>
+                      <td>{{ $product->id }}</td>
                       <td>{{ $product->name }}</td>
                       <td>{{ $product->original_price }}</td>
                       <td>{{ $product->category->name }}</td>

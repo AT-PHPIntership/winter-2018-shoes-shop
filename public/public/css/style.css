@@ -307,8 +307,8 @@
   max-height: 70px;
 }
 .size-product {
-  min-width: 250px;
-  min-height: 250px;
+  width: 270px;
+  height: 270px;
 }
 .size-slide {
   height: 700px;

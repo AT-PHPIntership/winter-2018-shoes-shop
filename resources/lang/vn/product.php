@@ -28,4 +28,5 @@ return [
     'images' => 'Hình ảnh sản phẩm',
     'choose_category' => 'Chọn danh mục',
     'image_error' => 'Ảnh không hợp lệ!',
+    'id' => 'Id',
 ];

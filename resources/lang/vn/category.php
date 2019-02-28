@@ -14,6 +14,7 @@ return [
         'level_error' => 'Bạn không thể chọn cấp danh mục này!',
     ],
     'table' => [
+        'id' => 'Id',
         'num' => 'STT',
         'name' => 'Tên danh mục',
         'parent_name' => 'Danh mục cha',

@@ -42,7 +42,7 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>{{ trans('common.table.num') }}</th>
+                    <th>{{ trans('category.table.id') }}</th>
                     <th>{{ trans('category.table.name') }}</th>
                     <th>{{ trans('category.table.parent_name') }}</th>
                     <th>{{ trans('common.table.action') }}</th>
@@ -51,7 +51,7 @@
                 <tbody>
                 @foreach($categories as $key => $category)
                   <tr>
-                    <td>{{ $key+1 }}</td>
+                    <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>

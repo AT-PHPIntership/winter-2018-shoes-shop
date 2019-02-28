@@ -271,14 +271,14 @@ class ProductService
      */
     public function handleStoreProduct($data)
     {
-        $quantity = 0;
-        foreach ($data['quantity_type'] as $itemQuantity) {
-            $quantity = $quantity + $itemQuantity;
-        }
-        $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
-        $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
         DB::beginTransaction();
         try {
+            $quantity = 0;
+            foreach ($data['quantity_type'] as $itemQuantity) {
+                $quantity = $quantity + $itemQuantity;
+            }
+            $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
+            $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
             $newProduct = $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
             foreach ($dataProductDetails as $detail) {
                 $this->createProductDetail($newProduct->id, $detail['color'], $detail['size'], $detail['quantity']);
