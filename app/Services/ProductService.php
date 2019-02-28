@@ -229,7 +229,7 @@ class ProductService
                 $products->orderBy('updated_at', $sort[1]);
             }
         }
-        $products = $products->distinct('product_id')->paginate(config('define.paginate.limit_rows_12'));
+        $products = $products->groupBy('products.id')->paginate(config('define.paginate.limit_rows_12'));
         $result = [];
         $items = [];
         foreach ($products as $key => $product) {

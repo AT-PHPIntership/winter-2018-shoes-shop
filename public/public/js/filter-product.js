@@ -16,6 +16,7 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice, page:page},
       success: function(data){
+        console.log(data['page']);
         var list = '';
         var pagi = '';
         if (data['products'].length) {
@@ -41,8 +42,8 @@ $(document).ready(function(){
             list += '</div>';
             list += '</div>';
           });
-          for (var i = 1; i < data['page']; i++) {
-            if (data['page'] > 2) {
+          for (var i = 1; i <= data['page']; i++) {
+            if (data['page'] > 1) {
               var active = '';
               if(page == i){
                 active = 'active';
@@ -109,11 +110,11 @@ $(document).ready(function(){
       var nonLinearSlider = document.getElementById('price-range');
       noUiSlider.create(nonLinearSlider, {
         connect: true,
-        start: [ 100000, 2000000 ],
+        start: [ 100000, 10000000 ],
         range: {
           'min': [ 0, 100000 ],
-          '50%': [ 1000000, 200000 ],
-          'max': [ 2000000 ],
+          '50%': [ 1000000, 500000 ],
+          'max': [ 10000000 ],
         }
       });
       var nodes = [
