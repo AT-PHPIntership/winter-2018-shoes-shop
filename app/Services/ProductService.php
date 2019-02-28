@@ -274,10 +274,10 @@ class ProductService
             $quantity = $quantity + $itemQuantity;
         }
         $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
+        $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
         DB::beginTransaction();
         try {
             $newProduct = $this->createProduct($data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
-            $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
             foreach ($dataProductDetails as $detail) {
                 $this->createProductDetail($newProduct->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
@@ -391,13 +391,13 @@ class ProductService
     {
         $output = [];
         for ($i = 0; $i < count($colors); $i++) { //check each data of input
-            for ($j = 0; $j < $i; $j++) { //compare each data in output
+            for ($j = 0; $j < count($output); $j++) { //compare each data in output
                 if (($colors[$i] == $output[$j]['color']) && ($sizes[$i] == $output[$j]['size'])) {
                     $output[$j]['quantity'] += $quantities[$i];
                     break;
                 }
             }
-            if ($j == $i) { //add data to output if not exist
+            if ($j == count($output)) { //add data to output if not exist
                 $detail['color'] = $colors[$i];
                 $detail['size'] = $sizes[$i];
                 $detail['quantity'] = $quantities[$i];
@@ -596,11 +596,11 @@ class ProductService
             $quantity = $quantity + $itemQuantity;
         }
         $categoryId = isset($data['child_category_id']) ? $data['child_category_id'] : $data['parent_category_id'];
+        $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
         DB::beginTransaction();
         try {
             $this->updateProduct($product->id, $data['name'], $categoryId, $data['original_price'], $quantity, $data['description']);
             DB::table('product_details')->where('product_id', $product->id)->delete();
-            $dataProductDetails = $this->checkDuplicate($data['color_id'], $data['size_id'], $data['quantity_type']);
             foreach ($dataProductDetails as $detail) {
                 $this->createProductDetail($product->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
