@@ -62,6 +62,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@handleLogin')->name('login');
     Route::get('logout', 'LoginController@handleLogout')->name('logout');
+    Route::get('register', 'RegisterController@showRegister')->name('register');
+    Route::post('register', 'RegisterController@handleRegister')->name('register');
     Route::get('category/filterProduct', 'ProductController@filterProduct');
     Route::get('category/{id}', 'ProductController@listProductByCatId')->name('category');
     Route::middleware(['auth'])->group(function () {

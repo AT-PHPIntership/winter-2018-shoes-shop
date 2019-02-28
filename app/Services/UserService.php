@@ -205,6 +205,37 @@ class UserService
         }
     }
 
+    /* Register a new account
+     *
+     * @param array $data data
+     *
+     * @return object
+     */
+    public function register(array $data)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'role_id' => Role::CUSTOMER_ROLE,
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+            Profile::create([
+                'user_id' => $user['id'],
+                'name' => $data['name'],
+                'gender' => $data['gender'],
+                'address' => $data['address'],
+                'phonenumber' => $data['phonenumber'],            
+                'avatar' => isset($data['avatar']) ? $this->uploadAvatar($data['avatar']) : null,
+            ]);
+            DB::commit();
+            return $user;
+        } catch (Exception $e) {
+            Log::error($e);
+            DB::rollback();
+        }
+    }
+
     /**
      * Update the password.
      *
