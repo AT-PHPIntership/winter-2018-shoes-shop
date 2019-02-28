@@ -25,7 +25,7 @@ class ModifyOriginalPriceProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('order_details', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->integer('original_price')->change();
         });
     }
