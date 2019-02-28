@@ -66,7 +66,11 @@
                 </tbody>
               </table>
             </div>
-            <div lass="row">{{ $categories->links() }}</div>
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                  {{ $categories->links() }}
+              </ul>
+            </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
