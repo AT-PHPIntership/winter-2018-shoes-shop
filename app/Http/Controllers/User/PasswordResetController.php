@@ -11,17 +11,28 @@ use App\Models\PasswordReset;
 use App\Http\Requests\User\EmailRequest;
 use App\Http\Requests\User\ResetPasswordRequest;
 use Carbon\Carbon;
+use App\Services\ResetPasswordService;
 
 class PasswordResetController extends Controller
 {
     /**
+     * The category Service implementation.
+     *
+     * @var resetPasswordService
+     */
+    protected $resetPasswordService;
+
+    /**
      * Create a new controller instance.
+     *
+     * @param CategoryService $categoryService comment about this variable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ResetPasswordService $resetPasswordService)
     {
         $this->middleware('guest');
+        $this->resetPasswordService = $resetPasswordService;
     }
 
     /**
@@ -43,22 +54,11 @@ class PasswordResetController extends Controller
      */
     public function sendResetLinkEmail(EmailRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return redirect()->route('user.password.request')->with('error', trans('user.invalid_email'));
+        $data = $request->only('email');
+        if ($this->resetPasswordService->sendEmail($data)) {
+            return redirect()->route('user.password.request')->with('success', trans('user.sent_email'));
         }
-        $passwordReset = PasswordReset::updateOrCreate(
-            ['email' => $user->email],
-            [
-                'email' => $user->email,
-                'token' => str_random(60)
-            ]
-        );
-        if ($user && $passwordReset) {
-            $user->notify( new PasswordResetRequest($passwordReset->token));
-            return redirect()->route('user.password.request')->with('success',trans('user.sent_email'));
-        }
-        return redirect()->route('user.password.request')->with('error', trans('user.check_error'));
+        return redirect()->route('user.password.request');
     }
 
     /**
@@ -90,14 +90,10 @@ class PasswordResetController extends Controller
      */
     public function reset(ResetPasswordRequest $request)
     {
-        $passwordReset = PasswordReset::where('token', $request->token)->first();
-        $user = User::where('email', $passwordReset->email)->first();
-        if (!$user) {
-            return redirect()->route('user.password.request')->with('errer', trans('user.check_error'));
+        $data = $request->only('password', 'token');
+        if ($this->resetPasswordService->resetPassword($data)) {
+            return redirect()->route('user.login');
         }
-        $user->password = bcrypt($request->password);
-        $user->save();
-        $user->notify(new PasswordResetSuccess($passwordReset));
-        return redirect()->route('user.login');
+        return redirect()->route('user.password.request');
     }
 }
