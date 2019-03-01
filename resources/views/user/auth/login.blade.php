@@ -43,7 +43,7 @@
 							</button>
 						</div>
 						<div>
-							<a class="reset_pass" href="{{route('user.password.reset')}}">Quên mật khẩu?</a>
+							<a class="reset_pass" href="{{route('user.password.request')}}">Quên mật khẩu?</a>
 						</div>
 						</div>
 					<div class="box-social text-uppercase p-t-30">
