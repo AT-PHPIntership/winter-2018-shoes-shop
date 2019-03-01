@@ -8,8 +8,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-</head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	</head>
 <body>
 	<div class="container">
 			<div class="row">
@@ -20,6 +20,9 @@
 								<h3><i class="fa fa-lock fa-4x"></i></h3>
 								<h2 class="text-center">Forgot Password?</h2>
 								<p>You can reset your password here.</p>
+									<div>
+										@include('user.module.message')
+									</div>
 								<div class="panel-body">
 									<form id="register-form" role="form" autocomplete="off" class="form" method="POST" action="{{ route('user.password.email') }}">
 										{{ csrf_field() }}
@@ -28,9 +31,12 @@
 												<span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
 												<input id="email" name="email" placeholder="email address" class="form-control"  type="email">
 											</div>
+											@if ($errors->has('email'))
+												<span style="color:red">{{ $errors->first('email') }}</span>
+											@endif
 										</div>
 										<div class="form-group">
-											<input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+											<button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
 										</div>
 									</form>	
 								</div>
