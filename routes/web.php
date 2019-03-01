@@ -73,6 +73,11 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         Route::post('password', 'ProfileController@handlePassword')->name('password');
         Route::get('orders', 'OrderController@index')->name('orders');
         Route::get('order/{id}', 'OrderController@show')->name('order.show');
+        // Password Reset
+        Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+        Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+        Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset.token');
+        Route::post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
     });
     Route::get('/{provider}/redirect', 'SocialController@redirect');
     Route::get('/{provider}/callback', 'SocialController@callback');
