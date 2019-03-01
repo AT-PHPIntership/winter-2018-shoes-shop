@@ -121,6 +121,9 @@ $(document).ready(function(){
   function checkCode(){
     var codeName = $('.js-input-code').val();
     var products = getProduct();
+    if(codeName == ''){
+      $('.mess-coupon').text('Vui lòng nhập mã!');
+    }
     if(codeName != '' && products.length != 0){
       $.ajax({
         url: 'cart/applyCode',

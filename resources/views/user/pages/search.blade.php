@@ -29,7 +29,7 @@
                   <img class="content-image img-fluid d-block mx-auto size-product" src="{{ $product->images->first() ? $product->images->first()->path : config('define.image_default_product') }}" alt="">
                   <div class="content-details fadeIn-bottom">
                     <div class="bottom d-flex align-items-center justify-content-center">
-                      <a href="#"><span class="lnr lnr-cart"></span></a>
+                      <a href="{{ route('user.detail', ['id' => $product->id]) }}"><span class="lnr lnr-cart"></span></a>
                       <a href="#" data-toggle="modal" data-target="#modal-product" data-product="{{ $product->id }}"><span class="lnr lnr-frame-expand"></span></a>
                     </div>
                   </div>

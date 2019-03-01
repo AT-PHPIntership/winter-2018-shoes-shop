@@ -15,6 +15,7 @@ use Log;
 use DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConfirmOrder;
+use App\Jobs\SendConfirmOrder;
 
 class OrderService
 {
@@ -162,8 +163,9 @@ class OrderService
             }
             if ($customer['userId']) {
                 $user = User::find($customer['userId']);
-                Mail::to($user->email)->send(new ConfirmOrder($order));
-                // dispatch(new \App\Jobs\SendConfirmOrder($user, $order));
+                // Mail::to($user->email)->send(new ConfirmOrder($order));
+                // dispatch(new \App\Jobs\SendConfirmOrder($user, $order))->delay(now()->addSeconds(5));
+                SendConfirmOrder::dispatch($user, $order)->delay(now()->addSeconds(5));
             }
             DB::commit();
             return true;

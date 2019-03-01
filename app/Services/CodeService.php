@@ -83,7 +83,11 @@ class CodeService
     public function getDecreaseTotalAmount(string $codeName, array $products)
     {
         try {
-            $code = Code::where('name', $codeName)->where('times', '>', 0)->first();
+            $code = Code::where('name', $codeName)
+                        ->where('times', '>', 0)
+                        ->where('start_date', '<=', Carbon::now())
+                        ->where('end_date', '>=', Carbon::now())
+                        ->first();
             if ($code) {
                 $cateogryId = $code->category_id;
                 $amountDecrease = 0;

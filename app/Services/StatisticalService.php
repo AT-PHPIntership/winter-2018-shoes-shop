@@ -36,10 +36,10 @@ class StatisticalService
      */
     public function getRevenue()
     {
-        $revenueThisDay = Order::where('status', 6)->where('delivered_at', Carbon::now()->format('Y-m-d'))->sum('total_amount');
-        $revenueThisWeek = Order::where('status', 6)->whereBetween('delivered_at', [Carbon::now()->startOfWeek()->format('Y-m-d'), Carbon::now()->endOfWeek()->format('Y-m-d')])->sum('total_amount');
-        $revenueThisMonth = Order::where('status', 6)->whereBetween('delivered_at', [Carbon::now()->startOfMonth()->format('Y-m-d'), Carbon::now()->endOfMonth()->format('Y-m-d')])->sum('total_amount');
-        $revenueThisYear = Order::where('status', 6)->whereBetween('delivered_at', [Carbon::now()->startOfYear()->format('Y-m-d'), Carbon::now()->endOfYear()->format('Y-m-d')])->sum('total_amount');
+        $revenueThisDay = Order::where('status', Order::ORDER_STATUS['DELIVERED'])->where('delivered_at', Carbon::now()->format('Y-m-d'))->sum('total_amount');
+        $revenueThisWeek = Order::where('status', Order::ORDER_STATUS['DELIVERED'])->whereBetween('delivered_at', [Carbon::now()->startOfWeek()->format('Y-m-d'), Carbon::now()->endOfWeek()->format('Y-m-d')])->sum('total_amount');
+        $revenueThisMonth = Order::where('status', Order::ORDER_STATUS['DELIVERED'])->whereBetween('delivered_at', [Carbon::now()->startOfMonth()->format('Y-m-d'), Carbon::now()->endOfMonth()->format('Y-m-d')])->sum('total_amount');
+        $revenueThisYear = Order::where('status', Order::ORDER_STATUS['DELIVERED'])->whereBetween('delivered_at', [Carbon::now()->startOfYear()->format('Y-m-d'), Carbon::now()->endOfYear()->format('Y-m-d')])->sum('total_amount');
         return [
             'revenueThisDay' => $revenueThisDay,
             'revenueThisWeek' => $revenueThisWeek,
