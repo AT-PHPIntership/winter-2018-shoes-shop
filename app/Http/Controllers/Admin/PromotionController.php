@@ -68,6 +68,13 @@ class PromotionController extends Controller
     public function store(PostPromotionRequest $request)
     {
         $data = $request->all();
+        if ($request->has('product_id')) {
+            $error = $this->promotionService->checkProductsHadPromotion($data);
+            if (count($error)) {
+                $products = implode(', ', $error);
+                return redirect()->route('admin.promotions.create')->with('error', $products.trans('promotion.mess_had_promotion'))->withInput();
+            }
+        }
         if ($this->promotionService->store($data)) {
             return redirect()->route('admin.promotions.index')->with('success', trans('common.message.create_success'));
         }
@@ -98,6 +105,13 @@ class PromotionController extends Controller
     public function update(PutPromotionRequest $request, Promotion $promotion)
     {
         $data = $request->all();
+        if ($request->has('product_id')) {
+            $error = $this->promotionService->checkProductsHadPromotion($data, $promotion->id);
+            if (count($error)) {
+                $products = implode(', ', $error);
+                return redirect()->route('admin.promotions.edit', ['id' => $promotion->id])->with('error', $products.trans('promotion.mess_had_promotion'));
+            }
+        }
         if ($this->promotionService->update($data, $promotion)) {
             return redirect()->route('admin.promotions.index')->with('success', trans('common.message.edit_success'));
         }
