@@ -187,14 +187,13 @@ class ProductController extends Controller
 
     /**
      * Export sample csv file to import product
-     * 
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function exportSampleFile()
     {
-        return Excel::create('sample_product_CSV', function ($excel){
-            $excel->sheet('sheet', function ($sheet){
+        return Excel::create('sample_product_CSV', function ($excel) {
+            $excel->sheet('sheet', function ($sheet) {
                 $sheet->cell('A1', function ($cell) {
                     $cell->setValue('name');
                 });

@@ -17,6 +17,8 @@ class ConfirmOrder extends Mailable
     /**
      * Create a new message instance.
      *
+     * @param Order $order order
+     *
      * @return void
      */
     public function __construct(Order $order)

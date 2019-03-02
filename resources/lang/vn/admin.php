@@ -29,6 +29,16 @@ return [
             'list' => 'Danh sách sản phẩm',
             'add' => 'Thêm sản phẩm',
         ],
+        'color' => [
+            'title' => 'Quản lý màu',
+            'list' => 'Danh sách màu',
+            'add' => 'Thêm màu',
+        ],
+        'size' => [
+            'title' => 'Quản lý kích cở',
+            'list' => 'Danh sách kích cở',
+            'add' => 'Thêm kích cở',
+        ],
         'order' => [
             'title' => 'Quản lý đơn hàng',
             'list' => 'Danh sách đơn hàng',

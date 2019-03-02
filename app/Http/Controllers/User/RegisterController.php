@@ -35,7 +35,8 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RegisterRequest $request request
+     *
      * @return \Illuminate\Http\Response
      */
     public function handleRegister(RegisterRequest $request)

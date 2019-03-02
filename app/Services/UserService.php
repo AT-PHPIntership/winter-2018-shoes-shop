@@ -205,7 +205,8 @@ class UserService
         }
     }
 
-    /* Register a new account
+    /**
+     * Register a new account
      *
      * @param array $data data
      *
@@ -225,7 +226,7 @@ class UserService
                 'name' => $data['name'],
                 'gender' => $data['gender'],
                 'address' => $data['address'],
-                'phonenumber' => $data['phonenumber'],            
+                'phonenumber' => $data['phonenumber'],
                 'avatar' => isset($data['avatar']) ? $this->uploadAvatar($data['avatar']) : null,
             ]);
             DB::commit();

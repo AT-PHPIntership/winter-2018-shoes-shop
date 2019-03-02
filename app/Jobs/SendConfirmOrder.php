@@ -22,6 +22,9 @@ class SendConfirmOrder implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param User  $user  user
+     * @param Order $order order
+     *
      * @return void
      */
     public function __construct(User $user, Order $order)
