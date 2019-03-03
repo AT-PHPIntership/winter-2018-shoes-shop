@@ -18,8 +18,8 @@
 						<div class="panel-body">
 							<div class="text-center">
 								<h3><i class="fa fa-lock fa-4x"></i></h3>
-								<h2 class="text-center">Forgot Password?</h2>
-								<p>You can reset your password here.</p>
+								<h2 class="text-center">{{ trans('login.forget_password') }}</h2>
+								<p>{{ trans('login.enter_email_reset') }}?</p>
 									<div>
 										@include('user.module.message')
 									</div>
@@ -36,7 +36,7 @@
 											@endif
 										</div>
 										<div class="form-group">
-											<button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
+											<button class="btn btn-lg btn-primary btn-block" type="submit">{{ trans('login.reset_password') }}</button>
 										</div>
 									</form>	
 								</div>

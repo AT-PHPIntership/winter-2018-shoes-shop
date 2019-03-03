@@ -18,7 +18,7 @@
 						<div class="panel-body">
 							<div class="text-center">
 								<h3><i class="fa fa-lock fa-4x"></i></h3>
-								<h2 class="text-center">Đổi mật khẩu</h2>
+								<h2 class="text-center">{{ trans('login.change_password') }}</h2>
 								<div>
 									@include('user.module.message')
 								</div>
@@ -27,14 +27,14 @@
 										{{ csrf_field() }}
 										<input type="hidden" name="token" value="{{ $token }}">
 										<div class="form-group">
-											<label for="password">Mật khẩu mới: </label>
+											<label for="password">{{ trans('login.new_password') }}</label>
 											<input name="password" type="password" class="form-control">
 											@if ($errors->has('password'))
 												<span style="color:red">{{ $errors->first('password') }}</span>
 											@endif
 										</div>
 										<div class="form-group">
-											<label for="confirm_password">Xác nhận mật mật khẩu: </label>
+											<label for="confirm_password">{{ trans('login.confirm_password') }}</label>
 											<input name="confirm_password" type="password" class="form-control">
 											@if ($errors->has('confirm_password'))
 												<span style="color:red">{{ $errors->first('confirm_password') }}</span>

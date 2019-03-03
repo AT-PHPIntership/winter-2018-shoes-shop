@@ -44,9 +44,9 @@ class PasswordResetRequest extends Notification
     {
         $url = url('password/reset/'.$this->token);
         return (new MailMessage)
-          ->line('You are receiving this email because we received a password reset request for your account.')
-          ->action('Reset Password', url($url))
-          ->line('If you did not request a password reset, no further action is required.');
+          ->line(trans('login.mail.notice_request'))
+          ->action(trans('login.reset_password'), url($url))
+          ->line(trans('login.mail.remind_change'));
     }
 
     /**

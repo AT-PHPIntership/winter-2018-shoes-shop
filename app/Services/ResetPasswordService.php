@@ -21,7 +21,8 @@ class ResetPasswordService
     {
         $user = User::where('email', $data['email'])->first();
         if (!$user) {
-            return redirect()->route('user.password.request')->with('error', trans('user.invalid_email'));
+            \Session::flash('error', trans('user.invalid_email'));
+            return false;
         }
         $passwordReset = PasswordReset::updateOrCreate(
             ['email' => $user->email],
@@ -34,7 +35,7 @@ class ResetPasswordService
             $user->notify(new PasswordResetRequest($passwordReset->token));
             return true;
         }
-        Session::flash('error', trans('user.check_error'));
+        \Session::flash('error', trans('user.check_error'));
         return false;
     }
 
@@ -50,7 +51,7 @@ class ResetPasswordService
         $passwordReset = PasswordReset::where('token', $data['token'])->first();
         $user = User::where('email', $passwordReset->email)->first();
         if (!$user) {
-            Session::flash('error', trans('user.check_error'));
+            \Session::flash('error', trans('user.check_error'));
         }
         $user->password = bcrypt($data['password']);
         $user->save();
