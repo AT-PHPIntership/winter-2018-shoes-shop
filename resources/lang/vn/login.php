@@ -12,4 +12,6 @@ return [
    'email' => 'Email',
    'password' => 'Password',
    'remember_me' => 'Nhớ mật khẩu',
+   'invalid_account' => 'Email không chính xác!',
+   'incorrect_password' => 'Mật khẩu không chính xác!',
 ];
