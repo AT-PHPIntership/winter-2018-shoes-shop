@@ -1,17 +1,17 @@
 @extends('user.module.master')
 @section('content')
-  <div class="content-wrapper p-t-50">
+  <div class="content-wrapper mt-60">
     @include('user.module.sidebar')
     <div class="content full-with">
       <section class="content-header">
-        <h2 class="box-title text-uppercase">@lang('user.manage_order')</h2>
+        <h3 class="box-title text-uppercase text-center">@lang('user.manage_order')</h3>
       </section>
       <section class="orders">
-        <h3 class="mb-10">@lang('order.show.title')</h3>
+        <h4 class="mb-10">@lang('order.show.title')</h4>
         <div class="text-dark">
           <div class="box">
             <div class="box-header with-border">
-              <h5>@lang('order.order') <strong class="order-num">#{{ $order->id}}:</strong>{{ $order->created_at}}</h5>
+              <h5>@lang('order.order') <strong class="order-num">#{{ $order->id}}:</strong>{{ $order->created_at->format('H:i:s d-m-Y') }}</h5>
               <div class="pull-right">@lang('order.table.amount'): {{ formatCurrencyVN($order->total_amount) }} </div>
             </div>
             <div class="box-body with-border">
@@ -33,20 +33,20 @@
                     @switch($order->status)
                       @case(0)
                       @case(1)
-                        <p class="timeline-order">@lang('order.timeline.ordered')<span>{{ $order->updated_at}}</span></p>
+                        <p class="timeline-order">@lang('order.timeline.ordered')<span>{{ $order->updated_at->format('H:i:s d-m-Y') }}</span></p>
                         @break
                       @case(2)
                       @case(3)
-                        <p class="timeline-order">@lang('order.timeline.processed')<span>{{ $order->updated_at}}</span></p>
+                        <p class="timeline-order">@lang('order.timeline.processed')<span>{{ $order->updated_at->format('H:i:s d-m-Y') }}</span></p>
                         @break
                       @case(4)
-                        <p class="timeline-order">@lang('order.timeline.dispatched')<span>{{ $order->updated_at}}</span></p>
+                        <p class="timeline-order">@lang('order.timeline.dispatched')<span>{{ $order->updated_at->format('H:i:s d-m-Y') }}</span></p>
                         @break
                       @case(5)
-                        <p class="timeline-order">@lang('order.timeline.delivered')<span>{{ $order->delivered_at}}</span></p>
+                        <p class="timeline-order">@lang('order.timeline.delivered')<span>{{ $order->delivered_at->format('H:i:s d-m-Y') }}</span></p>
                         @break
                       @default
-                        <p class="timeline-order">@lang('order.timeline.canceled')<span>{{ $order->updated_at}}</span></p>
+                        <p class="timeline-order">@lang('order.timeline.canceled')<span>{{ $order->updated_at->format('H:i:s d-m-Y') }}</span></p>
                       @break
                     @endswitch
                   </li>
@@ -63,7 +63,7 @@
                   @php
                   $subtotal += $detail->price * $detail->quantity;
                   @endphp
-                  <li class="row prodcut-item">
+                  <li class="row prodcut-item box-item-order">
                     <div class="col-sm-3">
                       <img class="product-img" src="{{ $detail->product->images->first() ? $detail->product->images->first()->path : config('define.path.default_image') }}" alt="hình ảnh">
                     </div>
@@ -78,21 +78,21 @@
             <div class="box-body row">
               <div class="col-sm-7">
                 <div class="box-footer">
-                  <h5 class="box-title">@lang('order.delivery_address'):</h5>
+                  <h5 class="mb-pb-5 bd-bt">@lang('order.delivery_address'):</h5>
                   <div class="own-info">
-                    <p>{{ $order->customer_name}}</p>
-                    <p>{{ $order->shipping_address}}</p>
-                    <p>{{ $order->phone_number}}</p>
+                    <p>{{ $order->user_id ? $order->user->profile->name : $order->customer_name}}</p>
+                    <p>{{ $order->user_id ? $order->user->profile->address : $order->shipping_address}}</p>
+                    <p>{{ $order->user_id ? $order->user->profile->phonenumber : $order->phone_number}}</p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-1"></div>
               <div class="col-sm-4">
                 <div class="box-footer">
-                  <h5 class="box-title">@lang('order.payment.pay')</h5>
+                  <h5 class="mb-pb-5 bd-bt">@lang('order.payment.pay')</h5>
                   <div class="own-info">
                     <p>@lang('order.payment.subtotal')<span class="pull-right">{{ formatCurrencyVN($subtotal) }}</span></p>
-                    <p>@lang('order.payment.discount')<span class="pull-right">{{ formatCurrencyVN($subtotal - $order->total_amount) }}</span></p>
+                    <p>@lang('order.payment.discount')<span class="pull-right">-{{ formatCurrencyVN($subtotal - $order->total_amount) }}</span></p>
                     <p>@lang('order.payment.total')<span class="pull-right">{{ formatCurrencyVN($order->total_amount) }}</span></p>
                   </div>
                 </div>

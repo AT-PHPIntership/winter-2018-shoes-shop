@@ -56,7 +56,7 @@ return [
     'unit_price' => 'Đơn giá',
     'delivery_address' => 'Địa chỉ nhận hàng',
     'timeline' => [
-        'ordered' => '>Đơn hàng của bạn đã được nhận: ',
+        'ordered' => 'Đơn hàng của bạn đã được nhận: ',
         'processed' => 'Đơn hàng của bạn đã được xử lý: ',
         'dispatched' => 'Đơn hàng của bạn đã được vận chuyển: ',
         'delivered' => 'Đơn hàng của bạn đã được giao: ',

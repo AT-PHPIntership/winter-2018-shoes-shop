@@ -1,22 +1,23 @@
 @extends('user.module.master')
 @section('content')
-  <div class="content-wrapper p-t-50">
+  <div class="content-wrapper mt-60">
     @include('user.module.sidebar')
     <div class="content">
       <section class="content-header">
-        <h2 class="box-title text-uppercase">@lang('user.manage_account')</h2>
+        <h3 class="box-title text-uppercase text-center">@lang('user.manage_account')</h3>
       </section>
-      <section class="">
+      <section>
         @include('user.module.message')
         <div class="row">
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">@lang('user.change_password')</h3>
+                <h4>@lang('user.change_password')</h4>
               </div>
-                <form method="POST" role="form" enctype="multipart/form-data" action="{{ route('user.password') }}" class="form-create col-sm-4 m-b-50">
-                  @csrf
-                  <div class="box-body row">
+              <form class="mb-150" method="POST" role="form" enctype="multipart/form-data" action="{{ route('user.password') }}">
+                @csrf
+                <div class="box-body row">
+                  <div class="col-md-12">
                     <div class="form-group">
                       <label for="current_password">@lang('user.table.current_password') *</label>
                       <input type="password" name="current_password" class="form-control">
@@ -39,12 +40,20 @@
                       @endif
                     </div>
                   </div>
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">@lang('common.submit')</button>
-                    <button type="reset" class="btn btn-secondry">@lang('common.reset')</button>
+                </div>
+                <div class="row plr-10">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <button type="submit" class="form-control btn btn-primary">@lang('common.submit')</button>
+                    </div>
                   </div>
-                </form>
-              </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <button type="reset" class="form-control btn btn-warning">@lang('common.reset')</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

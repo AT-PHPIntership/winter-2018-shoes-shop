@@ -1,10 +1,10 @@
 @extends('user.module.master')
 @section('content')
-  <div class="content-wrapper p-t-50">
+  <div class="content-wrapper mt-60">
     @include('user.module.sidebar')
     <div class="content">
       <section class="content-header">
-        <h2 class="box-title text-uppercase">@lang('user.manage_account')</h2>
+        <h3 class="box-title text-uppercase text-center">@lang('user.manage_account')</h3>
       </section>
       <section class="">
         @include('user.module.message')
@@ -12,7 +12,7 @@
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">@lang('user.show')</h3>
+                <h4>@lang('user.show')</h4>
               </div>
               <form class="m-b-50" method="POST" role="form" enctype="multipart/form-data" action="{{ route('user.profile') }}">
                 @csrf
@@ -70,9 +70,11 @@
                       @endif
                     </div>
                   </div>
-                </div>
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-primary">@lang('common.submit')</button>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <button type="submit" class="form-control btn btn-primary">@lang('common.submit')</button>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>

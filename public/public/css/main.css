@@ -2505,12 +2505,12 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 768px) {
   /* line 157, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
   .dropdown .dropdown-menu {
-    display: block;
+    /* display: block;
     opacity: 0;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s; */
   }
   /* line 162, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
   .dropdown-menu {

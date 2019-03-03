@@ -1,13 +1,13 @@
 @extends('user.module.master')
 @section('content')
-<div class="content-wrapper p-t-50">
+<div class="content-wrapper mt-60">
     @include('user.module.sidebar')
     <div class="content full-with">
       <section class="content-header">
-        <h2 class="box-title text-uppercase">@lang('user.manage_order')</h2>
+        <h3 class="box-title text-uppercase text-center">@lang('user.manage_order')</h3>
       </section>
       <section class="orders">
-				<h3 class="mb-10">@lang('user.order_list')</h3>
+				<h4 class="mb-10">@lang('user.order_list')</h4>
 				<div class="text-dark">
 					@if(!count($orders))
 						<div class="box">
@@ -15,9 +15,9 @@
 						</div>
 					@else
 						@foreach ($orders as $order)
-						<div class="box">
+						<div class="box box-item-order">
 							<div class="box-header with-border">
-								<h5>@lang('order.order') <strong class="order-num">#{{ $order->id}}:</strong>{{ $order->created_at}}</h5>
+								<h5>@lang('order.order') <strong class="order-num">#{{ $order->id}}:</strong>{{ $order->created_at->format('H:i:s d-m-Y') }}</h5>
 							<div class="pull-right"><a class="{{ $order->status == \App\Models\Order::ORDER_STATUS['CANCELED'] ? 'txt-red' : '' }}" href="{{ route('user.order.show', $order->id)}}">{{ $order->status == \App\Models\Order::ORDER_STATUS['CANCELED'] ? __('order.status.cancel') : __('order.status.follow') }}</a></div>
 							</div>
 							<div class="box-body">
