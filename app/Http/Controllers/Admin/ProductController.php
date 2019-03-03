@@ -86,6 +86,7 @@ class ProductController extends Controller
     public function store(PostProductRequest $request)
     {
         $data = $request->all();
+        dd($data);
         if ($this->products->handleStoreProduct($data)) {
             return redirect()->route('admin.product.index')->with('success', trans('common.message.create_success'));
         }

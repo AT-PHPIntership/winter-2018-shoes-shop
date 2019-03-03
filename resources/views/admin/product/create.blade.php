@@ -16,7 +16,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" enctype='multipart/form-data' method='POST' action="{{ route('admin.product.store') }}">
+            {{-- <form role="form" enctype='multipart/form-data' method='POST' action="{{ route('admin.product.store') }}" onsubmit="checkDetail();"> --}}
               @csrf
               <div class="box-body">
                 <div class="row">
@@ -77,21 +77,21 @@
                         <ul class="detail-menu list-unstyled" id="show-detail">   
                           <li class="js-row row margin-y-10">
                             <div class="col-xs-4">
-                              <select name="color_id[]" id="color" class="form-control" placeholder="Chọn màu">
+                              <select name="color_id[]" class="form-control js-color" placeholder="Chọn màu">
                                 @foreach($colors as $val)
                                   <option value="{{$val->id}}">{{$val->name}}</option>
                                 @endforeach
                               </select>
                             </div>
                             <div class="col-xs-3">
-                              <select name="size_id[]" class="form-control" placeholder="Chọn size">
+                              <select name="size_id[]" class="form-control js-size" placeholder="Chọn size">
                                 @foreach($sizes as $val)
                                   <option value="{{$val->id}}">{{$val->size}}</option>
                                 @endforeach
                               </select>
                             </div>
                             <div class="col-xs-4">
-                              <input name="quantity_type[]" type="number" class="form-control" placeholder="Số lượng">
+                              <input name="quantity_type[]" type="number" class="form-control js-quantity" placeholder="Số lượng">
                             </div>
                             <div class="col-xs-1">
                               <button type="button" class="js-btn-remove btn"> x </button>
@@ -114,10 +114,10 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">{{ trans('common.submit')}}</button>
+                <button id="js-check-product" type="submit" class="btn btn-primary">{{ trans('common.submit')}}</button>
                 <button type="reset" class="btn btn-default">{{ trans('common.reset')}}</button>
               </div>
-            </form>
+            {{-- </form> --}}
           </div>
           <!-- /.box -->
         </div>
@@ -126,4 +126,5 @@
   </div>
   <script>var getDetailUrl = "{{ url('admin/category/children') }}"</script>
   <script src="{!! asset('admin/js/product_detail.js') !!}"></script>
+  <script src="{!! asset('admin/js/check-product.js') !!}"></script>
 @endsection
