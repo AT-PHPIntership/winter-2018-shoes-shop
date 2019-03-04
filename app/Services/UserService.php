@@ -130,7 +130,7 @@ class UserService
             if ($user->role_id == Role::ADMIN_ROLE && ($data['role_id'] != Role::ADMIN_ROLE || Auth::user()->id != $user->id)) {
                 return false;
             }
-            if ($data['password']) {
+            if (isset($data['password']) && $data['password']) {
                 $inputUser['password'] = bcrypt($data['password']);
             }
             $inputUser['role_id'] = $data['role_id'];
