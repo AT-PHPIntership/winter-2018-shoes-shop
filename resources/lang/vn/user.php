@@ -53,4 +53,8 @@ return [
     'register_account' => 'Đăng ký tài khoản',
     'register_success' => 'Đăng ký thành công!',
     'register_error' => 'Đăng ký thất bại, vui lòng thử lại!',
+    'invalid_email' => 'Email bạn đã nhập không chính xác!',
+    'sent_email' => 'Link Reset mật khẩu đã được gửi tới email của bạn!',
+    'check_error' => 'Có lỗi xảy ra, vui lòng kiểm tra lại!',
+    'expired_request' => 'Yêu cầu đổi mật khẩu của bạn đã hết hạn!',
 ];

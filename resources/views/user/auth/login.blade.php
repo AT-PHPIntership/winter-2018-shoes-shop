@@ -43,7 +43,10 @@
 								{{ __('Login') }}
 							</button>
 						</div>
-					</div>
+						<div>
+							<a class="reset_pass" href="{{route('user.password.request')}}">Quên mật khẩu?</a>
+						</div>
+						</div>
 					<div class="box-social text-uppercase p-t-30">
 						<a href="{{url('facebook/redirect')}}" class="btn btn-success">@lang('login.facebook')</a>
 						<a href="{{url('google/redirect')}}" class="btn btn-danger">@lang('login.google+')</a>
