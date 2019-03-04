@@ -24,6 +24,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">{{ trans('product.list')}}</h3>
+              <a class="btn btn-default btn-xs" href="{{ route('admin.product.export.data', ['str' => 'inventory']) }}">CSV <i class="fa fa-download"></i></a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

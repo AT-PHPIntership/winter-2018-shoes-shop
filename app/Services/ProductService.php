@@ -697,4 +697,47 @@ class ProductService
             return false;
         }
     }
+
+    /*
+     * Export csv file including product data
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function handleExportProductData()
+    {
+        $data = $this->getAll(['category_id', 'name', 'original_price', 'quantity', 'total_sold']);
+        return \Excel::create('product_data', function ($excel) use ($data) {
+            $excel->sheet('sheet', function ($sheet) use ($data) {
+                $sheet->cell('A1', function ($cell) {
+                    $cell->setValue(trans('common.table.num'));
+                });
+                $sheet->cell('B1', function ($cell) {
+                    $cell->setValue(trans('product.name'));
+                });
+                $sheet->cell('C1', function ($cell) {
+                    $cell->setValue(trans('product.category'));
+                });
+                $sheet->cell('D1', function ($cell) {
+                    $cell->setValue(trans('product.price'));
+                });
+                $sheet->cell('E1', function ($cell) {
+                    $cell->setValue(trans('product.quantity'));
+                });
+                $sheet->cell('F1', function ($cell) {
+                    $cell->setValue(trans('product.total_sold'));
+                });
+                if (!empty($data)) {
+                    foreach ($data as $key => $value) {
+                        $i = $key + 2;
+                        $sheet->cell('A'.$i, $key + 1);
+                        $sheet->cell('B'.$i, $value->name);
+                        $sheet->cell('C'.$i, $value->category->name);
+                        $sheet->cell('D'.$i, $value->original_price);
+                        $sheet->cell('E'.$i, $value->quantity);
+                        $sheet->cell('F'.$i, $value->total_sold);
+                    }
+                }
+            });
+        })->download('csv');
+    }
 }
