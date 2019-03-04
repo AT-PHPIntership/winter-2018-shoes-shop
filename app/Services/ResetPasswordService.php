@@ -32,8 +32,7 @@ class ResetPasswordService
             ]
         );
         if ($user && $passwordReset) {
-            $user->notify((new PasswordResetRequest($passwordReset->token))->delay(now()->addSeconds(5)));
-            SendConfirmOrder::dispatch($user, $order)->delay(now()->addSeconds(5));
+            $user->notify((new PasswordResetRequest($passwordReset->token)));
             return true;
         }
         \Session::flash('error', trans('user.check_error'));
