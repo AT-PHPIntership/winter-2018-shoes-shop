@@ -3,17 +3,19 @@ $(document).ready(function(){
     var fromDate = $('.js-from-date').val();
     var toDate = $('.js-to-date').val();
     var flag = 1;
+    $('.wp-from-date').change(function() {
+      $(this).removeClass('bd-red');
+    });
+    $('.wp-to-date').change(function() {
+      $(this).removeClass('bd-red');
+    });
     if(fromDate == ''){
       $('.wp-from-date').addClass('bd-red');
       flag = 0;
-    }else{
-      $('.wp-from-date').removeClass('bd-red');
     }
     if(toDate == ''){
       $('.wp-to-date').addClass('bd-red');
       flag = 0;
-    }else{
-      $('.wp-to-date').removeClass('bd-red');
     }
     if(flag){
       $.ajax({
