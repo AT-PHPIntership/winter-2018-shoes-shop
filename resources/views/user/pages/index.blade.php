@@ -16,7 +16,7 @@
           <div class="row category-bottom">
             <div class="col-lg-6 col-md-6 mb-30">
               <div class="content">
-                <a href="javascript:void(0)" target="_blank">
+                <a href="{{ route('user.category', ['id' => 1]) }}" target="_blank">
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_men.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
@@ -27,7 +27,7 @@
             </div>
             <div class="col-lg-6 col-md-6 mb-30">
               <div class="content">
-                <a href="javascript:void(0)" target="_blank">
+                <a href="{{ route('user.category', ['id' => 2]) }}" target="_blank">
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_women.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
@@ -38,7 +38,7 @@
             </div>
             <div class="col-lg-12">
               <div class="content">
-                <a href="javascript:void(0)" target="_blank">
+                <a href="{{ route('user.category', ['id' => 3]) }}" target="_blank">
                   <div class="content-overlay"></div>
                   <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_kid.jpg') }}" alt="">
                   <div class="content-details fadeIn-bottom">
@@ -55,7 +55,7 @@
               <div class="content-overlay"></div>
               <img class="content-image img-fluid d-block mx-auto" src="{{ asset('public/img/banner_accessory.jpg') }}" alt="">
               <div class="content-details fadeIn-bottom">
-                <h3 class="content-title">{{ __('index.shoes.accessories') }}</h3>
+                {{-- <h3 class="content-title">{{ __('index.shoes.accessories') }}</h3> --}}
               </div>
             </a>
           </div>
@@ -72,7 +72,7 @@
         <div class="menu-content pb-40">
           <div class="title text-center">
             <h2 class="mb-10 parent-cat">
-              <a class="text-white" href="javascript:void(0)">{{ __('index.shoes.men') }}</a>
+              <a class="text-white" href="{{ route('user.category', ['id' => 1]) }}">{{ __('index.shoes.men') }}</a>
             </h2>
             <ul class="child-cat">
               @foreach ($childsCatForMen as $childCatForMen)
@@ -117,7 +117,7 @@
       <div class="countdown-content pb-40">
         <div class="title text-center">
           <h2 class="mb-10 parent-cat">
-            <a href="javascript:void(0)">{{ __('index.shoes.women') }}</a>
+            <a href="{{ route('user.category', ['id' => 2]) }}">{{ __('index.shoes.women') }}</a>
           </h2>
           <ul class="child-cat">
             @foreach ($childsCatForWomen as $childCatForWomen)
