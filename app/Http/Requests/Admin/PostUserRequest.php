@@ -26,7 +26,7 @@ class PostUserRequest extends FormRequest
     {
         return [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:5',
+            'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
             'name' => 'required',
             'gender' => 'nullable|in:'.Profile::OTHER.','.Profile::MALE.','.Profile::FEMALE.'',

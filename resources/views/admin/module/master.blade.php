@@ -41,9 +41,6 @@
     <script src="{!! asset('admin/js/bootstrap.min.js') !!}"></script>
     <!-- Date-Picker -->
     <script src="{{ asset('admin/js/bootstrap-datepicker.min.js') }}"></script>
-    <!-- Chart -->
-    <script src="{{ asset('admin/js/Chart.js') }}"></script>
-    <script src="{{ asset('admin/js/order-chart.js') }}"></script>
     <!-- Select2 -->
     <script src="{!! asset('admin/js/select2.full.min.js') !!}"></script>
     <!-- AdminLTE App -->

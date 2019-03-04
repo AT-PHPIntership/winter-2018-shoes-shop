@@ -1,19 +1,19 @@
 <?php
 
 return [
-    'title' => 'Quản lý kích cở',
+    'title' => 'Quản lý kích cỡ',
     'list' => [
-        'title' => 'Danh sách kích cở',
+        'title' => 'Danh sách kích cỡ',
     ],
     'table' => [
         'id' => 'Id',
-        'name' => 'Kích cở',
+        'name' => 'Kích cỡ',
         'action' => 'Hành động'
     ],
     'add' => [
-        'title' => 'Thêm kích cở',
+        'title' => 'Thêm kích cỡ',
     ],
     'edit' => [
-        'title' => 'Sửa kích cở',
+        'title' => 'Sửa kích cỡ',
     ],
 ];

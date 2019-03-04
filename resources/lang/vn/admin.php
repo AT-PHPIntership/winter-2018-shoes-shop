@@ -35,9 +35,9 @@ return [
             'add' => 'Thêm màu',
         ],
         'size' => [
-            'title' => 'Quản lý kích cở',
-            'list' => 'Danh sách kích cở',
-            'add' => 'Thêm kích cở',
+            'title' => 'Quản lý kích cỡ',
+            'list' => 'Danh sách kích cỡ',
+            'add' => 'Thêm kích cỡ',
         ],
         'order' => [
             'title' => 'Quản lý đơn hàng',

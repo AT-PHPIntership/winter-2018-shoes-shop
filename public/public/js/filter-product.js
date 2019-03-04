@@ -16,7 +16,6 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice, page:page},
       success: function(data){
-        console.log(data['page']);
         var list = '';
         var pagi = '';
         if (data['products'].length) {
@@ -51,9 +50,10 @@ $(document).ready(function(){
               pagi += '<a class="'+ active +'" href="'+ filterProductUrl +'?page='+ i +'">'+ i +'</a>';
             }
           }
-            $('#js-pagi-filter').html(pagi);
+          $('#js-pagi-filter').html(pagi);
         } else {
           list = '<p class="ml-20 mt-20 text-red">Không có sản phẩm</p>';
+          $('#js-pagi-filter').html('');
         }
         $('#list-product').html(list);
       }
@@ -123,13 +123,14 @@ $(document).ready(function(){
       ];
       nonLinearSlider.noUiSlider.on('update', function (values, handle) {
         nodes[handle].innerHTML = values[handle];
-      });
-      $('#lower-value').bind("DOMSubtreeModified",function(){
         filter_data();
       });
-      $('#upper-value').bind("DOMSubtreeModified",function(){
-        filter_data();
-      });
+      // $('#lower-value').bind("DOMSubtreeModified",function(){
+      //   filter_data();
+      // });
+      // $('#upper-value').bind("DOMSubtreeModified",function(){
+      //   filter_data();
+      // });
     }
   });
 

@@ -30,13 +30,13 @@
                         <div class="form-group">
                           <label for="order-slt-status">@lang('order.table.status') *</label>
                           <select name="status" class="form-control" id="order-slt-status">
+                            <option value="{{ \App\Models\Order::ORDER_STATUS['PENDING'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['PENDING'] ? "selected": "" }}>@lang('order.status.pending')</option>
                             <option value="{{ \App\Models\Order::ORDER_STATUS['CONFIRMED'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['CONFIRMED'] ? "selected": "" }}>@lang('order.status.confirmed')</option>
                             <option value="{{ \App\Models\Order::ORDER_STATUS['PROCESSING'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['PROCESSING'] ? "selected": "" }}>@lang('order.status.processing')</option>
                             <option value="{{ \App\Models\Order::ORDER_STATUS['QUALITY_CHECK'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['QUALITY_CHECK'] ? "selected": "" }}>@lang('order.status.quality_check')</option>
                             <option value="{{ \App\Models\Order::ORDER_STATUS['DISPATCHED_ITEM'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['DISPATCHED_ITEM'] ? "selected": "" }}>@lang('order.status.dispatched_item')</option>
                             <option value="{{ \App\Models\Order::ORDER_STATUS['DELIVERED'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['DELIVERED'] ? "selected": "" }}>@lang('order.status.delivered')</option>
                             <option value="{{ \App\Models\Order::ORDER_STATUS['CANCELED'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['CANCELED'] ? "selected": "" }}>@lang('order.status.canceled')</option>
-                            <option value="{{ \App\Models\Order::ORDER_STATUS['PENDING'] }}" {{ $order->status === \App\Models\Order::ORDER_STATUS['PENDING'] ? "selected": "" }}>@lang('order.status.pending')</option>
                           </select>
                           @if ($errors->has('status'))
                             <span class="help-block">{{ $errors->first('status') }}</span>

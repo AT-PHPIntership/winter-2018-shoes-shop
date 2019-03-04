@@ -141,6 +141,9 @@ class UserController extends Controller
      */
     public function update(PutUserRequest $request, User $user)
     {
+        if ($request->has('password') && $user->id != Auth::user()->id) {
+            return redirect()->route('admin.users.index')->with('error', trans('common.message.edit_error'));
+        }
         $data = $request->all();
         if (!empty($this->userService->update($data, $user))) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.edit_success'));

@@ -33,20 +33,29 @@
                     <span class="help-block">{{ $errors->first('name') }}</span>
                   @endif
                 </div>
-                <div class="form-group">
-                  <label for="ip-password">@lang('user.table.password')</label>
-                  <input type="password" name="password" class="form-control" id="ip-password">
-                  @if ($errors->has('password'))
-                    <span class="help-block">{{ $errors->first('password') }}</span>
-                  @endif
-                </div>
-                <div class="form-group">
-                  <label for="ip-confirm-password">@lang('user.table.confirm_password')</label>
-                  <input type="password" name="password_confirmation" class="form-control" id="ip-confirm-password">
-                  @if ($errors->has('password_confirmation'))
-                    <span class="help-block">{{ $errors->first('password_confirmation') }}</span>
-                  @endif
-                </div>
+                @if (Auth::user()->id == $user->id)
+                  <div class="form-group">
+                    <label for="ip-old-password">@lang('user.table.old_password')</label>
+                    <input type="password" name="current_password" class="form-control" id="ip-old-password">
+                    @if ($errors->has('current_password'))
+                      <span class="help-block">{{ $errors->first('current_password') }}</span>
+                    @endif
+                  </div>
+                  <div class="form-group">
+                    <label for="ip-password">@lang('user.table.password')</label>
+                    <input type="password" name="password" class="form-control" id="ip-password">
+                    @if ($errors->has('password'))
+                      <span class="help-block">{{ $errors->first('password') }}</span>
+                    @endif
+                  </div>
+                  <div class="form-group">
+                    <label for="ip-confirm-password">@lang('user.table.confirm_password')</label>
+                    <input type="password" name="password_confirmation" class="form-control" id="ip-confirm-password">
+                    @if ($errors->has('password_confirmation'))
+                      <span class="help-block">{{ $errors->first('password_confirmation') }}</span>
+                    @endif
+                  </div>
+                @endif
                 <div class="form-group">
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">

@@ -64,7 +64,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisDay')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisDay'] }}</span>
+              <span class="info-box-number">{{ formatCurrencyVN($arrRevenue['revenueThisDay']) }}</span>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisWeek')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisWeek'] }}</span>
+              <span class="info-box-number">{{ formatCurrencyVN($arrRevenue['revenueThisWeek']) }}</span>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisMonth')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisMonth'] }}</span>
+              <span class="info-box-number">{{ formatCurrencyVN($arrRevenue['revenueThisMonth']) }}</span>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">@lang('statistical.revenue.thisYear')</span>
-              <span class="info-box-number">{{ $arrRevenue['revenueThisYear'] }}</span>
+              <span class="info-box-number">{{ formatCurrencyVN($arrRevenue['revenueThisYear']) }}</span>
             </div>
           </div>
         </div>
@@ -220,4 +220,7 @@
       'quantity' : "{{ $arrQuantityOrder['pending'] }}",
     };
   </script>
+  <!-- Chart -->
+  <script src="{{ asset('admin/js/Chart.js') }}"></script>
+  <script src="{{ asset('admin/js/order-chart.js') }}"></script>
 @endsection
