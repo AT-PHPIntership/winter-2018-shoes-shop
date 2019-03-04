@@ -36,7 +36,7 @@
                 @foreach ($users as $user)
                   <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->socialAccount ? $user->socialAccount->provider_user_id.'-'.$user->socialAccount->provider : $user->email }}</td>
                     <td>{{ $user->profile->name }}</td>
                     <td>{{ $user->role->name }}</td>
                     <td>
