@@ -14,7 +14,7 @@ return [
     'message' => [
         'success' => 'Đặt hàng thành công',
         'error' => 'Có lỗi trong quá trình xử lý',
-        'err_used_code' => 'Bạn đã sử dụng code này',
+        'err_used_code' => 'Mã giảm giá không tồn tại (Bạn đã sử dụng mã này)',
         'required' => 'Vui lòng điền',
         'err_phone_number' => 'Không đúng định dạng',
         'thanks' => 'Cảm ơn bạn đã đặt hàng!',

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Code;
 use App\Models\Product;
 use App\Models\UserCode;
+use App\Models\Category;
 use Log;
 use Carbon\Carbon;
 
@@ -78,7 +79,7 @@ class CodeService
      * @param string $codeName codeName
      * @param array  $products products
      *
-     * @return \Illuminate\Http\Response
+     * @return int
      */
     public function getDecreaseTotalAmount(string $codeName, array $products)
     {
@@ -103,11 +104,16 @@ class CodeService
                         }
                     }
                 } else {
+                    if (Category::where('parent_id', $cateogryId)->count()) {
+                        $ids = Category::where('parent_id', $cateogryId)->orWhere('id', $cateogryId)->pluck('id')->toArray();
+                    } else {
+                        $ids = Category::where('id', $cateogryId)->pluck('id')->toArray();
+                    }
                     foreach ($products as $pd) {
                         $product = Product::with(['promotions' => function ($query) {
                             $query->where('start_date', '<=', Carbon::now())
                                 ->where('end_date', '>=', Carbon::now());
-                        }])->where('id', $pd['id'])->where('category_id', $cateogryId)->first();
+                        }])->where('id', $pd['id'])->whereIn('category_id', $ids)->first();
                         if ($product) {
                             $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
                             $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
@@ -116,11 +122,10 @@ class CodeService
                 }
                 return $amountDecrease;
             } else {
-                return null;
+                return 0;
             }
         } catch (\Exception $e) {
             Log::error($e);
-            return false;
         }
     }
 
@@ -135,8 +140,8 @@ class CodeService
     public function checkCodeWithUser(string $codeName, int $userId)
     {
         try {
-            $code = Code::where('name', $codeName)->first();
-            return UserCode::where('user_id', $userId)->where('code_id', $code->id)->first();
+            $code = Code::where('name', $codeName)->firstOrFail();
+            return UserCode::where('user_id', $userId)->where('code_id', $code->id)->firstOrFail();
         } catch (\Exception $e) {
             Log::error($e);
             return false;

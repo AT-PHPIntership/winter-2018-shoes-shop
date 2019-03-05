@@ -110,22 +110,26 @@ class OrderController extends Controller
             'customer.customerName' => 'required',
             'customer.phoneNumber' => 'required|numeric|min:10',
             'customer.shippingAddress' => 'required',
-            'arrProduct.*.product.id' => 'required|exists:products,id',
-            'arrProduct.*.color.id' => 'required|exists:colors,id',
-            'arrProduct.*.color.name' => 'required|exists:colors,name',
-            'arrProduct.*.size.id' => 'required|exists:sizes,id',
-            'arrProduct.*.size.name' => 'required|exists:sizes,size',
+            // 'arrProduct.*.product.id' => 'required|exists:products,id',
+            // 'arrProduct.*.color.id' => 'required|exists:colors,id',
+            // 'arrProduct.*.color.name' => 'required|exists:colors,name',
+            // 'arrProduct.*.size.id' => 'required|exists:sizes,id',
+            // 'arrProduct.*.size.name' => 'required|exists:sizes,size',
             'code.name' => 'exists:codes,name',
         ]);
-        if ((!empty($request->input('code.name')) && !empty($request->input('code.name')) && app(CodeService::class)->checkCodeWithUser($request->input('code.name'), $request->input('customer.userId')))) {
-            return response()->json(array('success' => false, 'message' => trans('checkout.message.err_used_code')));
-        }
         if ($validator->fails()) {
-            return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
+            return response()->json(array('success' => false, 'type' => 'valid', 'message' => $validator->errors()->all()));
+        }
+        if (!empty($request->input('code.name')) && app(CodeService::class)->checkCodeWithUser($request->input('code.name'), $request->input('customer.userId'))) {
+            return response()->json(array('success' => false, 'type' => 'code', 'message' => trans('checkout.message.err_used_code')));
+        }
+        $error = app(ProductService::class)->checkExistProducts($request->input('arrProduct'));
+        if (count($error)) {
+            return response()->json(array('success' => false, 'type' => 'product_exist', 'message' => $error));
         }
         $error = app(ProductService::class)->checkQuantityProducts($request->input('arrProduct'));
         if (count($error)) {
-            return response()->json(array('success' => false, 'message' => $error));
+            return response()->json(array('success' => false, 'type' => 'product_inventory', 'message' => $error));
         }
         if (app(OrderService::class)->order($request->input('code'), $request->input('arrProduct'), $request->input('customer'))) {
             return response()->json(array('success' => true, 'message' => trans('checkout.message.success')));

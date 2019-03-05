@@ -71,19 +71,40 @@ $(document).ready(function(){
             localStorage.removeItem('code');
             window.location.href = confermationUrl;
           }else{
-            if(typeof(data.message) == 'object'){
+            $('.message-checkout').addClass('error');
+            if(data.type == 'product_inventory'){
               var mess = '';
               $.each(data.message, function(key, val){
                 mess += 'Sản phẩm ' + val.product + '(' + val.color + '-' + val.size + ') chỉ còn ' + val.inventory + ' sản phẩm. ';
               });
               $('.message-checkout').text(mess);
+            }else if(data.type == 'product_exist'){
+              var mess = '';
+              $.each(data.message, function(key, val){
+                mess += 'Sản phẩm ' + getProductNameById(val.id) + ' không tồn tại. ';
+              });
+              $('.message-checkout').text(mess);
+            }else if(data.type == 'valid'){
+              $('.message-checkout').text(data.message);
             }else{
               $('.message-checkout').text(data.message);
             }
-            $('.message-checkout').addClass('error');
           }
         }
       });
     }
   });
+
+  //Get productName by id on localStorage
+  function getProductNameById(id){
+    var arrProduct = JSON.parse(localStorage.getItem("arrProduct"));
+    var rs;
+    $.each(arrProduct, function(key, val){
+      if(id == val.product.id){
+        rs = val.product.name;
+        return false;
+      }
+    });
+    return rs;
+  }
 });

@@ -656,7 +656,7 @@ class ProductService
                     File::delete(public_path($image->path));
                 }
             }
-            return $product->forceDelete();
+            return $product->delete();
         } catch (Exception $e) {
             Log::error($e);
         }
@@ -694,7 +694,36 @@ class ProductService
             return $error;
         } catch (Exception $e) {
             Log::error($e);
-            return false;
+        }
+    }
+
+    /**
+     * Check exist products in order
+     *
+     * @param array $products products
+     *
+     * @return array
+     */
+    public function checkExistProducts($products)
+    {
+        try {
+            $error = [];
+            foreach ($products as $key => $value) {
+                $product = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')
+                    ->join('colors', 'colors.id', '=', 'product_details.color_id')
+                    ->join('sizes', 'sizes.id', '=', 'product_details.size_id')
+                    ->where('product_id', $value['product']['id'])
+                    ->where('color_id', $value['color']['id'])
+                    ->where('size_id', $value['size']['id'])
+                    ->select('products.name as name', 'product_details.quantity', 'product_details.total_sold', 'colors.name as color', 'sizes.size as size')
+                    ->first();
+                if (!$product) {
+                    $error[$key]['id'] = $value['product']['id'];
+                }
+            }
+            return $error;
+        } catch (Exception $e) {
+            Log::error($e);
         }
     }
 

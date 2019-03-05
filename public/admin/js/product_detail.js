@@ -43,11 +43,17 @@ $(document).ready(function(){
   //Display product detail when click add button
   $("#add-detail").on("click", function(){
     $('#show-detail li:first-child').clone().appendTo('#show-detail');
+    removeProduct();
+  });
+
+  //Remove product
+  function removeProduct(){
     var listBtnRemove = $('.js-btn-remove');
-    for (var i = 1; i < listBtnRemove.length; i++) {
+    for (var i = 0; i < listBtnRemove.length; i++) {
       $(listBtnRemove[i]).on("click", function(){
         $(this.parentElement.parentElement).remove();
       });
     }
-  });
+  }
+  removeProduct();
 });

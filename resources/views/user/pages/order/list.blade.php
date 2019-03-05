@@ -28,7 +28,7 @@
 											<div class="col-sm-3">
 												<img class="product-img" src="{{ $detail->product->images->first() ? $detail->product->images->first()->path : config('define.path.default_image') }}" alt="hình ảnh">
 											</div>
-											<span class="col-sm-6 item-padding">{{ $detail->product->description ? $detail->product->description : ""}}</span>
+											<span class="col-sm-6 item-padding">{{ $detail->product->name }}</span>
 											<span class="col-sm-3 item-padding">@lang('order.table.quantity'): {{$detail->quantity}}</span>
 										</li>
 										@endforeach
