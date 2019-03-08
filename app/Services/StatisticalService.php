@@ -96,14 +96,15 @@ class StatisticalService
      */
     public function getQuantityOrderByStatus()
     {
+        $order = Order::select('status', \DB::raw('count(*) as total'))->groupBy('status')->get();
         return [
-            'confirmed' => Order::where('status', Order::ORDER_STATUS['CONFIRMED'])->count(),
-            'processing' => Order::where('status', Order::ORDER_STATUS['PROCESSING'])->count(),
-            'quality_check' => Order::where('status', Order::ORDER_STATUS['QUALITY_CHECK'])->count(),
-            'dispatched_item' => Order::where('status', Order::ORDER_STATUS['DISPATCHED_ITEM'])->count(),
-            'delivered' => Order::where('status', Order::ORDER_STATUS['DELIVERED'])->count(),
-            'canceled' => Order::where('status', Order::ORDER_STATUS['CANCELED'])->count(),
-            'pending' => Order::where('status', Order::ORDER_STATUS['PENDING'])->count(),
+            'confirmed' => optional($order->firstWhere('status', Order::ORDER_STATUS['CONFIRMED']))->total,
+            'processing' => optional($order->firstWhere('status', Order::ORDER_STATUS['PROCESSING']))->total,
+            'quality_check' => optional($order->firstWhere('status', Order::ORDER_STATUS['QUALITY_CHECK']))->total,
+            'dispatched_item' => optional($order->firstWhere('status', Order::ORDER_STATUS['DISPATCHED_ITEM']))->total,
+            'delivered' => optional($order->firstWhere('status', Order::ORDER_STATUS['DELIVERED']))->total,
+            'canceled' => optional($order->firstWhere('status', Order::ORDER_STATUS['CANCELED']))->total,
+            'pending' => optional($order->firstWhere('status', Order::ORDER_STATUS['PENDING']))->total,
         ];
     }
 

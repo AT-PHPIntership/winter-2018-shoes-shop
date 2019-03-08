@@ -51,11 +51,6 @@
                             <button type="submit" class="btn btn-warning btn-xs" onclick="return confirm('@lang('common.message.block_question')')">@lang('common.block')</button>
                           @endif
                         </form>
-                        <form class="form-inline" action="{{ route('admin.users.force-delete', ['id' => $user->id]) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
-                        </form>
                     </td>
                   </tr>
                 @endforeach
