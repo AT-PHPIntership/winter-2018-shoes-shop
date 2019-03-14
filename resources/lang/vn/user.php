@@ -58,4 +58,5 @@ return [
     'sent_email' => 'Link Reset mật khẩu đã được gửi tới email của bạn!',
     'check_error' => 'Có lỗi xảy ra, vui lòng kiểm tra lại!',
     'expired_request' => 'Yêu cầu đổi mật khẩu của bạn đã hết hạn!',
+    'account' => 'Tài khoản',
 ];

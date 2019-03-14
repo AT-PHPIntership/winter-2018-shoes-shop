@@ -20,7 +20,7 @@
               <div class="row">
                 <div class="col-md-7">
                   <p><strong>{{ $product->name}}</strong></p>
-                  <p>{{ trans('product.price')}}: {{ $product->original_price}} VNĐ</p>
+                  <p>{{ trans('product.price')}}: {{ formatCurrencyVN($product->original_price) }}</p>
                   <p>{{ trans('product.quantity')}}: {{ $product->quantity}}</p>
                   <p>{{ trans('product.total_sold')}}: {{ $product->total_sold}}</p>                  
                   <p>{{ trans('product.description')}}: {!! $product->description ? nl2br($product->description) : '-'!!}</p>

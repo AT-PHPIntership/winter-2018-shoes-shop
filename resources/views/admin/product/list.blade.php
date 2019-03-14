@@ -45,7 +45,7 @@
                     <tr>
                       <td>{{ $product->id }}</td>
                       <td>{{ $product->name }}</td>
-                      <td>{{ $product->original_price }}</td>
+                      <td>{{ formatCurrencyVN($product->original_price) }}</td>
                       <td>{{ $product->category->name }}</td>
                       <td>{{ $product->quantity }}</td>
                       <td>{{ $product->total_sold }}</td>
