@@ -50,7 +50,6 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = app(ProductService::class)->getDetailProduct($id);
-        $comments = app(CommentService::class)->getCommentsByProductId($id);
         return view('user.pages.detail', compact(['product', 'comments']));
     }
 
