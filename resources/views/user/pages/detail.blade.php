@@ -108,7 +108,7 @@
                         <img src="{{ $comment->user->profile->avatar ? $comment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
                         <div class="user-name order-3 order-sm-2">
                           <h5>{{ $comment->user->profile->name }}</h5>
-                          <span>{{ $comment->created_at->format('d/m/Y - H:i:s') }}</span>
+                          <span>{{ $comment->created_at }}</span>
                         </div>
                         @if (Auth::user())
                           <a href="javascript:void(0)" data-comment-id="{{ $comment->id }}" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
@@ -125,7 +125,7 @@
                                 <img src="{{ $childComment->user->profile->avatar ? $childComment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
                                 <div class="user-name order-3 order-sm-2">
                                   <h5>{{ $childComment->user->profile->name }}</h5>
-                                  <span>{{ $childComment->created_at->format('d/m/Y - H:i:s') }}</span>
+                                  <span>{{ $childComment->created_at }}</span>
                                 </div>
                               </div>
                               <p class="user-comment">{{ $childComment->content }}</p>
