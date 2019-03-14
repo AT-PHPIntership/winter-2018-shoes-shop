@@ -221,39 +221,11 @@ class ProductController extends Controller
 
     /**
      * Export csv file including product data
-     * 
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function exportDataFile()
     {
         return $this->products->handleExportProductData();
-        // $data = $this->products->getAll(['id', 'category_id', 'name', 'original_price'], 'quantity', 'total_sold');
-        // // dd($data[0]->category);
-        // return Excel::create('sample_product_CSV', function ($excel){
-        //     $excel->sheet('sheet', function ($sheet){
-        //         $sheet->cell('A1', function ($cell) {
-        //             $cell->setValue('name');
-        //         });
-        //         $sheet->cell('B1', function ($cell) {
-        //             $cell->setValue('category');
-        //         });
-        //         $sheet->cell('C1', function ($cell) {
-        //             $cell->setValue('original_price');
-        //         });
-        //         $sheet->cell('D1', function ($cell) {
-        //             $cell->setValue('description');
-        //         });
-        //         $sheet->cell('E1', function ($cell) {
-        //             $cell->setValue('color');
-        //         });
-        //         $sheet->cell('F1', function ($cell) {
-        //             $cell->setValue('size');
-        //         });
-        //         $sheet->cell('G1', function ($cell) {
-        //             $cell->setValue('quantity');
-        //         });
-        //     });
-        // })->download('csv');
     }
 }

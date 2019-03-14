@@ -89,7 +89,7 @@ class PromotionService
         try {
             $promotion->update($data);
             if (!isset($data['product_id'])) {
-                $data['product_id'] = [];                
+                $data['product_id'] = [];
             }
             $promotion->products()->sync($data['product_id']);
             DB::commit();

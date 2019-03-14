@@ -25,7 +25,7 @@ class PasswordResetController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param CategoryService $categoryService comment about this variable
+     * @param ResetPasswordService $resetPasswordService resetPasswordService
      *
      * @return void
      */

@@ -16,6 +16,8 @@ class PasswordResetRequest extends Notification
     /**
     * Create a new notification instance.
     *
+    * @param string $token token
+    *
     * @return void
     */
     public function __construct($token)
@@ -26,7 +28,8 @@ class PasswordResetRequest extends Notification
     /**
     * Get the notification's delivery channels.
     *
-    * @param  mixed $notifiable
+    * @param mixed $notifiable notifiable
+    *
     * @return array
     */
     public function via($notifiable)
@@ -37,7 +40,8 @@ class PasswordResetRequest extends Notification
      /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable notifiable
+     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -52,7 +56,8 @@ class PasswordResetRequest extends Notification
     /**
     * Get the array representation of the notification.
     *
-    * @param  mixed $notifiable
+    * @param mixed $notifiable notifiable
+    *
     * @return array
     */
     public function toArray($notifiable)

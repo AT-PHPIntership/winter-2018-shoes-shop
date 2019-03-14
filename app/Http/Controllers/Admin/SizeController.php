@@ -63,7 +63,7 @@ class SizeController extends Controller
      * Update the specified resource in storage.
      *
      * @param PutSizeRequest $request request
-     * @param Size           $size   size
+     * @param Size           $size    size
      *
      * @return \Illuminate\Http\Response
      */

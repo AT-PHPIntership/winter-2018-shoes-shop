@@ -194,7 +194,7 @@ class UserService
             ];
             if (isset($data['avatar'])) {
                 $inputProfile['avatar'] = $this->uploadAvatar($data['avatar']);
-                File::delete(public_path($user->profile->avatar));                
+                File::delete(public_path($user->profile->avatar));
             }
             $user->profile->update($inputProfile);
             DB::commit();

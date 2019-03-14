@@ -727,9 +727,9 @@ class ProductService
         }
     }
 
-    /*
+    /**
      * Export csv file including product data
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function handleExportProductData()
