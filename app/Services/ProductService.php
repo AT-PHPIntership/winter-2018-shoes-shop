@@ -210,25 +210,7 @@ class ProductService
             $ids = Category::where('id', $data['categoryId'])->pluck('id')->toArray();
         }
         $products->whereIn('category_id', $ids);
-        if (isset($data['colorIds'])) {
-            $products->whereIn('color_id', $data['colorIds']);
-        }
-        if (isset($data['sizeIds'])) {
-            $products->whereIn('size_id', $data['sizeIds']);
-        }
-        if (isset($data['minPrice'], $data['maxPrice'])) {
-            $products->whereBetween('original_price', [$data['minPrice'], $data['maxPrice']]);
-        }
-        if (!empty($data['sort'])) {
-            $sort = explode('-', $data['sort']);
-            if ($sort[0] == 'name') {
-                $products->orderBy('name', $sort[1]);
-            } elseif ($sort[0] == 'price') {
-                $products->orderBy('original_price', $sort[1]);
-            } elseif ($sort[0] == 'update_at') {
-                $products->orderBy('updated_at', $sort[1]);
-            }
-        }
+        $products = $this->subFilter($products, $data);
         $products = $products->groupBy('products.id')->paginate(config('define.paginate.limit_rows_12'));
         $result = [];
         $items = [];
@@ -242,6 +224,40 @@ class ProductService
         $result['products'] = $items;
         $result['page'] = $products->lastPage();
         return $result;
+    }
+
+    /**
+     * Filter products
+     *
+     * @param object $products products
+     * @param array  $data     data
+     *
+     * @return object
+     */
+    public function subFilter(object $products, array $data)
+    {
+        if (isset($data['colorIds'])) {
+            $products->whereIn('color_id', $data['colorIds']);
+        }
+        if (isset($data['sizeIds'])) {
+            $products->whereIn('size_id', $data['sizeIds']);
+        }
+        if (isset($data['minPrice'], $data['maxPrice'])) {
+            $products->whereBetween('original_price', [$data['minPrice'], $data['maxPrice']]);
+        }
+        if (!empty($data['sort'])) {
+            $sort = explode('-', $data['sort']);
+            $sortBy = $sort[0];
+            $sortVal = $sort[1];
+            if ($sortBy == 'name') {
+                $products->orderBy('name', $sortVal);
+            } elseif ($sortBy == 'price') {
+                $products->orderBy('original_price', $sortVal);
+            } elseif ($sortBy == 'update_at') {
+                $products->orderBy('updated_at', $sortVal);
+            }
+        }
+        return $products;
     }
 
     /**

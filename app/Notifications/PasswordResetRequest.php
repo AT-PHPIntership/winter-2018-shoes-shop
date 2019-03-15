@@ -28,11 +28,9 @@ class PasswordResetRequest extends Notification
     /**
     * Get the notification's delivery channels.
     *
-    * @param mixed $notifiable notifiable
-    *
     * @return array
     */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
@@ -40,30 +38,14 @@ class PasswordResetRequest extends Notification
      /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable notifiable
-     *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         $url = url('password/reset/'.$this->token);
         return (new MailMessage)
           ->line(trans('login.mail.notice_request'))
           ->action(trans('login.reset_password'), url($url))
           ->line(trans('login.mail.remind_change'));
-    }
-
-    /**
-    * Get the array representation of the notification.
-    *
-    * @param mixed $notifiable notifiable
-    *
-    * @return array
-    */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

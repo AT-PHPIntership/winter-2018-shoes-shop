@@ -34,28 +34,12 @@ class PasswordResetSuccess extends Notification
     /**
     * Get the mail representation of the notification.
     *
-    * @param mixed $notifiable notifiable
-    *
     * @return \Illuminate\Notifications\Messages\MailMessage
     */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->line(trans('login.mail.notice_success'))
             ->line(trans('login.mail.remind_protect'));
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param mixed $notifiable notifiable
-     *
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }
