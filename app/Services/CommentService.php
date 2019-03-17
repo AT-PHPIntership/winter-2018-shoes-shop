@@ -9,13 +9,25 @@ use Log;
 class CommentService
 {
     /**
-     * Get all data table role
+     * Get parent comment table role
      *
      * @return Comment
      */
-    public function getCommentWithPaginate()
+    public function getParentCommentWithPaginate()
     {
-        return Comment::orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+        return Comment::with(['user:id','user.profile:user_id,name', 'product:id,name'])->whereNull('parent_id')->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+    }
+
+    /**
+     * Get comment by id
+     *
+     * @param int $id id
+     *
+     * @return Comment
+     */
+    public function getCommentById(int $id)
+    {
+        return Comment::with(['user:id','user.profile:user_id,name', 'product:id,name', 'children', 'children.user:id', 'children.user.profile:user_id,name'])->where('id', $id)->orderBy('id', 'desc')->first();
     }
 
     /**

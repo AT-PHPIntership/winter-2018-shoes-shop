@@ -18,4 +18,9 @@ return [
         'active' => 'Hoạt động',
         'blocked' => 'Chặn',
     ],
+    'show' => [
+        'title' => 'Chi tiết bình luận',
+        'list_child_comment' => 'Danh sách bình luận con',
+        'no_child_comment' => 'Không có bình luận con',
+    ],
 ];

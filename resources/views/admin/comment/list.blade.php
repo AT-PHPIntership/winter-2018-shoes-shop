@@ -25,10 +25,9 @@
                   <th id="user-name">@lang('comment.table.user')</th>
                   <th>@lang('comment.table.product')</th>
                   <th>@lang('comment.table.content')</th>
-                  <th>@lang('comment.table.parent_id')</th>
                   <th>@lang('comment.table.created_at')</th>
                   <th>@lang('comment.table.status')</th>
-                  <th style="width: 100px">@lang('comment.table.action')</th>
+                  <th class="w-100">@lang('comment.table.action')</th>
                 </tr>
                 @foreach ($comments as $comment)
                   <tr>
@@ -36,12 +35,12 @@
                     <td>{{ $comment->user->profile->name }}</td>
                     <td>{{ $comment->product->name }}</td>
                     <td>{{ $comment->content }}</td>
-                    <td>{{ $comment->parent ? $comment->parent->content : '' }}</td>
-                    <td>{{ formatDateVN($comment->created_at) }}</td>
+                    <td>{{ $comment->created_at->format('h:i:m m-d-Y') }}</td>
                     <td>
                       <button data-id="{{ $comment->id }}" data-status="{{ $comment->status }}" class="js-status-cmt btn btn-block {{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $comment->status == \App\Models\Comment::ACTIVE_STATUS ? __('comment.table.active') : __('comment.table.blocked') }}</button>
                     </td>
                     <td>
+                      <a class="btn btn-info btn-xs" href="{{ route('admin.comments.show', ['id' => $comment->id]) }}">@lang('common.show')</a>
                       <form class="form-inline" action="{{ route('admin.comments.destroy', ['id' => $comment->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
