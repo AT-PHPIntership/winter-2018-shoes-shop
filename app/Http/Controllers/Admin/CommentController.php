@@ -16,8 +16,21 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = app(CommentService::class)->getCommentWithPaginate();
+        $comments = app(CommentService::class)->getParentCommentWithPaginate();
         return view('admin.comment.list', compact('comments'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $comment = app(CommentService::class)->getCommentById($id);
+        return view('admin.comment.show', compact('comment'));
     }
 
     /**
