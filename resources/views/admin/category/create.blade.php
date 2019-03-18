@@ -23,8 +23,8 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" class="form-control" placeholder="@lang('category.new')" name="name">
                 @if ($errors->has('name'))
-                   <span class="help-block">{{ $errors->first('name') }}</span>
-                 @endif
+                  <span class="help-block">{{ $errors->first('name') }}</span>
+                @endif
               </div>
             </div>
             <div class="form-group">
@@ -32,12 +32,13 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <select class="form-control" name="parent_id">
                   <option value=""></option>
-                  @foreach($categories as $category)
-                    @if(!$category->parent)
-                      <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endif
+                  @foreach($parents as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                   @endforeach
                 </select>
+                @if ($errors->has('parent_id'))
+                  <span class="help-block">{{ $errors->first('parent_id') }}</span>
+                @endif
               </div>
             </div>
             <div class="form-group">

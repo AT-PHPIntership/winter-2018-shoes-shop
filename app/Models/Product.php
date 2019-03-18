@@ -16,15 +16,6 @@ class Product extends Model
         'name', 'category_id', 'original_price', 'quantity', 'description'
     ];
 
-    use SoftDeletes;
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
-
     /**
      * Get list product details belong to product.
      *
@@ -53,5 +44,15 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
+    }
+
+    /**
+     * Product belong to promotion
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function promotions()
+    {
+        return $this->belongsToMany(Promotion::class, 'product_promotions');
     }
 }

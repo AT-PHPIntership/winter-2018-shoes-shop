@@ -9,7 +9,10 @@ use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\ColorService;
 use App\Services\SizeService;
+use App\Http\Requests\Admin\UploadRequest;
+use App\Http\Requests\Admin\PutProductRequest;
 use App\Http\Requests\Admin\PostProductRequest;
+use Excel;
 
 class ProductController extends Controller
 {
@@ -99,5 +102,130 @@ class ProductController extends Controller
         $color = $this->colors->getColors();
         $size = $this->sizes->getSizes();
         return response()->json(['color' => $color, 'size' => $size]);
+    }
+
+    /**
+     * Import csv file including products data.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importFile()
+    {
+        return view('admin.product.import');
+    }
+
+    /**
+     * Handle process import file csv including products data.
+     *
+     * @param \app\Http\Request\UploadRequest $request file csv from view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processImport(UploadRequest $request)
+    {
+        try {
+            $path = $request->file('csv_file')->getRealPath();
+            $data = Excel::load($path)->get();
+            if ($this->products->handleImportData($data)) {
+                session()->flash('success', trans('common.message.upload_success'));
+                return redirect()->route('admin.product.index');
+            }
+            return redirect()->route('admin.product.import');
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Show the form for editing the specified product.
+     *
+     * @param App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Product $product)
+    {
+        $sizes = $this->sizes->getSizes();
+        $colors = $this->colors->getColors();
+        $categories = $this->categories->getParentList();
+        return view('admin.product.edit', compact('product', 'categories', 'sizes', 'colors'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param PutProductRequest  $request request
+     * @param App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PutProductRequest $request, Product $product)
+    {
+        $data = $request->all();
+        if ($this->products->handleUpdateProduct($data, $product)) {
+            session()->flash('success', trans('common.message.edit_success'));
+            return redirect()->route('admin.product.index');
+        }
+        session()->flash('error', trans('common.message.edit_error'));
+        return redirect()->route('admin.product.edit', $product->id);
+    }
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param App\Models\Product $product product
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function destroy(Product $product)
+    {
+        if ($this->products->destroy($product)) {
+            return redirect()->route('admin.product.index')->with('success', trans('common.message.delete_success'));
+        }
+        return redirect()->route('admin.product.index')->with('error', trans('common.message.delete_error'));
+    }
+
+    /**
+     * Export sample csv file to import product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function exportSampleFile()
+    {
+        return Excel::create('sample_product_CSV', function ($excel) {
+            $excel->sheet('sheet', function ($sheet) {
+                $sheet->cell('A1', function ($cell) {
+                    $cell->setValue('name');
+                });
+                $sheet->cell('B1', function ($cell) {
+                    $cell->setValue('category');
+                });
+                $sheet->cell('C1', function ($cell) {
+                    $cell->setValue('original_price');
+                });
+                $sheet->cell('D1', function ($cell) {
+                    $cell->setValue('description');
+                });
+                $sheet->cell('E1', function ($cell) {
+                    $cell->setValue('color');
+                });
+                $sheet->cell('F1', function ($cell) {
+                    $cell->setValue('size');
+                });
+                $sheet->cell('G1', function ($cell) {
+                    $cell->setValue('quantity');
+                });
+            });
+        })->download('csv');
+    }
+
+    /**
+     * Export csv file including product data
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function exportDataFile()
+    {
+        return $this->products->handleExportProductData();
     }
 }

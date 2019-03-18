@@ -53,23 +53,23 @@
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">
                     <option value="">@lang('user.select')</option>
-                    <option value="{{ \App\Models\Profile::OTHER }}">@lang('user.gender.other')</option>
-                    <option value="{{ \App\Models\Profile::MALE }}">@lang('user.gender.male')</option>
-                    <option value="{{ \App\Models\Profile::FEMALE }}">@lang('user.gender.female')</option>
+                    <option {{ old('gender') == \App\Models\Profile::OTHER ? 'selected' : '' }} value="{{ \App\Models\Profile::OTHER }}">@lang('user.gender.other')</option>
+                    <option {{ old('gender') == \App\Models\Profile::MALE ? 'selected' : '' }} value="{{ \App\Models\Profile::MALE }}">@lang('user.gender.male')</option>
+                    <option {{ old('gender') == \App\Models\Profile::FEMALE ? 'selected' : '' }} value="{{ \App\Models\Profile::FEMALE }}">@lang('user.gender.female')</option>
                   </select>
                   @if ($errors->has('gender'))
                     <span class="help-block">{{ $errors->first('gender') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPhoneNumber">@lang('user.table.phone') *</label>
+                  <label for="exampleInputPhoneNumber">@lang('user.table.phone')</label>
                   <input type="text" name="phonenumber" class="form-control" id="exampleInputPhoneNumber" value="{{ old('phonenumber') }}">
                   @if ($errors->has('phonenumber'))
                     <span class="help-block">{{ $errors->first('phonenumber') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputAddress">@lang('user.table.address') *</label>
+                  <label for="exampleInputAddress">@lang('user.table.address')</label>
                   <input type="text" name="address" class="form-control" id="exampleInputAddress" value="{{ old('address') }}">
                   @if ($errors->has('address'))
                     <span class="help-block">{{ $errors->first('address') }}</span>
@@ -77,17 +77,19 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputAvatar">@lang('user.table.avatar')</label>
-                  <input type="file" name="avatar" id="exampleInputAvatar">
+                  <input type="file" name="avatar" id="exampleInputAvatar" onchange="previewAvatar();">
                   @if ($errors->has('avatar'))
                     <span class="help-block">{{ $errors->first('avatar') }}</span>
                   @endif
+                  <div class="block-img" id="preview-avatar">
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputRole">@lang('user.table.role') *</label>
                   <select name="role_id" class="form-control" id="exampleInputRole">
                       <option value="">@lang('user.select')</option>
                     @foreach ($roles as $role)
-                      <option value="{{ $role->id }}">{{ $role->name }}</option>
+                      <option {{ old('role_id') == $role->id ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
                     @endforeach
                   </select>
                   @if ($errors->has('role_id'))

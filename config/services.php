@@ -39,5 +39,14 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
-
+    'facebook' => [
+        'client_id'     => env('FACEBOOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOOK_CLIENT_SECRET'),
+        'redirect'      => env('FACEBOOOK_REDIRECT'),
+    ],
+    'google' => [
+        'client_id'     => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT'),
+    ],
 ];

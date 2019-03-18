@@ -1,5 +1,20 @@
+function formatCurrencyVN(number){
+  return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(number);
+}
+function previewAvatar() 
+{
+  var image = '';
+  image = '<img class="profile-user-img no-mg img-responsive img-circle" src="'+ URL.createObjectURL(event.target.files[0]) +'" alt="">';
+  $('#preview-avatar').html(image);
+}
 $(document).ready(function(){
   $('.select2').select2();
+  $('#datepicker-from').datepicker({
+    autoclose: true
+  });
+  $('#datepicker-to').datepicker({
+    autoclose: true
+  });
   $(".js-status-cmt").click(function(){
     var js_status = $(this);
     var id = js_status.data('id');

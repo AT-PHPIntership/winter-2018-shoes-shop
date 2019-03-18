@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Comment;
+use App\Models\User;
 use Log;
 
 class CommentService
@@ -14,7 +15,7 @@ class CommentService
      */
     public function getCommentWithPaginate()
     {
-        return Comment::with(['user:id', 'user.profile:user_id,name', 'product:id,name', 'parent'])->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+        return Comment::orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 
     /**

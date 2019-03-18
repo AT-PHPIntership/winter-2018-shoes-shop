@@ -3,7 +3,11 @@
 namespace App\Services;
 
 use App\Models\Code;
+use App\Models\Product;
+use App\Models\UserCode;
+use App\Models\Category;
 use Log;
+use Carbon\Carbon;
 
 class CodeService
 {
@@ -67,5 +71,80 @@ class CodeService
             Log::error($e);
         }
         return false;
+    }
+
+    /**
+     * Apply Code
+     *
+     * @param string $codeName codeName
+     * @param array  $products products
+     *
+     * @return int
+     */
+    public function getDecreaseTotalAmount(string $codeName, array $products)
+    {
+        try {
+            $code = Code::where('name', $codeName)
+                        ->where('times', '>', 0)
+                        ->where('start_date', '<=', Carbon::now())
+                        ->where('end_date', '>=', Carbon::now())
+                        ->first();
+            if ($code) {
+                $cateogryId = $code->category_id;
+                $amountDecrease = 0;
+                if (!$cateogryId) {
+                    foreach ($products as $pd) {
+                        $product = Product::with(['promotions' => function ($query) {
+                            $query->where('start_date', '<=', Carbon::now())
+                                ->where('end_date', '>=', Carbon::now());
+                        }])->find($pd['id']);
+                        if ($product) {
+                            $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
+                            $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
+                        }
+                    }
+                } else {
+                    if (Category::where('parent_id', $cateogryId)->count()) {
+                        $ids = Category::where('parent_id', $cateogryId)->orWhere('id', $cateogryId)->pluck('id')->toArray();
+                    } else {
+                        $ids = Category::where('id', $cateogryId)->pluck('id')->toArray();
+                    }
+                    foreach ($products as $pd) {
+                        $product = Product::with(['promotions' => function ($query) {
+                            $query->where('start_date', '<=', Carbon::now())
+                                ->where('end_date', '>=', Carbon::now());
+                        }])->where('id', $pd['id'])->whereIn('category_id', $ids)->first();
+                        if ($product) {
+                            $price = $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : $product->original_price;
+                            $amountDecrease += ($price * $code->percent / 100) * $pd['quantity'];
+                        }
+                    }
+                }
+                return $amountDecrease;
+            } else {
+                return 0;
+            }
+        } catch (\Exception $e) {
+            Log::error($e);
+        }
+    }
+
+    /**
+     * Check code with user
+     *
+     * @param string $codeName codeName
+     * @param int    $userId   userId
+     *
+     * @return boolean
+     */
+    public function checkCodeWithUser(string $codeName, int $userId)
+    {
+        try {
+            $code = Code::where('name', $codeName)->firstOrFail();
+            return UserCode::where('user_id', $userId)->where('code_id', $code->id)->firstOrFail();
+        } catch (\Exception $e) {
+            Log::error($e);
+            return false;
+        }
     }
 }

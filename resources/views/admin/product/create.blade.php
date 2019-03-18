@@ -1,6 +1,6 @@
 @extends('admin.module.master')
 @section('content')
-<div class="content-wrapper">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-uppercase">{{ trans('product.manage')}}</h1>
@@ -24,7 +24,7 @@
                     <div class="box-body">
                       <div class="form-group">
                         <label for="name">{{ trans('product.name')}}</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                         @if ($errors->has('name'))
                           <span class="help-block">{{ $errors->first('name') }}</span>
                         @endif
@@ -34,7 +34,7 @@
                         <select class="form-control" name="parent_category_id" id="parent-category">
                           <option value="">{{ trans('product.choose_category')}}</option>
                           @foreach($categories as $category)
-                            <option value={{$category->id}}>{{$category->name}}</option>
+                            <option {{ old('parent_category_id') == $category->id ? 'selected' : '' }} value={{$category->id}}>{{$category->name}}</option>
                           @endforeach
                         </select>
                         @if ($errors->has('parent_category_id'))
@@ -50,14 +50,14 @@
                       </div>
                       <div class="form-group">
                         <label for="original_price">{{ trans('product.price')}}</label>
-                        <input type="text" class="form-control" name="original_price">
+                        <input type="text" class="form-control" name="original_price" value="{{ old('original_price') }}">
                         @if ($errors->has('original_price'))
                           <span class="help-block">{{ $errors->first('original_price') }}</span>
                         @endif
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.description')}}</label>
-                        <textarea name="description" class="form-control" rows="3"></textarea>
+                        <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
                       </div>
                       <div class="form-group">
                         <label>{{ trans('product.images')}}</label>

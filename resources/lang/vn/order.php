@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'order' => 'Đơn hàng',
+    'none_order' => ' Chưa có đơn hàng!',
     'title' => 'Quản lý đơn hàng',
     'list' => [
         'title' => 'Danh sách đơn hàng',
@@ -17,18 +19,29 @@ return [
         'status' => 'Trạng thái',
         'action' => 'Hành động',
         'product' => 'Sản phẩm',
-        'original_price' => 'Giá thực',
+        'original_price' => 'Giá gốc',
         'price' => 'Giá',
         'quantity' => 'Số lượng',
         'category' => 'Danh mục',
         'total_price' => 'Thành tiền (Chưa áp dụng code)',
         'amount' => 'Tổng',
+        'bill' => 'Hóa đơn bán hàng',
+        'order_id' => 'Mã đơn hàng',
+        'customer_name' => 'Tên khách hàng',
+        'number_acr' => 'TT',
+        'quantity_acr' => 'SL',
+        'total_price_acr' => 'Thành tiền',
+        'sub_total_amount' => 'Tạm tính',
+        'thanks' => 'Cảm ơn quý khách',
+        'see_u_later' => 'Hẹn gặp lại!'
     ],
     'show' => [
         'title' => 'Chi tiết đơn hàng',
         'product' => 'Sản phẩm',
     ],
     'status' => [
+        'follow' => 'Theo dõi',
+        'cancel' => 'Đã hủy',
         'pending' => 'Đang chờ',
         'confirmed' => 'Đã xác nhận',
         'processing' => 'Đang xử lý',
@@ -36,5 +49,23 @@ return [
         'dispatched_item' => 'Đã gửi hàng',
         'delivered' => 'Đã giao hàng',
         'canceled' => 'Hủy đơn hàng',
+        'ordered' => 'Đã đặt hàng',
+        'processed' => 'Đã xử lý',
+        'dispatched' => 'Đã vận chuyển',
+    ],
+    'unit_price' => 'Đơn giá',
+    'delivery_address' => 'Địa chỉ nhận hàng',
+    'timeline' => [
+        'ordered' => 'Đơn hàng của bạn đã được nhận: ',
+        'processed' => 'Đơn hàng của bạn đã được xử lý: ',
+        'dispatched' => 'Đơn hàng của bạn đã được vận chuyển: ',
+        'delivered' => 'Đơn hàng của bạn đã được giao: ',
+        'canceled' => 'Đơn hàng của bạn đã bị hủy: ',
+    ],
+    'payment' => [
+        'pay' => 'Thanh toán: ',
+        'subtotal' => 'Tạm tính: ',
+        'discount' => 'Giảm giá: ',
+        'total' => 'Tổng: ',
     ]
 ];

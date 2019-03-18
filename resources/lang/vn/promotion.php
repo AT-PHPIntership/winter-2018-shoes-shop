@@ -35,4 +35,5 @@ return [
     'select' => 'Chọn',
     'option' => 'Tất cả',
     'null' => 'Tất cả',
+    'mess_had_promotion' => ' đang có khuyến mãi',
 ];

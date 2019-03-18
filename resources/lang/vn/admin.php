@@ -4,6 +4,7 @@ return [
     'index' => [
         'home' => 'Trang chủ',
         'user' => 'Người dùng',
+        'address' => 'Đà Nẵng',
     ],
     'footer' => [
         'version' => 'Version 1.0',
@@ -28,6 +29,16 @@ return [
             'list' => 'Danh sách sản phẩm',
             'add' => 'Thêm sản phẩm',
         ],
+        'color' => [
+            'title' => 'Quản lý màu',
+            'list' => 'Danh sách màu',
+            'add' => 'Thêm màu',
+        ],
+        'size' => [
+            'title' => 'Quản lý kích cỡ',
+            'list' => 'Danh sách kích cỡ',
+            'add' => 'Thêm kích cỡ',
+        ],
         'order' => [
             'title' => 'Quản lý đơn hàng',
             'list' => 'Danh sách đơn hàng',
@@ -50,6 +61,9 @@ return [
             'list' => 'Danh sách mã giảm giá',
             'add' => 'Thêm mã giảm giá',
         ],
+        'statistical' => [
+            'product' => 'Sản phẩm',
+        ]
     ],
     'header' => [
         'hello' => 'Xin chào',

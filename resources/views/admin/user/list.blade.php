@@ -11,6 +11,7 @@
         <div class="col-md-12">
           <div class="box-top">
             <a class="btn btn-success btn-md" href="{{ route('admin.users.create') }}">@lang('common.new')</a>
+            <a class="btn btn-warning btn-md" href="{{ route('admin.users.trash') }}"><i class="fa fa-trash"></i></a>
           </div>
         </div>
         <div class="col-md-12">
@@ -35,7 +36,7 @@
                 @foreach ($users as $user)
                   <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->socialAccount ? $user->socialAccount->provider_user_id.'-'.$user->socialAccount->provider : $user->email }}</td>
                     <td>{{ $user->profile->name }}</td>
                     <td>{{ $user->role->name }}</td>
                     <td>
@@ -47,7 +48,7 @@
                           @csrf
                           @method('DELETE')
                           @if ($user->role_id != \App\Models\Role::ADMIN_ROLE)
-                            <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>
+                            <button type="submit" class="btn btn-warning btn-xs" onclick="return confirm('@lang('common.message.block_question')')">@lang('common.block')</button>
                           @endif
                         </form>
                     </td>

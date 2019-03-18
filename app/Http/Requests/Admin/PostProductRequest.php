@@ -39,7 +39,7 @@ class PostProductRequest extends FormRequest
             'original_price' => 'required|numeric',
             'color_id' => 'exists:colors,id',
             'size_id' => 'exists:sizes,id',
-            'quantity_type.*' => 'required|numeric',
+            // 'quantity_type' => 'required|numeric',
         ];
     }
 }

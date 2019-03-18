@@ -56,4 +56,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    /**
+     * User has one SocialAccount
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function socialAccount()
+    {
+        return $this->hasOne(SocialAccount::class);
+    }
 }

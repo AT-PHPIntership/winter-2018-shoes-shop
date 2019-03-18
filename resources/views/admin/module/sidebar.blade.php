@@ -42,6 +42,30 @@
         </li>
         <li class="treeview">
             <a href="#">
+                <i class="fa fa-bomb"></i> <span>@lang('admin.sidebar.color.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.colors.index')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.color.list')</a></li>
+                <li><a href="{{ route('admin.colors.create')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.color.add')</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-asterisk"></i> <span>@lang('admin.sidebar.size.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.sizes.index')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.size.list')</a></li>
+                <li><a href="{{ route('admin.sizes.create')}}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.size.add')</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
                 <i class="fa fa-cart-plus"></i> <span>@lang('admin.sidebar.order.title')</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
@@ -50,11 +74,6 @@
             <ul class="treeview-menu">
                 <li class="active"><a href="{{ route('admin.orders.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.order.list')</a></li>
             </ul>
-        </li>
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-dashboard"></i> <span>@lang('admin.sidebar.report.title')</span>
-            </a>
         </li>
         <li class="treeview">
             <a href="#">
@@ -89,6 +108,18 @@
             </a>
             <ul class="treeview-menu">
                 <li class="active"><a href="{{ route('admin.comments.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.comment.list')</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>@lang('admin.sidebar.report.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.statisticals.revenue') }}"><i class="fa fa-circle-o"></i> Doanh thu</a></li>
+                <li><a href="{{ route('admin.statisticals.product') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.statistical.product')</a></li>
             </ul>
         </li>
       </ul>

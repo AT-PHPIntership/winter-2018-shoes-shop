@@ -38,6 +38,47 @@ class UserController extends Controller
     }
 
     /**
+     * Display a listing of trash.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trash()
+    {
+        $users = $this->userService->getTrashWithPaginate();
+        return view('admin.user.trash', compact('users'));
+    }
+
+    /**
+     * Display a listing of trash.
+     *
+     * @param int $id id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(int $id)
+    {
+        if ($this->userService->restore($id)) {
+            return redirect()->route('admin.users.trash')->with('success', trans('common.message.restore_success'));
+        }
+        return redirect()->route('admin.users.trash')->with('error', trans('common.message.restore_error'));
+    }
+
+    /**
+     * Force delete user
+     *
+     * @param int $id id
+     *
+     * @return boolean
+     */
+    public function forceDelete(int $id)
+    {
+        if ($this->userService->forceDelete($id)) {
+            return redirect()->route('admin.users.trash')->with('success', trans('common.message.delete_success'));
+        }
+        return redirect()->route('admin.users.trash')->with('error', trans('common.message.delete_error'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -100,6 +141,9 @@ class UserController extends Controller
      */
     public function update(PutUserRequest $request, User $user)
     {
+        if ($request->has('password') && $user->id != Auth::user()->id) {
+            return redirect()->route('admin.users.index')->with('error', trans('common.message.edit_error'));
+        }
         $data = $request->all();
         if (!empty($this->userService->update($data, $user))) {
             return redirect()->route('admin.users.index')->with('success', trans('common.message.edit_success'));
@@ -117,8 +161,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($this->userService->destroy($user)) {
-            return redirect()->route('admin.users.index')->with('success', trans('common.message.delete_success'));
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.block_success'));
         }
-        return redirect()->route('admin.users.index')->with('error', trans('common.message.delete_error'));
+        return redirect()->route('admin.users.index')->with('error', trans('common.message.block_error'));
     }
 }

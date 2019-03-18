@@ -20,10 +20,10 @@
               <div class="row">
                 <div class="col-md-7">
                   <p><strong>{{ $product->name}}</strong></p>
-                  <p>{{ trans('product.price')}}: {{ $product->original_price}} VNĐ</p>
+                  <p>{{ trans('product.price')}}: {{ formatCurrencyVN($product->original_price) }}</p>
                   <p>{{ trans('product.quantity')}}: {{ $product->quantity}}</p>
                   <p>{{ trans('product.total_sold')}}: {{ $product->total_sold}}</p>                  
-                  <p>{{ trans('product.description')}}: {{ $product->description ? $product->description : '-'}}</p>
+                  <p>{{ trans('product.description')}}: {!! $product->description ? nl2br($product->description) : '-'!!}</p>
                   <ul class="product-menu">
                     @foreach($product->images as $key => $image)
                       <li class="product-item"><img src="{{$image->path}}" class="product-img" alt="Product image"></li>

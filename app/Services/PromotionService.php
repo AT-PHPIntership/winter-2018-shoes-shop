@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Promotion;
+use App\Models\Product;
 use DB;
 use Log;
 
@@ -87,9 +88,10 @@ class PromotionService
         DB::beginTransaction();
         try {
             $promotion->update($data);
-            if (isset($data['product_id'])) {
-                $promotion->products()->sync($data['product_id']);
+            if (!isset($data['product_id'])) {
+                $data['product_id'] = [];
             }
+            $promotion->products()->sync($data['product_id']);
             DB::commit();
             return $promotion;
         } catch (\Exception $e) {
@@ -114,5 +116,36 @@ class PromotionService
             Log::error($e);
         }
         return false;
+    }
+
+    /**
+     * Check products had promtion
+     *
+     * @param array $data        data
+     * @param int   $promotionId promotionId
+     *
+     * @return array
+     */
+    public function checkProductsHadPromotion(array $data, int $promotionId = null)
+    {
+        try {
+            $error = [];
+            foreach ($data['product_id'] as $productId) {
+                $product = Product::with('promotions')->find($productId);
+                if ($product->promotions) {
+                    foreach ($product->promotions as $promotion) {
+                        if ($promotion->id != $promotionId) {
+                            if (($promotion->start_date <= $data['start_date'] && $data['start_date'] <= $promotion->end_date) || ($promotion->start_date <= $data['end_date'] && $data['end_date'] <= $promotion->end_date)) {
+                                $error[] = $product->name;
+                            }
+                        }
+                    }
+                }
+            }
+            return $error;
+        } catch (\Exception $e) {
+            Log::error($e);
+            return false;
+        }
     }
 }

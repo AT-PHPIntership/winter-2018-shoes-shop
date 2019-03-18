@@ -30,7 +30,6 @@
                   <th>@lang('promotion.table.name')</th>
                   <th>@lang('promotion.table.percent')</th>
                   <th>@lang('promotion.table.description')</th>
-                  <th>@lang('promotion.table.max_sell')</th>
                   <th>@lang('promotion.table.total_sold')</th>
                   <th>@lang('promotion.table.start_date')</th>
                   <th>@lang('promotion.table.end_date')</th>
@@ -42,7 +41,6 @@
                     <td>{{ $promotion->name }}</td>
                     <td>{{ $promotion->percent }}%</td>
                     <td>{{ $promotion->description }}</td>
-                    <td>{{ $promotion->max_sell }}</td>
                     <td>{{ $promotion->total_sold }}</td>
                     <td>{{ formatDateVN($promotion->start_date) }}</td>
                     <td>{{ formatDateVN($promotion->end_date) }}</td>
