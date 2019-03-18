@@ -93,9 +93,96 @@
       </div>
     </div>
   </div>
+  <div class="container mb-100">
+    <div class="details-tab-navigation d-flex justify-content-center mt-30">
+      <ul class="nav nav-tabs" id="my-tab" role="tablist">
+        <li>
+          <a class="nav-link active" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments">{{ __('index.detail.comment.title') }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content" id="my-tab-content">
+      <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments">
+        <div class="review-wrapper">
+          <div class="row">
+            <div class="col-xl-6">
+              <div class="total-comment">
+                <ul class="comment-list">
+                  @if ($comments->isEmpty())
+                    <b>{{ __('index.detail.comment.empty') }}</b>
+                  @else
+                    @foreach ($comments as $comment)
+                      <li class="comment-item">
+                        <div class="single-comment">
+                          <div class="user-details d-flex align-items-center flex-wrap">
+                            <img src="{{ $comment->user->profile->avatar ? $comment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
+                            <div class="user-name order-3 order-sm-2">
+                              <h5>{{ $comment->user->profile->name }}</h5>
+                              <span>{{ $comment->created_at->format('H:i:s - d/m/Y') }}</span>
+                            </div>
+                            @if (Auth::user())
+                              <a href="javascript:void(0)" data-comment-id="{{ $comment->id }}" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>
+                            @endif
+                          </div>
+                          <p class="user-comment">{{ $comment->content }}</p>
+                        </div>
+                        <ul class="reply-list-{{ $comment->id }}">
+                          @if ($comment->children->count())
+                            @foreach ($comment->children as $childComment)
+                              <li>
+                                <div class="single-comment reply-comment">
+                                  <div class="user-details d-flex align-items-center flex-wrap">
+                                    <img src="{{ $childComment->user->profile->avatar ? $childComment->user->profile->avatar : config('define.path.default_avatar') }}" class="img-fluid order-1 order-sm-1" alt="">
+                                    <div class="user-name order-3 order-sm-2">
+                                      <h5>{{ $childComment->user->profile->name }}</h5>
+                                      <span>{{ $childComment->created_at->format('H:i:s - d/m/Y') }}</span>
+                                    </div>
+                                  </div>
+                                  <p class="user-comment">{{ $childComment->content }}</p>
+                                </div>
+                              </li>
+                            @endforeach
+                          @endif
+                        </ul>
+                      </li>
+                    @endforeach
+                  @endif
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="add-review">
+                <h3>{{ __('index.detail.comment.post') }}</h3>
+                @if (Auth::user())
+                  <div class="main-form">
+                    <textarea id="js-comment-content" class="common-textarea" placeholder="{{ __('index.detail.comment.content') }}" onfocus="this.placeholder=''" onblur="this.placeholder = '{{ __('index.detail.comment.content') }}'"></textarea>
+                    <span class="mess-error comment-error"></span>
+                    <a href="javascript:void(0)" id="js-add-comment" data-user-id="{{ Auth::user()->id }}" data-product-id="{{ request()->route('id') }}" class="view-btn color-2 btn-comment"><span>{{ __('index.detail.comment.submit') }}</span></a>
+                  </div>
+                  <span></span>
+                @else
+                  <b>{{ __('index.detail.comment.login') }}</b>
+                @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- End Product Details -->
+  <div id="notification">
+    <i class="fa fa-check"></i> <span>{{ __('index.detail.comment.success') }}</span>
+  </div>
   <script>
     var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
     var option_default = "{{ __('index.quick_view.default_option') }}";
+    var addCommentUrl = "{{ url('add-comment') }}";
+    var required = "{{ __('index.detail.comment.required') }}";
+    var txtSubmit = "{{ __('index.detail.comment.submit') }}";
+    var txtContent = "{{ __('index.detail.comment.content') }}";
+    var txtCmtSuccess = "{{ __('index.detail.comment.success') }}";
+    var txtAdminCmtSuccess = "{{ __('index.detail.comment.admin_success') }}";
   </script>
+  <script src="{{ asset('public/js/comment-product.js') }}"></script> 
 @endsection
