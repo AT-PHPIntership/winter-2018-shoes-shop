@@ -68,13 +68,14 @@ class CommentService
      *
      * @return Comment
      */
-    public function getCommentsByProductId(int $productId)
+    public function getCommentsByProductId(array $data)
     {
         return Comment::with(['user:id','user.profile:user_id,name,avatar', 'product:id,name', 'children', 'children.user:id', 'children.user.profile:user_id,name,avatar'])
-            ->where('product_id', $productId)
+            ->where('product_id', $data['productId'])
             ->where('parent_id', null)
             ->where('status', Comment::ACTIVE_STATUS)
-            ->get();
+            ->orderBy('id', 'desc')
+            ->paginate(2);
     }
     
     /**

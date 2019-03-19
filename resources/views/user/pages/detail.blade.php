@@ -108,7 +108,7 @@
             <div class="col-xl-6">
               <div class="total-comment">
                 <ul class="comment-list">
-                  @if ($comments->isEmpty())
+                  {{-- @if ($comments->isEmpty())
                     <b>{{ __('index.detail.comment.empty') }}</b>
                   @else
                     @foreach ($comments as $comment)
@@ -146,8 +146,10 @@
                         </ul>
                       </li>
                     @endforeach
-                  @endif
+                  @endif --}}
                 </ul>
+                <div class="pagination" id="js-pagi-comment">
+                </div>
               </div>
             </div>
             <div class="col-xl-6">
@@ -177,12 +179,14 @@
   <script>
     var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
     var option_default = "{{ __('index.quick_view.default_option') }}";
-    var addCommentUrl = "{{ url('add-comment') }}";
+    var addCommentUrl = "{{ url('detail/add-comment') }}";
+    var getListCommentUrl = "{{ url('detail/get-list-comment') }}";
     var required = "{{ __('index.detail.comment.required') }}";
     var txtSubmit = "{{ __('index.detail.comment.submit') }}";
     var txtContent = "{{ __('index.detail.comment.content') }}";
     var txtCmtSuccess = "{{ __('index.detail.comment.success') }}";
     var txtAdminCmtSuccess = "{{ __('index.detail.comment.admin_success') }}";
+    var isLogin = "{{ Auth::check() }}";
   </script>
   <script src="{{ asset('public/js/comment-product.js') }}"></script> 
 @endsection
