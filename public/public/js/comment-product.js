@@ -20,7 +20,6 @@ $(document).ready(function(){
         if(data.success){
           if(data.result.data.length){
             var item = '';
-            var pagi = '';
             $.each(data.result.data, function(key, val){
               item += '<li class="comment-item">'
               item += '<div class="single-comment">'
@@ -31,7 +30,7 @@ $(document).ready(function(){
               item += '<span>'+ val.created_at +'</span>';
               item += '</div>';
                 if(isLogin){
-                  item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>';
+                  item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>'+ txtReply +'</span></a>';
                 }
               item += '</div>';
               item += '<p class="user-comment">'+ val.content +'</p>';
@@ -56,27 +55,27 @@ $(document).ready(function(){
               item += '</ul>';
               item += '</li>';
             });
-            $('.comment-list').html(item);
+            $('.comment-list').append(item);
             var totalPage = data.result.paginator.last_page;
-            for (var i = 1; i <= totalPage; i++) {
-              if (totalPage > 1) {
-                var active = '';
-                if(page == i){
-                  active = 'active';
-                }
-                pagi += '<a class="'+ active +'" href="'+ getListCommentUrl +'?page='+ i +'">'+ i +'</a>';
-              }
+            if(page < totalPage){
+              loadMore = '<a class="active" href="'+ getListCommentUrl +'?page='+ (page + 1) +'">'+ txtLoadMore +'</a>';
+              $('#js-load-more-comment').html(loadMore);
+            }else{
+              $('#js-load-more-comment').html('');
             }
-            $('#js-pagi-comment').html(pagi);
+          }else{
+            $('.comment-list').html('<b>'+ txtNoComment +'</b>');
           }
+        }else{
+          noti(false, data.message);
         }
       }
     });
   }
   showListComment();
 
-  // Click Pagination
-  $(document).on('click','#js-pagi-comment a', function(e){
+  // Click LoadMore
+  $(document).on('click','#js-load-more-comment a', function(e){
     e.preventDefault();
     var page = $(this).attr('href').split('page=')[1];
     showListComment(page);
@@ -122,7 +121,6 @@ $(document).ready(function(){
               if($(".comment-list li").length == 0){
                 $(".comment-list").html(item);
               }else{
-                // $(".comment-list").append(item);
                 $(".comment-list li:eq(0)").before(item);
               }
               noti(true, txtAdminCmtSuccess);
@@ -188,7 +186,6 @@ $(document).ready(function(){
               item += '</div>';
               item += '</li>';
               $('.reply-list-'+commentId).append(item);
-              // $('.reply-list-'+commentId+' li:eq(0)').before(item);
               noti(true, txtAdminCmtSuccess);
             }else{
               noti(true, txtCmtSuccess);

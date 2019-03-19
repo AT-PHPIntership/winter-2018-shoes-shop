@@ -57,4 +57,16 @@ class Comment extends Model
     {
         return $this->hasMany(Comment::class, 'parent_id', 'id');
     }
+
+    /**
+     * Get created_at.
+     *
+     * @param string $date date
+     *
+     * @return string
+     */
+    public function getCreatedAtAttribute($date)
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('H:i:s - d/m/Y');
+    }
 }

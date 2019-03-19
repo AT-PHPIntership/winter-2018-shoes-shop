@@ -19,10 +19,10 @@ class CommentController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'productId' => 'required|exists:products,id',
+            'page' => 'required|numeric',
         ]);
         if ($validator->fails()) {
-            return $request->all();
-            // return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
+            return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
         }
         $paginate = app(CommentService::class)->getCommentsByProductId($request->all());
         $paginate = $paginate->toArray();

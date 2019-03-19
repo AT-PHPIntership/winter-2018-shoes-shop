@@ -545,3 +545,12 @@
   from {bottom: 5%; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
+.load-more {
+  text-align: center;
+}
+.load-more a {
+  color: #26a69a;
+}
+.default-header{
+  z-index: 999;
+}

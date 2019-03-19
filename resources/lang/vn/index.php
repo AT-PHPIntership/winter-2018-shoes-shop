@@ -93,6 +93,7 @@ return [
             'success' => 'Bình luận thành công! Vui lòng chờ kiểm duyệt.',
             'admin_success' => 'Bình luận thành công!',
             'content' => 'Nội dung',
+            'load_more' => 'Xem thêm',
         ],
     ]
 ];

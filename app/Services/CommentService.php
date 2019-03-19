@@ -62,9 +62,9 @@ class CommentService
     }
 
     /**
-     * Get comments by productId
+     * Get comments by productId with paginate
      *
-     * @param int $productId productId
+     * @param array $data data
      *
      * @return Comment
      */
@@ -75,7 +75,7 @@ class CommentService
             ->where('parent_id', null)
             ->where('status', Comment::ACTIVE_STATUS)
             ->orderBy('id', 'desc')
-            ->paginate(2);
+            ->paginate(config('define.paginate.limit_rows_comment'));
     }
     
     /**
@@ -107,7 +107,7 @@ class CommentService
             $result['user_avatar'] = asset($user->profile->avatar ? $user->profile->avatar : config('define.path.default_avatar'));
             $result['comment_id'] = $comment->id;
             $result['comment_content'] = $comment->content;
-            $result['comment_created_at'] = $comment->created_at->format('d/m/Y - H:i:s');
+            $result['comment_created_at'] = $comment->created_at;
             return $result;
         } catch (\Exception $e) {
             Log::error($e);

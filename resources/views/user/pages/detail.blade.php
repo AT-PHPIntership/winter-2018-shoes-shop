@@ -148,7 +148,7 @@
                     @endforeach
                   @endif --}}
                 </ul>
-                <div class="pagination" id="js-pagi-comment">
+                <div class="load-more" id="js-load-more-comment">
                 </div>
               </div>
             </div>
@@ -187,6 +187,9 @@
     var txtCmtSuccess = "{{ __('index.detail.comment.success') }}";
     var txtAdminCmtSuccess = "{{ __('index.detail.comment.admin_success') }}";
     var isLogin = "{{ Auth::check() }}";
+    var txtNoComment = "{{ __('index.detail.comment.empty') }}";
+    var txtLoadMore = "{{ __('index.detail.comment.load_more') }}";
+    var txtReply = "{{ __('index.detail.comment.reply') }}";
   </script>
   <script src="{{ asset('public/js/comment-product.js') }}"></script> 
 @endsection
