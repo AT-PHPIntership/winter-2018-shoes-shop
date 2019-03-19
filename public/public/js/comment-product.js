@@ -30,7 +30,12 @@ $(document).ready(function(){
               item += '<span>'+ val.created_at +'</span>';
               item += '</div>';
                 if(isLogin){
-                  item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>'+ txtReply +'</span></a>';
+                  item += '<div class="group-btn order-2 order-sm-3">';
+                  item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-show-reply"><i class="fa fa-reply" aria-label="Tra loi" aria-hidden="true"></i><span>'+ txtReply +'</span></a>';
+                  if(val.user.id === +userId){
+                    item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
+                  }
+                  item += '</div>';
                 }
               item += '</div>';
               item += '<p class="user-comment">'+ val.content +'</p>';
@@ -46,6 +51,11 @@ $(document).ready(function(){
                     item += '<h5>'+ val.user.profile.name +'</h5>';
                     item += '<span>'+ val.created_at +'</span>';
                     item += '</div>';
+                    if(isLogin && val.user.id === +userId){
+                      item += '<div class="group-btn order-2 order-sm-3">';
+                      item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
+                      item += '</div>';
+                    }
                     item += '</div>';
                     item += '<p class="user-comment">'+ val.content +'</p>';
                     item += '</div>';
@@ -102,20 +112,24 @@ $(document).ready(function(){
         success: function(data){
           if(data.success){
             if(data.data.user_name){
+              var data = data.data;
               var item = '';
               item += '<li class="comment-item">';
               item += '<div class="single-comment">';
               item += '<div class="user-details d-flex align-items-center flex-wrap">';
-              item += '<img src="'+ data.data.user_avatar +'" class="img-fluid order-1 order-sm-1" alt="">';
+              item += '<img src="'+ data.user_avatar +'" class="img-fluid order-1 order-sm-1" alt="">';
               item += '<div class="user-name order-3 order-sm-2">';
-              item += '<h5>'+ data.data.user_name +'</h5>';
-              item += '<span>'+ data.data.comment_created_at +'</span>';
+              item += '<h5>'+ data.user_name +'</h5>';
+              item += '<span>'+ data.comment_created_at +'</span>';
               item += '</div>';
-              item += '<a href="javascript:void(0)" data-comment-id="'+ data.data.comment_id +'" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a>';
+              item += '<div class="group-btn order-2 order-sm-3">';
+              item += '<a href="javascript:void(0)" data-comment-id="'+ data.comment_id +'" class="js-show-reply"><i class="fa fa-reply" aria-label="Tra loi" aria-hidden="true"></i><span>'+ txtReply +'</span></a>';
+              item += '<a href="javascript:void(0)" data-comment-id="'+ data.comment_id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
               item += '</div>';
-              item += '<p class="user-comment">'+ data.data.comment_content +'</p>';
               item += '</div>';
-              item += '<ul class="reply-list-'+ data.data.comment_id +'">';
+              item += '<p class="user-comment">'+ data.comment_content +'</p>';
+              item += '</div>';
+              item += '<ul class="reply-list-'+ data.comment_id +'">';
               item += '</ul>';
               item += '</li>';
               if($(".comment-list li").length == 0){
@@ -172,17 +186,21 @@ $(document).ready(function(){
         success: function(data){
           if(data.success){
             if(data.data.user_name){
+              var data = data.data;
               var item = '';
               item += '<li class="comment-item">';
               item += '<div class="single-comment reply-comment">';
               item += '<div class="user-details d-flex align-items-center flex-wrap">';
-              item += '<img src="'+ data.data.user_avatar +'" class="img-fluid order-1 order-sm-1" alt="">';
+              item += '<img src="'+ data.user_avatar +'" class="img-fluid order-1 order-sm-1" alt="">';
               item += '<div class="user-name order-3 order-sm-2">';
-              item += '<h5>'+ data.data.user_name +'</h5>';
-              item += '<span>'+ data.data.comment_created_at +'</span>';
+              item += '<h5>'+ data.user_name +'</h5>';
+              item += '<span>'+ data.comment_created_at +'</span>';
+              item += '</div>';
+              item += '<div class="group-btn order-2 order-sm-3">';
+              item += '<a href="javascript:void(0)" data-comment-id="'+ data.comment_id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
               item += '</div>';
               item += '</div>';
-              item += '<p class="user-comment">'+ data.data.comment_content +'</p>';
+              item += '<p class="user-comment">'+ data.comment_content +'</p>';
               item += '</div>';
               item += '</li>';
               $('.reply-list-'+commentId).append(item);
@@ -191,6 +209,28 @@ $(document).ready(function(){
               noti(true, txtCmtSuccess);
             }
             reply.parent().find('.js-reply-content').val('');
+          }else{
+            noti(false, data.message);
+          }
+        }
+      });
+    }
+  });
+
+  // Remove Comment
+  $('.comment-list').on('click','.js-remove-cmt',function(){
+    var eleRemove = $(this);
+    var commentId = eleRemove.attr('data-comment-id');
+    if(confirm(txtQuesDelCmt)){
+      $.ajax({
+        url: removeCommentUrl,
+        method:"get",
+        dataType:"JSON",
+        data: {commentId:commentId},
+        success: function(data){
+          if(data.success){
+            eleRemove.parent().parent().parent().parent().remove();
+            noti(true, txtDeleteCmtSuccess);
           }else{
             noti(false, data.message);
           }

@@ -142,15 +142,19 @@
     var option_default = "{{ __('index.quick_view.default_option') }}";
     var addCommentUrl = "{{ url('detail/add-comment') }}";
     var getListCommentUrl = "{{ url('detail/get-list-comment') }}";
+    var removeCommentUrl = "{{ url('detail/remove-comment') }}";
     var required = "{{ __('index.detail.comment.required') }}";
     var txtSubmit = "{{ __('index.detail.comment.submit') }}";
     var txtContent = "{{ __('index.detail.comment.content') }}";
     var txtCmtSuccess = "{{ __('index.detail.comment.success') }}";
     var txtAdminCmtSuccess = "{{ __('index.detail.comment.admin_success') }}";
     var isLogin = "{{ Auth::check() }}";
+    var userId = "{{ Auth::check() ?? Auth::user()->id }}";
     var txtNoComment = "{{ __('index.detail.comment.empty') }}";
     var txtLoadMore = "{{ __('index.detail.comment.load_more') }}";
     var txtReply = "{{ __('index.detail.comment.reply') }}";
+    var txtDeleteCmtSuccess = "{{ __('common.message.delete_success') }}";
+    var txtQuesDelCmt = "{{ __('common.message.del_question') }}";
   </script>
   <script src="{{ asset('public/js/comment-product.js') }}"></script> 
 @endsection

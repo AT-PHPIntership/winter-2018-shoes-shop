@@ -60,6 +60,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('getDetailProduct', 'ProductController@getDetailProduct');
     Route::post('detail/add-comment', 'CommentController@addComment');
     Route::get('detail/get-list-comment', 'CommentController@getListComment');
+    Route::get('detail/remove-comment', 'CommentController@removeComment');
     Route::get('detail/{id}', 'ProductController@detail')->name('detail');
     Route::get('get-detail-product', 'ProductController@getDetailProduct');
     Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
