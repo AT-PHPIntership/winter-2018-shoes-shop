@@ -12,17 +12,15 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'product_id', 'path'
+        'path', 'imageable_type', 'imageable_id'
     ];
 
     /**
-     * Get the product for this image.
-     *
-     * @return void
+     * Get all of the owning commentable models.
      */
-    public function product()
+    public function imageable()
     {
-        return $this->belongsTo('App\Models\Product');
+        return $this->morphTo();
     }
 
     /**
