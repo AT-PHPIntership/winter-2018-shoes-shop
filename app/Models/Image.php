@@ -17,6 +17,8 @@ class Image extends Model
 
     /**
      * Get all of the owning commentable models.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function imageable()
     {

@@ -18,6 +18,8 @@ class Review extends Model
 
     /**
      * Get all of the image's reviews.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function images()
     {

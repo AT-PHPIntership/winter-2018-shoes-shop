@@ -135,8 +135,7 @@ class ProductService
         } else {
             $product = $product->where('category_id', $id);
         }
-        $a = $product->orderBy('updated_at', 'desc')->get($columns);
-        dd(Image::first()->imageable);
+        return $product->orderBy('updated_at', 'desc')->get($columns);
     }
 
     /**

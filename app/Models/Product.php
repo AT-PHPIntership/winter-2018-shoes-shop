@@ -18,6 +18,8 @@ class Product extends Model
 
     /**
      * Get all of the image's products.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function images()
     {
