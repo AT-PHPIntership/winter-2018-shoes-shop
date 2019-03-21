@@ -51,6 +51,10 @@ return [
             'title' => 'Quản lý bình luận',
             'list' => 'Danh sách bình luận',
         ],
+        'review' => [
+            'title' => 'Quản lý đánh giá',
+            'list' => 'Danh sách đánh giá',
+        ],
         'promotion' => [
             'title' => 'Quản lý khuyến mãi',
             'list' => 'Danh sách khuyến mãi',
