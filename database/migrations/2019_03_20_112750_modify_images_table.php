@@ -27,10 +27,12 @@ class ModifyImagesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::table('images', function (Blueprint $table) {
-            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('product_id')->after('id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->dropMorphs('imageable');
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }

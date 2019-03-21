@@ -14,11 +14,11 @@ class ImagesTableSeeder extends Seeder
     {
         $table = array_random(['products', 'reviews']);
         $model = array_random(['App\Models\Product', 'App\Models\Review']);
-        $id = $model::all('id')->random()->id;
+        $ids = $model::all('id');
         for ($i = 0; $i < 20; $i++) {
             factory(Image::class)->create([
                 'imageable_type' => $table,
-                'imageable_id' => $id,
+                'imageable_id' => $ids->random()->id,
             ]);
         }
     }
