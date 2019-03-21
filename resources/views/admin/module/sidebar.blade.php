@@ -112,6 +112,17 @@
         </li>
         <li class="treeview">
             <a href="#">
+                <i class="fa fa-star"></i> <span>@lang('admin.sidebar.review.title')</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="active"><a href="{{ route('admin.reviews.index') }}"><i class="fa fa-circle-o"></i> @lang('admin.sidebar.review.list')</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
                 <i class="fa fa-dashboard"></i> <span>@lang('admin.sidebar.report.title')</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
