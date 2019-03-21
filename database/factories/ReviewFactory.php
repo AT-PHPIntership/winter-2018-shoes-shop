@@ -6,6 +6,7 @@ use App\Models\Review;
 $factory->define(Review::class, function (Faker $faker) {
     return [
         'star' => array_random(Review::NUMBER_STAR),
+        'title' => $faker->text(20),
         'content' => $faker->text(30),
         'status' => $faker->randomElement([Review::ACTIVE_STATUS, Review::BLOCKED_STATUS]),
     ];

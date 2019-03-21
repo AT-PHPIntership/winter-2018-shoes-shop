@@ -20,6 +20,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->tinyInteger('star');
+            $table->string('title', 100);
             $table->string('content');
             $table->tinyInteger('status');
             $table->timestamps();
