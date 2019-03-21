@@ -50,7 +50,7 @@
                     </td>
                     <td>{{ formatDateVN($review->created_at) }}</td>
                     <td>
-                      <button data-id="{{ $review->id }}" data-status="{{ $review->status }}" class="js-status-cmt btn btn-block {{ $review->status == \App\Models\Review::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $review->status == \App\Models\Review::ACTIVE_STATUS ? __('review.table.active') : __('review.table.blocked') }}</button>
+                      <button data-id="{{ $review->id }}" data-status="{{ $review->status }}" class="js-status-review btn btn-block {{ $review->status == \App\Models\Review::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $review->status == \App\Models\Review::ACTIVE_STATUS ? __('review.table.active') : __('review.table.blocked') }}</button>
                     </td>
                     <td>
                       <form class="form-inline" action="" method="POST">
@@ -73,4 +73,10 @@
       </div>
     </section>
   </div>
+  <script>
+    var changeStatusUrl = "{{ url('admin/reviews/change-status') }}";
+    var active = "{{ __('comment.table.active') }}";
+    var blocked = "{{ __('comment.table.blocked') }}";
+  </script>
+  <script src="{{ asset('admin/js/review.js') }}"></script>
 @endsection
