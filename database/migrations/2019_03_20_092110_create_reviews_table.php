@@ -17,6 +17,7 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('is_buy')->default(0);
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->tinyInteger('star');
