@@ -9,6 +9,8 @@ return [
         'id' => 'Id',
         'user' => 'Người đánh giá',
         'product' => 'Sản phẩm',
+        'title' => 'Tiêu đề',
+        'score_rating' => 'Điểm (*/5)',
         'content' => 'Nội dung',
         'action' => 'Hành động',
         'created_at' => 'Ngày tạo',

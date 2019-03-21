@@ -24,6 +24,8 @@
                   <th style="width: 10px">@lang('review.table.id')</th>
                   <th id="user-name">@lang('review.table.user')</th>
                   <th>@lang('review.table.product')</th>
+                  <th>@lang('review.table.score_rating')</th>
+                  <th>@lang('review.table.title')</th>
                   <th>@lang('review.table.content')</th>
                   <th>@lang('review.table.created_at')</th>
                   <th>@lang('review.table.status')</th>
@@ -32,9 +34,20 @@
                 @foreach ($reviews as $review)
                   <tr>
                     <td>{{ $review->id }}</td>
-                    <td>{{ $review->user->profile->name }}</td>
+                    <td>{{ $review->user->profile->name }} @if ($review->is_buy) <i class="fa fa-check-circle green"></i> @endif</td>
                     <td>{{ $review->product->name }}</td>
-                    <td>{{ $review->content }}</td>
+                    <td>{{ $review->star }}</td>
+                    <td>{{ $review->title }}</td>
+                    <td>
+                      <p>{{ $review->content }} <i class="fa fa-thumbs-up"></i><span>{{ $review->likes ? $review->likes->count() : 0 }}</span></p>
+                      @if ($review->images)
+                        <p>
+                          @foreach ($review->images as $image)
+                            <img class="review-img" src="{{ $image->path }}" alt="">                            
+                          @endforeach
+                        </p>
+                      @endif
+                    </td>
                     <td>{{ formatDateVN($review->created_at) }}</td>
                     <td>
                       <button data-id="{{ $review->id }}" data-status="{{ $review->status }}" class="js-status-cmt btn btn-block {{ $review->status == \App\Models\review::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $review->status == \App\Models\review::ACTIVE_STATUS ? __('review.table.active') : __('review.table.blocked') }}</button>
