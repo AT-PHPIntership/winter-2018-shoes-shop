@@ -53,7 +53,7 @@ class ProductService
     public function getProductById($id)
     {
         $product = Product::with([
-            'images:product_id,path',
+            'images:imageable_type,imageable_id,path',
             'category:id,name',
             'productDetails' => function ($query) {
                 $query->with(['size:id,size', 'color:id,name']);
@@ -74,7 +74,7 @@ class ProductService
         $product = Product::with(['category:id,name', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
-        }, 'images:id,product_id,path', 'productDetails:id,product_id,color_id', 'productDetails.color:id,name'])->findOrFail($id);
+        }, 'images:id,imageable_type,imageable_id,path', 'productDetails:id,product_id,color_id', 'productDetails.color:id,name'])->findOrFail($id);
         $data['product'] = [
             'id' => $product->id,
             'name' => $product->name,
@@ -125,7 +125,7 @@ class ProductService
     public function getProductsByCat(string $categoryName, array $columns = ['*'])
     {
         $id = Category::where('name', $categoryName)->first(['id'])->id;
-        $product = Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
+        $product = Product::with(['category:id,name', 'images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }]);
@@ -147,7 +147,7 @@ class ProductService
      */
     public function getNewProducts(array $columns = ['*'])
     {
-        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }])->orderBy('updated_at', 'desc')
@@ -170,7 +170,7 @@ class ProductService
             ->groupBy('product_id')->orderBy('total', 'desc')
             ->limit(config('define.limit_rows_product'))
             ->pluck('product_id');
-        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }])->whereIn('id', $productIds)
@@ -197,7 +197,7 @@ class ProductService
      */
     public function filterProduct(array $data)
     {
-        $products =  Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        $products =  Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now());
         }])
@@ -269,7 +269,7 @@ class ProductService
      */
     public function searchProduct(string $search)
     {
-        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }])->where('name', 'like', '%'.$search.'%')
@@ -339,7 +339,8 @@ class ProductService
                 if (in_array($image->extension(), $extensions)) {
                     try {
                         Image::create([
-                            'product_id' => $productId,
+                            'imageable_type' => 'products',
+                            'imageable_id' => $productId,
                             'path' => $this->uploadImage($image)
                         ]);
                     } catch (\Exception $e) {
@@ -623,7 +624,7 @@ class ProductService
                 $this->createProductDetail($product->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
             if (isset($data['upload_file'])) {
-                DB::table('images')->where('product_id', $product->id)->delete();
+                DB::table('images')->where('imageable_type', 'products')->where('imageable_id', $product->id)->delete();
                 $this->createImages($data, $product->id);
             }
             DB::commit();
