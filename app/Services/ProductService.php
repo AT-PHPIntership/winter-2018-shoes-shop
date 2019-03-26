@@ -205,7 +205,7 @@ class ProductService
         }])
         ->join('categories as c', 'c.id', '=', 'products.category_id')
         ->join('product_details as pd', 'pd.product_id', '=', 'products.id')
-        ->select('products.id', 'products.name', 'products.original_price');
+        ->select('products.id', 'products.name', 'products.original_price', 'products.avg_rating', 'products.total_review');
         if (Category::where('parent_id', $data['categoryId'])->count()) {
             $ids = Category::where('parent_id', $data['categoryId'])->orWhere('id', $data['categoryId'])->pluck('id')->toArray();
         } else {
@@ -219,6 +219,8 @@ class ProductService
         foreach ($products as $key => $product) {
             $items[$key]['id'] = $product->id;
             $items[$key]['name'] = $product->name;
+            $items[$key]['avg_rating'] = $product->avg_rating;
+            $items[$key]['total_review'] = $product->total_review;
             $items[$key]['original_price'] = $product->original_price;
             $items[$key]['price'] =  $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null;
             $items[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
