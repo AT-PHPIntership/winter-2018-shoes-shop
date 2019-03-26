@@ -81,6 +81,8 @@ class ProductService
             'original_price' => $product->original_price,
             'price' => $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null,
             'inventory' => $product->quantity - $product->total_sold,
+            'total_review' => $product->total_review,
+            'avg_rating' => $product->avg_rating,
             'description' => $product->description,
         ];
         $data['category'] = [
@@ -785,5 +787,24 @@ class ProductService
                 }
             });
         })->download('csv');
+    }
+
+    /**
+     * Get top review products
+     *
+     * @param array $columns columns
+     *
+     * @return object
+     */
+    public function getTopReviewProducts(array $columns = ['*'])
+    {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])->orderBy('avg_rating', 'desc')
+        ->orderBy('total_review', 'desc')
+        ->orderBy('updated_at', 'desc')
+        ->limit(config('define.limit_rows_product'))
+        ->get($columns);
     }
 }
