@@ -89,5 +89,8 @@ return [
             'mess_error' => 'Bình luận thất bại',
             'required' => 'Không được bỏ trống',
         ],
+        'review' => [
+            'title' => 'Đánh giá',
+        ],
     ]
 ];
