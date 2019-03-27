@@ -227,6 +227,56 @@
               </div>
             </div>
           </div>
+          <div class="review-form mt-10 mb-30">
+            <div class="row">
+              <div class="col-lg-6">
+                <form action="" method="POST" id="add-review-form" enctype='multipart/form-data'>
+                  <div class="review-rate">
+                    <label>1. Đánh giá của bạn về sản phẩm này:</label>
+                    <div id="full-stars-example-two">
+                      <div class="rating-group">
+                         <input disabled checked class="rating-input rating-input--none" name="rating" id="rating-none" value="0" type="radio">
+                         <label aria-label="1 star" class="rating-label" for="rating-1"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                         <input class="rating-input" name="rating" id="rating-1" value="1" type="radio">
+                         <label aria-label="2 stars" class="rating-label" for="rating-2"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                         <input class="rating-input" name="rating" id="rating-2" value="2" type="radio">
+                         <label aria-label="3 stars" class="rating-label" for="rating-3"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                         <input class="rating-input" name="rating" id="rating-3" value="3" type="radio">
+                         <label aria-label="4 stars" class="rating-label" for="rating-4"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                         <input class="rating-input" name="rating" id="rating-4" value="4" type="radio">
+                         <label aria-label="5 stars" class="rating-label" for="rating-5"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                         <input class="rating-input" name="rating" id="rating-5" value="5" type="radio">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="review-title form-group">
+                    <label for="review-title">2. Tiêu đề của nhận xét:</label>
+                    <input type="text" name="title" class="form-control input-sm" id="review-title" placeholder="Nhập tiêu đề nhận xét (Không bắt buộc)">
+                  </div>
+                  <div class="review-content form-group">
+                    <label for="review-content">3. Viết bình luận của bạn vào bên dưới:</label>
+                    <textarea name="content" class="form-control input-sm" id="review-content" placeholder="Nhận xét của bạn về sản phẩm này" rows="6"></textarea>
+                  </div>
+                  <div class="review-content form-group">
+                    <label for="review-content">Thêm hình sản phẩm nếu có (tối đa 5 hình)</label>
+                    <input type="file" name="image[]" id="btn-file" multiple>
+                    {{-- <input type="file" name="image[]" id="test" multiple> --}}
+                    <span class="btn-fake">Chọn hình</span>
+                    <p class="err-rv error-image">
+                      <small></small>
+                    </p>
+                    <div class="wrapper-img">
+                    </div>
+                    <div class="action">
+                      <button type="submit" class="btn btn-default js-add-review">Gửi nhận xét</button>
+                    </div>
+                    <p>* Nhận xét sẽ được kiểm duyệt.</p>
+                  </div>
+                </form>    
+              </div>
+              <div class="col-lg-6"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -235,5 +285,7 @@
   <script>
     var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
     var option_default = "{{ __('index.quick_view.default_option') }}";
+    var addReviewUrl = "{{ url('add-review') }}";
   </script>
+  <script src="{{ asset('public/js/review.js') }}"></script>
 @endsection
