@@ -23,7 +23,7 @@ class CreateReviewsTable extends Migration
             $table->tinyInteger('star');
             $table->string('title', 100);
             $table->string('content');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
