@@ -4,20 +4,22 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Admin\Controller;
 use App\Services\ReviewService;
-use Illuminate\Http\Request;
+use App\Http\Requests\User\PostReviewRequest;
 
 class ReviewController extends Controller
 {
     /**
      * Add review
      *
-     * @param Request $request request
+     * @param PostReviewRequest $request request
      *
      * @return \Illuminate\Http\Response
      */
-    public function addReview(Request $request)
+    public function addReview(PostReviewRequest $request)
     {
-        dd($request->all());
-        // \Log::alert($request->all());
+        if (app(ReviewService::class)->addReview($request->all())) {
+            return response()->json(array('success' => false, 'message' => trans('index.detail.review.mess_success')));
+        }
+        return response()->json(array('success' => false, 'message' => trans('index.detail.review.mess_error')));
     }
 }

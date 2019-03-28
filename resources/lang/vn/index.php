@@ -96,6 +96,26 @@ return [
             'comment' => 'Nhận xét',
             'share' => 'Chia sẻ nhận xét về sản phẩm',
             'write' => 'Viết nhận xét của bạn',
+            'errors' => [
+                'title' => [
+                    'max' => 'Không được nhập quá 100 ký tự',
+                ],
+                'content' => [
+                    'required' => 'Trường này không được để trống',
+                    'max' => 'Không được nhập quá 255 ký tự',
+                ],
+                'star' => [
+                    'required' => 'Trường này không được để trống',
+                    'in' => 'Giá trị cho phép (1, 2, 3, 4, 5)',
+                ],
+                'image' => [
+                    'image' => 'Trường này phải là ảnh',
+                    'mimes' => 'Phải có đuôi là:jpeg,png,jpg,gif,svg',
+                    'max' => 'Không được dài hơn 255 ký tự',
+                ]
+            ],
+            'mess_success' => 'Đánh giá thành công',
+            'mess_error' => 'Đánh giá thất bại',
         ],
     ]
 ];

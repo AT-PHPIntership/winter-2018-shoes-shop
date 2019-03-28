@@ -231,36 +231,38 @@
             <div class="row">
               <div class="col-lg-6">
                 <form action="" method="POST" id="add-review-form" enctype='multipart/form-data'>
-                  <div class="review-rate">
+                  <input type="hidden" name="product_id" value="{{ $product['product']['id'] }}">
+                  <input type="hidden" name="user_id" value="{{ Auth::check() ? Auth::user()->id : null }}">
+                  <div class="review-rate form-group">
                     <label>1. Đánh giá của bạn về sản phẩm này:</label>
                     <div id="full-stars-example-two">
                       <div class="rating-group">
-                         <input disabled checked class="rating-input rating-input--none" name="rating" id="rating-none" value="0" type="radio">
+                         <input disabled checked class="rating-input rating-input--none" name="star" id="rating-none" value="0" type="radio">
                          <label aria-label="1 star" class="rating-label" for="rating-1"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="rating" id="rating-1" value="1" type="radio">
+                         <input class="rating-input" name="star" id="rating-1" value="1" type="radio">
                          <label aria-label="2 stars" class="rating-label" for="rating-2"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="rating" id="rating-2" value="2" type="radio">
+                         <input class="rating-input" name="star" id="rating-2" value="2" type="radio">
                          <label aria-label="3 stars" class="rating-label" for="rating-3"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="rating" id="rating-3" value="3" type="radio">
+                         <input class="rating-input" name="star" id="rating-3" value="3" type="radio">
                          <label aria-label="4 stars" class="rating-label" for="rating-4"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="rating" id="rating-4" value="4" type="radio">
+                         <input class="rating-input" name="star" id="rating-4" value="4" type="radio">
                          <label aria-label="5 stars" class="rating-label" for="rating-5"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="rating" id="rating-5" value="5" type="radio">
+                         <input class="rating-input" name="star" id="rating-5" value="5" type="radio">
+                         <input type="hidden" id="star">
                       </div>
                     </div>
                   </div>
                   <div class="review-title form-group">
                     <label for="review-title">2. Tiêu đề của nhận xét:</label>
-                    <input type="text" name="title" class="form-control input-sm" id="review-title" placeholder="Nhập tiêu đề nhận xét (Không bắt buộc)">
+                    <input type="text" name="title" class="form-control input-sm" id="title" placeholder="Nhập tiêu đề nhận xét (Không bắt buộc)">
                   </div>
                   <div class="review-content form-group">
                     <label for="review-content">3. Viết bình luận của bạn vào bên dưới:</label>
-                    <textarea name="content" class="form-control input-sm" id="review-content" placeholder="Nhận xét của bạn về sản phẩm này" rows="6"></textarea>
+                    <textarea name="content" class="form-control input-sm" id="content" placeholder="Nhận xét của bạn về sản phẩm này" rows="6"></textarea>
                   </div>
                   <div class="review-content form-group">
                     <label for="review-content">Thêm hình sản phẩm nếu có (tối đa 5 hình)</label>
-                    <input type="file" name="image[]" id="btn-file" multiple>
-                    {{-- <input type="file" name="image[]" id="test" multiple> --}}
+                    <input type="file" name="image[]" class="btn-file" accept="image/*" id="image" multiple>
                     <span class="btn-fake">Chọn hình</span>
                     <p class="err-rv error-image">
                       <small></small>
