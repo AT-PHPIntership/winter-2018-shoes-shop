@@ -16,6 +16,7 @@ $(document).ready(function(){
       dataType:"JSON",
       data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice, page:page},
       success: function(data){
+        console.log(data);
         var list = '';
         var pagi = '';
         if (data['products'].length) {
@@ -32,12 +33,29 @@ $(document).ready(function(){
             list += '</div>';
             list += '</div>';
             list += '<div class="price">';
-            list += '<h5>'+ val.name +'</h5>';
+            list += '<h5 class="mrb-5">'+ val.name +'</h5>';
             if (val.price) {
               list += '<p>'+ formatCurrencyVN(val.price) +' <del class="text-gray">'+ formatCurrencyVN(val.original_price) +'</del></p>';
             } else {
               list += '<p>'+ formatCurrencyVN(val.original_price) +'</p>';
             }
+            list += '<div class="review">';
+            list += '<span class="rating-content">';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '<span style="width: '+ +val.avg_rating/5*100 +'%">';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '<i class="fa fa-star"></i>';
+            list += '</span>';
+            list += '</span>';
+            list += '<span>('+ +val.total_review +' Nhận xét)</span>';
+            list += '</div>';
             list += '</div>';
             list += '</div>';
           });

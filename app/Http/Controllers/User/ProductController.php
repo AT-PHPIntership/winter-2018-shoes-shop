@@ -9,6 +9,7 @@ use App\Services\ColorService;
 use App\Services\SizeService;
 use Illuminate\Http\Request;
 use App\Services\CommentService;
+use App\Services\ReviewService;
 
 class ProductController extends Controller
 {
@@ -50,7 +51,8 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = app(ProductService::class)->getDetailProduct($id);
-        return view('user.pages.detail', compact(['product']));
+        $totalRating = app(ReviewService::class)->getTotalRatingByStar();
+        return view('user.pages.detail', compact(['product', 'totalRating']));
     }
 
     /**

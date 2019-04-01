@@ -498,3 +498,242 @@
   display: inline-block;
   color: #101010;
 }
+.user-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.rating-progress {
+  width: 80%;
+  display: inline-block;
+  height: 10px;
+  background: #efefef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.rating-progress-bar {
+  background: #23b445;
+  height: 100%;
+}
+.item {
+  margin-bottom: 5px;
+}
+.item .rating-num {
+  position: relative;
+}
+.item .rating-num:after {
+  position: absolute;
+  content: "\f005";
+  font-family: 'FontAwesome';
+  left: 11px;
+}
+.rating-num, .rating-num-total {
+  display: inline-block;
+  width: 8%;
+}
+.total-review-point {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 600;
+  color: #f41068;
+  margin: 20px 0;
+}
+.total-comment {
+  margin: 0;
+}
+.item-rating {
+  margin-bottom: 5px;
+}
+.rating-content {
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+  white-space: nowrap;
+}
+.rating-content > i {
+  color: #b8b8b8;
+  font-size: 1.5rem;
+}
+.rating-content span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden;
+  line-height: 1;
+}
+.rating-content span i {
+  color: #fbd600;
+  font-size: 1.5rem;
+}
+.js-btn-review {
+  font-size: 14px;
+  display: block;
+  margin: 15px auto;
+  background: #fbd600;
+  min-width: 200px;
+}
+.user-name {
+  margin: 10px 0 0;
+  font-weight: 500;
+  color: #101010;
+}
+.rv-info p {
+  margin: 0;
+}
+.rv-image img {
+  width: 70px;
+  height: 70px;
+  padding: 5px 5px 5px 0;
+}
+.rv-rating, .rv-title {
+  display: inline-block;
+}
+.js-btn-like {
+  background: transparent;
+  border: none;
+  padding: 0 3px;
+}
+.js-btn-like:hover {
+  cursor: pointer;
+}
+.js-btn-like i.active {
+  color: #1a9cb7;
+}
+.rv-total-like {
+  font-weight: 400;
+}
+.rv-total-like.active {
+  color: #1a9cb7;
+}
+.js-btn-like:focus {
+  outline:0;
+}
+.rv-buy-already {
+  color: #22b345;
+}
+.rv-title {
+  font-weight: 400;
+  color: #101010;
+}
+.rv-buy-already img {
+  width: 15px;
+  height: 15px;
+}
+.review-item {
+  margin-bottom: 15px;
+}
+.rv-rating i {
+  color: #b8b8b8;
+}
+.rv-rating i.active {
+  color: #fbd600;
+}
+.review-form {
+  display: none;
+  border-bottom: 1px solid #efefef;
+}
+.review-form label {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #101010;
+}
+.input-sm {
+  padding: 7px 8px;
+  font-size: 12px;
+}
+#full-stars-example-two {
+  display: inline-block;
+}
+#full-stars-example-two .rating-group {
+  display: inline-flex;
+}
+#full-stars-example-two .rating-icon {
+  pointer-events: none;
+}
+#full-stars-example-two .rating-input {
+  position: absolute !important;
+  left: -9999px !important;
+}
+#full-stars-example-two .rating-input--none {
+  display: none;
+}
+#full-stars-example-two .rating-label {
+  cursor: pointer;
+  padding: 0 0.1em;
+  font-size: 1.5rem;
+}
+#full-stars-example-two .rating-icon--star {
+  color: #fbd600;
+}
+#full-stars-example-two .rating-input:checked ~ .rating-label .rating-icon--star {
+  color: #ddd;
+}
+#full-stars-example-two .rating-group:hover .rating-label .rating-icon--star {
+  color: #fbd600;
+}
+#full-stars-example-two .rating-input:hover ~ .rating-label .rating-icon--star {
+  color: #ddd;
+}
+#btn-file {
+  display: none;
+}
+.btn-fake {
+  color: #189eff;
+  border: 1px solid #189eff;
+  padding: 5px 13px;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+.btn-fake:hover {
+  color: white;
+  background-color: #189eff;
+  cursor: pointer;
+}
+.img-content {
+  display: inline-block;
+  margin: 15px 11px 0 0;
+  position: relative
+}
+.img-preview {
+  width: 90px;
+  height: 90px;
+}
+.img-content .rm-img {
+  position: absolute;
+  top: -7px;
+  right: -6px;
+  line-height: 0;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
+}
+.img-content .rm-img i {
+  font-size: 17px;
+}
+.action {
+  text-align: right;
+}
+.js-add-review {
+  font-size: 14px;
+  background: #fbd600;
+  margin: 20px 0;
+  padding: 7px 20px;
+  cursor: pointer;
+}
+.review-header {
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 20px;
+}
+.err-rv {
+  color: red;
+  margin: 0;
+}
+.mrb-5 {
+  margin-bottom: 5px;
+}
+.rating-content.sm i {
+  font-size: 13px;
+}
