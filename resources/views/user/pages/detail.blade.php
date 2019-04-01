@@ -287,6 +287,39 @@
               </div>
             </div>
           @endif
+          <div class="review-content">
+            <div class="review-filter mb-10">
+              <div class="row">
+                <div class="col-md-2">
+                  <p>Chọn xem nhận xét:</p>
+                </div>
+                <div class="col-md-2">
+                  <select class="form-control form-control-sm" id="js-slt-sort">
+                    <option value="0">Hữu ích</option>
+                    <option value="1">Mới nhất</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control form-control-sm" id="js-slt-is-buy">
+                    <option value="0">Tất cả khách hàng</option>
+                    <option value="1">Khách hàng đã mua</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <select class="form-control form-control-sm" id="js-slt-star">
+                    <option value="0">Tất cả sao</option>
+                    <option value="5">5 sao</option>
+                    <option value="4">4 sao</option>
+                    <option value="3">3 sao</option>
+                    <option value="2">2 sao</option>
+                    <option value="1">1 sao</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="review-list">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -296,8 +329,9 @@
     var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
     var option_default = "{{ __('index.quick_view.default_option') }}";
     var addReviewUrl = "{{ url('add-review') }}";
-    var isLogin = "{{ Auth::check() }}";
+    var isLogin = "{{ Auth::check() ? Auth::user()->id : null }}";
     var loginUrl = "{{ url('login') }}";
+    var listReviewUrl = "{{ url('list-review') }}";
   </script>
   <script src="{{ asset('public/js/review.js') }}"></script>
 @endsection
