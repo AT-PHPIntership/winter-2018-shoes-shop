@@ -13,6 +13,6 @@ class ReviewService
      */
     public function getTotalRatingByStar()
     {
-        return Review::select('star', \DB::raw('count(*) as total'))->groupBy('star')->get();
+        return Review::where('status', Review::ACTIVE_STATUS)->select('star', \DB::raw('count(*) as total'))->groupBy('star')->get();
     }
 }

@@ -144,83 +144,54 @@
                 </p>
                 <p class="total-comment text-center">({{ $product['product']['total_review'] }} {{ __('index.detail.review.comment') }})</p>
               </div>
-              @if ($product['product']['total_review'])
-                <div class="col-lg-4">
-                  <div class="item rate-5">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['FIVE'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: {{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FIVE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FIVE'])->total/$product['product']['total_review']*100 : 0 }}%"></div>
-                    </div>
-                    <span class="rating-num-total">{{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FIVE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FIVE'])->total/$product['product']['total_review']*100 : 0 }}%</span>
+              @php
+                if ($product['product']['total_review']) {
+                  $perRating5 = ceil($totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FIVE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FIVE'])->total/$product['product']['total_review']*100 : 0);
+                  $perRating4 = ceil($totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FOUR']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FOUR'])->total/$product['product']['total_review']*100 : 0);
+                  $perRating3 = ceil($totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['THREE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['THREE'])->total/$product['product']['total_review']*100 : 0);
+                  $perRating2 = ceil($totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['TWO']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['TWO'])->total/$product['product']['total_review']*100 : 0);
+                  $perRating1 = ceil($totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['ONE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['ONE'])->total/$product['product']['total_review']*100 : 0);
+                } else {
+                  $perRating5 = $perRating4 = $perRating3 = $perRating2 = $perRating1 = 0;
+                }
+              @endphp
+              <div class="col-lg-4">
+                <div class="item rate-5">
+                  <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['FIVE'] }}</span>
+                  <div class="rating-progress">
+                    <div class="rating-progress-bar color-1" style="width: {{ $perRating5 }}%"></div>
                   </div>
-                  <div class="item rate-4">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['FOUR'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: {{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FOUR']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FOUR'])->total/$product['product']['total_review']*100 : 0 }}%"></div>
-                    </div>
-                    <span class="rating-num-total">{{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FOUR']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['FOUR'])->total/$product['product']['total_review']*100 : 0 }}%</span>
-                  </div>
-                  <div class="item rate-3">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['THREE'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: {{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['THREE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['THREE'])->total/$product['product']['total_review']*100 : 0 }}%"></div>
-                    </div>
-                    <span class="rating-num-total">{{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['THREE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['THREE'])->total/$product['product']['total_review']*100 : 0 }}%</span>
-                  </div>
-                  <div class="item rate-2">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['TWO'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: {{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['TWO']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['TWO'])->total/$product['product']['total_review']*100 : 0 }}%"></div>
-                    </div>
-                    <span class="rating-num-total">{{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['TWO']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['TWO'])->total/$product['product']['total_review']*100 : 0 }}%</span>
-                  </div>
-                  <div class="item rate-1">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['ONE'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: {{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['ONE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['ONE'])->total/$product['product']['total_review']*100 : 0 }}%"></div>
-                    </div>
-                    <span class="rating-num-total">{{ $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['ONE']) ? $totalRating->firstWhere('star', \App\Models\Review::NUMBER_STAR['ONE'])->total/$product['product']['total_review']*100 : 0 }}%</span>
-                  </div>
-                </div> 
-              @else
-                <div class="col-lg-4">
-                  <div class="item rate-5">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['FIVE'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: 0%"></div>
-                    </div>
-                    <span class="rating-num-total">0%</span>
-                  </div>
-                  <div class="item rate-4">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['FOUR'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: 0%"></div>
-                    </div>
-                    <span class="rating-num-total">0%</span>
-                  </div>
-                  <div class="item rate-3">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['THREE'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: 0%"></div>
-                    </div>
-                    <span class="rating-num-total">0%</span>
-                  </div>
-                  <div class="item rate-2">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['TWO'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: 0%"></div>
-                    </div>
-                    <span class="rating-num-total">0%</span>
-                  </div>
-                  <div class="item rate-1">
-                    <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['ONE'] }}</span>
-                    <div class="rating-progress">
-                      <div class="rating-progress-bar color-1" style="width: 0%"></div>
-                    </div>
-                    <span class="rating-num-total">0%</span>
-                  </div>
+                  <span class="rating-num-total">{{ $perRating5 }}%</span>
                 </div>
-              @endif
+                <div class="item rate-4">
+                  <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['FOUR'] }}</span>
+                  <div class="rating-progress">
+                    <div class="rating-progress-bar color-1" style="width: {{ $perRating4 }}%"></div>
+                  </div>
+                  <span class="rating-num-total">{{ $perRating4 }}%</span>
+                </div>
+                <div class="item rate-3">
+                  <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['THREE'] }}</span>
+                  <div class="rating-progress">
+                    <div class="rating-progress-bar color-1" style="width: {{ $perRating3 }}%"></div>
+                  </div>
+                  <span class="rating-num-total">{{ $perRating3 }}%</span>
+                </div>
+                <div class="item rate-2">
+                  <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['TWO'] }}</span>
+                  <div class="rating-progress">
+                    <div class="rating-progress-bar color-1" style="width: {{ $perRating2 }}%"></div>
+                  </div>
+                  <span class="rating-num-total">{{ $perRating2 }}%</span>
+                </div>
+                <div class="item rate-1">
+                  <span class="rating-num">{{ \App\Models\Review::NUMBER_STAR['ONE'] }}</span>
+                  <div class="rating-progress">
+                    <div class="rating-progress-bar color-1" style="width: {{ $perRating1 }}%"></div>
+                  </div>
+                  <span class="rating-num-total">{{ $perRating1 }}%</span>
+                </div>
+              </div>
               <div class="col-lg-4">
                 <h4 class="text-center">{{ __('index.detail.review.share') }}</h4>
                 <button class="btn btn-default js-btn-review">{{ __('index.detail.review.write') }}</button>
