@@ -257,28 +257,28 @@
             <div class="review-filter mb-10">
               <div class="row">
                 <div class="col-md-2">
-                  <p>Chọn xem nhận xét:</p>
+                  <p>{{ __('index.detail.review.filter.title') }}</p>
                 </div>
                 <div class="col-md-2">
                   <select class="form-control form-control-sm" id="js-slt-sort">
-                    <option value="0">Hữu ích</option>
-                    <option value="1">Mới nhất</option>
+                    <option value="0">{{ __('index.detail.review.filter.top_like') }}</option>
+                    <option value="1">{{ __('index.detail.review.filter.new') }}</option>
                   </select>
                 </div>
                 <div class="col-md-3">
                   <select class="form-control form-control-sm" id="js-slt-is-buy">
-                    <option value="0">Tất cả khách hàng</option>
-                    <option value="1">Khách hàng đã mua</option>
+                    <option value="0">{{ __('index.detail.review.filter.all_customer') }}</option>
+                    <option value="1">{{ __('index.detail.review.filter.is_buy_customer') }}</option>
                   </select>
                 </div>
                 <div class="col-md-2">
                   <select class="form-control form-control-sm" id="js-slt-star">
-                    <option value="0">Tất cả sao</option>
-                    <option value="5">5 sao</option>
-                    <option value="4">4 sao</option>
-                    <option value="3">3 sao</option>
-                    <option value="2">2 sao</option>
-                    <option value="1">1 sao</option>
+                    <option value="0">{{ __('index.detail.review.filter.all_star') }}</option>
+                    <option value="5">{{ __('index.detail.review.filter.5_star') }}</option>
+                    <option value="4">{{ __('index.detail.review.filter.4_star') }}</option>
+                    <option value="3">{{ __('index.detail.review.filter.3_star') }}</option>
+                    <option value="2">{{ __('index.detail.review.filter.2_star') }}</option>
+                    <option value="1">{{ __('index.detail.review.filter.1_star') }}</option>
                   </select>
                 </div>
               </div>
