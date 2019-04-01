@@ -26,6 +26,23 @@
               <div class="top">
                 <h3 id="js-name" class="head"></h3>
                 <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10" id="js-price"></span> <del id="js-original-price" class="ml-10"></del></div>
+                <div class="review">
+                  <span class="rating-content sm">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <span id="js-avg-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </span>
+                  </span>
+                  <span>(<span id="js-total-review"></span> {{ __('index.detail.review.comment') }})</span>
+                </div>
                 <div class="category">{{ __('index.quick_view.category') }}: <span id="js-category"></span></div>
                 <div class="available">{{ __('index.quick_view.inventory') }}: <span id="js-inventory"></span></div>
               </div>

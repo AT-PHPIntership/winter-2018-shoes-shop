@@ -17,6 +17,16 @@ class Product extends Model
     ];
 
     /**
+     * Get all of the image's products.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Models\Image', 'imageable');
+    }
+
+    /**
      * Get list product details belong to product.
      *
      * @return void
@@ -24,16 +34,6 @@ class Product extends Model
     public function productDetails()
     {
         return $this->hasMany('App\Models\ProductDetail');
-    }
-
-    /**
-     * Get list images belong to product.
-     *
-     * @return void
-     */
-    public function images()
-    {
-        return $this->hasMany('App\Models\Image');
     }
 
     /**

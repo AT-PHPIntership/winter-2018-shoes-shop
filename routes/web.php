@@ -58,6 +58,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('checkout/handle-checkout', 'OrderController@handleCheckout');
     Route::get('checkout/confermation', 'OrderController@confermation');
     Route::get('getDetailProduct', 'ProductController@getDetailProduct');
+    Route::post('add-review', 'ReviewController@addReview')->middleware('auth');
+    Route::get('list-review', 'ReviewController@getListReview');
     Route::get('detail/{id}', 'ProductController@detail')->name('detail');
     Route::post('add-comment', 'CommentController@addComment');
     Route::get('get-detail-product', 'ProductController@getDetailProduct');
