@@ -102,7 +102,7 @@ return [
                 ],
                 'content' => [
                     'required' => 'Trường này không được để trống',
-                    'max' => 'Không được nhập quá 255 ký tự',
+                    'between' => 'Nội dung ít nhất là 50 ký tự và nhiều nhất là 255 ký tự',
                 ],
                 'star' => [
                     'required' => 'Trường này không được để trống',
@@ -114,8 +114,17 @@ return [
                     'max' => 'Không được dài hơn 255 ký tự',
                 ]
             ],
-            'mess_success' => 'Đánh giá thành công',
+            'mess_success' => 'Đánh giá của bạn đã được gửi. Vui lòng chờ kiểm duyệt!',
             'mess_error' => 'Đánh giá thất bại',
+            'form' => [
+                'rating' => '1. Đánh giá của bạn về sản phẩm này:',
+                'title' => '2. Tiêu đề của nhận xét:',
+                'content' => '3. Viết bình luận của bạn vào bên dưới:',
+                'image' => 'Thêm hình sản phẩm nếu có (tối đa 5 hình)',
+                'choose_img' => 'Chọn hình',
+                'submit' => 'Gửi nhận xét',
+                'message' => '* Nhận xét sẽ được kiểm duyệt.',
+            ],
         ],
     ]
 ];

@@ -18,7 +18,7 @@ class ReviewController extends Controller
     public function addReview(PostReviewRequest $request)
     {
         if (app(ReviewService::class)->addReview($request->all())) {
-            return response()->json(array('success' => false, 'message' => trans('index.detail.review.mess_success')));
+            return response()->json(array('success' => true, 'message' => trans('index.detail.review.mess_success')));
         }
         return response()->json(array('success' => false, 'message' => trans('index.detail.review.mess_error')));
     }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Review;
 use App\Models\Order;
+use App\Models\Image;
 use DB;
 use Log;
 use Auth;
@@ -31,18 +32,23 @@ class ReviewService
     {
         DB::beginTransaction();
         try {
-            $order = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')->where('user_id', $data['user_id'])->where('product_id', $data['product_id'])->first();
+            $countReview = Review::where('product_id', $data['product_id'])->where('user_id', Auth::user()->id)->count();
+            if ($countReview > 1) {
+                return false;
+            }
+            $order = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')->where('user_id', Auth::user()->id)->where('product_id', $data['product_id'])->first();
             $order ? $isBuy = 1 : $isBuy = 0;
             $review = Review::create([
-                'user_id' => $data['user_id'],
+                'user_id' => Auth::user()->id,
                 'is_buy' => $isBuy,
                 'product_id' => $data['product_id'],
                 'title' => $data['title'],
                 'content' => $data['content'],
                 'star' => $data['star'],
+                'status' => Review::BLOCKED_STATUS,
             ]);
-            if (isset($data['image'])) {
-                foreach ($data['image'] as $image) {
+            if (isset($data['images'])) {
+                foreach ($data['images'] as $image) {
                     Image::create([
                         'imageable_type' => 'reviews',
                         'imageable_id' => $review->id,

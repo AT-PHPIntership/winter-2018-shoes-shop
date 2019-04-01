@@ -221,64 +221,72 @@
                   </div>
                 </div>
               @endif
-              <div class="col-lg-4">
-                <h4 class="text-center">{{ __('index.detail.review.share') }}</h4>
-                <button class="btn btn-default js-btn-review">{{ __('index.detail.review.write') }}</button>
-              </div>
+              @if (!Auth::check())
+                <div class="col-lg-4 action-review">
+                  <h4 class="text-center">{{ __('index.detail.review.share') }}</h4>
+                  <button class="btn btn-default js-btn-review">{{ __('index.detail.review.write') }}</button>
+                </div>
+              @elseif(Auth::check() && !isReview(Auth::user()->id, $product['product']['id']))
+                <div class="col-lg-4 action-review">
+                  <h4 class="text-center">{{ __('index.detail.review.share') }}</h4>
+                  <button class="btn btn-default js-btn-review">{{ __('index.detail.review.write') }}</button>
+                </div>
+              @endif
             </div>
           </div>
-          <div class="review-form mt-10 mb-30">
-            <div class="row">
-              <div class="col-lg-6">
-                <form action="" method="POST" id="add-review-form" enctype='multipart/form-data'>
-                  <input type="hidden" name="product_id" value="{{ $product['product']['id'] }}">
-                  <input type="hidden" name="user_id" value="{{ Auth::check() ? Auth::user()->id : null }}">
-                  <div class="review-rate form-group">
-                    <label>1. Đánh giá của bạn về sản phẩm này:</label>
-                    <div id="full-stars-example-two">
-                      <div class="rating-group">
-                         <input disabled checked class="rating-input rating-input--none" name="star" id="rating-none" value="0" type="radio">
-                         <label aria-label="1 star" class="rating-label" for="rating-1"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="star" id="rating-1" value="1" type="radio">
-                         <label aria-label="2 stars" class="rating-label" for="rating-2"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="star" id="rating-2" value="2" type="radio">
-                         <label aria-label="3 stars" class="rating-label" for="rating-3"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="star" id="rating-3" value="3" type="radio">
-                         <label aria-label="4 stars" class="rating-label" for="rating-4"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="star" id="rating-4" value="4" type="radio">
-                         <label aria-label="5 stars" class="rating-label" for="rating-5"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
-                         <input class="rating-input" name="star" id="rating-5" value="5" type="radio">
-                         <input type="hidden" id="star">
+          @if (Auth::check())
+            <div class="review-form mt-10 mb-30">
+              <div class="row">
+                <div class="col-lg-6">
+                  <form action="" method="POST" id="add-review-form" enctype='multipart/form-data'>
+                    <input type="hidden" name="product_id" value="{{ $product['product']['id'] }}">
+                    <div class="review-rate form-group">
+                      <label>{{ __('index.detail.review.form.rating') }}</label>
+                      <div id="full-stars-example-two">
+                        <div class="rating-group">
+                          <input disabled checked class="rating-input rating-input--none" name="star" id="rating-none" value="0" type="radio">
+                          <label aria-label="1 star" class="rating-label" for="rating-1"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-1" value="1" type="radio">
+                          <label aria-label="2 stars" class="rating-label" for="rating-2"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-2" value="2" type="radio">
+                          <label aria-label="3 stars" class="rating-label" for="rating-3"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-3" value="3" type="radio">
+                          <label aria-label="4 stars" class="rating-label" for="rating-4"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-4" value="4" type="radio">
+                          <label aria-label="5 stars" class="rating-label" for="rating-5"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-5" value="5" type="radio">
+                          <input type="hidden" id="star">
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="review-title form-group">
-                    <label for="review-title">2. Tiêu đề của nhận xét:</label>
-                    <input type="text" name="title" class="form-control input-sm" id="title" placeholder="Nhập tiêu đề nhận xét (Không bắt buộc)">
-                  </div>
-                  <div class="review-content form-group">
-                    <label for="review-content">3. Viết bình luận của bạn vào bên dưới:</label>
-                    <textarea name="content" class="form-control input-sm" id="content" placeholder="Nhận xét của bạn về sản phẩm này" rows="6"></textarea>
-                  </div>
-                  <div class="review-content form-group">
-                    <label for="review-content">Thêm hình sản phẩm nếu có (tối đa 5 hình)</label>
-                    <input type="file" name="image[]" class="btn-file" accept="image/*" id="image" multiple>
-                    <span class="btn-fake">Chọn hình</span>
-                    <p class="err-rv error-image">
-                      <small></small>
-                    </p>
-                    <div class="wrapper-img">
+                    <div class="review-title form-group">
+                      <label for="review-title">{{ __('index.detail.review.form.title') }}</label>
+                      <input type="text" name="title" class="form-control input-sm" id="title" placeholder="Nhập tiêu đề nhận xét (Không bắt buộc)">
                     </div>
-                    <div class="action">
-                      <button type="submit" class="btn btn-default js-add-review">Gửi nhận xét</button>
+                    <div class="review-content form-group">
+                      <label for="review-content">{{ __('index.detail.review.form.content') }}</label>
+                      <textarea name="content" class="form-control input-sm" id="content" placeholder="Nhận xét của bạn về sản phẩm này" rows="6"></textarea>
                     </div>
-                    <p>* Nhận xét sẽ được kiểm duyệt.</p>
-                  </div>
-                </form>    
+                    <div class="review-content form-group">
+                      <label for="review-content">{{ __('index.detail.review.form.image') }}</label>
+                      <input type="file" name="image[]" class="btn-file" accept="image/*" id="image" multiple>
+                      <span class="btn-fake">{{ __('index.detail.review.form.choose_img') }}</span>
+                      <p class="err-rv error-image">
+                        <small></small>
+                      </p>
+                      <div class="wrapper-img">
+                      </div>
+                      <div class="action">
+                        <button type="submit" class="btn btn-default js-add-review">{{ __('index.detail.review.form.submit') }}</button>
+                      </div>
+                      <p>{{ __('index.detail.review.form.message') }}</p>
+                    </div>
+                  </form>    
+                </div>
+                <div class="col-lg-6"></div>
               </div>
-              <div class="col-lg-6"></div>
             </div>
-          </div>
+          @endif
         </div>
       </div>
     </div>
@@ -288,6 +296,8 @@
     var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
     var option_default = "{{ __('index.quick_view.default_option') }}";
     var addReviewUrl = "{{ url('add-review') }}";
+    var isLogin = "{{ Auth::check() }}";
+    var loginUrl = "{{ url('login') }}";
   </script>
   <script src="{{ asset('public/js/review.js') }}"></script>
 @endsection

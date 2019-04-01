@@ -26,11 +26,11 @@ class PostReviewRequest extends FormRequest
     {
         return [
             'title' => 'max:100',
-            'content' => 'required|max:255',
+            'content' => 'required|between:50,255',
             'star' => 'required|in:'.implode(',', Review::NUMBER_STAR),
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images' => 'max:3',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'product_id' => 'required|exists:products,id',
-            'user_id' => 'required|exists:users,id',
         ];
     }
 
@@ -44,12 +44,12 @@ class PostReviewRequest extends FormRequest
         return [
             'title.max' => trans('index.detail.review.errors.title.max'),
             'content.required' => trans('index.detail.review.errors.content.required'),
-            'content.max' => trans('index.detail.review.errors.content.max'),
+            'content.between' => trans('index.detail.review.errors.content.between'),
             'star.required' => trans('index.detail.review.errors.star.required'),
             'star.in' => trans('index.detail.review.errors.star.in'),
-            'image.image' => trans('index.detail.review.errors.image.image'),
-            'image.mimes' => trans('index.detail.review.errors.image.mimes'),
-            'image.max' => trans('index.detail.review.errors.image.max'),
+            'images.*.image' => trans('index.detail.review.errors.image.image'),
+            'images.*.mimes' => trans('index.detail.review.errors.image.mimes'),
+            'images.*.max' => trans('index.detail.review.errors.image.max'),
         ];
     }
 }

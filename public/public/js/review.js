@@ -1,11 +1,17 @@
 $(document).ready(function(){
   //Show form review
   $('.js-btn-review').click(function(){
-    $('.review-form').toggle();
-    if($(this).text() == 'Viết nhận xét của bạn'){
-      $(this).text('Đóng');
-    } else {
-      $(this).text('Viết nhận xét của bạn');
+    if(isLogin){
+      $('.review-form').toggle();
+      if($(this).text() == 'Viết nhận xét của bạn'){
+        $(this).text('Đóng');
+      } else {
+        $(this).text('Viết nhận xét của bạn');
+      }
+    }else{
+      if(confirm('Bạn cần đăng nhập trước khi đánh giá.')){
+        window.location = loginUrl;
+      }
     }
   });
 
@@ -70,7 +76,7 @@ $(document).ready(function(){
     $(this).find('.help-block').remove();
     formData = new FormData(this);
     for(let i = 0; i < files.length; i++){
-      formData.append('image[' + i + ']', files[i]);
+      formData.append('images[' + i + ']', files[i]);
     }
     $.ajaxSetup({
       headers: {
@@ -84,10 +90,15 @@ $(document).ready(function(){
       processData: false,
       contentType: false,
       success: function(data){
-        console.log(data);
+        if(data['success']){
+          alert(data['message']);
+          $('.review-form').css('display', 'none');
+          $('.action-review').css('display', 'none');
+        }else{
+          alert(data['message']);
+        }
       },
       error: function(data){
-        console.log(data);
         var res = data.responseJSON;
         if ($.isEmptyObject(res) == false) {
           $.each(res.errors,function (key,value) {

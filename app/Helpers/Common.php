@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Role;
+use App\Models\Review;
 
 if (! function_exists('isAdminLogin')) {
     /**
@@ -39,5 +40,20 @@ if (! function_exists('formatCurrencyVN')) {
     function formatCurrencyVN(float $number)
     {
         return number_format($number, 0, '', '.').' đ';
+    }
+}
+
+if (! function_exists('isReview')) {
+    /**
+     * Function isReview check user review
+     *
+     * @param int $userId    userId
+     * @param int $productId productId
+     *
+     * @return boolean
+     */
+    function isReview(int $userId, int $productId)
+    {
+        return Review::where('user_id', $userId)->where('product_id', $productId)->count() ? 1 : 0;
     }
 }
