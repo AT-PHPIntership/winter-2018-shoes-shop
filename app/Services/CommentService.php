@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\Role;
 use Log;
 
 class CommentService
@@ -15,7 +16,8 @@ class CommentService
      */
     public function getCommentWithPaginate()
     {
-        return Comment::orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
+        return Comment::with(['user:id','user.profile:user_id,name', 'product:id,name', 'parent'])
+            ->orderBy('id', 'desc')->paginate(config('define.paginate.limit_rows'));
     }
 
     /**
@@ -53,6 +55,60 @@ class CommentService
     {
         try {
             return Comment::where('id', $id)->update(['status' => $status]);
+        } catch (\Exception $e) {
+            Log::error($e);
+            return false;
+        }
+    }
+
+    /**
+     * Get comments by productId with paginate
+     *
+     * @param array $data data
+     *
+     * @return Comment
+     */
+    public function getCommentsByProductId(array $data)
+    {
+        return Comment::with(['user:id','user.profile:user_id,name,avatar', 'product:id,name', 'children', 'children.user:id', 'children.user.profile:user_id,name,avatar'])
+            ->where('product_id', $data['productId'])
+            ->where('parent_id', null)
+            ->where('status', Comment::ACTIVE_STATUS)
+            ->orderBy('id', 'desc')
+            ->paginate(config('define.paginate.limit_rows_comment'));
+    }
+    
+    /**
+     * Add comment in detail product
+     *
+     * @param array $data data
+     *
+     * @return Comment
+     */
+    public function addComment(array $data)
+    {
+        try {
+            $user = User::with('profile:user_id,name,avatar')->find($data['userId']);
+            $param = [
+                'user_id' => $data['userId'],
+                'product_id' => $data['productId'],
+                'content' => $data['commentContent'],
+                'status' => $user->role_id === Role::ADMIN_ROLE ? Comment::ACTIVE_STATUS : Comment::BLOCKED_STATUS,
+            ];
+            if (isset($data['commentId'])) {
+                $param['parent_id'] = $data['commentId'];
+            }
+            $comment = Comment::create($param);
+            if ($user->role_id !== Role::ADMIN_ROLE) {
+                return $comment;
+            }
+            $result = [];
+            $result['user_name'] = $user->profile->name;
+            $result['user_avatar'] = asset($user->profile->avatar ? $user->profile->avatar : config('define.path.default_avatar'));
+            $result['comment_id'] = $comment->id;
+            $result['comment_content'] = $comment->content;
+            $result['comment_created_at'] = $comment->created_at;
+            return $result;
         } catch (\Exception $e) {
             Log::error($e);
             return false;

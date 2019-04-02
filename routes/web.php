@@ -58,8 +58,9 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('checkout/handle-checkout', 'OrderController@handleCheckout');
     Route::get('checkout/confermation', 'OrderController@confermation');
     Route::get('getDetailProduct', 'ProductController@getDetailProduct');
+    Route::post('detail/add-comment', 'CommentController@addComment');
+    Route::get('detail/get-list-comment', 'CommentController@getListComment');
     Route::get('detail/{id}', 'ProductController@detail')->name('detail');
-    Route::post('add-comment', 'CommentController@addComment');
     Route::get('get-detail-product', 'ProductController@getDetailProduct');
     Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
     Route::get('login', 'LoginController@showLoginForm')->name('login');

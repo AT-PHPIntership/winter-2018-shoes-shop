@@ -6,6 +6,7 @@ return [
         'limit_rows' => 10,
         'number_order' => 4,
         'limit_rows_12' => 12,
+        'limit_rows_comment' => 5,
     ],
     'format_date_vn' => 'd-m-Y',
     'path' => [
