@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Role;
 use Log;
+use Auth;
 
 class CommentService
 {
