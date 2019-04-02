@@ -96,7 +96,7 @@ class CommentService
             $param = [
                 'user_id' => $user->id,
                 'product_id' => $data['productId'],
-                'content' => $data['commentContent'],
+                'content' => strip_tags($data['commentContent']),
                 'status' => $user->role_id === Role::ADMIN_ROLE ? Comment::ACTIVE_STATUS : Comment::BLOCKED_STATUS,
             ];
             if (isset($data['commentId'])) {

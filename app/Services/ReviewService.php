@@ -121,8 +121,8 @@ class ReviewService
                 'user_id' => Auth::user()->id,
                 'is_buy' => $isBuy,
                 'product_id' => $data['product_id'],
-                'title' => $data['title'],
-                'content' => $data['content'],
+                'title' => strip_tags($data['title']),
+                'content' => strip_tags($data['content']),
                 'star' => $data['star'],
                 'status' => Review::BLOCKED_STATUS,
             ]);
