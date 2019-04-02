@@ -737,3 +737,6 @@
 .rating-content.sm i {
   font-size: 13px;
 }
+.js-rating {
+  cursor: pointer;
+}
