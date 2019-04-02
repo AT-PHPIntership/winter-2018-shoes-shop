@@ -39,7 +39,8 @@
                     <td>{{ $review->star }}</td>
                     <td>{{ $review->title }}</td>
                     <td>
-                      <p>{{ $review->content }} <i class="fa fa-thumbs-up"></i><span>{{ $review->likes ? $review->likes->count() : 0 }}</span></p>
+                      {{-- <p>{{ $review->content }} <i class="fa fa-thumbs-up"></i><span>{{ $review->likes ? $review->likes->count() : 0 }}</span></p> --}}
+                      <p>{{ $review->content }}</p>
                       @if ($review->images)
                         <p>
                           @foreach ($review->images as $image)

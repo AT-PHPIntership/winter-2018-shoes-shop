@@ -160,16 +160,16 @@ $(document).ready(function(){
               });
               list += '</div>';
             }
-            list += '<div class="rv-like">';
-            var isLike;
-            if(val['likes'].length){
-              $.each(val['likes'], function(key, val){
-                val['user_id'] == +userLogin.id ? isLike = 1 : isLike = 0;
-              });
-            }
-            list += '<button class="js-btn-like"><i class="fa fa-thumbs-up '+ (isLike == 1 ? 'active' : '') +'"></i></button>';
-            list += '<span class="rv-total-like '+ (isLike == 1 ? 'active' : '') +'">'+ (val['likes'].length > 0 ? val['likes'].length : '') +'</span>';
-            list += '</div>';
+            // list += '<div class="rv-like">';
+            // var isLike;
+            // if(val['likes'].length){
+            //   $.each(val['likes'], function(key, val){
+            //     val['user_id'] == +userLogin.id ? isLike = 1 : isLike = 0;
+            //   });
+            // }
+            // list += '<button class="js-btn-like"><i class="fa fa-thumbs-up '+ (isLike == 1 ? 'active' : '') +'"></i></button>';
+            // list += '<span class="rv-total-like '+ (isLike == 1 ? 'active' : '') +'">'+ (val['likes'].length > 0 ? val['likes'].length : '') +'</span>';
+            // list += '</div>';
             list += '</div>';
             list += '</div>';
             list += '</div>';
