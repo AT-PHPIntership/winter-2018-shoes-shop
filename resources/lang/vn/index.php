@@ -42,7 +42,7 @@ return [
     'product' => [
         'new' => 'Sản phẩm mới',
         'top_sell' => 'Sản phẩm bán chạy',
-        'top_review' => 'Sản phẩm đánh giá cao',
+        'top_review' => 'Sản phẩm đánh giá tốt',
     ],
     'quick_view' => [
         'previous' => 'Previous',
