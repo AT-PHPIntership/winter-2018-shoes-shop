@@ -32,7 +32,7 @@ $(document).ready(function(){
                 if(+userLogin.id){
                   item += '<div class="group-btn order-2 order-sm-3">';
                   item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-show-reply"><i class="fa fa-reply" aria-label="Tra loi" aria-hidden="true"></i><span>'+ txtReply +'</span></a>';
-                  if(val.user.id === +userLogin.id || val.user.role_id == 1){
+                  if(val.user.id === +userLogin.id || +userLogin.role == 1){
                     item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
                   }
                   item += '</div>';
@@ -51,7 +51,7 @@ $(document).ready(function(){
                     item += '<h5>'+ val.user.profile.name +'</h5>';
                     item += '<span>'+ val.created_at +'</span>';
                     item += '</div>';
-                    if(+userLogin.id && (val.user.id === +userLogin.id || val.user.role_id == 1)){
+                    if(+userLogin.id && (val.user.id === +userLogin.id || +userLogin.role == 1)){
                       item += '<div class="group-btn order-2 order-sm-3">';
                       item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
                       item += '</div>';
