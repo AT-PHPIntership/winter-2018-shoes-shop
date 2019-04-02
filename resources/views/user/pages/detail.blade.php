@@ -149,7 +149,7 @@
     var txtCmtSuccess = "{{ __('index.detail.comment.success') }}";
     var txtAdminCmtSuccess = "{{ __('index.detail.comment.admin_success') }}";
     var isLogin = "{{ Auth::check() }}";
-    var userId = "{{ Auth::check() ?? Auth::user()->id }}";
+    var userId = "{{ Auth::check() ? Auth::user()->id : null }}";
     var txtNoComment = "{{ __('index.detail.comment.empty') }}";
     var txtLoadMore = "{{ __('index.detail.comment.load_more') }}";
     var txtReply = "{{ __('index.detail.comment.reply') }}";
