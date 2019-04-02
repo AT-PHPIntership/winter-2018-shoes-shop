@@ -29,7 +29,7 @@ $(document).ready(function(){
               item += '<h5>'+ val.user.profile.name +'</h5>';
               item += '<span>'+ val.created_at +'</span>';
               item += '</div>';
-                if(isLogin){
+                if(+userLogin.id){
                   item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="view-btn color-2 reply order-2 order-sm-3 js-show-reply"><i class="fa fa-reply" aria-hidden="true"></i><span>'+ txtReply +'</span></a>';
                 }
               item += '</div>';
