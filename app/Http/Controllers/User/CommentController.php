@@ -46,7 +46,6 @@ class CommentController extends Controller
             'commentId' => 'exists:comments,id',
             'commentContent' => 'required',
             'productId' => 'required|exists:products,id',
-            'userId' => 'required|exists:users,id',
         ]);
         if ($validator->fails()) {
             return response()->json(array('success' => false, 'message' => $validator->errors()->all()));

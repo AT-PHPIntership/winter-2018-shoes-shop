@@ -88,9 +88,12 @@ class CommentService
     public function addComment(array $data)
     {
         try {
-            $user = User::with('profile:user_id,name,avatar')->find($data['userId']);
+            if (!Auth::check()) {
+                return false;
+            }
+            $user = Auth::user();
             $param = [
-                'user_id' => $data['userId'],
+                'user_id' => $user->id,
                 'product_id' => $data['productId'],
                 'content' => $data['commentContent'],
                 'status' => $user->role_id === Role::ADMIN_ROLE ? Comment::ACTIVE_STATUS : Comment::BLOCKED_STATUS,
