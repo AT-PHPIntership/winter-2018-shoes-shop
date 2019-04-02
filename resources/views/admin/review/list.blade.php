@@ -53,7 +53,7 @@
                       <button data-id="{{ $review->id }}" data-status="{{ $review->status }}" class="js-status-review btn btn-block {{ $review->status == \App\Models\Review::ACTIVE_STATUS ? 'btn-primary' : 'btn-warning' }} btn-xs">{{ $review->status == \App\Models\Review::ACTIVE_STATUS ? __('review.table.active') : __('review.table.blocked') }}</button>
                     </td>
                     <td>
-                      <form class="form-inline" action="" method="POST">
+                      <form class="form-inline" action="{{ route('admin.reviews.destroy', ['id' => $review->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('@lang('common.message.del_question')')">@lang('common.delete')</button>

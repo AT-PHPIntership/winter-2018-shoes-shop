@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::get('comments/change-status', 'CommentController@changeStatus');
         Route::resource('comments', 'CommentController')->only(['index', 'destroy']);
         Route::get('reviews/change-status', 'ReviewController@changeStatus');
-        Route::resource('reviews', 'ReviewController')->only('index');
+        Route::resource('reviews', 'ReviewController')->only(['index', 'destroy']);
         Route::get('statisticals/revenue', 'StatisticalController@revenue')->name('statisticals.revenue');
         Route::get('statisticals/product', 'StatisticalController@product')->name('statisticals.product');
         Route::get('statisticals/product/export/{str}', 'StatisticalController@exportProduct')->name('statisticals.product.export');

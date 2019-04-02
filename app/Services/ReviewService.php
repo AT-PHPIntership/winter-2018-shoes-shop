@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\Product;
 use Log;
 use DB;
+use File;
 
 class ReviewService
 {
@@ -55,5 +56,29 @@ class ReviewService
             DB::rollback();
         }
         return false;
+    }
+    
+    /**
+     * Remove review
+     *
+     * @param Review $review review
+     *
+     * @return boolean
+     */
+    public function destroy(Review $review)
+    {
+        try {
+            $review->delete();
+            if (!$review->images->isEmpty()) {
+                foreach ($review->images as $image) {
+                    $image->delete();
+                    File::delete(public_path($image->path));
+                }
+            }
+            return $review;
+        } catch (\Exception $e) {
+            Log::error($e);
+            return false;
+        }
     }
 }
