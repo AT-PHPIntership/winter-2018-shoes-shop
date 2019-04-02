@@ -554,3 +554,12 @@
 .default-header{
   z-index: 999;
 }
+.group-btn {
+  margin-left: auto;
+}
+.group-btn a {
+  padding: 5px;
+}
+.group-btn a:hover {
+  color: #f41068;
+}

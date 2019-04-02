@@ -57,4 +57,26 @@ class CommentController extends Controller
         }
         return response()->json(array('success' => false, 'message' => trans('index.detail.comment.mess_error')));
     }
+
+    /**
+     * Delete comment
+     *
+     * @param Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function removeComment(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'commentId' => 'exists:comments,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(array('success' => false, 'message' => $validator->errors()->all()));
+        }
+        $response = app(CommentService::class)->removeComment($request->all());
+        if ($response) {
+            return response()->json(array('success' => true, 'data' => $response));
+        }
+        return response()->json(array('success' => false, 'message' => trans('common.message.delete_error')));
+    }
 }

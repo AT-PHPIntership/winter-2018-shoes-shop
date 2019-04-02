@@ -103,12 +103,31 @@ class CommentService
                 return $comment;
             }
             $result = [];
+            $result['user_id'] = $user->id;
             $result['user_name'] = $user->profile->name;
             $result['user_avatar'] = asset($user->profile->avatar ? $user->profile->avatar : config('define.path.default_avatar'));
             $result['comment_id'] = $comment->id;
             $result['comment_content'] = $comment->content;
             $result['comment_created_at'] = $comment->created_at;
             return $result;
+        } catch (\Exception $e) {
+            Log::error($e);
+            return false;
+        }
+    }
+
+    /**
+     * Remove comment in detail product
+     *
+     * @param array $data data
+     *
+     * @return boolean
+     */
+    public function removeComment(array $data)
+    {
+        try {
+            $comment = Comment::find($data['commentId']);
+            return $comment->user_id == \Auth::user()->id ? $this->destroy($comment) : false;
         } catch (\Exception $e) {
             Log::error($e);
             return false;
