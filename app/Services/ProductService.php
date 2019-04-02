@@ -624,6 +624,11 @@ class ProductService
                 $this->createProductDetail($product->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
             if (isset($data['upload_file'])) {
+                if (!$product->images->isEmpty()) {
+                    foreach ($product->images as $image) {
+                        File::delete(public_path($image->path));
+                    }
+                }
                 DB::table('images')->where('imageable_type', 'products')->where('imageable_id', $product->id)->delete();
                 $this->createImages($data, $product->id);
             }
