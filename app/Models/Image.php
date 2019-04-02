@@ -12,17 +12,17 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'product_id', 'path'
+        'path', 'imageable_type', 'imageable_id'
     ];
 
     /**
-     * Get the product for this image.
+     * Get all of the owning commentable models.
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function product()
+    public function imageable()
     {
-        return $this->belongsTo('App\Models\Product');
+        return $this->morphTo();
     }
 
     /**
