@@ -81,6 +81,8 @@ class ProductService
             'original_price' => $product->original_price,
             'price' => $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null,
             'inventory' => $product->quantity - $product->total_sold,
+            'total_review' => $product->total_review,
+            'avg_rating' => $product->avg_rating,
             'description' => $product->description,
         ];
         $data['category'] = [
@@ -203,7 +205,7 @@ class ProductService
         }])
         ->join('categories as c', 'c.id', '=', 'products.category_id')
         ->join('product_details as pd', 'pd.product_id', '=', 'products.id')
-        ->select('products.id', 'products.name', 'products.original_price');
+        ->select('products.id', 'products.name', 'products.original_price', 'products.avg_rating', 'products.total_review');
         if (Category::where('parent_id', $data['categoryId'])->count()) {
             $ids = Category::where('parent_id', $data['categoryId'])->orWhere('id', $data['categoryId'])->pluck('id')->toArray();
         } else {
@@ -217,6 +219,8 @@ class ProductService
         foreach ($products as $key => $product) {
             $items[$key]['id'] = $product->id;
             $items[$key]['name'] = $product->name;
+            $items[$key]['avg_rating'] = $product->avg_rating;
+            $items[$key]['total_review'] = $product->total_review;
             $items[$key]['original_price'] = $product->original_price;
             $items[$key]['price'] =  $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null;
             $items[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
@@ -785,5 +789,24 @@ class ProductService
                 }
             });
         })->download('csv');
+    }
+
+    /**
+     * Get top review products
+     *
+     * @param array $columns columns
+     *
+     * @return object
+     */
+    public function getTopReviewProducts(array $columns = ['*'])
+    {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])->orderBy('avg_rating', 'desc')
+        ->orderBy('total_review', 'desc')
+        ->orderBy('updated_at', 'desc')
+        ->limit(config('define.limit_rows_product'))
+        ->get($columns);
     }
 }

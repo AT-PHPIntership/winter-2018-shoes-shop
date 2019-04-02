@@ -42,6 +42,7 @@ return [
     'product' => [
         'new' => 'Sản phẩm mới',
         'top_sell' => 'Sản phẩm bán chạy',
+        'top_review' => 'Sản phẩm đánh giá cao',
     ],
     'quick_view' => [
         'previous' => 'Previous',
@@ -94,6 +95,13 @@ return [
             'admin_success' => 'Bình luận thành công!',
             'content' => 'Nội dung',
             'load_more' => 'Xem thêm',
+        ],
+        'review' => [
+            'title' => 'Đánh giá',
+            'avg_rating' => 'Đánh giá trung bình',
+            'comment' => 'Nhận xét',
+            'share' => 'Chia sẻ nhận xét về sản phẩm',
+            'write' => 'Viết nhận xét của bạn',
         ],
     ]
 ];

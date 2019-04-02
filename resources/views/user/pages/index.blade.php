@@ -102,7 +102,24 @@
               </div>
               <div class="price">
                 <h5 class="text-white">{{ $productForMen->name }}</h5>
-                <p class="text-white">{{ $productForMen->promotions->last() ? formatCurrencyVN(($productForMen->original_price * (100 - $productForMen->promotions->last()->percent))/100) : formatCurrencyVN($productForMen->original_price) }} <del class="text-gray">{{ $productForMen->promotions->last() ? formatCurrencyVN($productForMen->original_price) : '' }}</del></p>
+                <p class="text-white mrb-5">{{ $productForMen->promotions->last() ? formatCurrencyVN(($productForMen->original_price * (100 - $productForMen->promotions->last()->percent))/100) : formatCurrencyVN($productForMen->original_price) }} <del class="text-gray">{{ $productForMen->promotions->last() ? formatCurrencyVN($productForMen->original_price) : '' }}</del></p>
+                <div class="review">
+                  <span class="rating-content">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <span style="width: {{ $productForMen->avg_rating/5*100 }}%">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </span>
+                  </span>
+                  <span>({{ $productForMen->total_review }} {{ __('index.detail.review.comment') }})</span>
+                </div>
               </div>
             </div>
           @endforeach
@@ -146,7 +163,24 @@
               </div>
               <div class="price">
                 <h5>{{ $productForWomen->name }}</h5>
-                <p>{{ $productForWomen->promotions->last() ? formatCurrencyVN(($productForWomen->original_price * (100 - $productForWomen->promotions->last()->percent))/100) : formatCurrencyVN($productForWomen->original_price) }} <del class="text-gray">{{ $productForWomen->promotions->last() ? formatCurrencyVN($productForWomen->original_price) : '' }}</del></p>
+                <p class="mrb-5">{{ $productForWomen->promotions->last() ? formatCurrencyVN(($productForWomen->original_price * (100 - $productForWomen->promotions->last()->percent))/100) : formatCurrencyVN($productForWomen->original_price) }} <del class="text-gray">{{ $productForWomen->promotions->last() ? formatCurrencyVN($productForWomen->original_price) : '' }}</del></p>
+                <div class="review">
+                  <span class="rating-content">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <span style="width: {{ $productForWomen->avg_rating/5*100 }}%">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </span>
+                  </span>
+                  <span>({{ $productForWomen->total_review }} {{ __('index.detail.review.comment') }})</span>
+                </div>
               </div>
             </div>
           @endforeach
@@ -171,6 +205,23 @@
               <div class="desc">
                 <a href="{{ route('user.detail', ['id' => $newProduct->id]) }}" class="title">{{ $newProduct->name }}</a>
                 <div class="price"><span class="lnr lnr-tag"></span> {{ $newProduct->promotions->last() ? formatCurrencyVN(($newProduct->original_price * (100 - $newProduct->promotions->last()->percent))/100) : formatCurrencyVN($newProduct->original_price) }} <del>{{ $newProduct->promotions->last() ? formatCurrencyVN($newProduct->original_price) : '' }}</del></div>
+                <div class="review">
+                  <span class="rating-content sm">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <span style="width: {{ $newProduct->avg_rating/5*100 }}%">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </span>
+                  </span>
+                  <span>({{ $newProduct->total_review }} {{ __('index.detail.review.comment') }})</span>
+                </div>
               </div>
             </div>
           </div>
@@ -195,12 +246,68 @@
             <div class="desc">
               <a href="{{ route('user.detail', ['id' => $topSellProduct->id]) }}" class="title">{{ $topSellProduct->name }}</a>
               <div class="price"><span class="lnr lnr-tag"></span> {{ $topSellProduct->promotions->last() ? formatCurrencyVN(($topSellProduct->original_price * (100 - $topSellProduct->promotions->last()->percent))/100) : formatCurrencyVN($topSellProduct->original_price) }} <del>{{ $topSellProduct->promotions->last() ? formatCurrencyVN($topSellProduct->original_price) : '' }}</del></div>
+              <div class="review">
+                <span class="rating-content sm">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <span style="width: {{ $topSellProduct->avg_rating/5*100 }}%">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </span>
+                </span>
+                <span>({{ $topSellProduct->total_review }} {{ __('index.detail.review.comment') }})</span>
+              </div>
             </div>
           </div>
         </div>
       @endforeach
   </section>
   <!-- End related-product Area -->
+  <!-- Start top-review-product Area --> 
+  <section class="related-product-area section-gap" id="latest">
+    <div class="container">
+    <div class="related-content">
+      <div class="title text-center">
+        <h2 class="mb-10">{{ __('index.product.top_review') }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      @foreach ($topReviewProducts as $topReviewProduct)
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-20">
+          <div class="single-search-product d-flex">
+            <a href="{{ route('user.detail', ['id' => $topReviewProduct->id]) }}"><img src="{{ $topReviewProduct->images->first() ? $topReviewProduct->images->first()->path : config('define.image_default_product') }}" alt=""></a>
+            <div class="desc">
+              <a href="{{ route('user.detail', ['id' => $topReviewProduct->id]) }}" class="title">{{ $topReviewProduct->name }}</a>
+              <div class="price"><span class="lnr lnr-tag"></span> {{ $topReviewProduct->promotions->last() ? formatCurrencyVN(($topReviewProduct->original_price * (100 - $topReviewProduct->promotions->last()->percent))/100) : formatCurrencyVN($topReviewProduct->original_price) }} <del>{{ $topReviewProduct->promotions->last() ? formatCurrencyVN($topReviewProduct->original_price) : '' }}</del></div>
+              <div class="review">
+                <span class="rating-content sm">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <span style="width: {{ $topReviewProduct->avg_rating/5*100 }}%">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </span>
+                </span>
+                <span>({{ $topReviewProduct->total_review }} {{ __('index.detail.review.comment') }})</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      @endforeach
+  </section>
+  <!-- End top-review-product Area -->
   <!-- Start brand Area -->
   <section class="brand-area pb-100">
     <div class="container">

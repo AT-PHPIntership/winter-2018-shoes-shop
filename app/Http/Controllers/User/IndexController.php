@@ -16,13 +16,14 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $productsForMen = app(ProductService::class)->getProductsByCat('Giày nam', ['id', 'name', 'original_price']);
-        $productsForWomen = app(ProductService::class)->getProductsByCat('Giày nữ', ['id', 'name', 'original_price']);
+        $productsForMen = app(ProductService::class)->getProductsByCat('Giày nam', ['id', 'name', 'original_price', 'avg_rating', 'total_review']);
+        $productsForWomen = app(ProductService::class)->getProductsByCat('Giày nữ', ['id', 'name', 'original_price', 'avg_rating', 'total_review']);
         $childsCatForMen = app(CategoryService::class)->getChildCatByParentCat('Giày nam', ['id', 'name']);
         $childsCatForWomen = app(CategoryService::class)->getChildCatByParentCat('Giày nữ', ['id', 'name']);
-        $newProducts = app(ProductService::class)->getNewProducts(['id', 'name', 'original_price']);
-        $topSellProducts = app(ProductService::class)->getTopSellProducts(['id', 'name', 'original_price']);
-        return view('user.pages.index', compact(['productsForMen', 'productsForWomen', 'childsCatForMen', 'childsCatForWomen', 'newProducts', 'topSellProducts']));
+        $newProducts = app(ProductService::class)->getNewProducts(['id', 'name', 'original_price', 'avg_rating', 'total_review']);
+        $topSellProducts = app(ProductService::class)->getTopSellProducts(['id', 'name', 'original_price', 'avg_rating', 'total_review']);
+        $topReviewProducts = app(ProductService::class)->getTopReviewProducts(['id', 'name', 'original_price', 'avg_rating', 'total_review']);
+        return view('user.pages.index', compact(['productsForMen', 'productsForWomen', 'childsCatForMen', 'childsCatForWomen', 'newProducts', 'topSellProducts', 'topReviewProducts']));
     }
 
     /**
