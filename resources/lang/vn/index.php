@@ -88,6 +88,12 @@ return [
             'login' => 'Bạn cần đăng nhập để bình luận',
             'mess_error' => 'Bình luận thất bại',
             'required' => 'Không được bỏ trống',
+            'submit' => 'Gửi',
+            'reply' => 'Trả lời',
+            'success' => 'Bình luận thành công! Vui lòng chờ kiểm duyệt.',
+            'admin_success' => 'Bình luận thành công!',
+            'content' => 'Nội dung',
+            'load_more' => 'Xem thêm',
         ],
     ]
 ];

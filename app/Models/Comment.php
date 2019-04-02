@@ -15,7 +15,7 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'product_id', 'parent_id', 'content', 'comment'
+        'user_id', 'product_id', 'parent_id', 'content', 'status'
     ];
     
     /**
@@ -56,5 +56,17 @@ class Comment extends Model
     public function children()
     {
         return $this->hasMany(Comment::class, 'parent_id', 'id');
+    }
+
+    /**
+     * Get created_at.
+     *
+     * @param string $date date
+     *
+     * @return string
+     */
+    public function getCreatedAtAttribute($date)
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('H:i:s - d/m/Y');
     }
 }
