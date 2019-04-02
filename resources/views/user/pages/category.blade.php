@@ -113,7 +113,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                   </span>
-                  <span class="ml-5">5 sao</span>
+                  <span class="ml-5 rating-title">5 sao</span>
                 </li>
                 <li data-star="{{ \App\Models\Review::NUMBER_STAR['FOUR'] }}" class="mgb-5 col-lg-12 col-md-12 js-rating">
                   <span class="rating-content">
@@ -130,7 +130,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                   </span>
-                  <span class="ml-5">Ít nhất 4 sao</span>
+                  <span class="ml-5 rating-title">Ít nhất 4 sao</span>
                 </li>
                 <li data-star="{{ \App\Models\Review::NUMBER_STAR['THREE'] }}" class="mgb-5 col-lg-12 col-md-12 js-rating">
                   <span class="rating-content">
@@ -147,7 +147,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                   </span>
-                  <span class="ml-5">Ít nhất 3 sao</span>
+                  <span class="ml-5 rating-title">Ít nhất 3 sao</span>
                 </li>
                 <li data-star="{{ \App\Models\Review::NUMBER_STAR['TWO'] }}" class="mgb-5 col-lg-12 col-md-12 js-rating">
                   <span class="rating-content">
@@ -164,7 +164,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                   </span>
-                  <span class="ml-5">Ít nhất 2 sao</span>
+                  <span class="ml-5 rating-title">Ít nhất 2 sao</span>
                 </li>
                 <li data-star="{{ \App\Models\Review::NUMBER_STAR['ONE'] }}" class="mgb-5 col-lg-12 col-md-12 js-rating">
                   <span class="rating-content">
@@ -181,7 +181,7 @@
                       <i class="fa fa-star"></i>
                     </span>
                   </span>
-                  <span class="ml-5">Ít nhất 1 sao</span>
+                  <span class="ml-5 rating-title">Ít nhất 1 sao</span>
                 </li>
               </ul>
             </form>

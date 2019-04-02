@@ -163,10 +163,15 @@ $(document).ready(function(){
   $('.js-rating').click(function(){
     $('.js-rating').removeClass('checked');
     $(this).addClass('checked');
-    // var name = $(this).parent().parent().find('span').text();
-    // var dataId = $(this).attr('data-id');
-    // var activeFilterItem = '<li class="filter-list active-filter-item ml-10" data-id="'+ dataId +'">'+ name +'<i class="fa fa-window-close remove-filter" aria-hidden="true"></i></li>';
-    // $('.active-filter-list').append(activeFilterItem);
+    $('.active-filter-list').find('.active-filter-rating').remove();
+    var name = $(this).find('.rating-title').text();
+    var activeFilterItem = '<li class="filter-list active-filter-rating ml-10">'+ name +'<i class="fa fa-window-close remove-filter-rating" aria-hidden="true"></i></li>';
+    $('.active-filter-list').append(activeFilterItem);
+    filter_data();
+  });
+  $('.active-filter-list').on('click', '.remove-filter-rating', function(){
+    $(this).parent().remove();
+    $('.js-rating').removeClass('checked');
     filter_data();
   });
 });
