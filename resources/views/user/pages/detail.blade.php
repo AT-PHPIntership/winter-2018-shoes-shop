@@ -285,6 +285,39 @@
               </div>
             </div>
           @endif
+          <div class="review-content">
+            <div class="review-filter mb-10">
+              <div class="row">
+                <div class="col-md-2">
+                  <p>{{ __('index.detail.review.filter.title') }}</p>
+                </div>
+                <div class="col-md-2">
+                  <select class="form-control form-control-sm" id="js-slt-sort">
+                    <option value="0">{{ __('index.detail.review.filter.top_like') }}</option>
+                    <option value="1">{{ __('index.detail.review.filter.new') }}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control form-control-sm" id="js-slt-is-buy">
+                    <option value="0">{{ __('index.detail.review.filter.all_customer') }}</option>
+                    <option value="1">{{ __('index.detail.review.filter.is_buy_customer') }}</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <select class="form-control form-control-sm" id="js-slt-star">
+                    <option value="0">{{ __('index.detail.review.filter.all_star') }}</option>
+                    <option value="5">{{ __('index.detail.review.filter.5_star') }}</option>
+                    <option value="4">{{ __('index.detail.review.filter.4_star') }}</option>
+                    <option value="3">{{ __('index.detail.review.filter.3_star') }}</option>
+                    <option value="2">{{ __('index.detail.review.filter.2_star') }}</option>
+                    <option value="1">{{ __('index.detail.review.filter.1_star') }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="review-list">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -315,6 +348,7 @@
     var txtQuesDelCmt = "{{ __('common.message.del_question') }}";
     var addReviewUrl = "{{ url('add-review') }}";
     var loginUrl = "{{ url('login') }}";
+    var listReviewUrl = "{{ url('list-review') }}";
   </script>
   <script src="{{ asset('public/js/comment-product.js') }}"></script>
   <script src="{{ asset('public/js/review.js') }}"></script>

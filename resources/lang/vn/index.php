@@ -131,6 +131,19 @@ return [
                 'submit' => 'Gửi nhận xét',
                 'message' => '* Nhận xét sẽ được kiểm duyệt.',
             ],
+            'filter' => [
+                'title' => 'Chọn xem nhận xét:',
+                'top_like' => 'Hữu ích',
+                'new' => 'Mới nhất',
+                'is_buy_customer' => 'Khách hàng đã mua',
+                'all_customer' => 'Tất cả khách hàng',
+                'all_star' => 'Tất cả sao',
+                '5_star' => '5 sao',
+                '4_star' => '4 sao',
+                '3_star' => '3 sao',
+                '2_star' => '2 sao',
+                '1_star' => '1 sao',
+            ],
         ],
     ]
 ];

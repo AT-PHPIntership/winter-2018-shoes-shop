@@ -807,3 +807,25 @@
   display: block;
   font-style: italic;
 }
+.paginate-review {
+  text-align: right;
+}
+.paginate-review a {
+  display: inline-block;
+  margin: 0 3px;
+  background: #f7f7f7;
+  color: black;
+  width: 27px;
+  height: 27px;
+  line-height: 27px;
+  text-align: center;
+  border-radius: 50%;
+}
+.paginate-review a:hover {
+  color: white;
+  background: #f41068;
+}
+.paginate-review a.active {
+  color: white;
+  background: #f41068;
+}

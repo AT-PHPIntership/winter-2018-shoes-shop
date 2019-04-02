@@ -109,4 +109,106 @@ $(document).ready(function(){
       }
     });
   });
+
+  //Show list review
+  listReview();
+  function listReview(page = 1){
+    var url = window.location.pathname;
+    var productId = url.substring(url.lastIndexOf('/') + 1);
+    var sort = $('#js-slt-sort').val();
+    var isBuy = $('#js-slt-is-buy').val();
+    var star = $('#js-slt-star').val();
+    $.ajax({
+      url: listReviewUrl,
+      method: "GET",
+      data: {productId:productId, page:page, sort:sort, isBuy:isBuy, star:star},
+      success: function(data){
+        if(data.data.length){
+          var list = '';
+          $.each(data.data, function(key, val){
+            list += '<div class="review-item">';
+            list += '<div class="row">';
+            list += '<div class="col-md-2 text-center">';
+            list += '<div class="user-avatar">';
+            list += '<img src="'+ val['user']['profile']['avatar'] +'" alt="">';
+            list += '</div>';
+            list += '<p class="user-name">'+ val['user']['profile']['name'] +'</p>';
+            list += '<p class="date-review">'+ val['created_at'] +'</p>';
+            list += '</div>';
+            list += '<div class="col-md-10">';
+            list += '<div class="rv-info">';
+            list += '<div class="rv-rating">';
+            var star = val['star'];
+            list += '<i class="fa fa-star '+ (1 <= star ? 'active' : '') +'"></i>';
+            list += '<i class="fa fa-star '+ (2 <= star ? 'active' : '') +'"></i>';
+            list += '<i class="fa fa-star '+ (3 <= star ? 'active' : '') +'"></i>';
+            list += '<i class="fa fa-star '+ (4 <= star ? 'active' : '') +'"></i>';
+            list += '<i class="fa fa-star '+ (5 <= star ? 'active' : '') +'"></i>';
+            list += '</div> ';
+            list += '<p class="rv-title">'+ val['title'] +'</p>';
+            if(val['is_buy']){
+              list += '<p class="rv-buy-already">';
+              list += '<img src="/public/images/icon_verified.png" alt="">';
+              list += '<span>Verified Purchase</span>';
+              list += '</p>';
+            }
+            list += '<p class="rv-content">'+ val['content'] +'</p>';
+            if(val['images']){
+              list += '<div class="rv-image">';
+              $.each(val['images'], function(key, val){
+                list += '<img src="'+ val['path'] +'" alt="">';
+              });
+              list += '</div>';
+            }
+            list += '<div class="rv-like">';
+            var isLike;
+            if(val['likes'].length){
+              $.each(val['likes'], function(key, val){
+                val['user_id'] == +userLogin.id ? isLike = 1 : isLike = 0;
+              });
+            }
+            list += '<button class="js-btn-like"><i class="fa fa-thumbs-up '+ (isLike == 1 ? 'active' : '') +'"></i></button>';
+            list += '<span class="rv-total-like '+ (isLike == 1 ? 'active' : '') +'">'+ (val['likes'].length > 0 ? val['likes'].length : '') +'</span>';
+            list += '</div>';
+            list += '</div>';
+            list += '</div>';
+            list += '</div>';
+            list += '</div>';
+          });
+          var totalPage = data['paginator']['last_page'];
+          if(totalPage > 1){
+            list += '<div class="paginate-review">';
+            for (let i = 1; i <= totalPage; i++) {
+              list += '<a class="'+ (page == i ? 'active' : '') +'" href="'+ listReviewUrl +'?page='+ i +'">'+ i +'</a>';            
+            }
+            list += '</div>';
+          }
+          $('.review-list').html(list);
+        }else{
+          $('.review-list').html('Chưa có đánh giá nào!');
+        }
+      },
+      error: function(data){
+        console.log(data);        
+      }
+    });
+  }
+
+  //Click paginate
+  $(document).on('click','.paginate-review a', function(e){
+    e.preventDefault();
+    var page = $(this).attr('href').split('page=')[1];
+    listReview(page);
+  });
+
+  // sort data
+  $('#js-slt-sort').on('change', function(){
+    listReview();
+  });
+  $('#js-slt-is-buy').on('change', function(){
+    listReview();
+  });
+  $('#js-slt-star').on('change', function(){
+    listReview();
+  });
 });

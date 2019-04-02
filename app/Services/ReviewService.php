@@ -10,6 +10,7 @@ use Log;
 use DB;
 use File;
 use Auth;
+use Exception;
 
 class ReviewService
 {
@@ -150,5 +151,32 @@ class ReviewService
         $fileName = time().'-'.$image->getClientOriginalName();
         $image->move('upload', $fileName);
         return $fileName;
+    }
+
+    /**
+     * Get list review
+     *
+     * @param array $data data
+     *
+     * @return object
+     */
+    public function getListReview($data)
+    {
+        $review = Review::with(['user:id','user.profile:user_id,name,avatar', 'product:id,name', 'images', 'likes'])
+            ->withCount('likes')
+            ->where('product_id', $data['productId'])
+            ->where('status', Review::ACTIVE_STATUS);
+        if ($data['isBuy'] == 1) {
+            $review->where('is_buy', 1);
+        }
+        if ($data['star'] != 0) {
+            $review->where('star', $data['star']);
+        }
+        if ($data['sort'] == 0) {
+            $review->orderBy('likes_count', 'desc');
+        } else {
+            $review->orderBy('updated_at', 'desc');
+        }
+        return $review->paginate(config('define.paginate.limit_rows_comment'));
     }
 }

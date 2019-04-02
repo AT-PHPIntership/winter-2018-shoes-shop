@@ -64,6 +64,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::get('detail/get-list-comment', 'CommentController@getListComment');
     Route::get('detail/remove-comment', 'CommentController@removeComment');
     Route::post('add-review', 'ReviewController@addReview')->middleware('auth');
+    Route::get('list-review', 'ReviewController@getListReview');
     Route::get('detail/{id}', 'ProductController@detail')->name('detail');
     Route::get('get-detail-product', 'ProductController@getDetailProduct');
     Route::get('get-sizes-by-color-id', 'ProductController@getSizesByColorId');
