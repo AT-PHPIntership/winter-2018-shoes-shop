@@ -29,10 +29,10 @@ $(document).ready(function(){
               item += '<h5>'+ val.user.profile.name +'</h5>';
               item += '<span>'+ val.created_at +'</span>';
               item += '</div>';
-                if(isLogin){
+                if(+userLogin.id){
                   item += '<div class="group-btn order-2 order-sm-3">';
                   item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-show-reply"><i class="fa fa-reply" aria-label="Tra loi" aria-hidden="true"></i><span>'+ txtReply +'</span></a>';
-                  if(val.user.id === +userId){
+                  if(val.user.id === +userLogin.id || val.user.role_id == 1){
                     item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
                   }
                   item += '</div>';
@@ -51,7 +51,7 @@ $(document).ready(function(){
                     item += '<h5>'+ val.user.profile.name +'</h5>';
                     item += '<span>'+ val.created_at +'</span>';
                     item += '</div>';
-                    if(isLogin && val.user.id === +userId){
+                    if(+userLogin.id && (val.user.id === +userLogin.id || val.user.role_id == 1)){
                       item += '<div class="group-btn order-2 order-sm-3">';
                       item += '<a href="javascript:void(0)" data-comment-id="'+ val.id +'" class="js-remove-cmt"><i class="fa fa-times" aria-hidden="true"></i><span>Xóa</span></a>';
                       item += '</div>';
@@ -95,7 +95,6 @@ $(document).ready(function(){
   $('#js-add-comment').click(function(){
     var commentContent = $('#js-comment-content').val();
     var productId = $(this).attr('data-product-id');
-    var userId = $(this).attr('data-user-id');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -108,7 +107,7 @@ $(document).ready(function(){
         url: addCommentUrl,
         method:"post",
         dataType:"JSON",
-        data: {commentContent:commentContent, productId:productId, userId:userId},
+        data: {commentContent:commentContent, productId:productId},
         success: function(data){
           if(data.success){
             if(data.data.user_name){
@@ -169,7 +168,6 @@ $(document).ready(function(){
     var commentId = reply.attr('data-comment-id');
     var commentContent = reply.parent().find('.js-reply-content').val();
     var productId = $('#js-add-comment').attr('data-product-id');
-    var userId = $('#js-add-comment').attr('data-user-id');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -182,7 +180,7 @@ $(document).ready(function(){
         url: addCommentUrl,
         method:"post",
         dataType:"JSON",
-        data: {commentId:commentId, commentContent:commentContent, productId:productId, userId:userId},
+        data: {commentId:commentId, commentContent:commentContent, productId:productId},
         success: function(data){
           if(data.success){
             if(data.data.user_name){

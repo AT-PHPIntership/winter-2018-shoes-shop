@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\User;
 use App\Models\Role;
 use Log;
+use Auth;
 
 class CommentService
 {
@@ -70,7 +71,7 @@ class CommentService
      */
     public function getCommentsByProductId(array $data)
     {
-        return Comment::with(['user:id','user.profile:user_id,name,avatar', 'product:id,name', 'children', 'children.user:id', 'children.user.profile:user_id,name,avatar'])
+        return Comment::with(['user:id,role_id','user.profile:user_id,name,avatar', 'product:id,name', 'children', 'children.user:id', 'children.user.profile:user_id,name,avatar'])
             ->where('product_id', $data['productId'])
             ->where('parent_id', null)
             ->where('status', Comment::ACTIVE_STATUS)
@@ -88,9 +89,12 @@ class CommentService
     public function addComment(array $data)
     {
         try {
-            $user = User::with('profile:user_id,name,avatar')->find($data['userId']);
+            if (!Auth::check()) {
+                return false;
+            }
+            $user = Auth::user();
             $param = [
-                'user_id' => $data['userId'],
+                'user_id' => $user->id,
                 'product_id' => $data['productId'],
                 'content' => $data['commentContent'],
                 'status' => $user->role_id === Role::ADMIN_ROLE ? Comment::ACTIVE_STATUS : Comment::BLOCKED_STATUS,
@@ -127,7 +131,10 @@ class CommentService
     {
         try {
             $comment = Comment::find($data['commentId']);
-            return $comment->user_id == \Auth::user()->id ? $this->destroy($comment) : false;
+            if (Auth::check() && (Auth::user()->id == $comment->user_id || Auth::user()->role_id == Role::ADMIN_ROLE)) {
+                return $this->destroy($comment);
+            }
+            return false;
         } catch (\Exception $e) {
             Log::error($e);
             return false;
