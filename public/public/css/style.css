@@ -829,3 +829,6 @@
   color: white;
   background: #f41068;
 }
+.js-rating {
+  cursor: pointer;
+}

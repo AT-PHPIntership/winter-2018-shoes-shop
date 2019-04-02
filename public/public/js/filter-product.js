@@ -10,13 +10,13 @@ $(document).ready(function(){
     var sort = $('.js-slt-sort').val();
     var minPrice = $('#lower-value').text();
     var maxPrice = $('#upper-value').text();
+    var rate = $('.js-rating.checked').attr('data-star');
     $.ajax({
       url: filterProductUrl,
       method:"get",
       dataType:"JSON",
-      data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice, page:page},
+      data: {categoryId:categoryId, colorIds:colorIds, sizeIds:sizeIds, sort:sort, minPrice:minPrice, maxPrice:maxPrice, page:page, rate:rate},
       success: function(data){
-        console.log(data);
         var list = '';
         var pagi = '';
         if (data['products'].length) {
@@ -157,5 +157,21 @@ $(document).ready(function(){
     e.preventDefault();
     var page = $(this).attr('href').split('page=')[1];
     filter_data(page);
+  });
+
+  // Check rating
+  $('.js-rating').click(function(){
+    $('.js-rating').removeClass('checked');
+    $(this).addClass('checked');
+    $('.active-filter-list').find('.active-filter-rating').remove();
+    var name = $(this).find('.rating-title').text();
+    var activeFilterItem = '<li class="filter-list active-filter-rating ml-10">'+ name +'<i class="fa fa-window-close remove-filter-rating" aria-hidden="true"></i></li>';
+    $('.active-filter-list').append(activeFilterItem);
+    filter_data();
+  });
+  $('.active-filter-list').on('click', '.remove-filter-rating', function(){
+    $(this).parent().remove();
+    $('.js-rating').removeClass('checked');
+    filter_data();
   });
 });

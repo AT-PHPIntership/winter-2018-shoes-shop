@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\ProductDetail;
 use App\Models\Image;
 use App\Models\Color;
+use App\Models\Review;
 use DB;
 use Log;
 use Session;
@@ -240,6 +241,13 @@ class ProductService
      */
     public function subFilter(object $products, array $data)
     {
+        if (isset($data['rate'])) {
+            if ($data['rate'] == Review::NUMBER_STAR['FIVE']) {
+                $products->where('avg_rating', $data['rate']);
+            } else {
+                $products->where('avg_rating', '>=', $data['rate']);
+            }
+        }
         if (isset($data['colorIds'])) {
             $products->whereIn('color_id', $data['colorIds']);
         }
