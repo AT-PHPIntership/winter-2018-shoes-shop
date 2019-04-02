@@ -85,7 +85,6 @@ $(document).ready(function(){
   $('#js-add-comment').click(function(){
     var commentContent = $('#js-comment-content').val();
     var productId = $(this).attr('data-product-id');
-    var userId = $(this).attr('data-user-id');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -98,7 +97,7 @@ $(document).ready(function(){
         url: addCommentUrl,
         method:"post",
         dataType:"JSON",
-        data: {commentContent:commentContent, productId:productId, userId:userId},
+        data: {commentContent:commentContent, productId:productId},
         success: function(data){
           if(data.success){
             if(data.data.user_name){
@@ -155,7 +154,6 @@ $(document).ready(function(){
     var commentId = reply.attr('data-comment-id');
     var commentContent = reply.parent().find('.js-reply-content').val();
     var productId = $('#js-add-comment').attr('data-product-id');
-    var userId = $('#js-add-comment').attr('data-user-id');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -168,7 +166,7 @@ $(document).ready(function(){
         url: addCommentUrl,
         method:"post",
         dataType:"JSON",
-        data: {commentId:commentId, commentContent:commentContent, productId:productId, userId:userId},
+        data: {commentId:commentId, commentContent:commentContent, productId:productId},
         success: function(data){
           if(data.success){
             if(data.data.user_name){
