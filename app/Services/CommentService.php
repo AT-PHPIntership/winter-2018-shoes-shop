@@ -71,7 +71,7 @@ class CommentService
      */
     public function getCommentsByProductId(array $data)
     {
-        return Comment::with(['user:id','user.profile:user_id,name,avatar', 'product:id,name', 'children', 'children.user:id', 'children.user.profile:user_id,name,avatar'])
+        return Comment::with(['user:id,role_id','user.profile:user_id,name,avatar', 'product:id,name', 'children', 'children.user:id', 'children.user.profile:user_id,name,avatar'])
             ->where('product_id', $data['productId'])
             ->where('parent_id', null)
             ->where('status', Comment::ACTIVE_STATUS)
@@ -131,7 +131,10 @@ class CommentService
     {
         try {
             $comment = Comment::find($data['commentId']);
-            return $comment->user_id == \Auth::user()->id ? $this->destroy($comment) : false;
+            if (Auth::check() && (Auth::user()->id == $comment->user_id || Auth::user()->role_id == Role::ADMIN_ROLE)) {
+                return $this->destroy($comment);
+            }
+            return false;
         } catch (\Exception $e) {
             Log::error($e);
             return false;
