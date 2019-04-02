@@ -224,12 +224,67 @@
                   <span class="rating-num-total">{{ $perRating1 }}%</span>
                 </div>
               </div>
-              <div class="col-lg-4">
-                <h4 class="text-center">{{ __('index.detail.review.share') }}</h4>
-                <button class="btn btn-default js-btn-review">{{ __('index.detail.review.write') }}</button>
-              </div>
+              @if(!Auth::check() || (Auth::check() && !isReview(Auth::user()->id, $product['product']['id'])))
+                <div class="col-lg-4 action-review">
+                  <h4 class="text-center">{{ __('index.detail.review.share') }}</h4>
+                  <button class="btn btn-default js-btn-review">{{ __('index.detail.review.write') }}</button>
+                </div>
+              @endif
             </div>
           </div>
+          @if (Auth::check())
+            <div class="review-form mt-10 mb-30">
+              <div class="row">
+                <div class="col-lg-6">
+                  <form action="" method="POST" id="add-review-form" enctype='multipart/form-data'>
+                    <input type="hidden" name="product_id" value="{{ $product['product']['id'] }}">
+                    <div class="review-rate form-group">
+                      <label>{{ __('index.detail.review.form.rating') }}</label>
+                      <div id="full-stars-example-two">
+                        <div class="rating-group">
+                          <input disabled checked class="rating-input rating-input--none" name="star" id="rating-none" value="0" type="radio">
+                          <label aria-label="1 star" class="rating-label" for="rating-1"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-1" value="1" type="radio">
+                          <label aria-label="2 stars" class="rating-label" for="rating-2"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-2" value="2" type="radio">
+                          <label aria-label="3 stars" class="rating-label" for="rating-3"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-3" value="3" type="radio">
+                          <label aria-label="4 stars" class="rating-label" for="rating-4"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-4" value="4" type="radio">
+                          <label aria-label="5 stars" class="rating-label" for="rating-5"><i class="rating-icon rating-icon--star fa fa-star"></i></label>
+                          <input class="rating-input" name="star" id="rating-5" value="5" type="radio">
+                          <input type="hidden" id="star">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="review-title form-group">
+                      <label for="review-title">{{ __('index.detail.review.form.title') }}</label>
+                      <input type="text" name="title" class="form-control input-sm" id="title" placeholder="Nhập tiêu đề nhận xét (Không bắt buộc)">
+                    </div>
+                    <div class="review-content form-group">
+                      <label for="review-content">{{ __('index.detail.review.form.content') }}</label>
+                      <textarea name="content" class="form-control input-sm" id="content" placeholder="Nhận xét của bạn về sản phẩm này" rows="6"></textarea>
+                    </div>
+                    <div class="review-content form-group">
+                      <label for="review-content">{{ __('index.detail.review.form.image') }}</label>
+                      <input type="file" name="image[]" class="btn-file" accept="image/*" id="image" multiple>
+                      <span class="btn-fake">{{ __('index.detail.review.form.choose_img') }}</span>
+                      <p class="err-rv error-image">
+                        <small></small>
+                      </p>
+                      <div class="wrapper-img">
+                      </div>
+                      <div class="action">
+                        <button type="submit" class="btn btn-default js-add-review">{{ __('index.detail.review.form.submit') }}</button>
+                      </div>
+                      <p>{{ __('index.detail.review.form.message') }}</p>
+                    </div>
+                  </form>    
+                </div>
+                <div class="col-lg-6"></div>
+              </div>
+            </div>
+          @endif
         </div>
       </div>
     </div>
@@ -258,6 +313,9 @@
     var txtReply = "{{ __('index.detail.comment.reply') }}";
     var txtDeleteCmtSuccess = "{{ __('common.message.delete_success') }}";
     var txtQuesDelCmt = "{{ __('common.message.del_question') }}";
+    var addReviewUrl = "{{ url('add-review') }}";
+    var loginUrl = "{{ url('login') }}";
   </script>
-  <script src="{{ asset('public/js/comment-product.js') }}"></script> 
+  <script src="{{ asset('public/js/comment-product.js') }}"></script>
+  <script src="{{ asset('public/js/review.js') }}"></script>
 @endsection

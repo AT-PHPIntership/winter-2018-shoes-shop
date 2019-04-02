@@ -742,7 +742,7 @@
 #full-stars-example-two .rating-input:hover ~ .rating-label .rating-icon--star {
   color: #ddd;
 }
-#btn-file {
+.btn-file {
   display: none;
 }
 .btn-fake {
@@ -801,4 +801,9 @@
 }
 .rating-content.sm i {
   font-size: 13px;
+}
+.help-block {
+  color: red;
+  display: block;
+  font-style: italic;
 }

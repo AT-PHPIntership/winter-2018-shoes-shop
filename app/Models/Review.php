@@ -17,6 +17,15 @@ class Review extends Model
     ];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'is_buy', 'product_id', 'title', 'content', 'star', 'status'
+    ];
+
+    /**
      * Get all of the image's reviews.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany

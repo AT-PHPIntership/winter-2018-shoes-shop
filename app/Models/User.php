@@ -66,4 +66,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(SocialAccount::class);
     }
+
+    /**
+     * User has many reviews
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'user_id');
+    }
 }
