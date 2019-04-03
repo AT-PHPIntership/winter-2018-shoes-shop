@@ -37,7 +37,11 @@ class ReviewService
             if ($countReview > 1) {
                 return false;
             }
-            $order = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')->where('user_id', Auth::user()->id)->where('product_id', $data['product_id'])->first();
+            $order = Order::join('order_details', 'orders.id', '=', 'order_details.order_id')
+                            ->where('user_id', Auth::user()->id)
+                            ->where('product_id', $data['product_id'])
+                            ->where('status', Order::ORDER_STATUS['DELIVERED'])
+                            ->first();
             $order ? $isBuy = 1 : $isBuy = 0;
             $review = Review::create([
                 'user_id' => Auth::user()->id,
