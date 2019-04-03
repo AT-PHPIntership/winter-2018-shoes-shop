@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Product;
 use App\Models\Image;
 
 class ImagesTableSeeder extends Seeder
@@ -13,12 +12,14 @@ class ImagesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('images')->truncate();
-        $product_ids = Product::all('id');
-        for ($i = 0; $i < 10; $i++) {
+        $table = array_random(['products', 'reviews']);
+        $model = array_random(['App\Models\Product', 'App\Models\Review']);
+        $ids = $model::all('id');
+        for ($i = 0; $i < 20; $i++) {
             factory(Image::class)->create([
-                'product_id' => $product_ids->random(),
+                'imageable_type' => $table,
+                'imageable_id' => $ids->random()->id,
             ]);
-        } 
+        }
     }
 }

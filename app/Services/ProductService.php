@@ -53,7 +53,7 @@ class ProductService
     public function getProductById($id)
     {
         $product = Product::with([
-            'images:product_id,path',
+            'images:imageable_type,imageable_id,path',
             'category:id,name',
             'productDetails' => function ($query) {
                 $query->with(['size:id,size', 'color:id,name']);
@@ -74,13 +74,15 @@ class ProductService
         $product = Product::with(['category:id,name', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
-        }, 'images:id,product_id,path', 'productDetails:id,product_id,color_id', 'productDetails.color:id,name'])->findOrFail($id);
+        }, 'images:id,imageable_type,imageable_id,path', 'productDetails:id,product_id,color_id', 'productDetails.color:id,name'])->findOrFail($id);
         $data['product'] = [
             'id' => $product->id,
             'name' => $product->name,
             'original_price' => $product->original_price,
             'price' => $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null,
             'inventory' => $product->quantity - $product->total_sold,
+            'total_review' => $product->total_review,
+            'avg_rating' => $product->avg_rating,
             'description' => $product->description,
         ];
         $data['category'] = [
@@ -125,7 +127,7 @@ class ProductService
     public function getProductsByCat(string $categoryName, array $columns = ['*'])
     {
         $id = Category::where('name', $categoryName)->first(['id'])->id;
-        $product = Product::with(['category:id,name', 'images:id,path,product_id', 'promotions' => function ($query) {
+        $product = Product::with(['category:id,name', 'images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }]);
@@ -147,7 +149,7 @@ class ProductService
      */
     public function getNewProducts(array $columns = ['*'])
     {
-        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }])->orderBy('updated_at', 'desc')
@@ -170,7 +172,7 @@ class ProductService
             ->groupBy('product_id')->orderBy('total', 'desc')
             ->limit(config('define.limit_rows_product'))
             ->pluck('product_id');
-        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }])->whereIn('id', $productIds)
@@ -197,13 +199,13 @@ class ProductService
      */
     public function filterProduct(array $data)
     {
-        $products =  Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        $products =  Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                 ->where('end_date', '>=', Carbon::now());
         }])
         ->join('categories as c', 'c.id', '=', 'products.category_id')
         ->join('product_details as pd', 'pd.product_id', '=', 'products.id')
-        ->select('products.id', 'products.name', 'products.original_price');
+        ->select('products.id', 'products.name', 'products.original_price', 'products.avg_rating', 'products.total_review');
         if (Category::where('parent_id', $data['categoryId'])->count()) {
             $ids = Category::where('parent_id', $data['categoryId'])->orWhere('id', $data['categoryId'])->pluck('id')->toArray();
         } else {
@@ -217,6 +219,8 @@ class ProductService
         foreach ($products as $key => $product) {
             $items[$key]['id'] = $product->id;
             $items[$key]['name'] = $product->name;
+            $items[$key]['avg_rating'] = $product->avg_rating;
+            $items[$key]['total_review'] = $product->total_review;
             $items[$key]['original_price'] = $product->original_price;
             $items[$key]['price'] =  $product->promotions->last() ? ($product->original_price * (100 - $product->promotions->last()->percent))/100 : null;
             $items[$key]['image'] =  $product->images->first() ? $product->images->first()->path : config('define.image_default_product');
@@ -269,7 +273,7 @@ class ProductService
      */
     public function searchProduct(string $search)
     {
-        return Product::with(['images:id,path,product_id', 'promotions' => function ($query) {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
             $query->where('start_date', '<=', Carbon::now())
                   ->where('end_date', '>=', Carbon::now());
         }])->where('name', 'like', '%'.$search.'%')
@@ -339,7 +343,8 @@ class ProductService
                 if (in_array($image->extension(), $extensions)) {
                     try {
                         Image::create([
-                            'product_id' => $productId,
+                            'imageable_type' => 'products',
+                            'imageable_id' => $productId,
                             'path' => $this->uploadImage($image)
                         ]);
                     } catch (\Exception $e) {
@@ -623,7 +628,7 @@ class ProductService
                 $this->createProductDetail($product->id, $detail['color'], $detail['size'], $detail['quantity']);
             }
             if (isset($data['upload_file'])) {
-                DB::table('images')->where('product_id', $product->id)->delete();
+                DB::table('images')->where('imageable_type', 'products')->where('imageable_id', $product->id)->delete();
                 $this->createImages($data, $product->id);
             }
             DB::commit();
@@ -784,5 +789,24 @@ class ProductService
                 }
             });
         })->download('csv');
+    }
+
+    /**
+     * Get top review products
+     *
+     * @param array $columns columns
+     *
+     * @return object
+     */
+    public function getTopReviewProducts(array $columns = ['*'])
+    {
+        return Product::with(['images:id,path,imageable_type,imageable_id', 'promotions' => function ($query) {
+            $query->where('start_date', '<=', Carbon::now())
+                  ->where('end_date', '>=', Carbon::now());
+        }])->orderBy('avg_rating', 'desc')
+        ->orderBy('total_review', 'desc')
+        ->orderBy('updated_at', 'desc')
+        ->limit(config('define.limit_rows_product'))
+        ->get($columns);
     }
 }

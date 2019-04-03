@@ -42,6 +42,7 @@ return [
     'product' => [
         'new' => 'Sản phẩm mới',
         'top_sell' => 'Sản phẩm bán chạy',
+        'top_review' => 'Sản phẩm đánh giá cao',
     ],
     'quick_view' => [
         'previous' => 'Previous',
@@ -89,5 +90,58 @@ return [
             'mess_error' => 'Bình luận thất bại',
             'required' => 'Không được bỏ trống',
         ],
+        'review' => [
+            'title' => 'Đánh giá',
+            'avg_rating' => 'Đánh giá trung bình',
+            'comment' => 'Nhận xét',
+            'share' => 'Chia sẻ nhận xét về sản phẩm',
+            'write' => 'Viết nhận xét của bạn',
+            'errors' => [
+                'title' => [
+                    'max' => 'Không được nhập quá 100 ký tự',
+                ],
+                'content' => [
+                    'required' => 'Trường này không được để trống',
+                    'between' => 'Nội dung ít nhất là 50 ký tự và nhiều nhất là 255 ký tự',
+                ],
+                'star' => [
+                    'required' => 'Trường này không được để trống',
+                    'in' => 'Giá trị cho phép (1, 2, 3, 4, 5)',
+                ],
+                'image' => [
+                    'image' => 'Trường này phải là ảnh',
+                    'mimes' => 'Phải có đuôi là:jpeg,png,jpg,gif,svg',
+                    'max' => 'Không được dài hơn 255 ký tự',
+                ]
+            ],
+            'mess_success' => 'Đánh giá của bạn đã được gửi. Vui lòng chờ kiểm duyệt!',
+            'mess_error' => 'Đánh giá thất bại',
+            'form' => [
+                'rating' => '1. Đánh giá của bạn về sản phẩm này:',
+                'title' => '2. Tiêu đề của nhận xét:',
+                'content' => '3. Viết bình luận của bạn vào bên dưới:',
+                'image' => 'Thêm hình sản phẩm nếu có (tối đa 5 hình)',
+                'choose_img' => 'Chọn hình',
+                'submit' => 'Gửi nhận xét',
+                'message' => '* Nhận xét sẽ được kiểm duyệt.',
+            ],
+            'filter' => [
+                'title' => 'Chọn xem nhận xét:',
+                'top_like' => 'Hữu ích',
+                'new' => 'Mới nhất',
+                'is_buy_customer' => 'Khách hàng đã mua',
+                'all_customer' => 'Tất cả khách hàng',
+                'all_star' => 'Tất cả sao',
+                '5_star' => '5 sao',
+                '4_star' => '4 sao',
+                '3_star' => '3 sao',
+                '2_star' => '2 sao',
+                '1_star' => '1 sao',
+            ],
+        ],
+        'like' => [
+            'mess_success' => 'Like thành công',
+            'mess_error' => 'Like thất bại',
+        ]
     ]
 ];
