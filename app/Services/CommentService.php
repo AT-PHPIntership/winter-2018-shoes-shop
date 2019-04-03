@@ -100,6 +100,10 @@ class CommentService
                 'status' => $user->role_id === Role::ADMIN_ROLE ? Comment::ACTIVE_STATUS : Comment::BLOCKED_STATUS,
             ];
             if (isset($data['commentId'])) {
+                $checkComment = Comment::find($data['commentId']);
+                if ($checkComment->parent_id) {
+                    return false;
+                }
                 $param['parent_id'] = $data['commentId'];
             }
             $comment = Comment::create($param);
