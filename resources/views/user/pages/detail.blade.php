@@ -295,7 +295,10 @@
     var getSizesByColorId = "{{ url('get-sizes-by-color-id') }}";
     var option_default = "{{ __('index.quick_view.default_option') }}";
     var addReviewUrl = "{{ url('add-review') }}";
-    var isLogin = "{{ Auth::check() ? Auth::user()->id : null }}";
+    var userLogin = {
+      id : "{{ Auth::user()->id ?? null }}",
+      role : "{{ Auth::user()->role_id ?? null }}",
+    };
     var loginUrl = "{{ url('login') }}";
     var listReviewUrl = "{{ url('list-review') }}";
     var likeReviewUrl = "{{ url('like-review') }}";

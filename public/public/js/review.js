@@ -1,7 +1,7 @@
 $(document).ready(function(){
   //Show form review
   $('.js-btn-review').click(function(){
-    if(isLogin){
+    if(userLogin['id']){
       $('.review-form').toggle();
       if($(this).text() == 'Viết nhận xét của bạn'){
         $(this).text('Đóng');
@@ -164,7 +164,7 @@ $(document).ready(function(){
             var isLike;
             if(val['likes'].length){
               $.each(val['likes'], function(key, val){
-                val['user_id'] == +isLogin ? isLike = 1 : isLike = 0;
+                val['user_id'] == +userLogin['id'] ? isLike = 1 : isLike = 0;
               });
             }
             list += '<button class="js-btn-like" data-id="'+ val['id'] +'"><i class="fa fa-thumbs-up '+ (isLike == 1 ? 'active' : '') +'"></i></button>';
