@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Controller;
 use App\Services\ReviewService;
 use App\Http\Requests\User\PostReviewRequest;
 use App\Http\Requests\User\GetReviewRequest;
+use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
@@ -40,5 +41,20 @@ class ReviewController extends Controller
             'data' => $paginate['data'],
         ];
         return response()->json(collect($result));
+    }
+
+    /**
+     * Like review
+     *
+     * @param Request $request request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function likeReview(Request $request)
+    {
+        if (app(ReviewService::class)->likeReview($request->all())) {
+            return response()->json(array('success' => true, 'message' => trans('index.detail.like.mess_success')));
+        }
+        return response()->json(array('success' => false, 'message' => trans('index.detail.like.mess_error')));
     }
 }

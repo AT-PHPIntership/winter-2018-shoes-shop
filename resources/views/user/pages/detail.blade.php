@@ -298,6 +298,7 @@
     var isLogin = "{{ Auth::check() ? Auth::user()->id : null }}";
     var loginUrl = "{{ url('login') }}";
     var listReviewUrl = "{{ url('list-review') }}";
+    var likeReviewUrl = "{{ url('like-review') }}";
   </script>
   <script src="{{ asset('public/js/review.js') }}"></script>
 @endsection
