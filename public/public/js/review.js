@@ -1,7 +1,7 @@
 $(document).ready(function(){
   //Show form review
   $('.js-btn-review').click(function(){
-    if(isLogin){
+    if(userLogin['id']){
       $('.review-form').toggle();
       if($(this).text() == 'Viết nhận xét của bạn'){
         $(this).text('Đóng');
