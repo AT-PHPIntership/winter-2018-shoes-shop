@@ -131,7 +131,8 @@ class CommentService
     {
         try {
             $comment = Comment::find($data['commentId']);
-            if (Auth::check() && (Auth::user()->id == $comment->user_id || Auth::user()->role_id == Role::ADMIN_ROLE)) {
+            // if (Auth::check() && (Auth::user()->id == $comment->user_id || Auth::user()->role_id == Role::ADMIN_ROLE)) {
+            if (Auth::check() && Auth::user()->id == $comment->user_id) {
                 return $this->destroy($comment);
             }
             return false;
