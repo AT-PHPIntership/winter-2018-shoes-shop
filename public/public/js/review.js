@@ -218,32 +218,41 @@ $(document).ready(function(){
     var eleLike = $(this);
     var reviewId = eleLike.attr('data-id');
     var totalLike = eleLike.siblings('.rv-total-like').text();
-    console.log(totalLike);
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    $.ajax({
-      url: likeReviewUrl,
-      method: "POST",
-      data: {reviewId:reviewId},
-      success: function(data){
-        if(eleLike.find('.fa-thumbs-up').hasClass('active')){
-          eleLike.find('.fa-thumbs-up').removeClass('active')
-          if(+totalLike - 1 == 0){
-            eleLike.siblings('.rv-total-like').text('');
+    if(userLogin['id']){
+      $.ajax({
+        url: likeReviewUrl,
+        method: "POST",
+        data: {reviewId:reviewId},
+        success: function(data){
+          if(data.success){
+            if(eleLike.find('.fa-thumbs-up').hasClass('active')){
+              eleLike.find('.fa-thumbs-up').removeClass('active')
+              if(+totalLike - 1 == 0){
+                eleLike.siblings('.rv-total-like').text('');
+              }else{
+                eleLike.siblings('.rv-total-like').text(+totalLike - 1);
+              }
+            }else{
+              eleLike.find('.fa-thumbs-up').addClass('active')
+              eleLike.siblings('.rv-total-like').text(+totalLike + 1);
+            }
           }else{
-            eleLike.siblings('.rv-total-like').text(+totalLike - 1);
+            alert(data.message);
           }
-        }else{
-          eleLike.find('.fa-thumbs-up').addClass('active')
-          eleLike.siblings('.rv-total-like').text(+totalLike + 1);
-        }
-      },
-      error: function(data){
-        console.log(data);
-      },
-    });
+        },
+        error: function(data){
+          console.log(data);
+        },
+      });
+    }else{
+      if(confirm('Bạn cần đăng nhập trước khi like.')){
+        window.location = loginUrl;
+      }
+    }
   });
 });

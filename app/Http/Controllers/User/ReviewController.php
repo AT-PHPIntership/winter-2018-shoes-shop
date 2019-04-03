@@ -52,6 +52,9 @@ class ReviewController extends Controller
      */
     public function likeReview(Request $request)
     {
+        $request->validate([
+            'reviewId' => 'required|exists:reviews,id',
+        ]);
         if (app(ReviewService::class)->likeReview($request->all())) {
             return response()->json(array('success' => true, 'message' => trans('index.detail.like.mess_success')));
         }

@@ -127,7 +127,7 @@ class ReviewService
                     ->where('user_id', Auth::user()->id)
                     ->first();
         if ($like) {
-            $like->delete();
+            return $like->delete();
         } else {
             return Like::create([
                 'review_id' => $data['reviewId'],
