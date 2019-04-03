@@ -498,3 +498,49 @@
   display: inline-block;
   color: #101010;
 }
+.review-pr-img {
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin: auto;
+}
+.item-left {
+  float: left;
+  width: 100px;
+}
+.item-right {
+  float: left;
+}
+.item-right h5 {
+  color: #007ff0;
+  font-weight: 500;
+}
+.item-right p {
+  margin: 5px 0;
+  font-size: 13px;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.review-item {
+  padding: 15px;
+  border-bottom: 0.5px solid rgb(224, 205, 205);
+  background: #fff;
+}
+.review-list {
+  margin-bottom: 40px;
+}
+.rv-rate i {
+  color: #dedddc;
+}
+.rv-rate i.active {
+  color: #ffc324;
+}
+.img-small {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+}

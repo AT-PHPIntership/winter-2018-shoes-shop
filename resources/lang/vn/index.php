@@ -89,5 +89,11 @@ return [
             'mess_error' => 'Bình luận thất bại',
             'required' => 'Không được bỏ trống',
         ],
+        'review' => [
+            'my' => 'Nhận xét của tôi',
+            'list' => 'Danh sách nhận xét',
+            'approved' => 'Đã duyệt',
+            'pending' => 'Đang chờ duyệt',
+        ]
     ]
 ];

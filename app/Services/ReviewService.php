@@ -14,6 +14,6 @@ class ReviewService
      */
     public function getListReviewByUser()
     {
-        return Review::where('user_id', Auth::user()->id)->get();
+        return Review::with(['product:id,name', 'product.images', 'images'])->where('user_id', Auth::user()->id)->paginate(config('define.paginate.number_order'));
     }
 }

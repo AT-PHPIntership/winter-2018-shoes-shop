@@ -25,4 +25,14 @@ class Review extends Model
     {
         return $this->morphMany('App\Models\Image', 'imageable');
     }
+
+    /**
+     * Review belong to Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
