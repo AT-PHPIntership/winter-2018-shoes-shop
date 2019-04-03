@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Image;
+use App\Models\Like;
 use Log;
 use DB;
 use File;
@@ -182,5 +183,30 @@ class ReviewService
             $review->orderBy('updated_at', 'desc');
         }
         return $review->paginate(config('define.paginate.limit_rows_comment'));
+    }
+
+    /**
+     * Like review
+     *
+     * @param array $data data
+     *
+     * @return object
+     */
+    public function likeReview($data)
+    {
+        if (!Auth::check()) {
+            return false;
+        }
+        $like = Like::where('review_id', $data['reviewId'])
+                    ->where('user_id', Auth::user()->id)
+                    ->first();
+        if ($like) {
+            return $like->delete();
+        } else {
+            return Like::create([
+                'review_id' => $data['reviewId'],
+                'user_id' => Auth::user()->id
+            ]);
+        }
     }
 }

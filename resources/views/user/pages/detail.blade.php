@@ -347,8 +347,13 @@
     var txtDeleteCmtSuccess = "{{ __('common.message.delete_success') }}";
     var txtQuesDelCmt = "{{ __('common.message.del_question') }}";
     var addReviewUrl = "{{ url('add-review') }}";
+    var userLogin = {
+      id : "{{ Auth::user()->id ?? null }}",
+      role : "{{ Auth::user()->role_id ?? null }}",
+    };
     var loginUrl = "{{ url('login') }}";
     var listReviewUrl = "{{ url('list-review') }}";
+    var likeReviewUrl = "{{ url('like-review') }}";
   </script>
   <script src="{{ asset('public/js/comment-product.js') }}"></script>
   <script src="{{ asset('public/js/review.js') }}"></script>

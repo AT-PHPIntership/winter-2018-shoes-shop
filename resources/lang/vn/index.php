@@ -145,5 +145,9 @@ return [
                 '1_star' => '1 sao',
             ],
         ],
+        'like' => [
+            'mess_success' => 'Like thành công',
+            'mess_error' => 'Like thất bại',
+        ]
     ]
 ];

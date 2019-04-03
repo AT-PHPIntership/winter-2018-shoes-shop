@@ -167,8 +167,8 @@ $(document).ready(function(){
                 val['user_id'] == +userLogin.id ? isLike = 1 : isLike = 0;
               });
             }
-            list += '<button class="js-btn-like"><i class="fa fa-thumbs-up '+ (isLike == 1 ? 'active' : '') +'"></i></button>';
-            list += '<span class="rv-total-like '+ (isLike == 1 ? 'active' : '') +'">'+ (val['likes'].length > 0 ? val['likes'].length : '') +'</span>';
+            list += '<button class="js-btn-like" data-id="'+ val['id'] +'"><i class="fa fa-thumbs-up '+ (isLike == 1 ? 'active' : '') +'"></i></button>';
+            list += '<span class="rv-total-like">'+ (val['likes'].length > 0 ? val['likes'].length : '') +'</span>';
             list += '</div>';
             list += '</div>';
             list += '</div>';
@@ -210,5 +210,49 @@ $(document).ready(function(){
   });
   $('#js-slt-star').on('change', function(){
     listReview();
+  });
+
+  // Like review
+  $(document).on('click','.js-btn-like', function(e){
+    e.preventDefault();
+    var eleLike = $(this);
+    var reviewId = eleLike.attr('data-id');
+    var totalLike = eleLike.siblings('.rv-total-like').text();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    if(userLogin['id']){
+      $.ajax({
+        url: likeReviewUrl,
+        method: "POST",
+        data: {reviewId:reviewId},
+        success: function(data){
+          if(data.success){
+            if(eleLike.find('.fa-thumbs-up').hasClass('active')){
+              eleLike.find('.fa-thumbs-up').removeClass('active')
+              if(+totalLike - 1 == 0){
+                eleLike.siblings('.rv-total-like').text('');
+              }else{
+                eleLike.siblings('.rv-total-like').text(+totalLike - 1);
+              }
+            }else{
+              eleLike.find('.fa-thumbs-up').addClass('active')
+              eleLike.siblings('.rv-total-like').text(+totalLike + 1);
+            }
+          }else{
+            alert(data.message);
+          }
+        },
+        error: function(data){
+          console.log(data);
+        },
+      });
+    }else{
+      if(confirm('Bạn cần đăng nhập trước khi like.')){
+        window.location = loginUrl;
+      }
+    }
   });
 });
