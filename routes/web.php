@@ -76,6 +76,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         Route::post('password', 'ProfileController@handlePassword')->name('password');
         Route::get('orders', 'OrderController@index')->name('orders');
         Route::get('order/{id}', 'OrderController@show')->name('order.show');
+        Route::get('reviews', 'ReviewController@index')->name('reviews.index');
         
     });
     Route::get('/{provider}/redirect', 'SocialController@redirect');

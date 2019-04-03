@@ -17,6 +17,11 @@
           <i class="fa fa-list-alt"></i> <span>{{ __('user.order_list') }}</span>
         </a>
       </li>
+      {{-- <li>
+        <a href="{{ route('user.reviews.index') }}">
+          <i class="fa fa-star"></i> <span>{{ __('user.review_list') }}</span>
+        </a>
+      </li> --}}
     </ul>
   </section>
 </aside>
