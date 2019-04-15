@@ -18,7 +18,6 @@
 					<span class="login100-form-title p-b-26">
 						@lang('login.welcome')
 					</span>
-					<span class="dis-block text-center">{{ request()->has('regis_success') ? request()->get('regis_success') : '' }}</span>
 					@include('user.module.message')
 					<div class="wrap-input100 validate-input">
                         <input class="input100" type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
@@ -40,17 +39,18 @@
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn">
-								{{ __('Login') }}
+								{{ __('login.login') }}
 							</button>
 						</div>
 						<div>
 							<a class="reset_pass" href="{{route('user.password.request')}}">Quên mật khẩu?</a>
+							<a class="reset_pass" href="{{ route('user.register') }}">{{ trans('user.register') }}</a>
 						</div>
-						</div>
-					<div class="box-social text-uppercase p-t-30">
+					</div>
+					{{-- <div class="box-social text-uppercase p-t-30">
 						<a href="{{url('facebook/redirect')}}" class="btn btn-success">@lang('login.facebook')</a>
 						<a href="{{url('google/redirect')}}" class="btn btn-danger">@lang('login.google+')</a>
-					</div>
+					</div> --}}
 				</form>
 			</div>
 		</div>

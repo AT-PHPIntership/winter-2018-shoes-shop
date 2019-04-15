@@ -43,8 +43,7 @@ class RegisterController extends Controller
     {
         $data = $request->all();
         if ($this->userService->register($data)) {
-            $regisSuccess = trans('user.register_success');
-            return redirect()->route('user.login', compact('regisSuccess'));
+            return redirect()->route('user.login')->with('success', trans('user.register_success'));
         }
         return redirect()->route('user.user.create')->with('error', trans('user.register_error'));
     }

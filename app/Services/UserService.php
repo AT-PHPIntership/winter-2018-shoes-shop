@@ -224,10 +224,10 @@ class UserService
             Profile::create([
                 'user_id' => $user['id'],
                 'name' => $data['name'],
-                'gender' => $data['gender'],
-                'address' => $data['address'],
-                'phonenumber' => $data['phonenumber'],
-                'avatar' => isset($data['avatar']) ? $this->uploadAvatar($data['avatar']) : null,
+                // 'gender' => $data['gender'],
+                // 'address' => $data['address'],
+                // 'phonenumber' => $data['phonenumber'],
+                // 'avatar' => isset($data['avatar']) ? $this->uploadAvatar($data['avatar']) : null,
             ]);
             DB::commit();
             return $user;

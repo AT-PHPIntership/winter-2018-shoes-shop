@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Auth::routes();
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'IndexController@index')->name('index');
-        Route::post('category/search','CategoryController@searchData')->name('category.search');
+        Route::post('category/search', 'CategoryController@searchData')->name('category.search');
         Route::get('users/trash', 'UserController@trash')->name('users.trash');
         Route::patch('users/restore/{id}', 'UserController@restore')->name('users.restore');
         Route::delete('users/force-delete/{id}', 'UserController@forceDelete')->name('users.force-delete');
@@ -81,7 +81,6 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
         Route::post('password', 'ProfileController@handlePassword')->name('password');
         Route::get('orders', 'OrderController@index')->name('orders');
         Route::get('order/{id}', 'OrderController@show')->name('order.show');
-        
     });
     Route::get('/{provider}/redirect', 'SocialController@redirect');
     Route::get('/{provider}/callback', 'SocialController@callback');
@@ -89,5 +88,4 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
     Route::post('password/email', 'PasswordResetController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'PasswordResetController@showResetForm')->name('password.reset.token');
     Route::post('password/reset', 'PasswordResetController@reset')->name('password.reset');
-    
 });
