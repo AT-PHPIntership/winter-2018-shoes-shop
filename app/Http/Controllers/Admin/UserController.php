@@ -58,7 +58,7 @@ class UserController extends Controller
     public function restore(int $id)
     {
         if ($this->userService->restore($id)) {
-            return redirect()->route('admin.users.trash')->with('success', trans('common.message.restore_success'));
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.restore_success'));
         }
         return redirect()->route('admin.users.trash')->with('error', trans('common.message.restore_error'));
     }
@@ -73,7 +73,7 @@ class UserController extends Controller
     public function forceDelete(int $id)
     {
         if ($this->userService->forceDelete($id)) {
-            return redirect()->route('admin.users.trash')->with('success', trans('common.message.delete_success'));
+            return redirect()->route('admin.users.index')->with('success', trans('common.message.delete_success'));
         }
         return redirect()->route('admin.users.trash')->with('error', trans('common.message.delete_error'));
     }

@@ -11,6 +11,7 @@ return [
     'upload' => 'Thêm tệp',
     'sample' => 'Tệp mẫu',
     'block' => 'Chặn',
+    'restore' => 'Khôi phục',
     'table' => [
         'num' => 'STT',
         'action' => 'Hành động',

@@ -15,7 +15,7 @@
       <div class="box padding-y-20">
         <div class="row">
           <form class="form-create col-sm-6 col-sm-offset-3 form-horizontal form-label-left" 
-            method="post" action="{{ route('admin.category.store')}}">
+            method="post" action="{{ route('admin.categories.store')}}">
             @csrf
             <h2 class="text-center padding-bot-20">@lang('category.create')</h2>
             <div class="form-group">

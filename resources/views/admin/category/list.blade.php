@@ -10,7 +10,8 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box-top">
-            <a class="btn btn-success btn-md" href="{{ route('admin.category.create')}}">{{ trans('common.new') }}</a>
+            <a class="btn btn-success btn-md" href="{{ route('admin.categories.create')}}">{{ trans('common.new') }}</a>
+            <a class="btn btn-warning btn-md" href="{{ route('admin.categories.trash') }}"><i class="fa fa-trash"></i></a>
           </div>
         </div>
         <div class="col-xs-12">
@@ -55,12 +56,13 @@
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->parent ? $category->parent->name : "-" }}</td>
                     <td>
-                      <button class="btn btn-primary btn-xs">
-                        <a href="{{ route('admin.category.edit', $category->id)}}" style="color: #fff;">{{  trans('common.edit') }}</a>
-                      </button>
-                      {{ Form::model($category, ['url' => ['admin/category', $category->id], 'method'=> 'DELETE', 'enctype' => 'multipart/form-data', 'style' => 'display: inline-block;'])}}
-                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('{{trans('common.message.confirm_delete')}}')">{{  trans('common.delete') }}</button>
-                      {{ Form::close()}}
+                      <a class="btn btn-primary btn-xs" href="{{ route('admin.categories.edit', $category->id)}}">@lang('common.edit')</a>                            
+                      <form class="form-inline" action="{{ route('admin.categories.destroy', ['id' => $category->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-warning btn-xs" onclick="return confirm('@lang('common.message.block_question')')">@lang('common.block')</button>
+                      </form>
+                    </td>
                   </tr>
                 @endforeach
                 </tbody>

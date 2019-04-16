@@ -17,13 +17,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     Auth::routes();
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('index', 'IndexController@index')->name('index');
-        Route::post('category/search', 'CategoryController@searchData')->name('category.search');
+        Route::post('categories/search', 'CategoryController@searchData')->name('categories.search');
         Route::get('users/trash', 'UserController@trash')->name('users.trash');
         Route::patch('users/restore/{id}', 'UserController@restore')->name('users.restore');
         Route::delete('users/force-delete/{id}', 'UserController@forceDelete')->name('users.force-delete');
         Route::resource('users', 'UserController');
         Route::get('category/children', 'CategoryController@getChildren');
-        Route::resource('category', 'CategoryController');
+        Route::get('categories/trash', 'CategoryController@trash')->name('categories.trash');
+        Route::patch('categories/restore/{id}', 'CategoryController@restore')->name('categories.restore');
+        Route::delete('categories/force-delete/{id}', 'CategoryController@forceDelete')->name('categories.force-delete');
+        Route::resource('categories', 'CategoryController');
         Route::get('product/detail', 'ProductController@getDetail');
         Route::get('product/{id}/detail', 'ProductController@getDetail');
         Route::get('product/export/sample', 'ProductController@exportSampleFile')->name('product.export.sample');

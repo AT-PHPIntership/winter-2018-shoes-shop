@@ -15,7 +15,7 @@
       <div class="box" style="padding: 20px">        
         <div class="row">
           <form class="col-sm-6 col-sm-offset-3 form-horizontal form-label-left" style="background: #ecf0f5; padding:20px;"
-            method="post" action="{{ route('admin.category.update', $category->id)}}">
+            method="post" action="{{ route('admin.categories.update', $category->id)}}">
             @csrf
             @method('PUT')
             <h2 class="text-center" style="padding-bottom: 20px">{{ trans('category.edit') }}</h2>

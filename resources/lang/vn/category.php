@@ -3,6 +3,7 @@
 return [
     'manage' => 'Quản lý danh mục',
     'list' => 'Danh sách danh mục',
+    'trash' => 'Danh sách bị chặn',
     'create' => 'Thêm mới danh mục',
     'new' => 'Danh mục mới',
     'edit' => 'Chỉnh sửa danh mục',

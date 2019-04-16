@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Log;
 
 class CategoryService
 {
@@ -145,16 +146,60 @@ class CategoryService
      */
     public function deleteCategory($id)
     {
-        $category = $this->getCategoryById($id);
-        foreach ($category->children as $child) {
-            if (!($child->forceDelete())) {
-                return false;
-            };
-        }
-        if (!($category->forceDelete())) {
+        try {
+            $category = $this->getCategoryById($id);
+            if ($category->children) {
+                foreach ($category->children as $child) {
+                    $child->delete();
+                }
+            }
+            $category->delete();
+            return true;
+        } catch (\Exception $e) {
+            Log::error($e);
             return false;
-        };
-        return true;
+        }
+    }
+
+    /**
+     * Get all data trash
+     *
+     * @return object
+     */
+    public function getTrashWithPaginate()
+    {
+        return Category::onlyTrashed()->with('parent')->paginate(config('define.paginate.limit_rows'));
+    }
+
+    /**
+     * Restore category
+     *
+     * @param int $id id
+     *
+     * @return boolean
+     */
+    public function restore(int $id)
+    {
+        return Category::onlyTrashed()->where('id', $id)->restore();
+    }
+
+
+    /**
+     * Force delete category
+     *
+     * @param int $id id
+     *
+     * @return boolean
+     */
+    public function forceDelete(int $id)
+    {
+        try {
+            $category = Category::onlyTrashed()->find($id);
+            return $category->forceDelete();
+        } catch (Exception $e) {
+            Log::error($e);
+            return false;
+        }
     }
 
     /**
