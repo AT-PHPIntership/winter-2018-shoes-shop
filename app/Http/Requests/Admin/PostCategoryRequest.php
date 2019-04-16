@@ -27,17 +27,17 @@ class PostCategoryRequest extends FormRequest
             'parent_id' => 'nullable|exists:categories,id',
         ];
     }
-    /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'name.required' => trans('category.request.required'),
-            'name.unique' => trans('category.request.unique'),
-            'parent_id.exists' => trans('category.request.category_exists'),
-        ];
-    }
+    // /**
+    //  * Get the validation attributes that apply to the request.
+    //  *
+    //  * @return array
+    //  */
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required' => trans('category.request.required'),
+    //         'name.unique' => trans('category.request.unique'),
+    //         'parent_id.exists' => trans('category.request.category_exists'),
+    //     ];
+    // }
 }

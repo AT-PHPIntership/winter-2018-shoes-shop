@@ -43,7 +43,7 @@
             </div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="reset" class="btn btn-primary">@lang('common.reset')</button>
+                {{-- <button type="reset" class="btn btn-primary">@lang('common.reset')</button> --}}
                 <button type="submit" class="btn btn-success">@lang('common.submit')</button>
               </div>
             </div>

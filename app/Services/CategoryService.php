@@ -111,17 +111,13 @@ class CategoryService
      */
     public function updateCategory(array $input, $category)
     {
-        if (count($category->children)) {
-            if ($input['parent_id']) {
-                session()->flash('error', trans('category.message.level_error'));
+        if ($input['parent_id']) {
+            if (count($category->children)) {
+                session()->flash('error', trans('category.message.current_cat_is_parent'));
                 return false;
-            }
-        } else {
-            if ($input['parent_id']) {
-                if (($this->isChild($input['parent_id'])) || ($input['parent_id'] == $category->id)) {
-                    session()->flash('error', trans('category.request.level_error'));
-                    return false;
-                }
+            } elseif ($this->isChild($input['parent_id']) || $input['parent_id'] == $category->id) {
+                session()->flash('error', trans('category.message.parent_cat_not_match'));
+                return false;
             }
         }
         return $category->update($input);

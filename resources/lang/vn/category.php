@@ -11,7 +11,8 @@ return [
     'parent_name' => 'Danh mục cha',
     'children_name' => 'Danh mục con',
     'message' => [
-        'level_error' => 'Bạn không thể chọn cấp danh mục này!',
+        'current_cat_is_parent' => 'Danh mục hiện tại là danh mục cha',
+        'parent_cat_not_match' => 'Danh mục cha không phù hợp',
     ],
     'table' => [
         'id' => 'Id',

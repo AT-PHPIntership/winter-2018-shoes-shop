@@ -33,12 +33,10 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <select class="form-control" name="parent_id">
                   <option value=""></option>
-                  @foreach($parents as $list)
-                    <option @if($list->id == $category->parent_id) selected @endif
-                      @if($list->id != $category->id)
-                        value="{{ $list->id }}">{{ $list->name }}
-                      @endif
-                    </option>
+                  @foreach($parents as $parent)
+                    @if($parent->id != $category->id)
+                      <option {{ $parent->id == $category->parent_id ? 'selected' : '' }} value="{{ $parent->id }}">{{ $parent->name }}</option>
+                    @endif
                   @endforeach
                 </select>
                 @if ($errors->has('parent_id'))
@@ -48,7 +46,6 @@
             </div>
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button type="reset" class="btn btn-primary">{{ trans('common.reset') }}</button>
                 <button type="submit" class="btn btn-success">{{ trans('common.submit') }}</button>
               </div>
             </div>

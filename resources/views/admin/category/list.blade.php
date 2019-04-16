@@ -24,7 +24,7 @@
               <h3 class="box-title">{{  trans('category.list') }}</h3>
               <!-- search form (Optional) -->
               <div class="box-tools">
-                <form action="{{ route('admin.category.search')}}" method="post">
+                {{-- <form action="{{ route('admin.category.search')}}" method="post">
                 @csrf
                 @method('POST')
                   <div class="input-group input-group-sm" style="width: 350px;">
@@ -33,7 +33,7 @@
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
                   </div>
-                </form>
+                </form> --}}
               </div>
               <!-- /.search form -->
             </div>
