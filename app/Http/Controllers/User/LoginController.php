@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Admin\Controller;
 use App\Http\Requests\User\LoginRequest;
 use App\Services\UserService;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+        session(['link' => url()->previous()]);
         return view('user.auth.login');
     }
 
@@ -39,11 +41,11 @@ class LoginController extends Controller
      */
     public function handleLogin(LoginRequest $request)
     {
-        $data = $request->except(['_token']);
+        $data = $request->only('email', 'password');
         if (app(UserService::class)->login($data)) {
-            return redirect()->route('user.index');
+            return redirect(session('link'));
         }
-        return redirect()->route('user.login');
+        return redirect()->route('user.login')->with('success', trans('login.invalid_account'))->withInput();
     }
 
     /**
