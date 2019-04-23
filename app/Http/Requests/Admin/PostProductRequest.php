@@ -24,22 +24,23 @@ class PostProductRequest extends FormRequest
     public function rules()
     {
         $data = $this->request->all();
-        if (!isset($data['color_id'])) {
-            return [
-                'name' => 'required|unique:products,name',
-                'parent_category_id' => 'exists:categories,id',
-                'child_category_id' => 'exists:categories,id|nullable',
-                'original_price' => 'required|numeric',
-            ];
-        }
+        // if (!isset($data['color_id'], $data['size_id'], $data['quantity_type'])) {
+        //     return [
+        //         'name' => 'required|unique:products,name',
+        //         'parent_category_id' => 'exists:categories,id',
+        //         'child_category_id' => 'exists:categories,id|nullable',
+        //         'original_price' => 'required|numeric',
+        //     ];
+        // }
         return [
             'name' => 'required|unique:products,name',
             'parent_category_id' => 'exists:categories,id',
             'child_category_id' => 'exists:categories,id|nullable',
             'original_price' => 'required|numeric',
-            'color_id' => 'exists:colors,id',
-            'size_id' => 'exists:sizes,id',
-            // 'quantity_type' => 'required|numeric',
+            'color_id.*' => 'exists:colors,id',
+            'size_id.*' => 'exists:sizes,id',
+            'quantity_type.*' => 'required|numeric',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

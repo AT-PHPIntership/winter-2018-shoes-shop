@@ -87,9 +87,9 @@ class ProductController extends Controller
     {
         $data = $request->all();
         if ($this->products->handleStoreProduct($data)) {
-            return redirect()->route('admin.product.index')->with('success', trans('common.message.create_success'));
+            return response()->json(array('success' => true, 'message' => trans('common.message.create_success')));
         }
-        return redirect()->route('admin.product.create')->with('error', trans('common.message.create_error'));
+        return response()->json(array('success' => false, 'message' => trans('common.message.create_error')));
     }
 
     /**
@@ -163,11 +163,9 @@ class ProductController extends Controller
     {
         $data = $request->all();
         if ($this->products->handleUpdateProduct($data, $product)) {
-            session()->flash('success', trans('common.message.edit_success'));
-            return redirect()->route('admin.product.index');
+            return response()->json(array('success' => true, 'message' => trans('common.message.edit_success')));
         }
-        session()->flash('error', trans('common.message.edit_error'));
-        return redirect()->route('admin.product.edit', $product->id);
+        return response()->json(array('success' => false, 'message' => trans('common.message.edit_error')));
     }
 
     /**

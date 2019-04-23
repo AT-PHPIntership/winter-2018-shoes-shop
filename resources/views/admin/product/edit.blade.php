@@ -21,7 +21,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" enctype='multipart/form-data' method='POST' action="{{ route('admin.product.update', $product->id) }}">
+            <form id="form-product" role="form" enctype='multipart/form-data' method='POST'>
               @csrf
               @method('PUT')
               <div class="box-body">
@@ -114,7 +114,7 @@
                                 <input name="quantity_type[]" value="{{ $detail->quantity}}" type="quantity_type" class="form-control" placeholder="Số lượng">
                               </div>
                               <div class="col-xs-1">
-                                <button type="button" class="js-btn-remove btn"> x </button>
+                                <button type="button" class="js-btn-remove btn btn-default"> x </button>
                               </div>
                             </li>
                           @endforeach
@@ -136,7 +136,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">{{ trans('common.submit')}}</button>
-                <button type="reset" class="btn btn-default">{{ trans('common.reset')}}</button>
+                {{-- <button type="reset" class="btn btn-default">{{ trans('common.reset')}}</button> --}}
               </div>
             </form>
           </div>
@@ -145,6 +145,10 @@
       </div>
     </section>
   </div>
-  <script>var getDetailUrl = "{{ url('admin/category/children') }}"</script>
+  <script>
+    var getDetailUrl = "{{ url('admin/category/children') }}";
+    var actionUrl = "{{ route('admin.product.update', $product->id) }}";
+  </script>
   <script src="{!! asset('admin/js/product_detail.js') !!}"></script>
+  <script src="{!! asset('admin/js/product.js') !!}"></script>
 @endsection

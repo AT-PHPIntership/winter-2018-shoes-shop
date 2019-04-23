@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
         Route::get('product/export/data', 'ProductController@exportDataFile')->name('product.export.data');
         Route::get('product/import', 'ProductController@importFile')->name('product.import');
         Route::post('product/import/process', 'ProductController@processImport')->name('product.import.process');
+        // Route::post('products/add-product', 'ProductController@store');
         Route::resource('product', 'ProductController');
         Route::resource('colors', 'ColorController')->except(['show']);
         Route::resource('sizes', 'SizeController')->except(['show']);
