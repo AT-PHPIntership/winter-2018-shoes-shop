@@ -11,8 +11,8 @@
         <div class="col-xs-12">
           <div class="box-top">
             <a class="btn btn-success btn-md" href="{{ route('admin.product.create')}}">{{ trans('common.new')}}</a>
-            <a class="btn btn-success btn-md" href="{{route('admin.product.import')}}">{{ trans('common.upload')}}</a>
-            <a class="btn btn-success btn-md" href="{{route('admin.product.export.sample')}}"><i class="fa fa-download">{{ trans('common.sample')}}</i></a>
+            {{-- <a class="btn btn-success btn-md" href="{{route('admin.product.import')}}">{{ trans('common.upload')}}</a> --}}
+            {{-- <a class="btn btn-success btn-md" href="{{route('admin.product.export.sample')}}"><i class="fa fa-download">{{ trans('common.sample')}}</i></a> --}}
           </div>
         </div>
         <div class="col-xs-12">
@@ -24,7 +24,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">{{ trans('product.list')}}</h3>
-              <a class="btn btn-default btn-xs" href="{{ route('admin.product.export.data', ['str' => 'inventory']) }}">CSV <i class="fa fa-download"></i></a>
+              {{-- <a class="btn btn-default btn-xs" href="{{ route('admin.product.export.data', ['str' => 'inventory']) }}">CSV <i class="fa fa-download"></i></a> --}}
             </div>
             <!-- /.box-header -->
             <div class="box-body">

@@ -41,7 +41,7 @@
                       @lang('profile.gender.other')
                     @elseif ($user->profile->gender === \App\Models\Profile::MALE)
                       @lang('profile.gender.male')
-                    @else
+                    @elseif ($user->profile->gender === \App\Models\Profile::FEMALE)
                       @lang('profile.gender.female')
                     @endif
                   </td>

@@ -53,9 +53,9 @@
                   <label for="exampleInputGender">@lang('user.table.gender')</label>
                   <select name="gender" class="form-control" id="exampleInputGender">
                     <option value="">@lang('user.select')</option>
-                    <option {{ old('gender') == \App\Models\Profile::OTHER ? 'selected' : '' }} value="{{ \App\Models\Profile::OTHER }}">@lang('user.gender.other')</option>
-                    <option {{ old('gender') == \App\Models\Profile::MALE ? 'selected' : '' }} value="{{ \App\Models\Profile::MALE }}">@lang('user.gender.male')</option>
-                    <option {{ old('gender') == \App\Models\Profile::FEMALE ? 'selected' : '' }} value="{{ \App\Models\Profile::FEMALE }}">@lang('user.gender.female')</option>
+                    <option {{ old('gender') === \App\Models\Profile::OTHER ? 'selected' : '' }} value="{{ \App\Models\Profile::OTHER }}">@lang('user.gender.other')</option>
+                    <option {{ old('gender') === \App\Models\Profile::MALE ? 'selected' : '' }} value="{{ \App\Models\Profile::MALE }}">@lang('user.gender.male')</option>
+                    <option {{ old('gender') === \App\Models\Profile::FEMALE ? 'selected' : '' }} value="{{ \App\Models\Profile::FEMALE }}">@lang('user.gender.female')</option>
                   </select>
                   @if ($errors->has('gender'))
                     <span class="help-block">{{ $errors->first('gender') }}</span>

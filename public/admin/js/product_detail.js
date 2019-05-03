@@ -11,7 +11,7 @@ function previewImage()
 }
 $(document).ready(function(){
   //Display children category list when click parent category
-  $("#parent-category").on("click", function(){
+  $("#parent-category").change(function(){
     var id = $(this).val();
     var categoryChildren = $('#category-children');
     $.ajax({
