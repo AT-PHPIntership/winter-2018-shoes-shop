@@ -55,6 +55,8 @@ $(document).ready(function(){
           modal.find('#js-original-price').text('');
           modal.find('#js-price').text(formatCurrencyVN(data.product.original_price));
         }
+        modal.find('#js-avg-rating').css('width', data.product.avg_rating/5*100 + '%');
+        modal.find('#js-total-review').text(data.product.total_review);
         modal.find('#js-inventory').text(data.product.inventory);
         modal.find('#js-description').text(data.product.description);
         modal.find('.js-add-cart').attr('data-product-id', data.product.id);
