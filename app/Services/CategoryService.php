@@ -56,8 +56,9 @@ class CategoryService
      */
     public function getParentList(array $columns = ['*'])
     {
-        $categories = Category::whereNull('parent_id')->get($columns);
-        return $categories;
+        return Category::with('children')
+            ->whereNull('parent_id')
+            ->get($columns);
     }
 
     /**
